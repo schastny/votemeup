@@ -1,0 +1,17 @@
+Project roadmap
+. Define requirements
+. Install environment (jdj7, maven, git, spring.io/sts)
+. Git clone /votemeup project, launch it locally
+. Create database schema
+. Evaluate DB (try different queries)
+. Create and validate domain entities to represent DB tables (JPA 2)
+. Create DAO (Spring Data)
+. Create Services 
+. Create Controllers (Spring Web)
+. Build UI (html, css, js, Jquery, bootstrap)
+. Security (Spring Security)
+. Email Notifications
+. Logging
+. Bind Facebook/VK
+. Implement search
+. ? other features

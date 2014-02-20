@@ -1,0 +1,13 @@
+Sample site: 
+    roi.ru
+
+Main features:
+    
+User roles:
+
+Architecture:
+- web app
+- server side platform:  Spring 3 with Hibernate with JPA2
+- persistence: MySQL 
+- client: jQuery with Bootstrap
+- infrastructure tools: git, maven, sts
