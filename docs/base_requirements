@@ -2,12 +2,20 @@ Sample site:
     roi.ru
 
 Main features:
+. search proposals
+. tags for proposals
+. view on map
+. vote for proposal
+. comment on pages
+. receive notifications by email
     
 User roles:
+. admin
+. regular user (who applies proposals)
 
 Architecture:
 - web app
 - server side platform:  Spring 3 with Hibernate with JPA2
 - persistence: MySQL 
 - client: jQuery with Bootstrap
-- infrastructure tools: git, maven, sts
+- infrastructure tools: git, maven, sts, junit, log4j

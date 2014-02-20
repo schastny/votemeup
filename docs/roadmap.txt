@@ -8,10 +8,13 @@ Project roadmap
 . Create DAO (Spring Data)
 . Create Services 
 . Create Controllers (Spring Web)
+. Logging with Log4
+
+Tasks to distribute
+. Testing with Junit 
 . Build UI (html, css, js, Jquery, bootstrap)
-. Security (Spring Security)
+. Security (Spring Security) (password hashing, ACLs, securing urls, session management, login)
 . Email Notifications
-. Logging
 . Bind Facebook/VK
 . Implement search
 . ? other features
