@@ -1,0 +1,15 @@
+SQL stuff
+- what is primary keys
+- what is foreign keys
+- one-to-many and many-to-many relations
+- basics of sqls
+- left join, inner join
+
+Homework
+- create in your named branch sql/schema.sql & sql/sampledata.sql
+- try to run some queries as follows:
+    - list all proposals by the given category
+    - count all proposals by the given category
+    - list comments of the proposal in chronological order 
+    - list users count by role, sorted by count
+    - ... propose yours 
