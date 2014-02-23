@@ -3,6 +3,6 @@ votemeup
 
 A place to promote some initiative online.
 
-Взял и поменял
+Вернул обратно.
 
 Use branches for work!
