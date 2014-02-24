@@ -1,0 +1,56 @@
+SELECT COUNT(c.category), c.category
+ 
+FROM category_proposal AS cp LEFT JOIN category AS c
+	  on cp.Category_id=c.id
+	  left join proposal AS p
+	  on cp.Proposal_id = p.id
+
+GROUP BY c.Category 
+
+
+SELECT 
+	u.FirstName,
+	COUNT(p.id) AS num
+FROM user u  
+JOIN proposal p 
+on u.id=p.Author
+GROUP BY u.id
+HAVING num > 1
+;
+
+SELECT *
+FROM proposal p 
+WHERE p.Author= '4'
+;
+
+SELECT *
+FROM user
+
+;
+
+
+SELECT 
+	u.FirstName,
+	COUNT(p.id) AS num,
+	COUNT(c.id) AS com
+FROM user u  
+LEFT JOIN proposal p 
+on u.id=p.Author
+LEFT JOIN `comment` AS c
+on u.id = c.User_id
+GROUP BY u.id
+;
+
+SELECT *
+FROM proposal p 
+WHERE p.Author= '4'
+;
+
+SELECT *
+FROM user
+
+;
+
+
+	
+	 	
