@@ -1,3 +1,66 @@
+- list all proposals by the given category
+
+SELECT 
+	p.Title,
+	c.Category 
+FROM 
+	proposal p 
+JOIN category_proposal cp
+ON p.id=cp.Proposal_id
+JOIN category c
+ON cp.Category_id=c.id
+WHERE 
+c.id = 2
+
+
+- count all proposals by the given category
+
+SELECT 
+	c.Category, 
+	COUNT(p.id) num
+FROM 
+	proposal p 
+JOIN category_proposal cp
+ON p.id=cp.Proposal_id
+JOIN category c
+ON cp.Category_id=c.id
+WHERE 
+c.id = 2
+
+
+
+- list comments of the proposal in chronological order 
+
+SELECT 
+	p.Title,
+	p.DataProposal 
+FROM 
+	proposal p 
+ORDER BY 
+	p.DataProposal ASC,	p.Title ASC
+
+
+- list users count by role, sorted by count
+
+SELECT 
+	r.Name,
+	COUNT(r.id) num
+FROM 
+	role r 
+LEFT JOIN 
+	`user` u
+ON u.Role_id=r.id	 	
+GROUP BY 
+	r.Name
+ORDER BY 
+	num DESC
+
+
+    - ... propose yours 
+
+
+
+
 SELECT COUNT(c.category), c.category
  
 FROM category_proposal AS cp LEFT JOIN category AS c
@@ -50,7 +113,7 @@ SELECT *
 FROM user
 
 ;
-
+                                           	
 
 	
 	 	
