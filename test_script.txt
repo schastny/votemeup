@@ -1,0 +1,82 @@
+------------------------------------------------------------
+/*колво пропозиций пользователя+++++++*/
+SELECT 
+	u.FirstName,
+	COUNT(p.id) AS num
+FROM user u  
+JOIN proposal p 
+on u.id=p.Author
+GROUP BY u.id
+;
+-------------------------------------------------------------
+/*количество пропозиций по категориям+++++++++++++*/
+SELECT COUNT(c.init_category), c.init_category
+ 
+FROM proposal_category AS pc 
+LEFT JOIN category AS c
+	  on pc.Category_id=c.id
+left join proposal AS p
+	  on pc.Proposal_id = p.id
+
+GROUP BY c.init_category ;
+
+-------------------------------------------------------------
+
+/*количество голосов у пропозиций+++++++++++++*/
+SELECT p.Title,  COUNT(v.Proposal_id) AS votes
+ 
+FROM vote AS v 
+LEFT JOIN  user AS u
+	  on v.Proposal_id = u.id
+LEFT JOIN proposal AS p
+   on p.id = v.Proposal_id
+GROUP BY v.Proposal_id ;
+-----------------------------------
+
+/*количество голосов у пользователя+++++++*/
+SELECT u.FirstName, COUNT(v.User_id) AS votes
+FROM vote AS v 
+LEFT JOIN  user AS u
+	  on v.User_id = u.id
+GROUP BY u.id ;
+
+-------------------------------------------------------------
+/*количество комнтариев у пропозиций*/
+SELECT p.Title,  COUNT(c.Proposal_id) AS com
+FROM comments AS c
+LEFT JOIN  user AS u
+	  on c.Proposal_id = u.id
+LEFT JOIN proposal AS p
+   on p.id = c.Proposal_id
+GROUP BY c.Proposal_id ;
+---------------------------------------------------------------
+
+
+
+
+
+
+
+/* колво голосов каждого юзеря*/
+SELECT 
+	u.FirstName,
+/*	COUNT(p.id) AS num*/
+COUNT(v.Proposal_id) AS com
+	
+FROM user u  
+LEFT JOIN proposal p 
+on u.id=p.Author
+LEFT JOIN vote AS v
+on u.id = v.User_id
+GROUP BY u.id;
+--------------------------------------------------------------
+
+/*количество пропоцизий по категориям*/
+SELECT COUNT(c.init_category), c.init_category
+ 
+FROM proposal_category AS pc LEFT JOIN category AS c
+	  on pc.Category_id=c.id
+	  left join proposal AS p
+	  on pc.Proposal_id = p.id
+
+GROUP BY c.init_category ;
