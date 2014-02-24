@@ -4,10 +4,14 @@ votemeup
 A place to promote some initiative online.
 
 <<<<<<< HEAD
-Use branches for work.
+<<<<<<< HEAD
+Use branches for work!
 
 =======
 Взял и поменял
+=======
+Вернул обратно.
+>>>>>>> origin/ponomarenko
 
 Use branches for work!
 >>>>>>> origin/master
