@@ -52,6 +52,55 @@ GROUP BY c.Proposal_id ;
 ---------------------------------------------------------------
 
 
+*количество комнтариев у пропозиций*/
+SELECT p.Title,  COUNT(c.Proposal_id) AS com
+FROM comments AS c
+LEFT JOIN  user AS u
+	  on c.Proposal_id = u.id
+LEFT JOIN proposal AS p
+   on p.id = c.Proposal_id
+GROUP BY c.Proposal_id ;
+---------------------------------------------------------------
+
+/*список пропозиций по категориям*/
+SELECT 
+	p.Title,
+	c.init_category 
+FROM 
+	proposal p 
+JOIN proposal_category cp
+ON p.id=cp.Proposal_id
+JOIN category c
+ON cp.Category_id=c.id
+;
+---------------------------------------------
+
+SELECT 
+	p.Title,
+	p.Date
+FROM 
+	proposal p 
+ORDER BY 
+	p.Date ASC,	p.Title ASC;
+
+
+-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
