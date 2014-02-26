@@ -1,8 +1,4 @@
 votemeup
 ========
 
-A place to promote some initiative online.
-
-Вернул обратно.
-
-Use branches for work!
+Alexander Koval's branch.
