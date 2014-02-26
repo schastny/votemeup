@@ -56,10 +56,10 @@ CREATE TABLE userd_role (
 
 
 CREATE TABLE category (
-	categ_id INT(7) NOT NULL AUTO_INCREMENT,
-	categ_name VARCHAR(250),
+	categId INT(7) NOT NULL AUTO_INCREMENT,
+	categName VARCHAR(250),
 	#category_description VARCHAR(250),
-	PRIMARY KEY (categ_id)
+	PRIMARY KEY (categId)
 );
 
 
@@ -77,7 +77,7 @@ CREATE TABLE document (
 
 CREATE TABLE proposal_doc (
 	proposal_id INT(7), #PF
-	doc_id INT(7) #PF
+	doc_id INT(7), #PF
 	PRIMARY KEY (proposal_id, doc_id) # there are no duplicated documents
 	
 );
