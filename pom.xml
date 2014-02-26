@@ -230,6 +230,35 @@
 					<path>/${project.build.finalName}</path>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+		<groupId>com.btmatthews.maven.plugins.inmemdb</groupId>
+        <artifactId>inmemdb-maven-plugin</artifactId>
+        <version>1.4.2</version>
+        <configuration>
+          <monitorPort>11527</monitorPort>
+          <monitorKey>inmemdb</monitorKey>
+          <type>hsqldb</type>
+          <database>.</database>
+          <username>sa</username>
+          <password></password>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>src/main/resources/sql/schema.sql</source>
+                <!-- 
+                <source>src/test/data/test_users.csv</source>
+                -->
+              </sources>
+            </configuration>
+          </execution>
+        </executions>			
+			</plugin>
 
 		</plugins>
 	</build>
