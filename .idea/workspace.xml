@@ -2,8 +2,54 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f8561e8-a956-4a18-8ccc-211b6fb7491a" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\src\main\java\up\voteme\domain\Sample.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__antlr_antlr_2_7_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__aopalliance_aopalliance_1_0.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__asm_asm_3_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__cglib_cglib_2_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__com_sun_xml_bind_jaxb_impl_2_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__commons_collections_commons_collections_3_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__commons_dbcp_commons_dbcp_20030825_184428.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__commons_pool_commons_pool_20030825_183949.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__dom4j_dom4j_1_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__hsqldb_hsqldb_1_8_0_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javassist_javassist_3_12_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_activation_activation_1_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_jms_jms_1_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_mail_mail_1_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_transaction_jta_1_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_validation_validation_api_1_0_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_xml_bind_jaxb_api_2_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__javax_xml_stream_stax_api_1_0_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__junit_junit_4_8_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__log4j_log4j_1_2_15.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_hibernate_hibernate_commons_annotations_3_2_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_hibernate_hibernate_core_3_6_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_hibernate_hibernate_entitymanager_3_6_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_hibernate_hibernate_validator_4_0_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_hibernate_javax_persistence_hibernate_jpa_2_0_api_1_0_0_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_slf4j_jcl_over_slf4j_1_5_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_slf4j_slf4j_api_1_5_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_slf4j_slf4j_log4j12_1_5_10.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_aop_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_beans_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_context_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_core_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_expression_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_jdbc_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_orm_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_test_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_tx_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_web_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__org_springframework_spring_webmvc_3_2_6_RELEASE.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\libraries\Maven__taglibs_standard_1_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="D:\Programming\SoftServe\GitHub\votemeup\.idea\workspace.xml" afterPath="" />
     </list>
     <ignored path="votemeup.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -137,15 +183,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Role.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="16" column="5" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="820">
-              <folding>
-                <element signature="e#292#293#0" expanded="true" />
-                <element signature="e#329#330#0" expanded="true" />
-                <element signature="e#357#358#0" expanded="true" />
-                <element signature="e#392#393#0" expanded="true" />
-                <element signature="e#419#420#0" expanded="true" />
-                <element signature="e#463#464#0" expanded="true" />
-                <element signature="e#495#496#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -221,24 +259,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Vote.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="15" column="0" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1320">
-              <folding>
-                <element signature="e#343#344#0" expanded="true" />
-                <element signature="e#368#369#0" expanded="true" />
-                <element signature="e#405#406#0" expanded="true" />
-                <element signature="e#433#434#0" expanded="true" />
-                <element signature="e#466#467#0" expanded="true" />
-                <element signature="e#493#494#0" expanded="true" />
-                <element signature="e#535#536#0" expanded="true" />
-                <element signature="e#567#568#0" expanded="true" />
-                <element signature="e#608#609#0" expanded="true" />
-                <element signature="e#639#640#0" expanded="true" />
-                <element signature="e#693#694#0" expanded="true" />
-                <element signature="e#733#734#0" expanded="true" />
-                <element signature="e#766#767#0" expanded="true" />
-                <element signature="e#793#794#0" expanded="true" />
-                <element signature="e#835#836#0" expanded="true" />
-                <element signature="e#867#868#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -247,16 +268,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Tag.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="13" column="0" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
-              <folding>
-                <element signature="e#274#275#0" expanded="true" />
-                <element signature="e#302#303#0" expanded="true" />
-                <element signature="e#348#349#0" expanded="true" />
-                <element signature="e#382#383#0" expanded="true" />
-                <element signature="e#412#413#0" expanded="true" />
-                <element signature="e#437#438#0" expanded="true" />
-                <element signature="e#474#475#0" expanded="true" />
-                <element signature="e#502#503#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -265,16 +277,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Category.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="13" column="0" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
-              <folding>
-                <element signature="e#273#274#0" expanded="true" />
-                <element signature="e#298#299#0" expanded="true" />
-                <element signature="e#335#336#0" expanded="true" />
-                <element signature="e#363#364#0" expanded="true" />
-                <element signature="e#399#400#0" expanded="true" />
-                <element signature="e#427#428#0" expanded="true" />
-                <element signature="e#473#474#0" expanded="true" />
-                <element signature="e#507#508#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -282,8 +285,9 @@
       <file leaf-file-name="Attachment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Attachment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="5" selection-start="299" selection-end="299" vertical-scroll-proportion="0.39517015" vertical-offset="0" max-vertical-offset="1060">
+            <state line="27" column="74" selection-start="417" selection-end="417" vertical-scroll-proportion="0.5927552" vertical-offset="0" max-vertical-offset="1060">
               <folding>
+                <element signature="e#298#299#0" expanded="true" />
                 <element signature="e#323#324#0" expanded="true" />
                 <element signature="e#360#361#0" expanded="true" />
                 <element signature="e#388#389#0" expanded="true" />
@@ -323,6 +327,7 @@
         <option value="$PROJECT_DIR$/src/main/java/up/voteme/domain/Tag.java" />
         <option value="$PROJECT_DIR$/src/main/java/up/voteme/domain/Category.java" />
         <option value="$PROJECT_DIR$/src/main/java/up/voteme/domain/Attachment.java" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
       </list>
     </option>
   </component>
@@ -646,7 +651,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="28" column="40" selection-start="841" selection-end="841" vertical-scroll-proportion="0.0" vertical-offset="476" max-vertical-offset="578">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -683,7 +688,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="112" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="578">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -720,7 +725,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="58" selection-start="479" selection-end="479" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -792,7 +797,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="3" selection-start="297" selection-end="297" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -879,15 +884,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Role.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="5" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
-          <folding>
-            <element signature="e#292#293#0" expanded="true" />
-            <element signature="e#329#330#0" expanded="true" />
-            <element signature="e#357#358#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-            <element signature="e#419#420#0" expanded="true" />
-            <element signature="e#463#464#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -930,56 +927,21 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Vote.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="0" selection-start="237" selection-end="237" vertical-scroll-proportion="0.0" vertical-offset="120" max-vertical-offset="1320">
-          <folding>
-            <element signature="e#343#344#0" expanded="true" />
-            <element signature="e#368#369#0" expanded="true" />
-            <element signature="e#405#406#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
-            <element signature="e#466#467#0" expanded="true" />
-            <element signature="e#493#494#0" expanded="true" />
-            <element signature="e#535#536#0" expanded="true" />
-            <element signature="e#567#568#0" expanded="true" />
-            <element signature="e#608#609#0" expanded="true" />
-            <element signature="e#639#640#0" expanded="true" />
-            <element signature="e#693#694#0" expanded="true" />
-            <element signature="e#733#734#0" expanded="true" />
-            <element signature="e#766#767#0" expanded="true" />
-            <element signature="e#793#794#0" expanded="true" />
-            <element signature="e#835#836#0" expanded="true" />
-            <element signature="e#867#868#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Tag.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="213" selection-end="213" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
-          <folding>
-            <element signature="e#274#275#0" expanded="true" />
-            <element signature="e#302#303#0" expanded="true" />
-            <element signature="e#348#349#0" expanded="true" />
-            <element signature="e#382#383#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-            <element signature="e#474#475#0" expanded="true" />
-            <element signature="e#502#503#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Category.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
-          <folding>
-            <element signature="e#273#274#0" expanded="true" />
-            <element signature="e#298#299#0" expanded="true" />
-            <element signature="e#335#336#0" expanded="true" />
-            <element signature="e#363#364#0" expanded="true" />
-            <element signature="e#399#400#0" expanded="true" />
-            <element signature="e#427#428#0" expanded="true" />
-            <element signature="e#473#474#0" expanded="true" />
-            <element signature="e#507#508#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,8 +979,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/up/voteme/domain/Attachment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="5" selection-start="299" selection-end="299" vertical-scroll-proportion="0.39517015" vertical-offset="0" max-vertical-offset="1060">
+        <state line="27" column="74" selection-start="417" selection-end="417" vertical-scroll-proportion="0.5927552" vertical-offset="0" max-vertical-offset="1060">
           <folding>
+            <element signature="e#298#299#0" expanded="true" />
             <element signature="e#323#324#0" expanded="true" />
             <element signature="e#360#361#0" expanded="true" />
             <element signature="e#388#389#0" expanded="true" />
