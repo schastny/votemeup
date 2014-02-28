@@ -14,6 +14,10 @@ public class Category
 
     private String title;
 
+    public Category()
+    {
+    }
+
     public int getId()
     {
         return id;

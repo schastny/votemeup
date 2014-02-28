@@ -14,6 +14,10 @@ public class Tag
 
     private String title;
 
+    public Tag()
+    {
+    }
+
     public String getTitle()
     {
         return title;

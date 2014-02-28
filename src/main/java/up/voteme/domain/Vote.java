@@ -18,6 +18,10 @@ public class Vote
     private Proposal proposal;
     private Date date;
 
+    public Vote()
+    {
+    }
+
     public int getId()
     {
         return id;

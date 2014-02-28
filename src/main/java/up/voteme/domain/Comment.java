@@ -20,6 +20,10 @@ public class Comment
     private String content;
     private Date publicationDate;
 
+    public Comment()
+    {
+    }
+
     public Date getPublicationDate()
     {
         return publicationDate;

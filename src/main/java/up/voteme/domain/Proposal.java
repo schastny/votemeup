@@ -23,6 +23,10 @@ public class Proposal
 
     private Attachment attachment;
 
+    public Proposal()
+    {
+    }
+
     public int getId()
     {
         return id;

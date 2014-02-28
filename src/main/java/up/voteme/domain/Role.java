@@ -13,6 +13,10 @@ public class Role
     private int id;
     private String role;
 
+    public Role()
+    {
+    }
+
     public int getId()
     {
         return id;

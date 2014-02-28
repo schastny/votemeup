@@ -15,6 +15,10 @@ public class Attachment
     private String url;
     private String path;
 
+    public Attachment()
+    {
+    }
+
     public int getId()
     {
         return id;
