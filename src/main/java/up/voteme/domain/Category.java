@@ -1,23 +1,33 @@
-package up.modell;
+package up.voteme.domain;
 
-import java.io.Serializable;
-
+import java.util.Collection;
+import java.util.HashSet;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table( name = "category" )
+@Table( name = "CATEGORY" )
 public class Category  {
 	private int categId;
 	private String categName;
+	private Collection<Proposal> proposals= new HashSet<>(); 
 	
+	@OneToMany (mappedBy="category")
+	public Collection<Proposal> getCategories() {
+		return proposals;
+	}
+
+	public void setCategories(Collection<Proposal> proposals) {
+		this.proposals = proposals;
+	}
+
 	public Category () {};
 	
-	//constructor to create instance for test purposes
+	//constructor for creating instances in test purposes
 	public Category (String categName){
 		this.categName = categName;
 	}
@@ -32,7 +42,6 @@ public class Category  {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	
 	public int getCategId() {
 		return categId;
 	}

@@ -1,7 +1,20 @@
-package up.modell;
+package up.voteme.domain;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+
+
+@Entity
 public class Userd {
 	private int userdId;
 	private String firstName;
@@ -14,6 +27,31 @@ public class Userd {
 	private String email;
 	private String userLogin;
 	private String userPassword;
+	private Collection<Proposal> proposals = new HashSet<>();
+	private Collection<Commentd> commentd = new HashSet<>();
+	private Collection<Vote> votes = new HashSet<>();
+	
+	//many-to-many rel. join table: USERD_ROLE, FK: ROLES_ROLEID, USERS_USERDID 
+	private Collection<Role> roles = new HashSet<>(); 
+	
+	@OneToMany (mappedBy = "userd")
+	public Collection<Commentd> getCommentd() {
+		return commentd;
+	}
+	public void setCommentd(Collection<Commentd> comments) {
+		this.commentd = comments;
+	}
+	@OneToMany (mappedBy = "userd")
+	public Collection<Proposal> getProposals() {
+		return proposals;
+	}
+	public void setProposals(Collection<Proposal> proposals) {
+		this.proposals = proposals;
+	}
+	
+	@Id
+	@GeneratedValue(generator="increment")
+	@GenericGenerator(name="increment", strategy = "increment")
 	public int getUserdId() {
 		return userdId;
 	}
@@ -79,6 +117,22 @@ public class Userd {
 	}
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
+	}
+	
+	@OneToMany (mappedBy="userd")
+	public Collection<Vote> getVotes() {
+		return votes;
+	}
+	public void setVotes(Collection<Vote> votes) {
+		this.votes = votes;
+	}
+	
+	@ManyToMany 
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 
 }

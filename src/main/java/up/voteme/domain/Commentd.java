@@ -1,21 +1,27 @@
-package up.modell;
+package up.voteme.domain;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity 
+@Table (name = "comment")
 public class Commentd {
 	
 	
 	private int commentId;
-	private int userId;
-	private int proposalId;
+	//private int userdId;
+	private Userd userd;
+	
+	//private int proposalId;
+	private Proposal proposal;
+	
 	private String commentText;
 	private Date commentDate;
 	
@@ -23,8 +29,8 @@ public class Commentd {
 
 	@Override
 	public String toString() {
-		return "Commentd [commentId=" + commentId + ", userId=" + userId
-				+ ", proposalId=" + proposalId + ", commentText=" + commentText
+		return "Commentd [commentId=" + commentId
+				+ ", commentText=" + commentText
 				+ ", commentDate=" + commentDate + "]";
 	}
 	
@@ -39,18 +45,6 @@ public class Commentd {
 		this.commentId = commentId;
 	}
 	
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	public int getProposalId() {
-		return proposalId;
-	}
-	public void setProposalId(int proposalId) {
-		this.proposalId = proposalId;
-	}
 	public String getCommentText() {
 		return commentText;
 	}
@@ -64,6 +58,20 @@ public class Commentd {
 		this.commentDate = commentDate;
 	}
 	
+	@ManyToOne 
+	public Userd getUserd() {
+		return userd;
+	}
+	public void setUserd(Userd userd) {
+		this.userd = userd;
+	}
 	
+	@ManyToOne
+	public Proposal getProposal() {
+		return proposal;
+	}
+	public void setProposal(Proposal proposal) {
+		this.proposal = proposal;
+	}
 
 }

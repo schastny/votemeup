@@ -15,30 +15,30 @@
 		</properties>
 	</persistence-unit>
 -->
+
 	<persistence-unit name="org.hibernate">
-        <description>
-            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
-        </description>
-
-        <class>up.voteme.domain.Category</class>
- 
-
+        <description>  Persistence unit for the JPA </description>
+         <class>up.voteme.domain.Category</class>
+         <class>up.voteme.domain.Userd</class>
+         <class>up.voteme.domain.Vote</class>
+         <class>up.voteme.domain.Role</class>
+         
 	    <properties>
            	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/votemeup" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="qwerty123" />
+			<property name="javax.persistence.validation.mode" value="AUTO" />
 		
 		<!-- 	<property name="eclipselink.logging.level" value="FINEST" />   -->
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>  
+		<!--  	<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>  -->
         </properties>
-
-
-
-
     </persistence-unit>
 
-
-
+	
+	
+	
+	
+	
 
 </persistence>

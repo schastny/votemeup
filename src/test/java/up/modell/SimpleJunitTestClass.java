@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
+import up.voteme.domain.Category;
 import junit.framework.TestCase;
 
 public class SimpleJunitTestClass extends TestCase {
