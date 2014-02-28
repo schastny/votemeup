@@ -18,6 +18,15 @@ public class Tag
     {
     }
 
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
+    }
 
     public int getId()
     {
@@ -27,15 +36,5 @@ public class Tag
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public void setTitle(String title)
-    {
-        this.title = title;
     }
 }
