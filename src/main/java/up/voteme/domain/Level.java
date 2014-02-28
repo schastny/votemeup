@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+public enum MinVotePeriod {
+    week,
+    month,
+    quarter;
+}
+
 @Entity
 @Table(name = "LEVEL")
 
@@ -20,7 +26,15 @@ public class Level {
     private String level;	
 
     @Column(name = "MinVoteYes")
-    private String MinVoteYes;	
+    private Integer minVoteYes;	
     
-	
+    @Column(name = "MinVotePeriod")
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition="enum('week','month','quarter')")
+    private MinVotePeriod minVotePeriod;	
+    
+
+    
 }
+
+// http://habrahabr.ru/post/77982/
