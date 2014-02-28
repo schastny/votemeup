@@ -1,5 +1,10 @@
 package up.voteme.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.sql.Date;
 
 /**
@@ -24,16 +29,10 @@ public class Comment
     {
     }
 
-    public Date getPublicationDate()
-    {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate)
-    {
-        this.publicationDate = publicationDate;
-    }
-
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public int getId()
     {
         return id;
@@ -44,6 +43,18 @@ public class Comment
         this.id = id;
     }
 
+    @Column(name = "date")
+    public Date getPublicationDate()
+    {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(Date publicationDate)
+    {
+        this.publicationDate = publicationDate;
+    }
+
+    @Column(name = "user_id")
     public User getAuthor()
     {
         return author;
@@ -54,6 +65,7 @@ public class Comment
         this.author = author;
     }
 
+    @Column(name = "proposal_id")
     public Proposal getProposal()
     {
         return proposal;
@@ -64,6 +76,7 @@ public class Comment
         this.proposal = proposal;
     }
 
+    @Column(name = "content")
     public String getContent()
     {
         return content;

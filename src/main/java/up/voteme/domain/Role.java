@@ -1,5 +1,11 @@
 package up.voteme.domain;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 /**
  * Created with IntelliJ IDEA.
  * User: St1ch
@@ -17,6 +23,10 @@ public class Role
     {
     }
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator="increment")
+    @GenericGenerator(name="increment", strategy = "increment")
     public int getId()
     {
         return id;
@@ -27,6 +37,7 @@ public class Role
         this.id = id;
     }
 
+    @Column(name = "role")
     public String getRole()
     {
         return role;
