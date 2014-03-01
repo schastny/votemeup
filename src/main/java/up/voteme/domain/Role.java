@@ -1,5 +1,7 @@
 package up.voteme.domain;
 
+import javax.persistence.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: St1ch
@@ -8,6 +10,8 @@ package up.voteme.domain;
  * Package name: up.voteme.domain
  * Project name: votemeup
  */
+@Entity
+@Table(name = "role")
 public class Role
 {
     private int id;
@@ -17,6 +21,8 @@ public class Role
     {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
         return id;
@@ -27,6 +33,7 @@ public class Role
         this.id = id;
     }
 
+    @Column(name = "role")
     public String getRole()
     {
         return role;

@@ -1,7 +1,7 @@
 package up.voteme.domain;
 
-import javax.persistence.Entity;
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,6 +12,7 @@ import java.sql.Date;
  * Project name: votemeup
  */
 @Entity
+@Table(name = "user")
 public class User
 {
     private int id;
@@ -31,6 +32,8 @@ public class User
     {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
         return id;
@@ -41,6 +44,7 @@ public class User
         this.id = id;
     }
 
+    @Column(name = "first_name")
     public String getFirstName()
     {
         return firstName;
@@ -51,6 +55,7 @@ public class User
         this.firstName = firstName;
     }
 
+    @Column(name = "last_name")
     public String getLastName()
     {
         return lastName;
@@ -61,6 +66,8 @@ public class User
         this.lastName = lastName;
     }
 
+    @Column(name = "date_of_birth")
+    @Temporal(value=TemporalType.DATE)
     public Date getDateOfBirth()
     {
         return dateOfBirth;
@@ -71,6 +78,7 @@ public class User
         this.dateOfBirth = dateOfBirth;
     }
 
+    @Column(name = "city")
     public String getCity()
     {
         return city;
@@ -81,6 +89,7 @@ public class User
         this.city = city;
     }
 
+    @Column(name = "login")
     public String getLogin()
     {
         return login;
@@ -91,6 +100,7 @@ public class User
         this.login = login;
     }
 
+    @Column(name = "password")
     public String getPassword()
     {
         return password;
@@ -101,6 +111,7 @@ public class User
         this.password = password;
     }
 
+    @Column(name = "email")
     public String getEmail()
     {
         return email;
@@ -111,6 +122,7 @@ public class User
         this.email = email;
     }
 
+    @Column(name = "role")
     public Role getRole()
     {
         return role;

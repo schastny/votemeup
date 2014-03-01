@@ -1,6 +1,7 @@
 package up.voteme.domain;
 
-import java.sql.Date;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -10,6 +11,8 @@ import java.sql.Date;
  * Package name: up.voteme.domain
  * Project name: votemeup
  */
+@Entity
+@Table(name = "proposal")
 public class Proposal
 {
     private int id;
@@ -27,6 +30,8 @@ public class Proposal
     {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
         return id;
@@ -37,6 +42,7 @@ public class Proposal
         this.id = id;
     }
 
+    @Column(name = "author")
     public User getAuthor()
     {
         return author;
@@ -47,6 +53,7 @@ public class Proposal
         this.author = author;
     }
 
+    @Column(name = "title")
     public String getTitle()
     {
         return title;
@@ -57,6 +64,7 @@ public class Proposal
         this.title = title;
     }
 
+    @Column(name = "content")
     public String getContent()
     {
         return content;
@@ -67,6 +75,8 @@ public class Proposal
         this.content = content;
     }
 
+    @Column(name = "pulication_date")
+    @Temporal(value=TemporalType.DATE)
     public Date getPublicationDate()
     {
         return publicationDate;
@@ -77,6 +87,8 @@ public class Proposal
         this.publicationDate = publicationDate;
     }
 
+    @Column(name = "due_date")
+    @Temporal(value=TemporalType.DATE)
     public Date getDueDate()
     {
         return dueDate;
@@ -87,6 +99,7 @@ public class Proposal
         this.dueDate = dueDate;
     }
 
+    @Column(name = "attachment")
     public Attachment getAttachment()
     {
         return attachment;

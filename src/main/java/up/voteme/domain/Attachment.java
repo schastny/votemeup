@@ -1,5 +1,7 @@
 package up.voteme.domain;
 
+import javax.persistence.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: St1ch
@@ -8,6 +10,8 @@ package up.voteme.domain;
  * Package name: up.voteme.domain
  * Project name: votemeup
  */
+@Entity
+@Table(name = "attachment")
 public class Attachment
 {
     private int id;
@@ -19,6 +23,8 @@ public class Attachment
     {
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
         return id;
@@ -29,6 +35,7 @@ public class Attachment
         this.id = id;
     }
 
+    @Column(name = "url")
     public String getUrl()
     {
         return url;
@@ -39,6 +46,7 @@ public class Attachment
         this.url = url;
     }
 
+    @Column(name = "path")
     public String getPath()
     {
         return path;
