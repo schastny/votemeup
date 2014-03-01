@@ -1,6 +1,7 @@
 package up.voteme.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +17,7 @@ public class Role
 {
     private int id;
     private String role;
+    private Set<User> users;
 
     public Role()
     {
@@ -42,5 +44,16 @@ public class Role
     public void setRole(String role)
     {
         this.role = role;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Set<User> getUsers()
+    {
+        return users;
+    }
+
+    public void setUsers(Set<User> users)
+    {
+        this.users = users;
     }
 }

@@ -123,6 +123,8 @@ public class User
     }
 
     @Column(name = "role")
+    @ManyToOne
+    @JoinColumn(name = "id")
     public Role getRole()
     {
         return role;
