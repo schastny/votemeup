@@ -15,11 +15,10 @@
         <slf4j.version>1.5.10</slf4j.version>
         <java.version>1.7</java.version>
         <junit.version>4.8.2</junit.version>
+        <hibernate.version>4.3.2.Final</hibernate.version>
     </properties>
 
     <dependencies>
-
-
         <!-- Bean Validation Dependencies -->
 
         <dependency>
@@ -37,6 +36,12 @@
         </dependency>
 
         <!-- JPA Persistence Dependencies -->
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -177,9 +182,20 @@
     <repositories>
         <!-- JBoss Repository used for Java EE 6 pieces -->
         <repository>
-            <id>repository.jboss.org</id>
-            <name>JBoss Repository</name>
-            <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+            <id>JBoss repository</id>
+            <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+        </repository>
+
+        <repository>
+            <id>MavenCentral</id>
+            <name>Maven repository</name>
+            <url>http://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
 
         <repository>
