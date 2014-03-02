@@ -1,4 +1,4 @@
-package domain;
+package up.voteme.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,3 +43,4 @@ public class Vote {
 		this.id = id;
 	}
 }
+

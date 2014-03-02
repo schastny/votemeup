@@ -1,4 +1,4 @@
-package domain;
+package up.voteme.domain;
 
 import java.util.Date;
 
@@ -64,3 +64,4 @@ public class Comment {
 	}
 
 }
+
