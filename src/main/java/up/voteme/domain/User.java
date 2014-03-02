@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -27,8 +28,18 @@ public class User {
 	private Collection<Proposal> proposal = new HashSet<>();
 	private Collection<Comment> comment = new HashSet<>();
 	private Collection<Vote> vote = new HashSet<>();
-	private Collection<Roles> roles = new HashSet<>();
+    private Roles role;
+	
+    @ManyToOne
+	public Roles getRoles() {
+		return role;
+	}
 
+	public void setURoles(Roles role) {
+		this.role = role;
+	}
+    
+    
 	@OneToMany(mappedBy = "User")
 	public Collection<Proposal> getProposal() {
 		return proposal;
@@ -56,15 +67,7 @@ public class User {
 		this.vote = vote;
 	}
 
-	@ManyToMany
-	public Collection<Roles> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<Roles> roles) {
-		this.roles = roles;
-	}
-
+	
 	public int getId() {
 		return id;
 	}

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -21,15 +22,15 @@ public class Roles {
 	private String roleDescrirtion;
 	private Collection<User> user = new HashSet<>();
 	
-	@ManyToMany(mappedBy="Roles")
+	@OneToMany(mappedBy = "Roles")
 	public Collection<User> getUser() {
 		return user;
 	}
-	
+
 	public void setUser(Collection<User> user) {
 		this.user = user;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
