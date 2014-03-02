@@ -1,5 +1,6 @@
 package up.voteme.domain;
 
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -33,6 +34,7 @@ public class User
     }
 
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
@@ -122,9 +124,8 @@ public class User
         this.email = email;
     }
 
-    @Column(name = "role")
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "role_id")
     public Role getRole()
     {
         return role;

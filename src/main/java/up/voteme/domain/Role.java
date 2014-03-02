@@ -1,6 +1,8 @@
 package up.voteme.domain;
 
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -17,13 +19,14 @@ public class Role
 {
     private int id;
     private String role;
-    private Set<User> users;
+    private Set<User> users = new HashSet<User>();
 
     public Role()
     {
     }
 
     @Id
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
@@ -46,7 +49,7 @@ public class Role
         this.role = role;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "role")
     public Set<User> getUsers()
     {
         return users;

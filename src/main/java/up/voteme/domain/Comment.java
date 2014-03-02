@@ -1,5 +1,6 @@
 package up.voteme.domain;
 
+
 import javax.persistence.*;
 import java.util.Date;
 
