@@ -3,6 +3,8 @@ package up.voteme.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,6 +30,7 @@ public class User
     private String email;
 
     private Role role;
+    private Set<Proposal> proposals = new HashSet<>();
 
     public User()
     {
@@ -134,5 +137,16 @@ public class User
     public void setRole(Role role)
     {
         this.role = role;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Proposal> getProposals()
+    {
+        return proposals;
+    }
+
+    public void setProposals(Set<Proposal> proposals)
+    {
+        this.proposals = proposals;
     }
 }

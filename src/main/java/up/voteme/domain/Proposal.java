@@ -1,8 +1,9 @@
 package up.voteme.domain;
 
-
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,13 +26,14 @@ public class Proposal
     private Date publicationDate;
     private Date dueDate;
 
-    private Attachment attachment;
+    private Set<Attachment> attachments  = new HashSet<>();
 
     public Proposal()
     {
     }
 
     @Id
+    @Column(name = "proposal_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
@@ -43,7 +45,8 @@ public class Proposal
         this.id = id;
     }
 
-    @Column(name = "author")
+    @ManyToOne
+    @JoinColumn(name = "author")
     public User getAuthor()
     {
         return author;
@@ -100,14 +103,14 @@ public class Proposal
         this.dueDate = dueDate;
     }
 
-    @Column(name = "attachment")
-    public Attachment getAttachment()
+    @OneToMany(mappedBy = "proposal")
+    public Set<Attachment> getAttachments()
     {
-        return attachment;
+        return attachments;
     }
 
-    public void setAttachment(Attachment attachment)
+    public void setAttachments(Set<Attachment> attachments)
     {
-        this.attachment = attachment;
+        this.attachments = attachments;
     }
 }

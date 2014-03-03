@@ -1,6 +1,5 @@
 package up.voteme.domain;
 
-
 import javax.persistence.*;
 
 /**
@@ -17,6 +16,7 @@ public class Attachment
 {
     private int id;
 
+    private Proposal proposal;
     private String url;
     private String path;
 
@@ -56,5 +56,17 @@ public class Attachment
     public void setPath(String path)
     {
         this.path = path;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "proposal_id")
+    public Proposal getProposal()
+    {
+        return proposal;
+    }
+
+    public void setProposal(Proposal proposal)
+    {
+        this.proposal = proposal;
     }
 }

@@ -22,6 +22,12 @@
 
         <mapping class="up.voteme.domain.User"/>
         <mapping class="up.voteme.domain.Role"/>
+        <!--<mapping class="up.voteme.domain.Category"/>-->
+        <!--<mapping class="up.voteme.domain.Comment"/>-->
+        <mapping class="up.voteme.domain.Proposal"/>
+        <!--<mapping class="up.voteme.domain.Tag"/>-->
+        <!--<mapping class="up.voteme.domain.Vote"/>-->
+        <mapping class="up.voteme.domain.Attachment"/>
 
     </session-factory>
 
