@@ -12,7 +12,7 @@ import java.util.Date;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "vote")
+@Table(name = "VOTE")
 public class Vote
 {
     private int id;
@@ -37,7 +37,8 @@ public class Vote
         this.id = id;
     }
 
-    @Column(name = "user")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     public User getUser()
     {
         return user;
@@ -48,7 +49,8 @@ public class Vote
         this.user = user;
     }
 
-    @Column(name = "proposal")
+    @ManyToOne
+    @JoinColumn(name = "proposal_id")
     public Proposal getProposal()
     {
         return proposal;

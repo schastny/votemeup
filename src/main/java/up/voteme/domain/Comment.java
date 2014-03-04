@@ -13,14 +13,13 @@ import java.util.Date;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "comment")
+@Table(name = "COMMENT")
 public class Comment
 {
     private int id;
 
     private User author;
     private Proposal proposal;
-
     private String content;
     private Date publicationDate;
 
@@ -29,6 +28,7 @@ public class Comment
     }
 
     @Id
+    @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
@@ -40,7 +40,8 @@ public class Comment
         this.id = id;
     }
 
-    @Column(name = "author")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     public User getAuthor()
     {
         return author;
@@ -51,7 +52,8 @@ public class Comment
         this.author = author;
     }
 
-    @Column(name = "proposal")
+    @ManyToOne
+    @JoinColumn(name = "proposal_id")
     public Proposal getProposal()
     {
         return proposal;
@@ -84,4 +86,5 @@ public class Comment
     {
         this.publicationDate = publicationDate;
     }
+
 }

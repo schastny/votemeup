@@ -15,7 +15,7 @@ import java.util.Set;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "user")
+@Table(name = "USER")
 public class User
 {
     private int id;
@@ -31,6 +31,8 @@ public class User
 
     private Role role;
     private Set<Proposal> proposals = new HashSet<>();
+    private Set<Comment> comments = new HashSet<>();
+    private Set<Vote> votes = new HashSet<>();
 
     public User()
     {
@@ -148,5 +150,27 @@ public class User
     public void setProposals(Set<Proposal> proposals)
     {
         this.proposals = proposals;
+    }
+
+    @OneToMany(mappedBy = "author")
+    public Set<Comment> getComments()
+    {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments)
+    {
+        this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public Set<Vote> getVotes()
+    {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes)
+    {
+        this.votes = votes;
     }
 }

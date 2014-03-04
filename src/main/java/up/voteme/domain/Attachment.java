@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "attachment")
+@Table(name = "ATTACHMENT")
 public class Attachment
 {
     private int id;
@@ -25,6 +25,7 @@ public class Attachment
     }
 
     @Id
+    @Column(name = "attachment_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
@@ -69,4 +70,5 @@ public class Attachment
     {
         this.proposal = proposal;
     }
+
 }

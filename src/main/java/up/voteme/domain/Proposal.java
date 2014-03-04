@@ -14,7 +14,7 @@ import java.util.Set;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "proposal")
+@Table(name = "PROPOSAL")
 public class Proposal
 {
     private int id;
@@ -27,6 +27,10 @@ public class Proposal
     private Date dueDate;
 
     private Set<Attachment> attachments  = new HashSet<>();
+    private Set<Category> categories = new HashSet<>();
+    private Set<Comment> comments = new HashSet<>();
+    private Set<Tag> tags = new HashSet<>();
+    private Set<Vote> votes = new HashSet<>();
 
     public Proposal()
     {
@@ -112,5 +116,65 @@ public class Proposal
     public void setAttachments(Set<Attachment> attachments)
     {
         this.attachments = attachments;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "PROPOSAL_CATEGORY",
+               joinColumns = {
+                    @JoinColumn(name = "proposal_id")
+               },
+               inverseJoinColumns = {
+                    @JoinColumn(name = "category_id")
+               }
+    )
+    public Set<Category> getCategories()
+    {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories)
+    {
+        this.categories = categories;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "PROPOSAL_TAG",
+                joinColumns = {
+                        @JoinColumn(name = "proposal_id")
+                },
+                inverseJoinColumns = {
+                        @JoinColumn(name = "tag_id")
+                }
+    )
+    public Set<Tag> getTags()
+    {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags)
+    {
+        this.tags = tags;
+    }
+
+    @OneToMany(mappedBy = "proposal")
+    public Set<Comment> getComments()
+    {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments)
+    {
+        this.comments = comments;
+    }
+
+    @OneToMany(mappedBy = "proposal")
+    public Set<Vote> getVotes()
+    {
+        return votes;
+    }
+
+    public void setVotes(Set<Vote> votes)
+    {
+        this.votes = votes;
     }
 }

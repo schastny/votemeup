@@ -2,6 +2,8 @@ package up.voteme.domain;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,11 +14,12 @@ import javax.persistence.*;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "tag")
+@Table(name = "TAG")
 public class Tag
 {
     private int id;
     private String title;
+    private Set<Proposal> proposals = new HashSet<>();
 
     public Tag()
     {
@@ -38,6 +41,17 @@ public class Tag
     public String getTitle()
     {
         return title;
+    }
+
+    @ManyToMany(mappedBy = "tags")
+    public Set<Proposal> getProposals()
+    {
+        return proposals;
+    }
+
+    public void setProposals(Set<Proposal> proposals)
+    {
+        this.proposals = proposals;
     }
 
     public void setTitle(String title)

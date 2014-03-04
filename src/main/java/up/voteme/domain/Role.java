@@ -14,7 +14,7 @@ import java.util.Set;
  * Project name: votemeup
  */
 @Entity
-@Table(name = "role")
+@Table(name = "ROLE")
 public class Role
 {
     private int id;
