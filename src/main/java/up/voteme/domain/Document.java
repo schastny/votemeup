@@ -1,59 +1,69 @@
 package up.voteme.domain;
 
-import java.util.Collection;
-import java.util.HashSet;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table (name="document")
 public class Document {
-	private int docId;
+	private long docId;
 	private String docName;
-	private String docDescr;
 	private String docUrl;
-	
-	private Collection<Proposal> proposals = new HashSet <>();
+	private Proposal proposal;
 	
 	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	public int getDocId() {
+	@Column (name = "doc_id")
+	public long getDocId() {
 		return docId;
 	}
-	public void setDocId(int docId) {
+	public void setDocId(long docId) {
 		this.docId = docId;
 	}
+	
+	@Column (name = "doc_name")
 	public String getDocName() {
 		return docName;
 	}
 	public void setDocName(String docName) {
 		this.docName = docName;
 	}
-	public String getDocDescr() {
-		return docDescr;
-	}
-	public void setDocDescr(String docDescr) {
-		this.docDescr = docDescr;
-	}
+	
+	
+	
+	@Column (name = "doc_url")
 	public String getDocUrl() {
 		return docUrl;
 	}
+	
+	
 	public void setDocUrl(String docUrl) {
 		this.docUrl = docUrl;
 	}
 	
-	@ManyToMany (mappedBy="documents")	
-	public Collection<Proposal> getProposals() {
-		return proposals;
+	@ManyToOne
+	@JoinColumn(name = "proposal_id")
+	public Proposal getProposal() {
+		return proposal;
 	}
-	public void setProposals(Collection<Proposal> proposals) {
-		this.proposals = proposals;
+	public void setProposal(Proposal proposal) {
+		this.proposal = proposal;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Document [docId=" + docId + ", docName=" + docName
+				+  ", docUrl=" + docUrl
+				+ ", proposal ID=" + proposal.getProposalId() 
+				+ "]";
+	}
 }

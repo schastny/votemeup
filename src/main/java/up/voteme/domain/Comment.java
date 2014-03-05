@@ -2,26 +2,24 @@ package up.voteme.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity 
-@Table (name = "comment")
-public class Commentd {
+@Table (name = "commentd")
+public class Comment {
 	
 	
-	private int commentId;
-	//private int userdId;
+	private long commentId;
 	private Userd userd;
-	
-	//private int proposalId;
 	private Proposal proposal;
-	
 	private String commentText;
 	private Date commentDate;
 	
@@ -29,7 +27,7 @@ public class Commentd {
 
 	@Override
 	public String toString() {
-		return "Commentd [commentId=" + commentId
+		return "Comment [commentId=" + commentId
 				+ ", commentText=" + commentText
 				+ ", commentDate=" + commentDate + "]";
 	}
@@ -38,19 +36,23 @@ public class Commentd {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	public int getCommentId() {
+	@Column (name = "comment_id")
+	public long getCommentId() {
 		return commentId;
 	}
-	public void setCommentId(int commentId) {
+	public void setCommentId(long commentId) {
 		this.commentId = commentId;
 	}
 	
+	@Column (name="comment_text")
 	public String getCommentText() {
 		return commentText;
 	}
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
 	}
+	
+	@Column (name="comment_date")
 	public Date getCommentDate() {
 		return commentDate;
 	}
@@ -59,6 +61,7 @@ public class Commentd {
 	}
 	
 	@ManyToOne 
+	@JoinColumn (name="userd_id")
 	public Userd getUserd() {
 		return userd;
 	}
@@ -67,6 +70,7 @@ public class Commentd {
 	}
 	
 	@ManyToOne
+	@JoinColumn (name="proposal_id")
 	public Proposal getProposal() {
 		return proposal;
 	}

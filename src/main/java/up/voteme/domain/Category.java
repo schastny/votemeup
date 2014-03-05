@@ -2,54 +2,56 @@ package up.voteme.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table( name = "CATEGORY" )
+@Table( name = "category" )
 public class Category  {
-	private int categId;
+	private long categId;
 	private String categName;
 	private Collection<Proposal> proposals= new HashSet<>(); 
 	
-	@OneToMany (mappedBy="category")
-	public Collection<Proposal> getCategories() {
+
+	@ManyToMany (mappedBy = "categories")
+	@Column (name="proposal_id")
+	public Collection<Proposal> getProposals() {
 		return proposals;
 	}
 
-	public void setCategories(Collection<Proposal> proposals) {
+	public void setProposals(Collection<Proposal> proposals) {
 		this.proposals = proposals;
 	}
 
-	public Category () {};
-	
-	//constructor for creating instances in test purposes
-	public Category (String categName){
-		this.categName = categName;
-	}
 	
 	@Override
 	public String toString() {
 		return "Category [categId=" + categId + ", categName=" + categName
-				+ "]";
+				//+ ", prop.size()="+proposals.size()
+				+"]";
 	}
 
 	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	public int getCategId() {
+	@Column (name="category_id")
+	public long getCategId() {
 		return categId;
 	}
 
-	public void setCategId(int categId) {
+	public void setCategId(long categId) {
 		this.categId = categId;
 	}
 
+	@Column (name="category_name")
 	public String getCategName() {
 		return categName;
 	}

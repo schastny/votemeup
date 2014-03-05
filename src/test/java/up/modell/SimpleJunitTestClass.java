@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import org.eclipse.persistence.expressions.ExpressionBuilder;
 
 import up.voteme.domain.Category;
+import up.voteme.domain.Document;
 import junit.framework.TestCase;
 
 public class SimpleJunitTestClass extends TestCase {
@@ -29,30 +30,34 @@ public class SimpleJunitTestClass extends TestCase {
 	
 	public void testBasicUsage() {
 				System.out.println("run as Junit test - testBasicUsage() started...");
-				
+			
 				// create a couple of categories...
 				EntityManager entityManager = entityManagerFactory.createEntityManager();
-				entityManager.getTransaction().begin();
+/*				entityManager.getTransaction().begin();
 				entityManager.persist( new Category( "Transport") );
 				entityManager.persist( new Category( "Zdravoohranenie") );
 				entityManager.persist( new Category( "Health Care") );
 				entityManager.persist( new Category( "Emergency forces") );
 				entityManager.getTransaction().commit();
 				entityManager.close();
-
+*/
 				// now lets pull categories from the database and list them
 				entityManager = entityManagerFactory.createEntityManager();
-				entityManager.getTransaction().begin();
-				
-				//uncomment if do not  easylink
-		       // List<Category> result = entityManager.createQuery( "from Category", Category.class ).getResultList();
-				
-				List<Category> result =  entityManager.createQuery( "SELECT c FROM Category c ORDER BY c.categName" ).getResultList();
-		        
+			//	entityManager.getTransaction().begin();
+		
+				List<Category> result =  entityManager.createQuery( "SELECT c FROM Category c" ).getResultList();
 		        for ( Category categ : result ) {
 					System.out.println( categ );
 				}
-		        entityManager.getTransaction().commit();
+ /*	
+				System.out.println( entityManager );
+				List<Documentd> result =  entityManager.createQuery( "SELECT d FROM Documentd d" ).getResultList();
+		        for ( Documentd doc : result ) {
+					System.out.println( doc );
+				}
+*/		        
+		        
+		 //       entityManager.getTransaction().commit();
 		        entityManager.close();
 	}
 

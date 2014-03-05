@@ -3,21 +3,22 @@ package up.voteme.domain;
 import java.util.Collection;
 import java.util.HashSet;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Role {
-	private int roleId;
+	private long roleId;
 	private String roleName;
 	private String roleDescr;
 	private Collection<Userd> users = new HashSet<>();
 	
-	@ManyToMany(mappedBy="roles")
+	@OneToMany(mappedBy="role")
 	public Collection<Userd> getUsers() {
 		return users;
 	}
@@ -28,18 +29,23 @@ public class Role {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	public int getRoleId() {
+	@Column(name = "role_id")
+	public long getRoleId() {
 		return roleId;
 	}
-	public void setRoleId(int roleId) {
+	public void setRoleId(long roleId) {
 		this.roleId = roleId;
 	}
+	
+	@Column(name = "role_name")
 	public String getRoleName() {
 		return roleName;
 	}
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
 	}
+	
+	@Column(name = "role_description")
 	public String getRoleDescr() {
 		return roleDescr;
 	}

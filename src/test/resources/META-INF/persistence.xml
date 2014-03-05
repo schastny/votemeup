@@ -20,19 +20,39 @@
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
 
-        <class>up.voteme.domain.Category</class>
+         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         <class>up.voteme.domain.Category</class>
+         <class>up.voteme.domain.Userd</class>
+         <class>up.voteme.domain.Vote</class>
+         <class>up.voteme.domain.Role</class>
+         <class>up.voteme.domain.Proposal</class>
+         <class>up.voteme.domain.Comment</class>
+         <class>up.voteme.domain.Document</class>
+         <class>up.voteme.domain.ProposalLevel</class>
+         <class>up.voteme.domain.ProposalStatus</class>
+         <class>up.voteme.domain.UserStatus</class>
  
-
+<!--  
 	    <properties>
            	<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/votemeup" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="qwerty123" />
 		
-		<!-- 	<property name="eclipselink.logging.level" value="FINEST" />   -->
-			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>  
+		 	<property name="eclipselink.logging.level" value="FINEST" />   
+		  	<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>  
         </properties>
-
+-->
+		 <properties>
+            <property name="hibernate.connection.driver_class"     value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.url"             value="jdbc:mysql://localhost:3306/votemeup" />
+            <property name="hibernate.connection.username"         value="root" />
+            <property name="hibernate.connection.password"         value="qwerty123" />
+            <property name="hibernate.dialect"                     value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql"                 value="true" />
+          <!--   <property name="hibernate.hbm2ddl.auto" value="validate" /> -->
+        </properties>
+	
 
 
 

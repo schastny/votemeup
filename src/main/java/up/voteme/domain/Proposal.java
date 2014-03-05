@@ -1,13 +1,15 @@
 package up.voteme.domain;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -18,77 +20,113 @@ import org.hibernate.annotations.GenericGenerator;
 public class Proposal {
 
 	
-	private int proposalId;
+	@Override
+	public String toString() {
+		return "Proposal [proposalId=" + proposalId + ", proposalName="
+				+ ", comments.size=" + comments.size() 
+				+ ", votes.size=" + votes.size()
+				+ ", documents.size=" + documents.size() 
+				+ ", categories.size=" + categories.size()
+				+ "]";
+	}
+	private long proposalId;
+	private String proposalName;
 	private String proposalText;
+	private String proposalResult;
 	private Date creationDate;
-	private Date voteStartDate;
-	private String proposalStatus; // "active", "complete", "inChecking"
-	private String proposalLevel;  // "local", "region", "state"
-	//private int userdId;	
-	//private int categId;	
-	private Category category; //FK to category many-to-one
+	private ProposalStatus proposalStatus; 
+	private ProposalLevel proposalLevel;    
 	private Userd userd;		//FK to userd	many-to-one
-	private Collection<Commentd> comments = new HashSet<>(); //for one-to-many relation
+	private Collection<Comment> comments = new HashSet<>(); //for one-to-many relation
 	private Collection<Vote> votes = new HashSet<>();//for one-to-many relation
-	//many-to-many rel. join table: PROPOSAL_DOCUMENT, FK: DOCUMENTS_DOCUMENTID, PROPOSALS_PROPOSALID 
-	private Collection<Document> documents = new HashSet<>();
+	private Collection<Document> documents = new HashSet<>();//for one-to-many relation
+	private Collection<Category> categories = new HashSet<>();//many-to-many rel.
 	
+	
+	@ManyToMany 
+	 @JoinTable(
+	            name = "proposal_category", 
+	            joinColumns         = @JoinColumn(name = "proposal_id"), 
+	            inverseJoinColumns     = @JoinColumn(name = "category_id"))
+	public Collection<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Collection<Category> categories) {
+		this.categories = categories;
+	}
 	
 	@OneToMany (mappedBy = "proposal")
-	public Collection<Commentd> getComments() {
+	public Collection<Comment> getComments() {
 		return comments;
 	}
-	public void setComments(Collection<Commentd> comments) {
+	
+	public void setComments(Collection<Comment> comments) {
 		this.comments = comments;
 	}
-	@ManyToOne
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
+	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	public int getProposalId() {
+	@Column (name="proposal_id")
+	public long getProposalId() {
 		return proposalId;
 	}
-	public void setProposalId(int proposalId) {
+	public void setProposalId(long proposalId) {
 		this.proposalId = proposalId;
 	}
+	
+	@Column(name = "proposal_text")
 	public String getProposalText() {
 		return proposalText;
 	}
 	public void setProposalText(String proposalText) {
 		this.proposalText = proposalText;
 	}
+	
+	@Column (name = "creation_date")
 	public Date getCreationDate() {
 		return creationDate;
 	}
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-	public Date getVoteStartDate() {
-		return voteStartDate;
+	
+	@Column (name = "proposal_name")
+	public String getProposalName() {
+		return proposalName;
 	}
-	public void setVoteStartDate(Date voteStartDate) {
-		this.voteStartDate = voteStartDate;
+	public void setProposalName(String proposalName) {
+		this.proposalName = proposalName;
 	}
-	public String getProposalStatus() {
+	
+	@Column (name = "proposal_result")
+	public String getProposalResult() {
+		return proposalResult;
+	}
+	public void setProposalResult(String proposalResult) {
+		this.proposalResult = proposalResult;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "proposal_status_id")
+	public ProposalStatus getProposalStatus() {
 		return proposalStatus;
 	}
-	public void setProposalStatus(String proposalStatus) {
+	public void setProposalStatus(ProposalStatus proposalStatus) {
 		this.proposalStatus = proposalStatus;
 	}
-	public String getProposalLevel() {
+	
+	@ManyToOne
+	@JoinColumn(name = "proposal_level_id")
+	public ProposalLevel getProposalLevel() {
 		return proposalLevel;
 	}
-	public void setProposalLevel(String proposalLevel) {
+	public void setProposalLevel(ProposalLevel proposalLevel) {
 		this.proposalLevel = proposalLevel;
 	}
 	
 	@ManyToOne
+	@JoinColumn(name="userd_id")
 	public Userd getUserd() {
 		return userd;
 	}
@@ -103,7 +141,7 @@ public class Proposal {
 		this.votes = votes;
 	}
 	
-	@ManyToMany
+	@OneToMany (mappedBy = "proposal")
 	public Collection<Document> getDocuments() {
 		return documents;
 	}

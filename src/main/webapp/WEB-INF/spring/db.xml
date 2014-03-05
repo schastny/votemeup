@@ -26,6 +26,16 @@
 		</property>		
 	</bean>
 
+
+
+
+
+
+
+
+
+
+
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
 		<property name="driverClassName" value="${db.driver}" />

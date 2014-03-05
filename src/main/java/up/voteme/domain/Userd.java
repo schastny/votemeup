@@ -4,10 +4,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -16,9 +19,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Userd {
-	private int userdId;
+	private long userdId;
 	private String firstName;
-	private String secondName;
 	private String lastName;
 	private int birthYear;
 	private String sex ;// "male", "female"
@@ -28,17 +30,15 @@ public class Userd {
 	private String userLogin;
 	private String userPassword;
 	private Collection<Proposal> proposals = new HashSet<>();
-	private Collection<Commentd> commentd = new HashSet<>();
+	private Collection<Comment> commentd = new HashSet<>();
 	private Collection<Vote> votes = new HashSet<>();
-	
-	//many-to-many rel. join table: USERD_ROLE, FK: ROLES_ROLEID, USERS_USERDID 
-	private Collection<Role> roles = new HashSet<>(); 
+	private Role role; 
 	
 	@OneToMany (mappedBy = "userd")
-	public Collection<Commentd> getCommentd() {
+	public Collection<Comment> getCommentd() {
 		return commentd;
 	}
-	public void setCommentd(Collection<Commentd> comments) {
+	public void setCommentd(Collection<Comment> comments) {
 		this.commentd = comments;
 	}
 	@OneToMany (mappedBy = "userd")
@@ -52,30 +52,31 @@ public class Userd {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	public int getUserdId() {
+	@Column(name = "userd_id")
+	public long getUserdId() {
 		return userdId;
 	}
-	public void setUserdId(int userdId) {
+	public void setUserdId(long userdId) {
 		this.userdId = userdId;
 	}
+	
+	@Column(name = "first_name")
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	public String getSecondName() {
-		return secondName;
-	}
-	public void setSecondName(String secondName) {
-		this.secondName = secondName;
-	}
+	
+	@Column(name = "last_name")
 	public String getLastName() {
 		return lastName;
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	@Column(name = "birth_year")
 	public int getBirthYear() {
 		return birthYear;
 	}
@@ -88,6 +89,8 @@ public class Userd {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	
+	@Column(name = "registration_date")
 	public Date getRegistrationDate() {
 		return registrationDate;
 	}
@@ -106,12 +109,16 @@ public class Userd {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Column(name = "user_login")
 	public String getUserLogin() {
 		return userLogin;
 	}
 	public void setUserLogin(String userLogin) {
 		this.userLogin = userLogin;
 	}
+	
+	@Column(name = "user_password")
 	public String getUserPassword() {
 		return userPassword;
 	}
@@ -127,12 +134,13 @@ public class Userd {
 		this.votes = votes;
 	}
 	
-	@ManyToMany 
-	public Collection<Role> getRoles() {
-		return roles;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+	public Role getRole() {
+		return role;
 	}
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }
