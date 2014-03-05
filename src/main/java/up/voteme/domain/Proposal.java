@@ -75,7 +75,7 @@ public class Proposal {
 		this.proposalId = proposalId;
 	}
 	
-	@Column(name = "proposal_text")
+	@Column(name = "proposal_text",columnDefinition="text")
 	public String getProposalText() {
 		return proposalText;
 	}
@@ -91,7 +91,7 @@ public class Proposal {
 		this.creationDate = creationDate;
 	}
 	
-	@Column (name = "proposal_name")
+	@Column (name = "proposal_name",columnDefinition="text")
 	public String getProposalName() {
 		return proposalName;
 	}
@@ -99,7 +99,7 @@ public class Proposal {
 		this.proposalName = proposalName;
 	}
 	
-	@Column (name = "proposal_result")
+	@Column (name = "proposal_result",columnDefinition="text")
 	public String getProposalResult() {
 		return proposalResult;
 	}

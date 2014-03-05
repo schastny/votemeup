@@ -40,7 +40,7 @@ public class Document {
 	
 	
 	
-	@Column (name = "doc_url")
+	@Column (name = "doc_url",columnDefinition="text")
 	public String getDocUrl() {
 		return docUrl;
 	}

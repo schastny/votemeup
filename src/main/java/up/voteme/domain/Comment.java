@@ -44,7 +44,7 @@ public class Comment {
 		this.commentId = commentId;
 	}
 	
-	@Column (name="comment_text")
+	@Column (name="comment_text",columnDefinition="text")
 	public String getCommentText() {
 		return commentText;
 	}
