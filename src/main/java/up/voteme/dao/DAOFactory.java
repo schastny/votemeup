@@ -10,9 +10,9 @@ public abstract class DAOFactory
     {
         switch(whichFactory)
         {
-            case HibernateMySqlDAO : return new HibernateMySqlDAOFactory();
+            case HibernateMySqlDAO : return new HibernateDAOFactory();
 
-            default: return new HibernateMySqlDAOFactory();
+            default: return new HibernateDAOFactory();
         }
     }
 

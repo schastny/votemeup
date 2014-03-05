@@ -2,11 +2,14 @@ package up.voteme;
 
 
 import up.voteme.dao.DAOFactory;
+import up.voteme.domain.Attachment;
+import up.voteme.domain.Proposal;
 import up.voteme.domain.User;
+import up.voteme.service.AttachmentDAO;
+import up.voteme.service.ProposalDAO;
 import up.voteme.service.UserDAO;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,6 +25,9 @@ public class HibernateTest
     {
         DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateMySqlDAO);
         UserDAO userDAO = factory.createUserDAO();
+        ProposalDAO proposalDAO = factory.createProposalDAO();
+        AttachmentDAO attachmentDAO = factory.createAttachmentDAO();
+
 
         User ivan = new User();
         ivan.setLogin("eggplant");
@@ -39,12 +45,24 @@ public class HibernateTest
 
         userDAO.addUser(sasha);
 
+        Proposal proposal = new Proposal();
+        proposal.setTitle("title");
+        proposal.setContent("content");
 
-        List<User> users = userDAO.getAllUsers();
+        Attachment attachment = new Attachment();
+        attachment.setPath("hfhjsd");
+        attachment.setUrl("http://localhost");
+        attachment.setProposal(proposal);
 
-        User user = userDAO.getUserByLogin("eggplant");
-        userDAO.close();
 
-        System.out.println(user.getLogin());
+        proposal.getAttachments().add(attachment);
+
+
+        attachmentDAO.addAttachment(attachment);
+        proposalDAO.addProposal(proposal);
+
+
+        System.out.println(attachmentDAO.getAllAttachmentsByProposal(proposal));
+
     }
 }
