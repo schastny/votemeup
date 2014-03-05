@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -43,8 +44,41 @@ public class Proposal {
     @JoinColumn(name = "Level_id")
     private Level level;
 
+    @OneToMany(mappedBy = "proposal")
+    private List<Attachment> attachments;
+
+    @ManyToMany(mappedBy = "proposal")
+    private List<Category> categoryes;
     
-    public int getId() {
+    @OneToMany(mappedBy = "proposal")
+    private List<VoteProposal> voteProposals;
+
+    
+    @ManyToOne
+    @JoinColumn(name = "Author")
+    private User user;
+
+    @OneToMany(mappedBy = "proposal")
+    private List<Comment> comments;
+    
+    
+    public List<Category> getCategoryes() {
+		return categoryes;
+	}
+
+	public void setCategoryes(List<Category> categoryes) {
+		this.categoryes = categoryes;
+	}
+
+	public List<Attachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<Attachment> attachments) {
+		this.attachments = attachments;
+	}
+
+	public int getId() {
 		return id;
 	}
 
@@ -116,22 +150,5 @@ public class Proposal {
 		this.level = level;
 	}
 
-	
-	
-	public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public List<Person> getPersons() {
-        return persons;
-    }
-
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
 
 }
