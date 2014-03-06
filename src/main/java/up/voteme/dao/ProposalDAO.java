@@ -57,14 +57,14 @@ public class ProposalDAO {
   }
  }
 
- public List<Proposal> findAll() {
+ public List<Proposal> findAllWithAttachments() {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
    Query query = manager.createQuery("select proposal from Proposal proposal");
    @SuppressWarnings("unchecked")
    List<Proposal> items = query.getResultList();
    for (Proposal item : items) {
-    item.getProposal().size();
+    item.getAttachments().size();
    }
    
    return items;

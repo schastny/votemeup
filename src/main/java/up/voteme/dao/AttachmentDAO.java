@@ -63,9 +63,6 @@ public class AttachmentDAO {
    Query query = manager.createQuery("select attachment from Attachment attachment");
    @SuppressWarnings("unchecked")
    List<Attachment> items = query.getResultList();
-   for (Attachment item : items) {
-    item.getAttachment().size();
-   }
    
    return items;
 
