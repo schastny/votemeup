@@ -8,21 +8,21 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Category;
+import up.voteme.domain.Level;
 
-public class CategoryDAO {
+public class LevelDAO {
  private EntityManagerFactory entityManagerFactory;
 
- public CategoryDAO() {
+ public LevelDAO() {
   entityManagerFactory = Persistence.createEntityManagerFactory("votemeup_new");
  }
  
- public void store(Category category) {
+ public void store(Level level) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   manager.merge(category);
+   manager.merge(level);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -32,13 +32,13 @@ public class CategoryDAO {
   }
  }
 
- public void delete(Long categoryId) {
+ public void delete(Long levelId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   Category category = manager.find(Category.class, categoryId);
-   manager.remove(category);
+   Level level = manager.find(Level.class, levelId);
+   manager.remove(level);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -48,23 +48,23 @@ public class CategoryDAO {
   }
  }
 
- public Category findById(Long categoryId) {
+ public Level findById(Long levelId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   return manager.find(Category.class, categoryId);
+   return manager.find(Level.class, levelId);
   } finally {
    manager.close();
   }
  }
 
- public List<Category> findAll() {
+ public List<Level> findAll() {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   Query query = manager.createQuery("select category from Category category");
+   Query query = manager.createQuery("select level from Level level");
    @SuppressWarnings("unchecked")
-   List<Category> items = query.getResultList();
-   for (Category item : items) {
-    item.getCategory().size();
+   List<Level> items = query.getResultList();
+   for (Level item : items) {
+    item.getLevel().size();
    }
    
    return items;

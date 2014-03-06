@@ -8,21 +8,21 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Category;
+import up.voteme.domain.VoteProposal;
 
-public class CategoryDAO {
+public class VoteProposalDAO {
  private EntityManagerFactory entityManagerFactory;
 
- public CategoryDAO() {
+ public VoteProposalDAO() {
   entityManagerFactory = Persistence.createEntityManagerFactory("votemeup_new");
  }
  
- public void store(Category category) {
+ public void store(VoteProposal voteProposal) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   manager.merge(category);
+   manager.merge(voteProposal);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -32,13 +32,13 @@ public class CategoryDAO {
   }
  }
 
- public void delete(Long categoryId) {
+ public void delete(Long voteProposalId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   Category category = manager.find(Category.class, categoryId);
-   manager.remove(category);
+   VoteProposal voteProposal = manager.find(VoteProposal.class, voteProposalId);
+   manager.remove(voteProposal);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -48,23 +48,23 @@ public class CategoryDAO {
   }
  }
 
- public Category findById(Long categoryId) {
+ public VoteProposal findById(Long voteProposalId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   return manager.find(Category.class, categoryId);
+   return manager.find(VoteProposal.class, voteProposalId);
   } finally {
    manager.close();
   }
  }
 
- public List<Category> findAll() {
+ public List<VoteProposal> findAll() {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   Query query = manager.createQuery("select category from Category category");
+   Query query = manager.createQuery("select voteProposal from VoteProposal voteProposal");
    @SuppressWarnings("unchecked")
-   List<Category> items = query.getResultList();
-   for (Category item : items) {
-    item.getCategory().size();
+   List<VoteProposal> items = query.getResultList();
+   for (VoteProposal item : items) {
+    item.getVoteProposal().size();
    }
    
    return items;

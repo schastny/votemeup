@@ -8,21 +8,21 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Category;
+import up.voteme.domain.Attachment;
 
-public class CategoryDAO {
+public class AttachmentDAO {
  private EntityManagerFactory entityManagerFactory;
 
- public CategoryDAO() {
+ public AttachmentDAO() {
   entityManagerFactory = Persistence.createEntityManagerFactory("votemeup_new");
  }
  
- public void store(Category category) {
+ public void store(Attachment attachment) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   manager.merge(category);
+   manager.merge(attachment);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -32,13 +32,13 @@ public class CategoryDAO {
   }
  }
 
- public void delete(Long categoryId) {
+ public void delete(Long attachmentId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   Category category = manager.find(Category.class, categoryId);
-   manager.remove(category);
+   Attachment attachment = manager.find(Attachment.class, attachmentId);
+   manager.remove(attachment);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -48,23 +48,23 @@ public class CategoryDAO {
   }
  }
 
- public Category findById(Long categoryId) {
+ public Attachment findById(Long attachmentId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   return manager.find(Category.class, categoryId);
+   return manager.find(Attachment.class, attachmentId);
   } finally {
    manager.close();
   }
  }
 
- public List<Category> findAll() {
+ public List<Attachment> findAll() {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   Query query = manager.createQuery("select category from Category category");
+   Query query = manager.createQuery("select attachment from Attachment attachment");
    @SuppressWarnings("unchecked")
-   List<Category> items = query.getResultList();
-   for (Category item : items) {
-    item.getCategory().size();
+   List<Attachment> items = query.getResultList();
+   for (Attachment item : items) {
+    item.getAttachment().size();
    }
    
    return items;
