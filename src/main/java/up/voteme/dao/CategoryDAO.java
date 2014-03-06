@@ -64,7 +64,7 @@ public class CategoryDAO {
    @SuppressWarnings("unchecked")
    List<Category> items = query.getResultList();
    for (Category item : items) {
-    item.getProjects().size();
+    item.getProposals().size();
    }
    
    return items;
