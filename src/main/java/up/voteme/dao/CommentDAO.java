@@ -8,21 +8,21 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Category;
+import up.voteme.domain.Comment;
 
-public class CategoryDAO {
+public class CommentDAO {
  private EntityManagerFactory entityManagerFactory;
 
- public CategoryDAO() {
+ public CommentDAO() {
   entityManagerFactory = Persistence.createEntityManagerFactory("votemeup_new");
  }
  
- public void store(Category category) {
+ public void store(Comment comment) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   manager.merge(category);
+   manager.merge(comment);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -32,13 +32,13 @@ public class CategoryDAO {
   }
  }
 
- public void delete(Long categoryId) {
+ public void delete(Long commentId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   EntityTransaction tx = manager.getTransaction();
   try {
    tx.begin();
-   Category category = manager.find(Category.class, categoryId);
-   manager.remove(category);
+   Comment comment = manager.find(Comment.class, commentId);
+   manager.remove(comment);
    tx.commit();
   } catch (RuntimeException e) {
    tx.rollback();
@@ -48,23 +48,23 @@ public class CategoryDAO {
   }
  }
 
- public Category findById(Long categoryId) {
+ public Comment findById(Long commentId) {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   return manager.find(Category.class, categoryId);
+   return manager.find(Comment.class, commentId);
   } finally {
    manager.close();
   }
  }
 
- public List<Category> findAll() {
+ public List<Comment> findAll() {
   EntityManager manager = entityManagerFactory.createEntityManager();
   try {
-   Query query = manager.createQuery("select category from Category category");
+   Query query = manager.createQuery("select comment from Comment comment");
    @SuppressWarnings("unchecked")
-   List<Category> items = query.getResultList();
-   for (Category item : items) {
-    item.getCategory().size();
+   List<Comment> items = query.getResultList();
+   for (Comment item : items) {
+    item.getComment().size();
    }
    
    return items;
