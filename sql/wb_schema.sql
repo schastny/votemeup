@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`proposal_status` (
 CREATE TABLE IF NOT EXISTS `votemeup`.`proposal_level` (
   `proposal_level_id` BIGINT NOT NULL AUTO_INCREMENT,
   `proposal_level` VARCHAR(250) NULL DEFAULT NULL,
+  `vote_period` TIME NULL,
   PRIMARY KEY (`proposal_level_id`));
 
 
