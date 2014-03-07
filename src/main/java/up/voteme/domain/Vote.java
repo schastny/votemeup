@@ -2,6 +2,7 @@ package up.voteme.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,10 +14,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Vote {
+	
 	private long voteId;
 	private Userd userd;
 	private Proposal proposal;
-	private String vote;
+	private boolean vote;
 	private Date voteDate;
 	
 	
@@ -33,6 +35,7 @@ public class Vote {
 	
 	@ManyToOne
 	@JoinColumn(name = "userd_id")
+	
 	public Userd getUserd() {
 		return userd;
 	}
@@ -48,10 +51,12 @@ public class Vote {
 		this.proposal = proposal;
 	}
 	
-	public void setVote(String vote) {
+	public void setVote(boolean vote) {
 		this.vote = vote;
 	}
-	public String getVote() {
+	
+	@Column(name = "vote", columnDefinition = "BIT", length = 1)
+	public boolean getVote() {
 		return vote;
 	}
 	
@@ -61,6 +66,12 @@ public class Vote {
 	}
 	public void setVoteDate(Date voteDate) {
 		this.voteDate = voteDate;
+	}
+	
+	@Override
+	public String toString() {
+		return "Vote [voteId=" + voteId + ", userd=" + userd.getUserdId() + ", proposal="
+				+ proposal.getProposalId() + ", vote=" + vote + ", voteDate=" + voteDate + "]";
 	}
 
 }

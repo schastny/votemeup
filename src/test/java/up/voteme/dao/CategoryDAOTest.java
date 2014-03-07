@@ -13,9 +13,6 @@ import org.junit.runners.MethodSorters;
 import up.voteme.domain.Category;
 
 
-
-
-
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class CategoryDAOTest  {
 
@@ -24,10 +21,8 @@ public class CategoryDAOTest  {
 	@Test
 	public void A_findAllTest() {
 		final int SHOW_ITEMS = 5;
-		System.out.println("Find all items, show first "+ SHOW_ITEMS+" items....");
-
+		System.out.println("Find all items....");
 		List<Category> list = dao.findAll();
-		
 		for (int i = 0; i< list.size(); i++){
 			System.out.println(list.get(i));
 			// comment if block to show all items
@@ -45,7 +40,11 @@ public class CategoryDAOTest  {
 	public void B_storeTest(){
 		System.out.println("Store new item....");
 		List<Category> beforList = dao.findAll();
-		Category item = new Category();
+		//modify item
+		Category item = dao.findById(1L);
+		item.setCategId(0);
+		item.setCategName("OHOHOHOHOHO");
+		
 		long id =  dao.store(item);
 		List<Category> afterList = dao.findAll();
 		System.out.println("New item stored with id="+id);

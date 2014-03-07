@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`role` (
 -- Table `votemeup`.`user_status`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `votemeup`.`user_status` (
-  `user_status_id` BIGINT NOT NULL,
+  `user_status_id` BIGINT NOT NULL AUTO_INCREMENT,
   `user_status` VARCHAR(250) NULL DEFAULT NULL,
   PRIMARY KEY (`user_status_id`));
 
@@ -118,8 +118,8 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`userd` (
   `email` VARCHAR(250) NULL DEFAULT NULL,
   `user_login` VARCHAR(20) NULL DEFAULT NULL,
   `user_password` VARCHAR(20) NULL DEFAULT NULL,
-  `user_status_id` BIGINT NULL,
-  `role_id` BIGINT NULL DEFAULT NULL,
+  `user_status_id` BIGINT NOT NULL,
+  `role_id` BIGINT NOT NULL,
   `country_id` BIGINT NOT NULL,
   `region_id` BIGINT NOT NULL,
   `city_id` BIGINT NOT NULL,
@@ -172,28 +172,28 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`proposal` (
   `proposal_text` TEXT NULL DEFAULT NULL,
   `proposal_result` TEXT NULL DEFAULT NULL,
   `creation_date` DATETIME NULL DEFAULT NULL,
-  `status_id` BIGINT NULL,
-  `level_id` BIGINT NULL DEFAULT NULL,
-  `userd_id` BIGINT NULL DEFAULT NULL,
-  `country_id` BIGINT NOT NULL,
-  `region_id` BIGINT NOT NULL,
-  `city_id` BIGINT NOT NULL,
-  `district_id` INT NOT NULL,
+  `proposal_status_id` BIGINT NOT NULL,
+  `proposal_level_id` BIGINT NOT NULL,
+  `userd_id` BIGINT NOT NULL,
+  `country_id` BIGINT NULL DEFAULT NULL,
+  `region_id` BIGINT NULL DEFAULT NULL,
+  `city_id` BIGINT NULL DEFAULT NULL,
+  `district_id` BIGINT NULL DEFAULT NULL,
   PRIMARY KEY (`proposal_id`),
-  INDEX `fk_proposal_proposal_status1_idx` (`status_id` ASC),
-  INDEX `fk_proposal_proposal_level1_idx` (`level_id` ASC),
+  INDEX `fk_proposal_proposal_status1_idx` (`proposal_status_id` ASC),
+  INDEX `fk_proposal_proposal_level1_idx` (`proposal_level_id` ASC),
   INDEX `fk_proposal_userd1_idx` (`userd_id` ASC),
   INDEX `fk_proposal_country1_idx` (`country_id` ASC),
   INDEX `fk_proposal_region1_idx` (`region_id` ASC),
   INDEX `fk_proposal_city1_idx` (`city_id` ASC),
   INDEX `fk_proposal_district1_idx` (`district_id` ASC),
   CONSTRAINT `fk_proposal_proposal_status1`
-    FOREIGN KEY (`status_id`)
+    FOREIGN KEY (`proposal_status_id`)
     REFERENCES `votemeup`.`proposal_status` (`proposal_status_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_proposal_proposal_level1`
-    FOREIGN KEY (`level_id`)
+    FOREIGN KEY (`proposal_level_id`)
     REFERENCES `votemeup`.`proposal_level` (`proposal_level_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -257,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`vote` (
   `vote_id` BIGINT NOT NULL AUTO_INCREMENT,
   `userd_id` BIGINT NOT NULL,
   `proposal_id` BIGINT NOT NULL,
-  `vote` TINYINT(1) NULL,
+  `vote` BOOL NULL,
   `vote_date` DATETIME NULL DEFAULT NULL,
   PRIMARY KEY (`vote_id`),
   INDEX `fk_vote_userd1_idx` (`userd_id` ASC),

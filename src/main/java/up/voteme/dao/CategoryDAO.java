@@ -21,15 +21,10 @@ public CategoryDAO() {
 public long store(Category item) {
 	 EntityManager manager = entityManagerFactory.createEntityManager();
 	 EntityTransaction tx = manager.getTransaction();
-	 long id = item.getCategId(); //stored item id
+	 long id; //stored item id
 	 try {
 		 tx.begin();
-		 if( id == 0){			 //create
-			 manager.persist(item);
-			 id = item.getCategId();
-		 } else {
-			 manager.merge(item);//update
-		 }
+		 id= manager.merge(item).getCategId();	//store/update
 		 tx.commit();
 	 } catch (RuntimeException e) {
 		 tx.rollback();

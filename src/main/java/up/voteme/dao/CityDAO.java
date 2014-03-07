@@ -8,72 +8,72 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Comment;
+import up.voteme.domain.City;
 
 
-public class CommentDAO {
+public class CityDAO {
 	private EntityManagerFactory entityManagerFactory;
 
-	public CommentDAO() {
+	public CityDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
-	public long store(Comment item) {
+	public long store(City item) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 long id; //stored item id
 		 try {
 			 tx.begin();
-			 id= manager.merge(item).getCommentId();	//store/update
+			 id= manager.merge(item).getCityId();	//store/update
 			 tx.commit();
 		 } catch (RuntimeException e) {
 			 tx.rollback();
-		  throw e;
+			 throw e;
 		 } finally {
 			 manager.close();
 		 }
 		 return id;
 	}
 
-	public void delete(Long Id) {
+	public void delete(Long categoryId) {
+		EntityManager manager = entityManagerFactory.createEntityManager();
+		EntityTransaction tx = manager.getTransaction();
+		try {
+			tx.begin();
+			City category = manager.find(City.class, categoryId);
+			manager.remove(category);
+			tx.commit();
+		} catch (RuntimeException e) {
+			tx.rollback();
+			throw e;
+		} finally {
+			manager.close();
+		}
+	}
+
+	public City findById(Long cityId) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
-		 EntityTransaction tx = manager.getTransaction();
 		 try {
-			  tx.begin();
-			  Comment com = manager.find(Comment.class, Id);
-			  manager.remove(com);
-			  tx.commit();
-		 } catch (RuntimeException e) {
-			 tx.rollback();
-		  throw e;
+			 return manager.find(City.class, cityId);
 		 } finally {
 			 manager.close();
 		 }
 	}
 
-	public Comment findById(Long Id) {
+	public List<City> findAll() {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			 return manager.find(Comment.class, Id);
+			  Query query = manager.createQuery("select c from City c");
+			  @SuppressWarnings("unchecked")
+			  List<City> items = query.getResultList();
+			  for (City item : items) {
+			  item.getDistricts().size();
+			  }
+		  
+		  return items;
+		
 		 } finally {
 			 manager.close();
 		 }
+		}
 	}
-
-	public List<Comment> findAll() {
-	 EntityManager manager = entityManagerFactory.createEntityManager();
-	 try {
-		  Query query = manager.createQuery("select com from Comment com");
-		  @SuppressWarnings("unchecked")
-		  List<Comment> items = query.getResultList();
-		  //for (Comment item : items) {
-		  //item.getProjects().size();
-		  //}
-	  
-	  return items;
-
-	 } finally {
-		 manager.close();
-	 }
-	}
-}

@@ -1,7 +1,8 @@
 #fill created table with sample data
 SET FOREIGN_KEY_CHECKS = 0;
 
-INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_date, proposal_status_id, proposal_level_id, userd_id)VALUES 
+
+INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_date, proposal_status_id, proposal_level_id, userd_id )VALUES 
 	('Likvidirovat GAI','blabla','blablabla','2014-01-12 20:00:00', 1,1,3),
 	('Pereimenovat militsiu v poitsiu','blabla','blablabla','2014-01-12 20:00:00',  1,3,1),
 	('Pereimenovat Berkut v Omon','blabla','blablabla','2014-01-12 20:00:00',  1,1,6),
@@ -12,12 +13,12 @@ INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_da
 
 
 INSERT INTO userd (first_name, last_name, birth_year, sex, registration_date, email, user_login, user_password, user_status_id, role_id, country_id, region_id, city_id, district_id ) VALUES 
-	('Иван','Иванов','1954','male','2012-10-12 12:30:00','df@df.df',NULL,NULL,1,1),
-	('Сидор','Козлодоев','1960','male','2012-10-12 12:30:00','sdfd@mail.ru',NULL,NULL,1,1),
-	('Федот','Иванов','1965','male','2012-10-12 12:30:00','df@gmail.com',NULL,NULL,1,1),
-	('Аристарх','Суходрищев','1974','male','2012-10-12 12:30:00','df@df.df',NULL,NULL,1,1),
-	('Иван','Абрамов','1980','male','2013-10-12 12:30:00','df@df.df',NULL,NULL,1,3),
-	('Лидия','Сидорова','1980','female','2011-10-12 12:30:00','df@df.df',NULL,NULL,1,2);
+	('Иван','Иванов','1954','male','2012-10-12 12:30:00','df@df.df',NULL,NULL,1,1,1,3,1,6),
+	('Сидор','Козлодоев','1960','male','2012-10-12 12:30:00','sdfd@mail.ru',NULL,NULL,1,1,1,3,1,7),
+	('Федот','Иванов','1965','male','2012-10-12 12:30:00','df@gmail.com',NULL,NULL,1,1,1,3,2,1),
+	('Аристарх','Суходрищев','1974','male','2012-10-12 12:30:00','df@df.df',NULL,NULL,1,1,1,3,2,1),
+	('Иван','Абрамов','1980','male','2013-10-12 12:30:00','df@df.df',NULL,NULL,1,3,1,3,2,2),
+	('Лидия','Сидорова','1980','female','2011-10-12 12:30:00','df@df.df',NULL,NULL,1,2,1,3,2,3);
 
 
 
@@ -65,7 +66,7 @@ INSERT INTO city (city_name, region_id) VALUES
 	('Рязань',4)
 ;
 
-INSERT INTO district (district_name, district_id) VALUES
+INSERT INTO district (district_name, city_id) VALUES
 	('Ленинский',2),
 	('Гагаринский',2),
 	('Нахимовский',2),
@@ -83,15 +84,15 @@ INSERT INTO document (doc_name, doc_url, proposal_id) VALUES
 	
 
 INSERT INTO vote (userd_id,proposal_id, vote, vote_date) VALUES 
-	(1, 1, 'yes', '2013-01-20 12:30:00'),
-	(1, 2, 'no', '2013-02-20 12:30:00'),
-	(1, 6, 'yes', '2013-03-20 12:30:00'),
-	(1, 7, 'no', '2013-04-20 12:30:00'),
-	(2, 3, 'yes', '2013-05-20 12:30:00'),
-	(2, 4, 'yes', '2013-06-20 12:30:00'),
-	(3, 6, 'no', '2013-07-20 12:30:00'),
-	(6, 5, 'no', '2014-01-20 12:30:00'),
-	(5, 6, 'yes', '2014-02-20 12:30:00')
+	(1, 1, 1, '2013-01-20 12:30:00'),
+	(1, 2, 0, '2013-02-20 12:30:00'),
+	(1, 6, 1, '2013-03-20 12:30:00'),
+	(1, 7, 0, '2013-04-20 12:30:00'),
+	(2, 3, 1, '2013-05-20 12:30:00'),
+	(2, 4, 1, '2013-06-20 12:30:00'),
+	(3, 6, 0, '2013-07-20 12:30:00'),
+	(6, 5, 0, '2014-01-20 12:30:00'),
+	(5, 6, 1, '2014-02-20 12:30:00')
 ;
 
 

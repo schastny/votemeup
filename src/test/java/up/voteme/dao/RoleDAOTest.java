@@ -8,18 +8,18 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import up.voteme.domain.Proposal;
+import up.voteme.domain.Role;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
-public class ProposalDAOTest {
+public class RoleDAOTest {
 
-	private	ProposalDAO dao = new ProposalDAO();
+	private	RoleDAO dao = new RoleDAO();
 
 	@Test
 	public void A_findAllTest() {
 		final int SHOW_ITEMS = 5;
 		System.out.println("Find all items....");
-		List<Proposal> list = dao.findAll();
+		List<Role> list = dao.findAll();
 		for (int i = 0; i< list.size(); i++){
 			System.out.println(list.get(i));
 			// comment if block to show all items
@@ -36,14 +36,14 @@ public class ProposalDAOTest {
 	@Test
 	public void B_storeTest(){
 		System.out.println("Store new item....");
-		List<Proposal> beforList = dao.findAll();
+		List<Role> beforList = dao.findAll();
 		//modify item
-		Proposal item = dao.findById(1L);
-		item.setProposalId(0);
-		item.setProposalName("OHOHOHOHOHO");
+		Role item = dao.findById(1L);
+		item.setRoleId(0);
+		item.setRoleName("OHOHOHOHOHO");
 		
 		long id =  dao.store(item);
-		List<Proposal> afterList = dao.findAll();
+		List<Role> afterList = dao.findAll();
 		System.out.println("New item stored with id="+id);
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
@@ -53,17 +53,17 @@ public class ProposalDAOTest {
 	public void C_findByIdTest() {
 		System.out.println("Find last record (assume ID = num of rec)....");
 		long id = dao.findAll().size();
-		Proposal item = dao.findById(id);
-		System.out.println("Item id="+id+" was found"+item.getClass());
+		Role item = dao.findById(id);
+		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
 	}
 	
 	@Test
 	public void D_deleteTest() {
 		System.out.println("Delete last record(assume ID = num of rec)....");
-		List<Proposal> beforList = dao.findAll();
+		List<Role> beforList = dao.findAll();
 		long id = beforList.size();        // = befor size
 		dao.delete(id);
-		List<Proposal> afterList = dao.findAll();
+		List<Role> afterList = dao.findAll();
 		System.out.println("Item id="+id+" was deleted");
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);

@@ -20,18 +20,13 @@ public class ProposalDAO {
 	public long store(Proposal item) {
 	 EntityManager manager = entityManagerFactory.createEntityManager();
 	 EntityTransaction tx = manager.getTransaction();
-	 long id = item.getProposalId(); //stored item id
+	 long id; //stored item id
 	 try {
 		 tx.begin();
-		 if( id == 0){			//save
-			 manager.persist(item);
-			 //manager.refresh(item);;
-			 id = item.getProposalId();
-		 } else {
-			 manager.merge(item);	//update
-		 }
+		 id= manager.merge(item).getProposalId();	//store/update
 		 tx.commit();
 	 } catch (RuntimeException e) {
+		 System.out.println("persist failed "+e); 
 		 tx.rollback();
 		 throw e;
 	 } finally {
@@ -60,7 +55,9 @@ public class ProposalDAO {
 	public Proposal findById(Long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			 return manager.find(Proposal.class, Id);
+			 Proposal item = manager.find(Proposal.class, Id);
+			 
+			 return item;
 		 } finally {
 			 manager.close();
 		 }

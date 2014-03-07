@@ -11,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "proposal_level")
 public class ProposalLevel {
+	
 	private long id;
 	private String level;
 	
@@ -31,5 +32,10 @@ public class ProposalLevel {
 	}
 	public void setLevel(String level) {
 		this.level = level;
+	}
+	
+	@Override
+	public String toString() {
+		return "ProposalLevel [id=" + id + ", level=" + level + "]";
 	}
 }

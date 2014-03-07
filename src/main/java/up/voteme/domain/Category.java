@@ -31,13 +31,6 @@ public class Category  {
 	}
 
 	
-	@Override
-	public String toString() {
-		return "Category [categId=" + categId + ", categName=" + categName
-				//+ ", prop.size()="+proposals.size()
-				+"]";
-	}
-
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -62,6 +55,11 @@ public class Category  {
 
 	
 	
-	
+	@Override
+	public String toString() {
+		return "Category [categId=" + categId + ", categName=" + categName
+				+ ", prop.size()="+proposals.size()
+				+"]";
+	}
 
 }

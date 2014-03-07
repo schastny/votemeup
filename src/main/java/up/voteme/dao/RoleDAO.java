@@ -22,16 +22,10 @@ public class RoleDAO {
 	public long store(Role item) {
 	 EntityManager manager = entityManagerFactory.createEntityManager();
 	 EntityTransaction tx = manager.getTransaction();
-	 long id = item.getRoleId(); //stored item id
+	 long id; //stored item id
 	 try {
 		 tx.begin();
-		 if( id == 0){			//save
-			 manager.persist(item);
-			 //manager.refresh(item);;
-			 id = item.getRoleId();
-		 } else {
-			 manager.merge(item);	//update
-		 }
+		 id= manager.merge(item).getRoleId();	//store/update
 		 tx.commit();
 	 } catch (RuntimeException e) {
 		 tx.rollback();
@@ -77,7 +71,7 @@ public class RoleDAO {
 		  //Collections are lazy-load by default
 		  // alternative is @OneToMany(fetch = FetchType.EAGER)
 		  for (Role item : items) {
-			  	item.getUsers();
+			  	item.getUsers().size();
 			 // item.getCategories().size();
 			//  item.getDocuments().size();
 			//  item.getVotes().size();

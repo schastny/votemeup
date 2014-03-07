@@ -8,23 +8,22 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Comment;
+import up.voteme.domain.ProposalLevel;
 
-
-public class CommentDAO {
+public class ProposalLevelDAO {
 	private EntityManagerFactory entityManagerFactory;
 
-	public CommentDAO() {
+	public ProposalLevelDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
-	public long store(Comment item) {
+	public long store(ProposalLevel item) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 long id; //stored item id
 		 try {
 			 tx.begin();
-			 id= manager.merge(item).getCommentId();	//store/update
+			 id= manager.merge(item).getId();	//store/update
 			 tx.commit();
 		 } catch (RuntimeException e) {
 			 tx.rollback();
@@ -40,7 +39,7 @@ public class CommentDAO {
 		 EntityTransaction tx = manager.getTransaction();
 		 try {
 			  tx.begin();
-			  Comment com = manager.find(Comment.class, Id);
+			  ProposalLevel com = manager.find(ProposalLevel.class, Id);
 			  manager.remove(com);
 			  tx.commit();
 		 } catch (RuntimeException e) {
@@ -51,22 +50,22 @@ public class CommentDAO {
 		 }
 	}
 
-	public Comment findById(Long Id) {
+	public ProposalLevel findById(Long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			 return manager.find(Comment.class, Id);
+			 return manager.find(ProposalLevel.class, Id);
 		 } finally {
 			 manager.close();
 		 }
 	}
 
-	public List<Comment> findAll() {
+	public List<ProposalLevel> findAll() {
 	 EntityManager manager = entityManagerFactory.createEntityManager();
 	 try {
-		  Query query = manager.createQuery("select com from Comment com");
+		  Query query = manager.createQuery("select com from ProposalLevel com");
 		  @SuppressWarnings("unchecked")
-		  List<Comment> items = query.getResultList();
-		  //for (Comment item : items) {
+		  List<ProposalLevel> items = query.getResultList();
+		  //for (ProposalLevel item : items) {
 		  //item.getProjects().size();
 		  //}
 	  

@@ -18,26 +18,22 @@ public class DocumentDAO {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
-	public void store(Document item) {
+	public long store(Document item) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
-		 long id = item.getDocId(); //stored item id
+		 long id; //stored item id
 		 try {
-			  tx.begin();
-			  if( id == 0){			 //create
-					 manager.persist(item);
-					 manager.refresh(item);
-					 id = item.getDocId();
-				 } else {
-					 manager.merge(item);//update
-				 }
-			  tx.commit();
+			 tx.begin();
+			 id= manager.merge(item).getDocId();	//store/update
+			 tx.commit();
 		 } catch (RuntimeException e) {
+			 System.out.println("Persist fail "+e);
 			 tx.rollback();
 		  throw e;
 		 } finally {
 			 manager.close();
 		 }
+		 return id;
 	}
 
 	public void delete(Long Id) {

@@ -11,6 +11,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity 
 @Table(name = "proposal_status")
 public class ProposalStatus {
+	
 	private long id;
 	private String status;
 	
@@ -32,6 +33,11 @@ public class ProposalStatus {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	@Override
+	public String toString() {
+		return "ProposalStatus [id=" + id + ", status=" + status + "]";
 	}
 
 }

@@ -18,39 +18,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Proposal {
-
 	
-	public Proposal(long proposalId, String proposalName, String proposalText,
-			String proposalResult, Date creationDate,
-			ProposalStatus proposalStatus, ProposalLevel proposalLevel,
-			Userd userd, Collection<Comment> comments, Collection<Vote> votes,
-			Collection<Document> documents, Collection<Category> categories) {
-		super();
-		this.proposalId = proposalId;
-		this.proposalName = proposalName;
-		this.proposalText = proposalText;
-		this.proposalResult = proposalResult;
-		this.creationDate = creationDate;
-		this.proposalStatus = proposalStatus;
-		this.proposalLevel = proposalLevel;
-		this.userd = userd;
-		this.comments = comments;
-		this.votes = votes;
-		this.documents = documents;
-		this.categories = categories;
-	}
-	public Proposal() {
-		// TODO Auto-generated constructor stub
-	}
-	@Override
-	public String toString() {
-		return "Proposal [proposalId=" + proposalId + ", proposalName="
-				+ ", comments.size=" + comments.size() 
-				+ ", votes.size=" + votes.size()
-				+ ", documents.size=" + documents.size() 
-				+ ", categories.size=" + categories.size()
-				+ "]";
-	}
 	private long proposalId;
 	private String proposalName;
 	private String proposalText;
@@ -58,33 +26,15 @@ public class Proposal {
 	private Date creationDate;
 	private ProposalStatus proposalStatus; 
 	private ProposalLevel proposalLevel;    
-	private Userd userd;		//FK to userd	many-to-one
+	private Userd userd;		
+	private Country country;
+	private Region region;
+	private City city;
+	private District district;
 	private Collection<Comment> comments = new HashSet<>(); //for one-to-many relation
 	private Collection<Vote> votes = new HashSet<>();//for one-to-many relation
 	private Collection<Document> documents = new HashSet<>();//for one-to-many relation
 	private Collection<Category> categories = new HashSet<>();//many-to-many rel.
-	
-	
-	@ManyToMany 
-	 @JoinTable(
-	            name = "proposal_category",
-	            joinColumns = @JoinColumn(name = "proposal_proposal_id"), 
-	            inverseJoinColumns = @JoinColumn(name = "category_category_id"))
-	public Collection<Category> getCategories() {
-		return categories;
-	}
-	public void setCategories(Collection<Category> categories) {
-		this.categories = categories;
-	}
-	
-	@OneToMany (mappedBy = "proposal")
-	public Collection<Comment> getComments() {
-		return comments;
-	}
-	
-	public void setComments(Collection<Comment> comments) {
-		this.comments = comments;
-	}
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -155,7 +105,7 @@ public class Proposal {
 	public void setUserd(Userd userd) {
 		this.userd = userd;
 	}
-	@OneToMany (mappedBy = "userd")
+	@OneToMany(mappedBy = "userd")
 	public Collection<Vote> getVotes() {
 		return votes;
 	}
@@ -163,21 +113,81 @@ public class Proposal {
 		this.votes = votes;
 	}
 	
-	@OneToMany (mappedBy = "proposal")
+	@OneToMany(mappedBy = "proposal")
 	public Collection<Document> getDocuments() {
 		return documents;
 	}
 	public void setDocuments(Collection<Document> documents) {
 		this.documents = documents;
 	}
+	
+	@ManyToMany 
+	 @JoinTable(
+	            name = "proposal_category",
+	            joinColumns = @JoinColumn(name = "proposal_proposal_id"), 
+	            inverseJoinColumns = @JoinColumn(name = "category_category_id"))
+	public Collection<Category> getCategories() {
+		return categories;
+	}
+	public void setCategories(Collection<Category> categories) {
+		this.categories = categories;
+	}
+	
+	@OneToMany (mappedBy = "proposal")
+	public Collection<Comment> getComments() {
+		return comments;
+	}
+	
+	public void setComments(Collection<Comment> comments) {
+		this.comments = comments;
+	}
 
+	@ManyToOne 
+	@JoinColumn(name = "country_id")
+	public Country getCountry() {
+		return country;
+	}
+	public void setCountry(Country country) {
+		this.country = country;
+	}
 	
-
+	@ManyToOne
+	@JoinColumn(name = "region_id")
+	public Region getRegion() {
+		return region;
+	}
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "district_id")
+	public District getDistrict() {
+		return district;
+	}
+	public void setDistrict(District district) {
+		this.district = district;
+	}
 	
 	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Proposal [proposalId=" + proposalId + ", proposalName="+proposalName
+				+ ", comments.size=" + comments.size() 
+				+ ", votes.size=" + votes.size()
+				+ ", documents.size=" + documents.size() 
+				+ ", categories.size=" + categories.size()
+				+ "]";
+	}
 	
 	
 }

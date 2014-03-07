@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "user_status")
 public class UserStatus {
+	
 	private long id;
 	private String status;
 	
@@ -29,5 +30,9 @@ public class UserStatus {
 		this.status = status;
 	}
 	
+	@Override
+	public String toString() {
+		return "UserStatus [id=" + id + ", status=" + status + "]";
+	}
 
 }

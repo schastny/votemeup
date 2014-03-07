@@ -13,6 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Role {
+	
 	private long roleId;
 	private String roleName;
 	private String roleDescr;
@@ -51,6 +52,12 @@ public class Role {
 	}
 	public void setRoleDescr(String roleDescr) {
 		this.roleDescr = roleDescr;
+	}
+	
+	@Override
+	public String toString() {
+		return "Role [roleId=" + roleId + ", roleName=" + roleName
+				+ ", roleDescr=" + roleDescr + ", users=" + users.size() + "]";
 	}
 
 }

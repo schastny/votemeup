@@ -19,20 +19,38 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Userd {
+	@Override
+	public String toString() {
+		return "Userd [userdId=" + userdId + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", birthYear=" + birthYear
+				+ ", sex=" + sex + ", registrationDate=" + registrationDate
+				+ ", email=" + email + ", userLogin=" + userLogin
+				+ ", userPassword=" + userPassword + ", role=" + role.getRoleId()
+				+ ", userStatus=" + userStatus.getId() + ", country=" + country.getCountryId()
+				+ ", region=" + region.getRegionId() + ", city=" + city.getCityId() + ", district="
+				+ district.getDistrictId() + ", proposals=" + proposals.size() + ", commentd="
+				+ commentd.size() + ", votes=" + votes.size() + "]";
+	}
 	private long userdId;
 	private String firstName;
 	private String lastName;
 	private int birthYear;
 	private String sex ;// "male", "female"
 	private Date registrationDate;
-	private String city;
 	private String email;
 	private String userLogin;
 	private String userPassword;
+	private Role role; 
+	private UserStatus userStatus;
+	private Country country;
+	private Region region;
+	private City city;
+	private District district;
+	
 	private Collection<Proposal> proposals = new HashSet<>();
 	private Collection<Comment> commentd = new HashSet<>();
 	private Collection<Vote> votes = new HashSet<>();
-	private Role role; 
+	
 	
 	@OneToMany (mappedBy = "userd")
 	public Collection<Comment> getCommentd() {
@@ -97,12 +115,7 @@ public class Userd {
 	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -141,6 +154,51 @@ public class Userd {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "user_status_id")
+	public UserStatus getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(UserStatus userStatus) {
+		this.userStatus = userStatus;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	public Country getCountry() {
+		return country;
+	}
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "region_id")
+	public Region getRegion() {
+		return region;
+	}
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "city_id")
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name = "district_id")
+	public District getDistrict() {
+		return district;
+	}
+	public void setDistrict(District district) {
+		this.district = district;
 	}
 
 }

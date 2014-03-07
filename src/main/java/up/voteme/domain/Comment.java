@@ -25,12 +25,7 @@ public class Comment {
 	
 	
 
-	@Override
-	public String toString() {
-		return "Comment [commentId=" + commentId
-				+ ", commentText=" + commentText
-				+ ", commentDate=" + commentDate + "]";
-	}
+	
 	
 	
 	@Id
@@ -78,4 +73,10 @@ public class Comment {
 		this.proposal = proposal;
 	}
 
+	@Override
+	public String toString() {
+		return "Comment [commentId=" + commentId + ", userd=" + userd.getUserdId()
+				+ ", proposal=" + proposal.getProposalId() + ", commentText=" + commentText
+				+ ", commentDate=" + commentDate + "]";
+	}
 }

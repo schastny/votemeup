@@ -8,23 +8,22 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Comment;
+import up.voteme.domain.Region;
 
-
-public class CommentDAO {
+public class RegionDAO {
 	private EntityManagerFactory entityManagerFactory;
 
-	public CommentDAO() {
+	public RegionDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
-	public long store(Comment item) {
+	public long store(Region item) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 long id; //stored item id
 		 try {
 			 tx.begin();
-			 id= manager.merge(item).getCommentId();	//store/update
+			 id= manager.merge(item).getRegionId();	//store/update
 			 tx.commit();
 		 } catch (RuntimeException e) {
 			 tx.rollback();
@@ -40,7 +39,7 @@ public class CommentDAO {
 		 EntityTransaction tx = manager.getTransaction();
 		 try {
 			  tx.begin();
-			  Comment com = manager.find(Comment.class, Id);
+			  Region com = manager.find(Region.class, Id);
 			  manager.remove(com);
 			  tx.commit();
 		 } catch (RuntimeException e) {
@@ -51,24 +50,24 @@ public class CommentDAO {
 		 }
 	}
 
-	public Comment findById(Long Id) {
+	public Region findById(Long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			 return manager.find(Comment.class, Id);
+			 return manager.find(Region.class, Id);
 		 } finally {
 			 manager.close();
 		 }
 	}
 
-	public List<Comment> findAll() {
+	public List<Region> findAll() {
 	 EntityManager manager = entityManagerFactory.createEntityManager();
 	 try {
-		  Query query = manager.createQuery("select com from Comment com");
+		  Query query = manager.createQuery("select com from Region com");
 		  @SuppressWarnings("unchecked")
-		  List<Comment> items = query.getResultList();
-		  //for (Comment item : items) {
-		  //item.getProjects().size();
-		  //}
+		  List<Region> items = query.getResultList();
+		  for (Region item : items) {
+			  item.getCities().size();
+		  }
 	  
 	  return items;
 
