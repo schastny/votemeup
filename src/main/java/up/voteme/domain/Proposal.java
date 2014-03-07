@@ -20,6 +20,28 @@ import org.hibernate.annotations.GenericGenerator;
 public class Proposal {
 
 	
+	public Proposal(long proposalId, String proposalName, String proposalText,
+			String proposalResult, Date creationDate,
+			ProposalStatus proposalStatus, ProposalLevel proposalLevel,
+			Userd userd, Collection<Comment> comments, Collection<Vote> votes,
+			Collection<Document> documents, Collection<Category> categories) {
+		super();
+		this.proposalId = proposalId;
+		this.proposalName = proposalName;
+		this.proposalText = proposalText;
+		this.proposalResult = proposalResult;
+		this.creationDate = creationDate;
+		this.proposalStatus = proposalStatus;
+		this.proposalLevel = proposalLevel;
+		this.userd = userd;
+		this.comments = comments;
+		this.votes = votes;
+		this.documents = documents;
+		this.categories = categories;
+	}
+	public Proposal() {
+		// TODO Auto-generated constructor stub
+	}
 	@Override
 	public String toString() {
 		return "Proposal [proposalId=" + proposalId + ", proposalName="
@@ -45,9 +67,9 @@ public class Proposal {
 	
 	@ManyToMany 
 	 @JoinTable(
-	            name = "proposal_category", 
-	            joinColumns         = @JoinColumn(name = "proposal_id"), 
-	            inverseJoinColumns     = @JoinColumn(name = "category_id"))
+	            name = "proposal_category",
+	            joinColumns = @JoinColumn(name = "proposal_proposal_id"), 
+	            inverseJoinColumns = @JoinColumn(name = "category_category_id"))
 	public Collection<Category> getCategories() {
 		return categories;
 	}
