@@ -10,6 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
 
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
+ 
 	<bean id="placeholderConfig"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:db.properties" />
@@ -17,6 +18,10 @@
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		
+		<property name="persistenceUnitName" value="org.hibernate" />
+		<property name="dataSource" ref="dataSource" />
+		
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
@@ -24,16 +29,14 @@
 				<property name="databasePlatform" value="${db.dialect}" />
 			</bean>
 		</property>		
+		<property name="persistenceUnitManager">
+			<bean class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+				<property name="defaultDataSource" ref="dataSource" />
+			</bean>
+		</property>
+		
+		
 	</bean>
-
-
-
-
-
-
-
-
-
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

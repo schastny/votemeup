@@ -10,7 +10,7 @@
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
 
-         <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
          <class>up.voteme.domain.Category</class>
          <class>up.voteme.domain.Userd</class>
          <class>up.voteme.domain.Vote</class>
