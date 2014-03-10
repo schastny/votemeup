@@ -15,18 +15,18 @@ ${controllerMessage}
 
 
 <h2>List of Proposals</h2>
-	<table>
-		<tr>
-			<th>ID</th>
-			<th>Text</th>
-		</tr>
-		<c:forEach items="${list}" var="userVar" >
-		<tr>
-			<td>${userVar.proposalId}</td>
-			<td>${userVar.proposalName}</td>
-		</tr>
-		</c:forEach>
-	</table>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Text</th>
+	</tr>
+	<c:forEach items="${list}" var="userVar" >
+	<tr>
+		<td>${userVar.proposalId}</td>
+		<td>${userVar.proposalName}</td>
+	</tr>
+	</c:forEach>
+</table>
 
 
 

@@ -29,19 +29,18 @@ public class HomeController {
 	public String home(Model model) {
 		logger.info("Welcome home!");
 		
-		
+		//log all proposals for debug purposes
 		ProposalDAO dao = new ProposalDAO();
 		List<Proposal> list= dao.findAll();
 		for (Proposal p: list){
 			logger.debug(p.toString());
 		}
-		
+		//add all proposals as attribute to show on home.jsp 
 		model.addAttribute("list",list);
-	
-		Date date = new Date();
-
+		
+		
 		model.addAttribute("controllerMessage",
-				"This is the message from the controller!"+date);
+				"This is the message from the controller! "+new Date());
 		return "home";
 	}
 
