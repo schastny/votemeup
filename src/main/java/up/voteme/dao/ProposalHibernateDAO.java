@@ -4,6 +4,7 @@ import org.hibernate.HibernateException;
 import up.voteme.domain.Category;
 import up.voteme.domain.Proposal;
 import up.voteme.domain.Tag;
+import up.voteme.domain.User;
 import up.voteme.exception.dao.ProposalDAOException;
 import up.voteme.service.ProposalDAO;
 import up.voteme.util.HibernateUtil;
@@ -72,32 +73,90 @@ public class ProposalHibernateDAO implements ProposalDAO
     }
 
     @Override
-    public List<Proposal> getUserProposals(int userId)
+    public List<Proposal> getUserProposals(User user) throws ProposalDAOException
+    {
+        List<Proposal> proposals;
+        try
+        {
+            begin();
+            int userId = user.getId();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where user_id =:userId")
+                                                    .setInteger("userId", userId)
+                                                    .list();
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new ProposalDAOException("Could't get all proposals by user!" + user, e);
+        }
+        return proposals;
+    }
+
+    @Override
+    public List<Proposal> getProposalsByTag(Tag tag)
+    {
+        List<Proposal> proposals;
+        try
+        {
+            begin();
+            int tagId = tag.getId();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where user_id =:userId")
+                                                    .setInteger("userId", tagId)
+                                                    .list();
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new ProposalDAOException("Could't get all proposals by user!" + user, e);
+        }
+        return proposals;
+    }
+
+    @Override
+    public List<Proposal> getProposalsByCategory(Category category)
     {
         return null;
     }
 
     @Override
-    public Proposal getProposalByTag(Tag tag)
+    public List<Proposal> getProposalsByDueDate(Date dueDate) throws ProposalDAOException
     {
-        return null;
+        List<Proposal> proposals;
+        try
+        {
+            begin();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where date =:date")
+                                                    .setDate("date", dueDate)
+                                                    .list();
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new ProposalDAOException("Could't get all votes by dueDate!" + dueDate, e);
+        }
+        return proposals;
     }
 
     @Override
-    public Proposal getProposalByCategory(Category category)
+    public List<Proposal> getProposalsByCreationalDate(Date creationalDate) throws ProposalDAOException
     {
-        return null;
-    }
-
-    @Override
-    public Proposal getProposalByDueDate(Date dueDate)
-    {
-        return null;
-    }
-
-    @Override
-    public Proposal getProposalByCreationalDate(Date creationalDate)
-    {
-        return null;
+        List<Proposal> proposals;
+        try
+        {
+            begin();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where date =:date")
+                                                    .setDate("date", creationalDate)
+                                                    .list();
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new ProposalDAOException("Could't get all votes by creationalDate!" + creationalDate, e);
+        }
+        return proposals;
     }
 }
