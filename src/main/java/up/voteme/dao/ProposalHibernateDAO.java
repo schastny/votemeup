@@ -1,8 +1,6 @@
 package up.voteme.dao;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import up.voteme.domain.Category;
 import up.voteme.domain.Proposal;
 import up.voteme.domain.Tag;
@@ -13,19 +11,19 @@ import up.voteme.util.HibernateUtil;
 import java.util.Date;
 import java.util.List;
 
+import static up.voteme.util.HibernateUtil.*;
+
 public class ProposalHibernateDAO implements ProposalDAO
 {
-    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
     @Override
     public void addProposal(Proposal proposal) throws ProposalDAOException
     {
         try
         {
-            HibernateUtil.begin();
-            HibernateUtil.getSession().save(proposal);
-            HibernateUtil.commit();
-            HibernateUtil.closeSession();
+            begin();
+            getSession().save(proposal);
+            commit();
+            closeSession();
         } catch(HibernateException e)
         {
             HibernateUtil.rollback();
@@ -38,10 +36,10 @@ public class ProposalHibernateDAO implements ProposalDAO
     {
         try
         {
-            HibernateUtil.begin();
-            HibernateUtil.getSession().delete(proposal);
-            HibernateUtil.commit();
-            HibernateUtil.closeSession();
+            begin();
+            getSession().delete(proposal);
+            commit();
+            closeSession();
         } catch(HibernateException e)
         {
             HibernateUtil.rollback();
@@ -50,16 +48,20 @@ public class ProposalHibernateDAO implements ProposalDAO
     }
 
     @Override
-    public Proposal getProposal(int id)
+    public Proposal getProposal(int id) throws ProposalDAOException
     {
         Proposal proposal = null;
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        proposal = (Proposal)session.get(Proposal.class, id);
-        session.getTransaction().commit();
-        session.close();
-
+        try
+        {
+            begin();
+            proposal = (Proposal)getSession().get(Proposal.class, id);
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new ProposalDAOException("Could't get proposal by ID!" + id, e);
+        }
         return proposal;
     }
 
