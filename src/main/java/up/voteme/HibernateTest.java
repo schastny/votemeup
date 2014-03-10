@@ -2,10 +2,7 @@ package up.voteme;
 
 
 import up.voteme.dao.DAOFactory;
-import up.voteme.domain.Proposal;
-import up.voteme.domain.Role;
-import up.voteme.domain.User;
-import up.voteme.domain.Vote;
+import up.voteme.domain.*;
 import up.voteme.service.*;
 
 import java.util.Date;
@@ -59,7 +56,19 @@ public class HibernateTest
         System.out.println("testing VoteHibernateDao");
 
         Proposal proposal = new Proposal();
-        proposal.setTitle("Proposal1");
+        proposal.setTitle("Proposal");
+
+        Proposal proposal1 = new Proposal();
+        proposal1.setTitle("Proposal1");
+
+        Tag tag = new Tag();
+        tag.setTitle("Pron");
+        tag.getProposals().add(proposal);
+        tag.getProposals().add(proposal1);
+
+        proposal.getTags().add(tag);
+        proposal1.getTags().add(tag);
+
         //proposal.setAuthor(ivan);
 
         Date date = new Date();
@@ -73,8 +82,13 @@ public class HibernateTest
         vote1.setProposal(proposal);
         proposal.getVotes().add(vote1);
 
+        TagDAO tagDAO = factory.createTagDAO();
+        tagDAO.addTag(tag);
+
         ProposalDAO proposalDAO1 = factory.createProposalDAO();
         proposalDAO1.addProposal(proposal);
+        proposalDAO1.addProposal(proposal1);
+
 
         VoteDAO voteDAO = factory.createVoteDAO();
         voteDAO.addVote(vote1);
@@ -84,11 +98,15 @@ public class HibernateTest
         System.out.println("voteDAO.getAllVotesByUser(ivan)" + voteDAO.getAllVotesByUser(new User()));
         System.out.println("voteDAO.getAllVotesByDate(date)" + voteDAO.getAllVotesByDate(date));
 
-        proposalDAO1.deleteProposal(proposal);
+        //proposalDAO1.deleteProposal(proposal);
 
         // testing RoleHibernateDao
 
         System.out.println("/n/n testing VoteHibernateDao");
+
+        // getProposalsByTag
+
+        System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
 
 
 
