@@ -1,43 +1,64 @@
 package up.voteme.dao;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import up.voteme.domain.User;
+import up.voteme.exception.dao.UserDAOException;
 import up.voteme.service.UserDAO;
 import up.voteme.util.HibernateUtil;
 
 import java.util.List;
 
-public class UserHibernateDAO implements UserDAO {
+import static up.voteme.util.HibernateUtil.*;
+import static up.voteme.util.HibernateUtil.rollback;
+
+public class UserHibernateDAO implements UserDAO
+{
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
-    public void addUser(User user) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
-        session.close();
+    public void addUser(User user) throws UserDAOException
+    {
+        try
+        {
+            begin();
+            getSession().save(user);
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new UserDAOException("Could't add user! " + user, e);
+        }
     }
 
     @Override
-    public void deleteUser(User user) {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        session.delete(user);
-        session.getTransaction().commit();
-        session.close();
+    public void deleteUser(User user) throws UserDAOException
+    {
+        try
+        {
+            begin();
+            getSession().delete(user);
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new UserDAOException("Could't delete user! " + user, e);
+        }
     }
 
     @Override
-    public User getUserById(int id) {
+    public User getUserById(int id)
+    {
         User user = null;
 
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        user = (User) session.get(User.class, id);
+        user = (User)session.get(User.class, id);
         session.getTransaction().commit();
         session.close();
 
@@ -45,7 +66,8 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers()
+    {
         List<User> users = null;
 
         Session session = sessionFactory.openSession();
@@ -58,7 +80,8 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login)
+    {
         User user = null;
 
         Session session = sessionFactory.openSession();
@@ -75,12 +98,8 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public void updateUser(int id) {
+    public void updateUser(int id)
+    {
 
-    }
-
-    @Override
-    public void close() {
-        sessionFactory.close();
     }
 }

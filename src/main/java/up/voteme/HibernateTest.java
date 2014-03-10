@@ -2,12 +2,11 @@ package up.voteme;
 
 
 import up.voteme.dao.DAOFactory;
-import up.voteme.domain.Attachment;
 import up.voteme.domain.Proposal;
+import up.voteme.domain.Role;
 import up.voteme.domain.User;
-import up.voteme.service.AttachmentDAO;
-import up.voteme.service.ProposalDAO;
-import up.voteme.service.UserDAO;
+import up.voteme.domain.Vote;
+import up.voteme.service.*;
 
 import java.util.Date;
 
@@ -21,48 +20,78 @@ import java.util.Date;
  */
 public class HibernateTest
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
-        DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateMySqlDAO);
+        DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateDAO);
         UserDAO userDAO = factory.createUserDAO();
         ProposalDAO proposalDAO = factory.createProposalDAO();
         AttachmentDAO attachmentDAO = factory.createAttachmentDAO();
+        RoleDAO roleDAO = factory.createRoleDAO();
 
+        Role admin = new Role();
+        admin.setRole("admin");
+
+        Role user = new Role();
+        user.setRole("user");
 
         User ivan = new User();
         ivan.setLogin("eggplant");
         ivan.setEmail("redtube@mail.com");
         ivan.setCity("Shkolnoe");
         ivan.setDateOfBirth(new Date());
-
-        userDAO.addUser(ivan);
+        ivan.setRole(admin);
 
         User sasha = new User();
         sasha.setLogin("pussy");
         sasha.setEmail("homeless@mail.com");
         sasha.setCity("Yalta");
         sasha.setDateOfBirth(new Date());
+        sasha.setRole(user);
 
+        userDAO.addUser(ivan);
         userDAO.addUser(sasha);
 
+        System.out.println(userDAO.getAllUsers().get(0).getRole());
+        System.out.println(userDAO.getAllUsers().get(1).getRole());
+
+        // testing VoteHibernateDao
+
+        System.out.println("testing VoteHibernateDao");
+
         Proposal proposal = new Proposal();
-        proposal.setTitle("title");
-        proposal.setContent("content");
+        proposal.setTitle("Proposal1");
+        //proposal.setAuthor(ivan);
 
-        Attachment attachment = new Attachment();
-        attachment.setPath("hfhjsd");
-        attachment.setUrl("http://localhost");
-        attachment.setProposal(proposal);
+        Date date = new Date();
+
+        Vote vote1 = new Vote();
+        vote1.setDate(date);
+        Vote vote2 = new Vote();
+        vote2.setDate(date);
+        vote1.setUser(ivan);
+
+        vote1.setProposal(proposal);
+        proposal.getVotes().add(vote1);
+
+        ProposalDAO proposalDAO1 = factory.createProposalDAO();
+        proposalDAO1.addProposal(proposal);
+
+        VoteDAO voteDAO = factory.createVoteDAO();
+        voteDAO.addVote(vote1);
+        voteDAO.addVote(vote2);
+
+        System.out.println("voteDAO.getAllVotesByProposal(proposal)" + voteDAO.getAllVotesByProposal(proposal));
+        System.out.println("voteDAO.getAllVotesByUser(ivan)" + voteDAO.getAllVotesByUser(new User()));
+        System.out.println("voteDAO.getAllVotesByDate(date)" + voteDAO.getAllVotesByDate(date));
+
+        proposalDAO1.deleteProposal(proposal);
+
+        // testing RoleHibernateDao
+
+        System.out.println("/n/n testing VoteHibernateDao");
 
 
-        proposal.getAttachments().add(attachment);
 
-
-        attachmentDAO.addAttachment(attachment);
-        proposalDAO.addProposal(proposal);
-
-
-        System.out.println(attachmentDAO.getAllAttachmentsByProposal(proposal));
-
+        System.exit(0);
     }
 }

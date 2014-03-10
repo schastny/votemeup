@@ -1,22 +1,21 @@
 package up.voteme.service;
 
 import up.voteme.domain.User;
+import up.voteme.exception.dao.UserDAOException;
 
 import java.util.List;
 
 public interface UserDAO
 {
-    public void addUser(User user);
+    public void addUser(User user) throws UserDAOException;
 
-    public void deleteUser(User user);
+    public void deleteUser(User user) throws UserDAOException;
 
-    public User getUserById(int id);
+    public User getUserById(int id) throws UserDAOException;
 
-    public List<User> getAllUsers();
+    public List<User> getAllUsers() throws UserDAOException;
 
-    public User getUserByLogin(String login);
+    public User getUserByLogin(String login) throws UserDAOException;
 
-    public void updateUser(int id);
-
-    public void close();
+    public void updateUser(int id) throws UserDAOException;
 }

@@ -74,7 +74,7 @@ public class User
     }
 
     @Column(name = "date_of_birth")
-    @Temporal(value=TemporalType.DATE)
+    @Temporal(value = TemporalType.DATE)
     public Date getDateOfBirth()
     {
         return dateOfBirth;
@@ -129,7 +129,7 @@ public class User
         this.email = email;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     public Role getRole()
     {

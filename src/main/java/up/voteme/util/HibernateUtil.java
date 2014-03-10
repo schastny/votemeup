@@ -1,6 +1,8 @@
 package up.voteme.util;
 
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
@@ -15,6 +17,7 @@ import org.hibernate.cfg.AnnotationConfiguration;
 public class HibernateUtil
 {
     private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static final ThreadLocal session = new ThreadLocal();
 
     private static SessionFactory buildSessionFactory()
     {
@@ -32,5 +35,47 @@ public class HibernateUtil
     public static SessionFactory getSessionFactory()
     {
         return sessionFactory;
+    }
+
+    public static Session getSession()
+    {
+        Session session = (Session)HibernateUtil.session.get();
+        if(session == null)
+        {
+            session = sessionFactory.openSession();
+            HibernateUtil.session.set(session);
+        }
+        return session;
+    }
+
+    public static void begin()
+    {
+        getSession().beginTransaction();
+    }
+
+    public static void commit()
+    {
+        getSession().getTransaction().commit();
+    }
+
+    public static void rollback()
+    {
+        try {
+            getSession().getTransaction().rollback();
+        } catch (HibernateException e) {
+            System.out.println("Cannot rollback: " + e);
+        }
+        try {
+            getSession().close();
+        } catch (HibernateException e) {
+            System.out.println("Cannot close: " + e);
+        }
+        HibernateUtil.session.set(null);
+    }
+
+    public static void closeSession()
+    {
+        getSession().close();
+        HibernateUtil.session.set(null);
     }
 }

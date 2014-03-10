@@ -4,7 +4,6 @@ import up.voteme.service.*;
 
 public class HibernateDAOFactory extends DAOFactory
 {
-
     @Override
     public AttachmentDAO createAttachmentDAO()
     {
@@ -52,4 +51,6 @@ public class HibernateDAOFactory extends DAOFactory
     {
         return new VoteHibernateDAO();
     }
+
+
 }

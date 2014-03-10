@@ -1,79 +1,86 @@
 package up.voteme.dao;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.HibernateException;
 import up.voteme.domain.Attachment;
-import up.voteme.domain.Comment;
 import up.voteme.domain.Proposal;
+import up.voteme.exception.dao.AttachmentDAOException;
 import up.voteme.service.AttachmentDAO;
-import up.voteme.util.HibernateUtil;
 
 import java.util.List;
 
+import static up.voteme.util.HibernateUtil.*;
+
 public class AttachmentHibernateDAO implements AttachmentDAO
 {
-    private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-
     @Override
-    public void addAttachment(Attachment attachment)
+    public void addAttachment(Attachment attachment) throws AttachmentDAOException
     {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        session.save(attachment);
-        session.getTransaction().commit();
-        session.close();
+        try
+        {
+            begin();
+            getSession().save(attachment);
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new AttachmentDAOException("Could't add attachment!" + attachment, e);
+        }
     }
 
     @Override
-    public void deleteAttachment(Attachment attachment)
+    public void deleteAttachment(Attachment attachment) throws AttachmentDAOException
     {
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        session.delete(attachment);
-        session.getTransaction().commit();
-        session.close();
+        try
+        {
+            begin();
+            getSession().delete(attachment);
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new AttachmentDAOException("Could't delete attachment!" + attachment, e);
+        }
     }
 
     @Override
-    public Attachment getAttachment(int id)
+    public Attachment getAttachment(int id) throws AttachmentDAOException
     {
-        Attachment attachment = null;
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        attachment = (Attachment)session.get(Attachment.class, id);
-
-        session.getTransaction().commit();
-        session.close();
+        Attachment attachment;
+        try
+        {
+            begin();
+            attachment = (Attachment)getSession().get(Attachment.class, id);
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new AttachmentDAOException("Could't get attachment by ID!" + id, e);
+        }
         return attachment;
     }
 
     @Override
-    public List<Attachment> getAllAttachmentsByProposal(Proposal proposal)
+    public List<Attachment> getAllAttachmentsByProposal(Proposal proposal) throws AttachmentDAOException
     {
-        List<Attachment> attachments = null;
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        Criteria criteria = session.createCriteria(Attachment.class);
-        criteria.add(Restrictions.eq("proposal", proposal));
-        attachments = criteria.list();
-
-        session.getTransaction().commit();
-        session.close();
-
+        List<Attachment> attachments;
+        try
+        {
+            begin();
+            int proposalId = proposal.getId();
+            attachments = (List<Attachment>)getSession().createQuery("from Attachment where proposal_id =:proposalId")
+                                                        .setInteger("proposalId", proposalId)
+                                                        .list();
+            commit();
+            closeSession();
+        } catch(HibernateException e)
+        {
+            rollback();
+            throw new AttachmentDAOException("Could't get all attachments by proposal!" + proposal, e);
+        }
         return attachments;
     }
 
-    @Override
-    public List<Attachment> getAllAttachmentsByComment(Comment comment)
-    {
-        return null;
-    }
 }

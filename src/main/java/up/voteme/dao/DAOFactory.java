@@ -4,13 +4,13 @@ import up.voteme.service.*;
 
 public abstract class DAOFactory
 {
-    public static final int HibernateMySqlDAO = 0;
+    public static final int HibernateDAO = 0;
 
     public static DAOFactory getFactory(int whichFactory)
     {
         switch(whichFactory)
         {
-            case HibernateMySqlDAO : return new HibernateDAOFactory();
+            case HibernateDAO: return new HibernateDAOFactory();
 
             default: return new HibernateDAOFactory();
         }
@@ -24,5 +24,4 @@ public abstract class DAOFactory
     public abstract TagDAO createTagDAO();
     public abstract UserDAO createUserDAO();
     public abstract VoteDAO createVoteDAO();
-
 }

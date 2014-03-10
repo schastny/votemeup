@@ -26,6 +26,7 @@ public class Vote
     }
 
     @Id
+    @Column(name = "vote_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId()
     {
@@ -62,7 +63,7 @@ public class Vote
     }
 
     @Column(name = "date")
-    @Temporal(value=TemporalType.DATE)
+    @Temporal(value = TemporalType.DATE)
     public Date getDate()
     {
         return date;

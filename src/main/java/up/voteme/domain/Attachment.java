@@ -2,14 +2,6 @@ package up.voteme.domain;
 
 import javax.persistence.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: St1ch
- * Date: 27.02.14
- * Time: 13:02
- * Package name: up.voteme.domain
- * Project name: votemeup
- */
 @Entity
 @Table(name = "ATTACHMENT")
 public class Attachment
