@@ -11,6 +11,8 @@ import java.util.List;
 import static up.voteme.util.HibernateUtil.*;
 
 public class AttachmentHibernateDAO implements AttachmentDAO {
+
+//   ivan lox
     @Override
     public void addAttachment(Attachment attachment) throws AttachmentDAOException {
         try {
