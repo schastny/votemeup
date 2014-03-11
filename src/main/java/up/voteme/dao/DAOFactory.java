@@ -30,4 +30,6 @@ public abstract class DAOFactory {
     public abstract UserDAO createUserDAO();
 
     public abstract VoteDAO createVoteDAO();
+
+    public abstract AddressDAO createAddressDAO();
 }

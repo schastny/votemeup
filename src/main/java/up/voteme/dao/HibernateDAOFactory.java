@@ -3,6 +3,7 @@ package up.voteme.dao;
 import up.voteme.service.*;
 
 public class HibernateDAOFactory extends DAOFactory {
+
     @Override
     public AttachmentDAO createAttachmentDAO() {
         return new AttachmentHibernateDAO();
@@ -43,5 +44,9 @@ public class HibernateDAOFactory extends DAOFactory {
         return new VoteHibernateDAO();
     }
 
+    @Override
+    public AddressDAO createAddressDAO() {
+        return new AddressHibernateDAO();
+    }
 
 }

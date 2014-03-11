@@ -9,10 +9,13 @@ import java.util.Date;
 
 public class HibernateTest {
     public static void main(String[] args) throws Exception {
+
         DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateDAO);
+
         UserDAO userDAO = factory.createUserDAO();
         AttachmentDAO attachmentDAO = factory.createAttachmentDAO();
         RoleDAO roleDAO = factory.createRoleDAO();
+        AddressDAO addressDAO = factory.createAddressDAO();
 
         Role admin = new Role();
         admin.setRole("admin");
@@ -26,9 +29,15 @@ public class HibernateTest {
         ivan.setLogin("eggplant");
         ivan.setPassword("123");
         ivan.setEmail("redtube@mail.com");
-        ivan.setCity("Shkolnoe");
         ivan.setDateOfBirth(new Date());
         ivan.setRole(admin);
+
+        Address address1 = new Address();
+        address1.setCountry("Ukraine");
+        address1.setCity("Kiev");
+        address1.setStreet("Tarasa Shevchenko Boulevard");
+
+        ivan.setAddress(address1);
 
         User sasha = new User();
         sasha.setFirstName("Sasha");
@@ -36,12 +45,22 @@ public class HibernateTest {
         sasha.setPassword("123");
         sasha.setLogin("pussy");
         sasha.setEmail("homeless@mail.com");
-        sasha.setCity("Yalta");
         sasha.setDateOfBirth(new Date());
         sasha.setRole(user);
 
+        Address address2 = new Address();
+        address2.setCountry("Russia");
+        address2.setCity("Moscow");
+        address2.setStreet("Lenina street");
+
+        sasha.setAddress(address2);
+
+        addressDAO.addAddress(address1);
+        addressDAO.addAddress(address2);
+
         userDAO.addUser(ivan);
         userDAO.addUser(sasha);
+
 
         System.out.println(userDAO.getAllUsers().get(0).getRole());
         System.out.println(userDAO.getAllUsers().get(1).getRole());
@@ -104,7 +123,6 @@ public class HibernateTest {
         // getProposalsByTag
 
         System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
-
 
 
 

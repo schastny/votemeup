@@ -15,12 +15,12 @@ public class User {
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
-    private String city;
 
     private String login;
     private String password;
     private String email;
 
+    private Address address;
     private Role role;
     private Set<Proposal> proposals = new HashSet<>();
     private Set<Comment> comments = new HashSet<>();
@@ -68,15 +68,6 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @Column(name = "city")
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     @Column(name = "login", nullable = false, length = 32)
     public String getLogin() {
         return login;
@@ -102,6 +93,16 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @OneToOne(cascade = CascadeType.REMOVE) // if we want to delete user it's address should also be deleted
+    @JoinColumn(name = "address_id")
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @ManyToOne(cascade = CascadeType.ALL)

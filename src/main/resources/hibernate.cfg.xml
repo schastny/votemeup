@@ -28,6 +28,7 @@
         <mapping class="up.voteme.domain.Tag"/>
         <mapping class="up.voteme.domain.Vote"/>
         <mapping class="up.voteme.domain.Attachment"/>
+        <mapping class="up.voteme.domain.Address"/>
 
     </session-factory>
 

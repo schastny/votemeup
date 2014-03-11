@@ -7,6 +7,7 @@ import java.util.Date;
 @Entity
 @Table(name = "COMMENT")
 public class Comment {
+
     private int id;
 
     private User author;
@@ -48,7 +49,7 @@ public class Comment {
         this.proposal = proposal;
     }
 
-    @Column(name = "content")
+    @Column(name = "content", nullable = false)
     public String getContent() {
         return content;
     }

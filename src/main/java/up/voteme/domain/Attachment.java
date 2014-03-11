@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity  // flags the class as persistent (makes it an entity bean)
 @Table(name = "ATTACHMENT")
 public class Attachment {
+
     private int id;
 
     private Proposal proposal;
