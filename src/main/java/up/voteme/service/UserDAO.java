@@ -5,8 +5,7 @@ import up.voteme.exception.dao.UserDAOException;
 
 import java.util.List;
 
-public interface UserDAO
-{
+public interface UserDAO {
     public void addUser(User user) throws UserDAOException;
 
     public void deleteUser(User user) throws UserDAOException;

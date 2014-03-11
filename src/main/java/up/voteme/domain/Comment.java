@@ -4,18 +4,9 @@ package up.voteme.domain;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: St1ch
- * Date: 27.02.14
- * Time: 13:04
- * Package name: up.voteme.domain
- * Project name: votemeup
- */
 @Entity
 @Table(name = "COMMENT")
-public class Comment
-{
+public class Comment {
     private int id;
 
     private User author;
@@ -23,67 +14,56 @@ public class Comment
     private String content;
     private Date publicationDate;
 
-    public Comment()
-    {
+    public Comment() {
     }
 
     @Id
     @Column(name = "comment_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.id = id;
     }
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    public User getAuthor()
-    {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author)
-    {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
     @ManyToOne
     @JoinColumn(name = "proposal_id")
-    public Proposal getProposal()
-    {
+    public Proposal getProposal() {
         return proposal;
     }
 
-    public void setProposal(Proposal proposal)
-    {
+    public void setProposal(Proposal proposal) {
         this.proposal = proposal;
     }
 
     @Column(name = "content")
-    public String getContent()
-    {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(String content)
-    {
+    public void setContent(String content) {
         this.content = content;
     }
 
     @Column(name = "publication_date")
-    @Temporal(value= TemporalType.DATE)
-    public Date getPublicationDate()
-    {
+    @Temporal(value = TemporalType.DATE)
+    public Date getPublicationDate() {
         return publicationDate;
     }
 
-    public void setPublicationDate(Date publicationDate)
-    {
+    public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
 

@@ -5,8 +5,7 @@ import up.voteme.exception.dao.CategoryDAOException;
 
 import java.util.List;
 
-public interface CategoryDAO
-{
+public interface CategoryDAO {
     public void addCategory(Category category) throws CategoryDAOException;
 
     public void deleteCategory(Category category) throws CategoryDAOException;

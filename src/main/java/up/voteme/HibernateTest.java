@@ -7,18 +7,8 @@ import up.voteme.service.*;
 
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: St1ch
- * Date: 01.03.14
- * Time: 13:15
- * Package name: up.voteme
- * Project name: votemeup
- */
-public class HibernateTest
-{
-    public static void main(String[] args) throws Exception
-    {
+public class HibernateTest {
+    public static void main(String[] args) throws Exception {
         DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateDAO);
         UserDAO userDAO = factory.createUserDAO();
         ProposalDAO proposalDAO = factory.createProposalDAO();
@@ -107,7 +97,6 @@ public class HibernateTest
         // getProposalsByTag
 
         System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
-
 
 
         System.exit(0);

@@ -8,8 +8,7 @@ import up.voteme.exception.dao.CommentDAOException;
 import java.sql.Date;
 import java.util.List;
 
-public interface CommentDAO
-{
+public interface CommentDAO {
     public void addComment(Comment comment) throws CommentDAOException;
 
     public void deleteComment(int id) throws CommentDAOException;

@@ -6,8 +6,7 @@ import up.voteme.exception.dao.AttachmentDAOException;
 
 import java.util.List;
 
-public interface AttachmentDAO
-{
+public interface AttachmentDAO {
     public void addAttachment(Attachment attachment) throws AttachmentDAOException;
 
     public void deleteAttachment(Attachment attachment) throws AttachmentDAOException;

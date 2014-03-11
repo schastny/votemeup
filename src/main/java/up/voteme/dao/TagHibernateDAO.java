@@ -14,14 +14,12 @@ import static up.voteme.util.HibernateUtil.rollback;
 public class TagHibernateDAO implements TagDAO {
     @Override
     public void addTag(Tag tag) throws TagDAOException {
-        try
-        {
+        try {
             begin();
             getSession().save(tag);
             commit();
             closeSession();
-        } catch(HibernateException e)
-        {
+        } catch(HibernateException e) {
             rollback();
             throw new TagDAOException("Could't add tag! " + tag, e);
         }

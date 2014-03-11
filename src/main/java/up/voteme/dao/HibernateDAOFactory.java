@@ -2,53 +2,44 @@ package up.voteme.dao;
 
 import up.voteme.service.*;
 
-public class HibernateDAOFactory extends DAOFactory
-{
+public class HibernateDAOFactory extends DAOFactory {
     @Override
-    public AttachmentDAO createAttachmentDAO()
-    {
+    public AttachmentDAO createAttachmentDAO() {
         return new AttachmentHibernateDAO();
     }
 
     @Override
-    public CategoryDAO createCategoryDAO()
-    {
+    public CategoryDAO createCategoryDAO() {
         return new CategoryHibernateDAO();
     }
 
     @Override
-    public CommentDAO createCommentDAO()
-    {
+    public CommentDAO createCommentDAO() {
         return new CommentHibernateDAO();
     }
 
     @Override
-    public ProposalDAO createProposalDAO()
-    {
+    public ProposalDAO createProposalDAO() {
         return new ProposalHibernateDAO();
     }
 
     @Override
-    public RoleDAO createRoleDAO()
-    {
+    public RoleDAO createRoleDAO() {
         return new RoleHibernateDAO();
     }
 
     @Override
-    public TagDAO createTagDAO()
-    {
+    public TagDAO createTagDAO() {
         return new TagHibernateDAO();
     }
 
     @Override
-    public UserDAO createUserDAO()
-    {
+    public UserDAO createUserDAO() {
         return new UserHibernateDAO();
     }
 
     @Override
-    public VoteDAO createVoteDAO()
-    {
+    public VoteDAO createVoteDAO() {
         return new VoteHibernateDAO();
     }
 

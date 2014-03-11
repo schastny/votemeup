@@ -9,8 +9,7 @@ import up.voteme.exception.dao.ProposalDAOException;
 import java.util.Date;
 import java.util.List;
 
-public interface ProposalDAO
-{
+public interface ProposalDAO {
     public void addProposal(Proposal proposal) throws ProposalDAOException;
 
     public void deleteProposal(Proposal proposal) throws ProposalDAOException;

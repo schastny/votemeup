@@ -8,14 +8,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created with IntelliJ IDEA.
- * User: St1ch
- * Date: 27.02.14
- * Time: 13:00
- * Package name: up.voteme.domain
- * Project name: votemeup
- */
 @Entity
 @Table(name = "PROPOSAL")
 public class Proposal {

@@ -8,8 +8,7 @@ import up.voteme.exception.dao.VoteDAOException;
 import java.util.Date;
 import java.util.List;
 
-public interface VoteDAO
-{
+public interface VoteDAO {
     public void addVote(Vote vote) throws VoteDAOException;
 
     public List<Vote> getAllVotesByUser(User user) throws VoteDAOException;

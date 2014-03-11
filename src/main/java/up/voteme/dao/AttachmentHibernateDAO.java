@@ -10,52 +10,42 @@ import java.util.List;
 
 import static up.voteme.util.HibernateUtil.*;
 
-public class AttachmentHibernateDAO implements AttachmentDAO
-{
+public class AttachmentHibernateDAO implements AttachmentDAO {
     @Override
-    public void addAttachment(Attachment attachment) throws AttachmentDAOException
-    {
-        try
-        {
+    public void addAttachment(Attachment attachment) throws AttachmentDAOException {
+        try {
             begin();
             getSession().save(attachment);
             commit();
             closeSession();
-        } catch(HibernateException e)
-        {
+        } catch(HibernateException e) {
             rollback();
             throw new AttachmentDAOException("Could't add attachment!" + attachment, e);
         }
     }
 
     @Override
-    public void deleteAttachment(Attachment attachment) throws AttachmentDAOException
-    {
-        try
-        {
+    public void deleteAttachment(Attachment attachment) throws AttachmentDAOException {
+        try {
             begin();
             getSession().delete(attachment);
             commit();
             closeSession();
-        } catch(HibernateException e)
-        {
+        } catch(HibernateException e) {
             rollback();
             throw new AttachmentDAOException("Could't delete attachment!" + attachment, e);
         }
     }
 
     @Override
-    public Attachment getAttachment(int id) throws AttachmentDAOException
-    {
+    public Attachment getAttachment(int id) throws AttachmentDAOException {
         Attachment attachment;
-        try
-        {
+        try {
             begin();
-            attachment = (Attachment)getSession().get(Attachment.class, id);
+            attachment = (Attachment) getSession().get(Attachment.class, id);
             commit();
             closeSession();
-        } catch(HibernateException e)
-        {
+        } catch(HibernateException e) {
             rollback();
             throw new AttachmentDAOException("Could't get attachment by ID!" + id, e);
         }
@@ -63,20 +53,17 @@ public class AttachmentHibernateDAO implements AttachmentDAO
     }
 
     @Override
-    public List<Attachment> getAllAttachmentsByProposal(Proposal proposal) throws AttachmentDAOException
-    {
+    public List<Attachment> getAllAttachmentsByProposal(Proposal proposal) throws AttachmentDAOException {
         List<Attachment> attachments;
-        try
-        {
+        try {
             begin();
             int proposalId = proposal.getId();
-            attachments = (List<Attachment>)getSession().createQuery("from Attachment where proposal_id =:proposalId")
-                                                        .setInteger("proposalId", proposalId)
-                                                        .list();
+            attachments = (List<Attachment>) getSession().createQuery("from Attachment where proposal_id =:proposalId")
+                    .setInteger("proposalId", proposalId)
+                    .list();
             commit();
             closeSession();
-        } catch(HibernateException e)
-        {
+        } catch(HibernateException e) {
             rollback();
             throw new AttachmentDAOException("Could't get all attachments by proposal!" + proposal, e);
         }
