@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "ROLE")
 public class Role {
+
     private int id;
     private String role;
     private Set<User> users = new HashSet<User>();
@@ -26,7 +27,7 @@ public class Role {
         this.id = id;
     }
 
-    @Column(name = "role")
+    @Column(name = "role", nullable = false, length = 32)
     public String getRole() {
         return role;
     }

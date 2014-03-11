@@ -11,6 +11,7 @@ import java.util.Set;
 @Entity
 @Table(name = "PROPOSAL")
 public class Proposal {
+
     private int id;
 
     private User author;
@@ -50,7 +51,7 @@ public class Proposal {
         this.author = author;
     }
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false, length = 32)
     public String getTitle() {
         return title;
     }
@@ -59,7 +60,7 @@ public class Proposal {
         this.title = title;
     }
 
-    @Column(name = "content")
+    @Column(name = "content", nullable = false)
     public String getContent() {
         return content;
     }

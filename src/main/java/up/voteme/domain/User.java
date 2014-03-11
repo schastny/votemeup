@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 @Table(name = "USER")
 public class User {
+
     private int id;
 
     private String firstName;
@@ -39,7 +40,7 @@ public class User {
         this.id = id;
     }
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false, length = 32)
     public String getFirstName() {
         return firstName;
     }
@@ -48,7 +49,7 @@ public class User {
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false, length = 32)
     public String getLastName() {
         return lastName;
     }
@@ -76,7 +77,7 @@ public class User {
         this.city = city;
     }
 
-    @Column(name = "login")
+    @Column(name = "login", nullable = false, length = 32)
     public String getLogin() {
         return login;
     }
@@ -85,7 +86,7 @@ public class User {
         this.login = login;
     }
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false, length = 32)
     public String getPassword() {
         return password;
     }
@@ -94,7 +95,7 @@ public class User {
         this.password = password;
     }
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, length = 32)
     public String getEmail() {
         return email;
     }

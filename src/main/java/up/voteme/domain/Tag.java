@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "TAG")
 public class Tag {
+
     private int id;
     private String title;
     private Set<Proposal> proposals = new HashSet<>();
@@ -25,7 +26,7 @@ public class Tag {
         this.id = id;
     }
 
-    @Column(name = "title")
+    @Column(name = "title",nullable = false, length = 32)
     public String getTitle() {
         return title;
     }
