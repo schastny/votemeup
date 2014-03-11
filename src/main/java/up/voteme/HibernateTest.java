@@ -99,11 +99,13 @@ public class HibernateTest {
 
         // testing RoleHibernateDao
 
-        System.out.println("/n/n testing VoteHibernateDao");
+        System.out.println("\n\n testing VoteHibernateDao");
 
         // getProposalsByTag
 
-        //System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
+        System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
+
+
 
 
         System.exit(0);
