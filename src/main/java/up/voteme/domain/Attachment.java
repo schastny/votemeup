@@ -43,7 +43,7 @@ public class Attachment {
         this.path = path;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "proposal_id")
     public Proposal getProposal() {
         return proposal;

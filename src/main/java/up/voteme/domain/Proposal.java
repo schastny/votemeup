@@ -1,8 +1,5 @@
 package up.voteme.domain;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -89,7 +86,7 @@ public class Proposal {
         this.dueDate = dueDate;
     }
 
-    @OneToMany(mappedBy = "proposal")
+    @OneToMany(mappedBy = "proposal", cascade = CascadeType.REMOVE) // if we want to delete proposal all it's attachments should be deleted
     public Set<Attachment> getAttachments() {
         return attachments;
     }
@@ -141,8 +138,7 @@ public class Proposal {
         this.comments = comments;
     }
 
-    @OneToMany(mappedBy = "proposal")
-    @Cascade(CascadeType.DELETE) // if we want to delete proposal all it's votes should be deleted
+    @OneToMany(mappedBy = "proposal", cascade = CascadeType.REMOVE)  // if we want to delete proposal all it's votes should be deleted
     public Set<Vote> getVotes() {
         return votes;
     }

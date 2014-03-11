@@ -26,7 +26,7 @@ public class Category {
         this.id = id;
     }
 
-    @Column(name = "title", length = 40)
+    @Column(name = "title", length = 32)
     public String getTitle() {
         return title;
     }

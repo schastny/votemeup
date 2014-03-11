@@ -11,7 +11,6 @@ public class HibernateTest {
     public static void main(String[] args) throws Exception {
         DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateDAO);
         UserDAO userDAO = factory.createUserDAO();
-        ProposalDAO proposalDAO = factory.createProposalDAO();
         AttachmentDAO attachmentDAO = factory.createAttachmentDAO();
         RoleDAO roleDAO = factory.createRoleDAO();
 
@@ -22,13 +21,19 @@ public class HibernateTest {
         user.setRole("user");
 
         User ivan = new User();
+        ivan.setFirstName("Ivan");
+        ivan.setLastName("Saprykin");
         ivan.setLogin("eggplant");
+        ivan.setPassword("123");
         ivan.setEmail("redtube@mail.com");
         ivan.setCity("Shkolnoe");
         ivan.setDateOfBirth(new Date());
         ivan.setRole(admin);
 
         User sasha = new User();
+        sasha.setFirstName("Sasha");
+        sasha.setLastName("Koval");
+        sasha.setPassword("123");
         sasha.setLogin("pussy");
         sasha.setEmail("homeless@mail.com");
         sasha.setCity("Yalta");
@@ -47,9 +52,11 @@ public class HibernateTest {
 
         Proposal proposal = new Proposal();
         proposal.setTitle("Proposal");
+        proposal.setContent("asdf");
 
         Proposal proposal1 = new Proposal();
         proposal1.setTitle("Proposal1");
+        proposal1.setContent("sdfafff");
 
         Tag tag = new Tag();
         tag.setTitle("Pron");
@@ -88,7 +95,7 @@ public class HibernateTest {
         System.out.println("voteDAO.getAllVotesByUser(ivan)" + voteDAO.getAllVotesByUser(new User()));
         System.out.println("voteDAO.getAllVotesByDate(date)" + voteDAO.getAllVotesByDate(date));
 
-        //proposalDAO1.deleteProposal(proposal);
+        proposalDAO1.deleteProposal(proposal);
 
         // testing RoleHibernateDao
 
@@ -96,7 +103,7 @@ public class HibernateTest {
 
         // getProposalsByTag
 
-        System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
+        //System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
 
 
         System.exit(0);
