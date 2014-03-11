@@ -16,5 +16,5 @@ public interface UserDAO {
 
     public User getUserByLogin(String login) throws UserDAOException;
 
-    public void updateUser(int id) throws UserDAOException;
+    public void updateUser(User user) throws UserDAOException;
 }

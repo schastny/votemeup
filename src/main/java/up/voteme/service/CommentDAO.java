@@ -21,5 +21,5 @@ public interface CommentDAO {
 
     public List<Comment> getAllCommentsByDate(Date date) throws CommentDAOException;
 
-    public void updateComment(int id) throws CommentDAOException;
+    public void updateComment(Comment comment) throws CommentDAOException;
 }

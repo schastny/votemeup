@@ -26,13 +26,31 @@ public class TagHibernateDAO implements TagDAO {
     }
 
     @Override
-    public void deleteTag(Tag tag) {
-
+    public void deleteTag(Tag tag) throws TagDAOException {
+        try {
+            begin();
+            getSession().delete(tag);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new TagDAOException("Could't delete tag! " + tag, e);
+        }
     }
 
     @Override
-    public Tag getTag(int id) {
-        return null;
+    public Tag getTag(int id) throws TagDAOException {
+        Tag tag;
+        try {
+            begin();
+            tag = (Tag) getSession().get(Tag.class, id);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new TagDAOException("Could't get tag by ID!" + id, e);
+        }
+        return tag;
     }
 
     @Override
@@ -46,7 +64,7 @@ public class TagHibernateDAO implements TagDAO {
     }
 
     @Override
-    public void updateTag(int id) {
+    public void updateTag(Tag tag) {
 
     }
 }

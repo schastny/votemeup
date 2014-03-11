@@ -16,7 +16,7 @@ public interface ProposalDAO {
 
     public Proposal getProposal(int id) throws ProposalDAOException;
 
-    public void updateProposal(int id) throws ProposalDAOException;
+    public void updateProposal(Proposal proposal) throws ProposalDAOException;
 
     public List<Proposal> getUserProposals(User user) throws ProposalDAOException;
 

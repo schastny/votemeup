@@ -110,7 +110,15 @@ public class CommentHibernateDAO implements CommentDAO {
     }
 
     @Override
-    public void updateComment(int id) {
-
+    public void updateComment(Comment comment) throws CommentDAOException {
+        try {
+            begin();
+            getSession().update(comment);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new CommentDAOException("Could't update comment! " + comment, e);
+        }
     }
 }

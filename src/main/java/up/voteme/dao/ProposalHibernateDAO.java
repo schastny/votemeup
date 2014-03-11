@@ -47,7 +47,7 @@ public class ProposalHibernateDAO implements ProposalDAO {
         Proposal proposal = null;
         try {
             begin();
-            proposal = (Proposal) getSession().get(Proposal.class, id);
+            proposal = (Proposal)getSession().get(Proposal.class, id);
             commit();
             closeSession();
         } catch(HibernateException e) {
@@ -58,8 +58,16 @@ public class ProposalHibernateDAO implements ProposalDAO {
     }
 
     @Override
-    public void updateProposal(int id) {
-
+    public void updateProposal(Proposal proposal) throws ProposalDAOException {
+        try {
+            begin();
+            getSession().update(proposal);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new ProposalDAOException("Could't update proposal! " + proposal, e);
+        }
     }
 
     @Override
@@ -68,9 +76,9 @@ public class ProposalHibernateDAO implements ProposalDAO {
         try {
             begin();
             int userId = user.getId();
-            proposals = (List<Proposal>) getSession().createQuery("from Proposal where user_id =:userId")
-                    .setInteger("userId", userId)
-                    .list();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where user_id =:userId")
+                                                    .setInteger("userId", userId)
+                                                    .list();
             commit();
             closeSession();
         } catch(HibernateException e) {
@@ -82,19 +90,15 @@ public class ProposalHibernateDAO implements ProposalDAO {
 
     @Override
     public List<Proposal> getProposalsByTag(Tag tag) throws ProposalDAOException {
-
         List<Proposal> proposals;
         try {
             begin();
 
             int tagId = tag.getId();
             Query query = getSession().createQuery(
-                    " select proposal "
-                            + " from Proposal proposal INNER JOIN proposal.tags tag"
-                            + " where tag.id=:tagId "
-            );
+                    "select proposal " + " from Proposal proposal INNER JOIN proposal.tags tag" + " where tag.id=:tagId ");
             query.setInteger("tagId", tagId);
-            proposals = (List<Proposal>) query.list();
+            proposals = (List<Proposal>)query.list();
 
             commit();
             closeSession();
@@ -106,8 +110,24 @@ public class ProposalHibernateDAO implements ProposalDAO {
     }
 
     @Override
-    public List<Proposal> getProposalsByCategory(Category category) {
-        return null;
+    public List<Proposal> getProposalsByCategory(Category category) throws ProposalDAOException {
+        List<Proposal> proposals;
+        try {
+            begin();
+
+            int categoryId = category.getId();
+            Query query = getSession().createQuery(
+                    "select proposal " + " from Proposal proposal INNER JOIN proposal.categories category" + " where category.id=:categoryId ");
+            query.setInteger("categoryId", categoryId);
+            proposals = (List<Proposal>)query.list();
+
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new ProposalDAOException("Could't get all proposals by category! " + category, e);
+        }
+        return proposals;
     }
 
     @Override
@@ -115,9 +135,9 @@ public class ProposalHibernateDAO implements ProposalDAO {
         List<Proposal> proposals;
         try {
             begin();
-            proposals = (List<Proposal>) getSession().createQuery("from Proposal where date =:date")
-                    .setDate("date", dueDate)
-                    .list();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where date =:date")
+                                                    .setDate("date", dueDate)
+                                                    .list();
             commit();
             closeSession();
         } catch(HibernateException e) {
@@ -132,9 +152,9 @@ public class ProposalHibernateDAO implements ProposalDAO {
         List<Proposal> proposals;
         try {
             begin();
-            proposals = (List<Proposal>) getSession().createQuery("from Proposal where date =:date")
-                    .setDate("date", creationalDate)
-                    .list();
+            proposals = (List<Proposal>)getSession().createQuery("from Proposal where date =:date")
+                                                    .setDate("date", creationalDate)
+                                                    .list();
             commit();
             closeSession();
         } catch(HibernateException e) {

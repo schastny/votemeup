@@ -1,10 +1,8 @@
 package up.voteme.dao;
 
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import up.voteme.domain.User;
 import up.voteme.exception.dao.UserDAOException;
 import up.voteme.service.UserDAO;
@@ -13,7 +11,6 @@ import up.voteme.util.HibernateUtil;
 import java.util.List;
 
 import static up.voteme.util.HibernateUtil.*;
-import static up.voteme.util.HibernateUtil.rollback;
 
 public class UserHibernateDAO implements UserDAO {
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
@@ -45,15 +42,18 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public User getUserById(int id) {
-        User user = null;
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        user = (User) session.get(User.class, id);
-        session.getTransaction().commit();
-        session.close();
-
+    public User getUserById(int id) throws UserDAOException
+    {
+        User user;
+        try {
+            begin();
+            user = (User) getSession().get(User.class, id);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new UserDAOException("Could't get user by ID!" + id, e);
+        }
         return user;
     }
 
@@ -71,24 +71,33 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public User getUserByLogin(String login) throws UserDAOException
+    {
         User user = null;
-
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        Criteria criteria = session.createCriteria(User.class);
-        criteria.add(Restrictions.eq("login", login));
-        user = (User) criteria.uniqueResult();
-
-        session.getTransaction().commit();
-        session.close();
-
+        try {
+            begin();
+            user = (User)getSession().createQuery("from User where login =:login")
+                                                   .setString("login", login);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new UserDAOException("Could't get user by login!" + login, e);
+        }
         return user;
     }
 
     @Override
-    public void updateUser(int id) {
-
+    public void updateUser(User user) throws UserDAOException
+    {
+        try {
+            begin();
+            getSession().update(user);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new UserDAOException("Could't update user! " + user, e);
+        }
     }
 }
