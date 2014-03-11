@@ -12,7 +12,7 @@ import static up.voteme.util.HibernateUtil.*;
 
 public class AttachmentHibernateDAO implements AttachmentDAO {
 
-//   ivan lox
+//   ivan !lox  sasha lox
     @Override
     public void addAttachment(Attachment attachment) throws AttachmentDAOException {
         try {
