@@ -8,7 +8,6 @@ public class Attachment {
 
     private int id;
 
-    private Proposal proposal;
     private String url;
     private String path;
 
@@ -44,14 +43,13 @@ public class Attachment {
         this.path = path;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "proposal_id")
-    public Proposal getProposal() {
-        return proposal;
-    }
 
-    public void setProposal(Proposal proposal) {
-        this.proposal = proposal;
+    @Override
+    public String toString() {
+        return "Attachment{" +
+                "id=" + id +
+                ", url='" + url + '\'' +
+                ", path='" + path + '\'' +
+                '}';
     }
-
 }

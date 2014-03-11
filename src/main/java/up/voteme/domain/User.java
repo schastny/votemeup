@@ -26,6 +26,8 @@ public class User {
     private Set<Comment> comments = new HashSet<>();
     private Set<Vote> votes = new HashSet<>();
 
+    // @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN) - Hibernate extension(not part of JPA) - If item removed from set and no other references, it is removed from DB
+
     public User() {
     }
 
@@ -140,5 +142,23 @@ public class User {
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", role=" + role +
+                ", proposals=" + proposals +
+                ", comments=" + comments +
+                ", votes=" + votes +
+                '}';
     }
 }

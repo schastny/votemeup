@@ -55,4 +55,14 @@ public class Vote {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "id=" + id +
+                ", user=" + user +
+                ", proposal=" + proposal +
+                ", date=" + date +
+                '}';
+    }
 }

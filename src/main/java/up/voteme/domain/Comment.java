@@ -3,6 +3,8 @@ package up.voteme.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "COMMENT")
@@ -14,6 +16,7 @@ public class Comment {
     private Proposal proposal;
     private String content;
     private Date publicationDate;
+    private Set<Attachment> attachments = new HashSet<Attachment>();
 
     public Comment() {
     }
@@ -68,4 +71,27 @@ public class Comment {
         this.publicationDate = publicationDate;
     }
 
+    @OneToMany
+    @JoinTable(name = "COMMENT_ATTACHMENT",
+            joinColumns = @JoinColumn(name = "comment_id"),
+            inverseJoinColumns = @JoinColumn(name = "attachment_id")
+    )
+    public Set<Attachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(Set<Attachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", author=" + author +
+                ", proposal=" + proposal +
+                ", content='" + content + '\'' +
+                ", publicationDate=" + publicationDate +
+                '}';
+    }
 }

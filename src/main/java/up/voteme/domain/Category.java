@@ -43,4 +43,14 @@ public class Category {
     public void setProposals(Set<Proposal> proposals) {
         this.proposals = proposals;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", proposals=" + proposals +
+                '}';
+    }
+
 }

@@ -16,6 +16,7 @@ public class HibernateTest {
         AttachmentDAO attachmentDAO = factory.createAttachmentDAO();
         RoleDAO roleDAO = factory.createRoleDAO();
         AddressDAO addressDAO = factory.createAddressDAO();
+        CommentDAO commentDAO = factory.createCommentDAO();
 
         Role admin = new Role();
         admin.setRole("admin");
@@ -62,8 +63,8 @@ public class HibernateTest {
         userDAO.addUser(sasha);
 
 
-        System.out.println(userDAO.getAllUsers().get(0).getRole());
-        System.out.println(userDAO.getAllUsers().get(1).getRole());
+        //System.out.println(userDAO.getAllUsers().get(0).getRole());
+        //System.out.println(userDAO.getAllUsers().get(1).getRole());
 
         // testing VoteHibernateDao
 
@@ -77,7 +78,36 @@ public class HibernateTest {
         proposal1.setTitle("Proposal1");
         proposal1.setContent("sdfafff");
 
-        Tag tag = new Tag();
+        Comment comment = new Comment();
+        comment.setContent("wtf?");
+        comment.setProposal(proposal);
+
+        Attachment attachment1 = new Attachment();
+        attachment1.setUrl("google.com");
+
+        Attachment attachment2 = new Attachment();
+        attachment2.setUrl("yandex.ru");
+
+        Attachment attachment3 = new Attachment();
+        attachment3.setUrl("bing.com");
+
+        proposal.getAttachments().add(attachment1);
+        proposal.getAttachments().add(attachment2);
+
+        comment.getAttachments().add(attachment3);
+        comment.getAttachments().add(attachment2);
+
+        attachmentDAO.addAttachment(attachment1);
+        attachmentDAO.addAttachment(attachment2);
+        attachmentDAO.addAttachment(attachment3);
+
+        ProposalDAO proposalDAO1 = factory.createProposalDAO();
+        proposalDAO1.addProposal(proposal);
+        proposalDAO1.addProposal(proposal1);
+
+        commentDAO.addComment(comment);
+
+        /*Tag tag = new Tag();
         tag.setTitle("Pron");
         tag.getProposals().add(proposal);
         tag.getProposals().add(proposal1);
@@ -124,7 +154,7 @@ public class HibernateTest {
 
         System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
 
-
+          */
 
         System.exit(0);
     }

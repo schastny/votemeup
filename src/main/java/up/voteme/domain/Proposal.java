@@ -86,7 +86,11 @@ public class Proposal {
         this.dueDate = dueDate;
     }
 
-    @OneToMany(mappedBy = "proposal", cascade = CascadeType.REMOVE) // if we want to delete proposal all it's attachments should be deleted
+    @OneToMany(cascade = CascadeType.REMOVE ) // if we want to delete proposal all it's attachments should be deleted
+    @JoinTable(name = "PROPOSAL_ATTACHMENT",
+            joinColumns = @JoinColumn(name = "proposal_id"),
+            inverseJoinColumns = @JoinColumn(name = "attachment_id")
+    )
     public Set<Attachment> getAttachments() {
         return attachments;
     }
@@ -145,5 +149,22 @@ public class Proposal {
 
     public void setVotes(Set<Vote> votes) {
         this.votes = votes;
+    }
+
+    @Override
+    public String toString() {
+        return "Proposal{" +
+                "id=" + id +
+                ", author=" + author +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", publicationDate=" + publicationDate +
+                ", dueDate=" + dueDate +
+                ", attachments=" + attachments +
+                ", categories=" + categories +
+                ", comments=" + comments +
+                ", tags=" + tags +
+                ", votes=" + votes +
+                '}';
     }
 }
