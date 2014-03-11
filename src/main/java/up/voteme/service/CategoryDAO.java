@@ -1,6 +1,7 @@
 package up.voteme.service;
 
 import up.voteme.domain.Category;
+import up.voteme.domain.Proposal;
 import up.voteme.exception.dao.CategoryDAOException;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface CategoryDAO {
 
     public List<Category> getAllCategories() throws CategoryDAOException;
 
-    public void updateCategory(int id) throws CategoryDAOException;
+    public List<Category> getAllCategoriesByProposal(Proposal proposal) throws CategoryDAOException;
 
+    public void updateCategory(Category category) throws CategoryDAOException;
 }

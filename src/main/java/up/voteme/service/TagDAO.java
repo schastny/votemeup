@@ -17,5 +17,5 @@ public interface TagDAO {
 
     public List<Tag> getAllTags() throws TagDAOException;
 
-    public void updateTag(int id) throws TagDAOException;
+    public void updateTag(Tag tag) throws TagDAOException;
 }

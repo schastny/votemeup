@@ -42,6 +42,4 @@ public class HibernateDAOFactory extends DAOFactory {
     public VoteDAO createVoteDAO() {
         return new VoteHibernateDAO();
     }
-
-
 }

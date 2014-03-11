@@ -2,6 +2,7 @@ package up.voteme.dao;
 
 import org.hibernate.HibernateException;
 import up.voteme.domain.Category;
+import up.voteme.domain.Proposal;
 import up.voteme.exception.dao.CategoryDAOException;
 import up.voteme.service.CategoryDAO;
 
@@ -67,7 +68,20 @@ public class CategoryHibernateDAO implements CategoryDAO {
     }
 
     @Override
-    public void updateCategory(int id) throws CategoryDAOException {
+    public List<Category> getAllCategoriesByProposal(Proposal proposal) throws CategoryDAOException {
+        return null;
+    }
 
+    @Override
+    public void updateCategory(Category category) throws CategoryDAOException {
+        try {
+            begin();
+            getSession().update(category);
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new CategoryDAOException("Could't update category! " + category, e);
+        }
     }
 }

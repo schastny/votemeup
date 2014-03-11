@@ -49,7 +49,6 @@ public class RoleHibernateDAO implements RoleDAO {
         return role;
     }
 
-    //todo doesn't work :(
     @Override
     public void updateRole(Role role) throws RoleDAOException {
         try {
