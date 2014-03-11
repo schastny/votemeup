@@ -44,10 +44,9 @@ public class HibernateDAOFactory extends DAOFactory {
         return new VoteHibernateDAO();
     }
 
-
-    /*@Override
+    @Override
     public AddressDAO createAddressDAO() {
         return new AddressHibernateDAO();
-    } */
+    }
 
 }
