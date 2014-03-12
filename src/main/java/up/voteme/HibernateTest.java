@@ -17,6 +17,7 @@ public class HibernateTest {
         RoleDAO roleDAO = factory.createRoleDAO();
         AddressDAO addressDAO = factory.createAddressDAO();
         CommentDAO commentDAO = factory.createCommentDAO();
+        TagDAO tagDAO = factory.createTagDAO();
 
         Role admin = new Role();
         admin.setRole("admin");
@@ -101,23 +102,36 @@ public class HibernateTest {
         attachmentDAO.addAttachment(attachment2);
         attachmentDAO.addAttachment(attachment3);
 
+
+
+        Tag tag = new Tag();
+        tag.setTitle("Pron");
+        Tag tag1 = new Tag();
+        tag1.setTitle("Education");
+        Tag tag2 = new Tag();
+        tag2.setTitle("Education");
+        //tag.getProposals().add(proposal);
+        //tag.getProposals().add(proposal1);
+
+        proposal.getTags().add(tag);
+        proposal.getTags().add(tag1);
+        proposal1.getTags().add(tag2);
+        proposal1.getTags().add(tag1);
+
+        tagDAO.addTag(tag);
+        tagDAO.addTag(tag1);
+        tagDAO.addTag(tag2);
+
         ProposalDAO proposalDAO1 = factory.createProposalDAO();
         proposalDAO1.addProposal(proposal);
         proposalDAO1.addProposal(proposal1);
 
         commentDAO.addComment(comment);
 
-        /*Tag tag = new Tag();
-        tag.setTitle("Pron");
-        tag.getProposals().add(proposal);
-        tag.getProposals().add(proposal1);
-
-        proposal.getTags().add(tag);
-        proposal1.getTags().add(tag);
 
         //proposal.setAuthor(ivan);
 
-        Date date = new Date();
+        /*Date date = new Date();
 
         Vote vote1 = new Vote();
         vote1.setDate(date);
@@ -128,8 +142,7 @@ public class HibernateTest {
         vote1.setProposal(proposal);
         proposal.getVotes().add(vote1);
 
-        TagDAO tagDAO = factory.createTagDAO();
-        tagDAO.addTag(tag);
+
 
         ProposalDAO proposalDAO1 = factory.createProposalDAO();
         proposalDAO1.addProposal(proposal);

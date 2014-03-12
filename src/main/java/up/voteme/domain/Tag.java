@@ -11,7 +11,6 @@ public class Tag {
 
     private int id;
     private String title;
-    private Set<Proposal> proposals = new HashSet<>();
 
     public Tag() {
     }
@@ -31,15 +30,6 @@ public class Tag {
         return title;
     }
 
-    @ManyToMany(mappedBy = "tags")
-    public Set<Proposal> getProposals() {
-        return proposals;
-    }
-
-    public void setProposals(Set<Proposal> proposals) {
-        this.proposals = proposals;
-    }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -49,7 +39,6 @@ public class Tag {
         return "Tag{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", proposals=" + proposals +
                 '}';
     }
 }

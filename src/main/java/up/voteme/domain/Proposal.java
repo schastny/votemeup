@@ -118,12 +118,8 @@ public class Proposal {
 
     @ManyToMany
     @JoinTable(name = "PROPOSAL_TAG",
-            joinColumns = {
-                    @JoinColumn(name = "proposal_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "tag_id")
-            }
+            joinColumns = @JoinColumn(name = "proposal_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     public Set<Tag> getTags() {
         return tags;
