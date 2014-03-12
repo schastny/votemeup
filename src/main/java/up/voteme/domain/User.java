@@ -135,7 +135,11 @@ public class User {
         this.comments = comments;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany
+    @JoinTable(name = "USER_ROLE",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
     public Set<Vote> getVotes() {
         return votes;
     }
