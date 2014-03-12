@@ -11,7 +11,6 @@ public class Role {
 
     private int id;
     private String role;
-    private Set<User> users = new HashSet<User>();
 
     public Role() {
     }
@@ -36,21 +35,11 @@ public class Role {
         this.role = role;
     }
 
-    @OneToMany(mappedBy = "role")
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
-                ", users=" + users +
                 '}';
     }
 }
