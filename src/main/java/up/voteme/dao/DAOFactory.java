@@ -25,8 +25,6 @@ public abstract class DAOFactory {
 
     public abstract RoleDAO createRoleDAO();
 
-    public abstract TagDAO createTagDAO();
-
     public abstract UserDAO createUserDAO();
 
     public abstract VoteDAO createVoteDAO();

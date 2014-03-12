@@ -4,7 +4,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import up.voteme.domain.Category;
 import up.voteme.domain.Proposal;
-import up.voteme.domain.Tag;
 import up.voteme.domain.User;
 import up.voteme.exception.dao.ProposalDAOException;
 import up.voteme.service.ProposalDAO;
@@ -84,27 +83,6 @@ public class ProposalHibernateDAO implements ProposalDAO {
         } catch(HibernateException e) {
             rollback();
             throw new ProposalDAOException("Could't get all proposals by user!" + user, e);
-        }
-        return proposals;
-    }
-
-    @Override
-    public List<Proposal> getProposalsByTag(Tag tag) throws ProposalDAOException {
-        List<Proposal> proposals;
-        try {
-            begin();
-
-            int tagId = tag.getId();
-            Query query = getSession().createQuery(
-                    "select proposal " + " from Proposal proposal INNER JOIN proposal.tags tag" + " where tag.id=:tagId ");
-            query.setInteger("tagId", tagId);
-            proposals = (List<Proposal>)query.list();
-
-            commit();
-            closeSession();
-        } catch(HibernateException e) {
-            rollback();
-            throw new ProposalDAOException("Could't get all proposals by tag! " + tag, e);
         }
         return proposals;
     }

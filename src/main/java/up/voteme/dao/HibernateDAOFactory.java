@@ -30,11 +30,6 @@ public class HibernateDAOFactory extends DAOFactory {
     }
 
     @Override
-    public TagDAO createTagDAO() {
-        return new TagHibernateDAO();
-    }
-
-    @Override
     public UserDAO createUserDAO() {
         return new UserHibernateDAO();
     }

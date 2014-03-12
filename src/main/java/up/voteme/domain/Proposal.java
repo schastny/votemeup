@@ -21,7 +21,6 @@ public class Proposal {
     private Set<Attachment> attachments = new HashSet<>();
     private Set<Category> categories = new HashSet<>();
     private Set<Comment> comments = new HashSet<>();
-    private Set<Tag> tags = new HashSet<>();
     private Set<Vote> votes = new HashSet<>();
 
     public Proposal() {
@@ -101,12 +100,8 @@ public class Proposal {
 
     @ManyToMany
     @JoinTable(name = "PROPOSAL_CATEGORY",
-            joinColumns = {
-                    @JoinColumn(name = "proposal_id")
-            },
-            inverseJoinColumns = {
-                    @JoinColumn(name = "category_id")
-            }
+            joinColumns = @JoinColumn(name = "proposal_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
     )
     public Set<Category> getCategories() {
         return categories;
@@ -114,19 +109,6 @@ public class Proposal {
 
     public void setCategories(Set<Category> categories) {
         this.categories = categories;
-    }
-
-    @ManyToMany
-    @JoinTable(name = "PROPOSAL_TAG",
-            joinColumns = @JoinColumn(name = "proposal_id"),
-            inverseJoinColumns = @JoinColumn(name = "tag_id")
-    )
-    public Set<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<Tag> tags) {
-        this.tags = tags;
     }
 
     @OneToMany(mappedBy = "proposal")
@@ -159,7 +141,6 @@ public class Proposal {
                 ", attachments=" + attachments +
                 ", categories=" + categories +
                 ", comments=" + comments +
-                ", tags=" + tags +
                 ", votes=" + votes +
                 '}';
     }

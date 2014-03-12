@@ -17,7 +17,7 @@ public class HibernateTest {
         RoleDAO roleDAO = factory.createRoleDAO();
         AddressDAO addressDAO = factory.createAddressDAO();
         CommentDAO commentDAO = factory.createCommentDAO();
-        TagDAO tagDAO = factory.createTagDAO();
+        CategoryDAO categoryDAO = factory.createCategoryDAO();
 
         Role admin = new Role();
         admin.setRole("admin");
@@ -103,24 +103,21 @@ public class HibernateTest {
         attachmentDAO.addAttachment(attachment3);
 
 
+        Category category1 = new Category();
+        category1.setTitle("Sport");
+        Category category2 = new Category();
+        category2.setTitle("Education");
+        Category category3 = new Category();
+        category3.setTitle("Children");
 
-        Tag tag = new Tag();
-        tag.setTitle("Pron");
-        Tag tag1 = new Tag();
-        tag1.setTitle("Education");
-        Tag tag2 = new Tag();
-        tag2.setTitle("Education");
-        //tag.getProposals().add(proposal);
-        //tag.getProposals().add(proposal1);
+        proposal.getCategories().add(category1);
+        proposal.getCategories().add(category2);
+        proposal1.getCategories().add(category2);
+        proposal1.getCategories().add(category3);
 
-        proposal.getTags().add(tag);
-        proposal.getTags().add(tag1);
-        proposal1.getTags().add(tag2);
-        proposal1.getTags().add(tag1);
-
-        tagDAO.addTag(tag);
-        tagDAO.addTag(tag1);
-        tagDAO.addTag(tag2);
+        categoryDAO.addCategory(category1);
+        categoryDAO.addCategory(category2);
+        categoryDAO.addCategory(category3);
 
         ProposalDAO proposalDAO1 = factory.createProposalDAO();
         proposalDAO1.addProposal(proposal);

@@ -2,7 +2,6 @@ package up.voteme.service;
 
 import up.voteme.domain.Category;
 import up.voteme.domain.Proposal;
-import up.voteme.domain.Tag;
 import up.voteme.domain.User;
 import up.voteme.exception.dao.ProposalDAOException;
 
@@ -19,8 +18,6 @@ public interface ProposalDAO {
     public void updateProposal(Proposal proposal) throws ProposalDAOException;
 
     public List<Proposal> getUserProposals(User user) throws ProposalDAOException;
-
-    public List<Proposal> getProposalsByTag(Tag tag) throws ProposalDAOException;
 
     public List<Proposal> getProposalsByCategory(Category category) throws ProposalDAOException;
 

@@ -80,7 +80,7 @@ public class CategoryHibernateDAO implements CategoryDAO {
             closeSession();
         } catch(HibernateException e) {
             rollback();
-            throw new AttachmentDAOException("Could't get all attachments by proposal!" + proposal, e);
+            throw new CategoryDAOException("Could't get all attachments by proposal!" + proposal, e);
         }
         return categories;
     }

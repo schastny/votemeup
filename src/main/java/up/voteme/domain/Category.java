@@ -11,7 +11,6 @@ public class Category {
 
     private int id;
     private String title;
-    private Set<Proposal> proposals = new HashSet<>();
 
     public Category() {
     }
@@ -35,21 +34,11 @@ public class Category {
         this.title = title;
     }
 
-    @ManyToMany(mappedBy = "categories")
-    public Set<Proposal> getProposals() {
-        return proposals;
-    }
-
-    public void setProposals(Set<Proposal> proposals) {
-        this.proposals = proposals;
-    }
-
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", proposals=" + proposals +
                 '}';
     }
 
