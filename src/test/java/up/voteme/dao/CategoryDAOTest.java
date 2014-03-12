@@ -40,16 +40,16 @@ public class CategoryDAOTest  {
 	public void B_storeTest(){
 		System.out.println("Store new item....");
 		List<Category> beforList = dao.findAll();
-		//modify item
+		//create new item by modifying of existent
 		Category item = dao.findById(1L);
 		item.setCategId(0);
 		item.setCategName("OHOHOHOHOHO");
-		
 		long id =  dao.store(item);
+		//more correct create in DAO layer query with COUNT 
 		List<Category> afterList = dao.findAll();
 		System.out.println("New item stored with id="+id);
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
+		assertTrue ("Record in DB not added  ",beforList.size() == afterList.size()-1);
 	}
 	
 	@Test
@@ -57,11 +57,26 @@ public class CategoryDAOTest  {
 		System.out.println("Find last record (assume ID = num of rec)....");
 		long id = dao.findAll().size();
 		Category item = dao.findById(id);
-		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
+		assertTrue ("Error in DB record retrieve ", item.getCategName().equals("OHOHOHOHOHO"));
+		System.out.println("Item id="+id+" was found, Name="+item.getCategName());
 	}
 	
 	@Test
-	public void D_deleteTest() {
+	public void D_updateTest(){
+		System.out.println("Update last record with new name 'BEBEBEBEBEBE'....");
+		long id = dao.findAll().size();
+		Category item = dao.findById(id);
+		//modify
+		item.setCategName("BEBEBEBEBEBE");
+		id =  dao.store(item);
+		
+		item = dao.findById(id);
+		assertTrue ("Error in DB record update ", item.getCategName().equals("BEBEBEBEBEBE"));
+		System.out.println("Item id="+id+" was found, Name="+item.getCategName());
+	}
+	
+	@Test
+	public void E_deleteTest() {
 		System.out.println("Delete last record(assume ID = num of rec)....");
 		List<Category> beforList = dao.findAll();
 		long id = beforList.size();        // = befor size

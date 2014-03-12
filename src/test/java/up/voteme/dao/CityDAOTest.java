@@ -8,6 +8,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+
 import up.voteme.domain.City;
 
 
@@ -20,7 +21,7 @@ public class CityDAOTest {
 	@Test
 	public void A_findAllTest() {
 		final int SHOW_ITEMS = 5;
-		System.out.println("Find all items ....");
+		System.out.println("Find all items....");
 		List<City> list = dao.findAll();
 		for (int i = 0; i< list.size(); i++){
 			System.out.println(list.get(i));
@@ -39,16 +40,16 @@ public class CityDAOTest {
 	public void B_storeTest(){
 		System.out.println("Store new item....");
 		List<City> beforList = dao.findAll();
-		//modify item
+		//create new item by modifying of existent
 		City item = dao.findById(1L);
 		item.setCityId(0);
 		item.setCityName("OHOHOHOHOHO");
-		
 		long id =  dao.store(item);
+		//more correct create in DAO layer query with COUNT 
 		List<City> afterList = dao.findAll();
 		System.out.println("New item stored with id="+id);
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
+		assertTrue ("Record in DB not added  ",beforList.size() == afterList.size()-1);
 	}
 	
 	@Test
@@ -56,19 +57,36 @@ public class CityDAOTest {
 		System.out.println("Find last record (assume ID = num of rec)....");
 		long id = dao.findAll().size();
 		City item = dao.findById(id);
-		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
+		assertTrue ("Error in DB record retrieve ", item.getCityName().equals("OHOHOHOHOHO"));
+		System.out.println("Item id="+id+" was found, Name="+item.getCityName());
 	}
 	
 	@Test
-	public void D_deleteTest() {
+	public void D_updateTest(){
+		System.out.println("Update last record with new name 'BEBEBEBEBEBE'....");
+		long id = dao.findAll().size();
+		City item = dao.findById(id);
+		//modify
+		item.setCityName("BEBEBEBEBEBE");
+		id =  dao.store(item);
+		
+		item = dao.findById(id);
+		assertTrue ("Error in DB record update ", item.getCityName().equals("BEBEBEBEBEBE"));
+		System.out.println("Item id="+id+" was found, Name="+item.getCityName());
+	}
+	
+	@Test
+	public void E_deleteTest() {
 		System.out.println("Delete last record(assume ID = num of rec)....");
 		List<City> beforList = dao.findAll();
-		long id = beforList.size();        // = before size
+		long id = beforList.size();        // = befor size
 		dao.delete(id);
 		List<City> afterList = dao.findAll();
 		System.out.println("Item id="+id+" was deleted");
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
 	}
-
+	
+	
+	
 }
