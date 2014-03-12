@@ -34,6 +34,7 @@ public class City {
 		this.cityId = cityId;
 	}
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "region_id")
 	public Region getRegion() {

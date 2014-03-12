@@ -34,6 +34,7 @@ public class Region {
 	@OneToMany (mappedBy = "region")
 	private Collection<City> cities = new HashSet<>();
 	
+	
 	public long getRegionId() {
 		return regionId;
 	}
