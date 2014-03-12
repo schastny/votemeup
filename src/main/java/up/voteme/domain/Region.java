@@ -16,16 +16,24 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Region {
 	
-	private long regionId ;
-	private String regionName;
-	private Country country;
-	private Collection<City> cities = new HashSet<>();
-	
-	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column (name="region_id")
+	private long regionId ;
+
+	
+	@Column (name = "region_name")
+	private String regionName;
+
+	@ManyToOne
+	@JoinColumn (name = "country_id")
+	private Country country;
+
+	
+	@OneToMany (mappedBy = "region")
+	private Collection<City> cities = new HashSet<>();
+	
 	public long getRegionId() {
 		return regionId;
 	}
@@ -33,7 +41,6 @@ public class Region {
 		this.regionId = regionId;
 	}
 	
-	@Column (name = "region_name")
 	public String getRegionName() {
 		return regionName;
 	}
@@ -41,8 +48,6 @@ public class Region {
 		this.regionName = regionName;
 	}
 	
-	@ManyToOne
-	@JoinColumn (name = "country_id")
 	public Country getCountry() {
 		return country;
 	}
@@ -50,7 +55,6 @@ public class Region {
 		this.country = country;
 	}
 	
-	@OneToMany (mappedBy = "region")
 	public Collection<City> getCities() {
 		return cities;
 	}

@@ -68,5 +68,8 @@ public class ProposalStatusDAOTest {
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
 	}
+	
+	
+	
 
 }
