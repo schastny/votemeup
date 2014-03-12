@@ -69,7 +69,20 @@ public class CategoryHibernateDAO implements CategoryDAO {
 
     @Override
     public List<Category> getAllCategoriesByProposal(Proposal proposal) throws CategoryDAOException {
-        return null;
+        List<Category> categories;
+        try {
+            begin();
+            int proposalId = proposal.getId();
+            categories = (List<Category>) getSession().createQuery("from Attachment where proposal_id =:proposalId")
+                                                         .setInteger("proposalId", proposalId)
+                                                         .list();
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new AttachmentDAOException("Could't get all attachments by proposal!" + proposal, e);
+        }
+        return categories;
     }
 
     @Override
