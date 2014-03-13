@@ -48,8 +48,11 @@ public class Country {
 	
 	@Override
 	public String toString() {
-		return "Country [countryId=" + countryId + ", countryName="
-				+ countryName + ", regions.size()=" + regions.size() + "]";
+		//return "Country [countryId=" + countryId + ", countryName="
+		//		+ countryName + ", regions.size()=" + regions.size() + "]";
+
+		return "Country [countryId=" + countryId + ", countryName="+ countryName+ "]";
+	
 	}
 
 }

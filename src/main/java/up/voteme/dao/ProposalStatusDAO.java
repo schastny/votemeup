@@ -75,5 +75,21 @@ public class ProposalStatusDAO {
 		 manager.close();
 	 }
 	}
+
+	public int countPS() {
+		 EntityManager manager = entityManagerFactory.createEntityManager();
+		 try {
+			  Query query = manager.createQuery("SELECT COUNT(*) FROM ProposalStatus ps");
+			  int count = query.getFirstResult();
+			  System.out.println("Count of items = "+count);
+			  
+			  return count;
+
+		 } finally {
+			 manager.close();
+		 }
+		}
+
+
 }
 
