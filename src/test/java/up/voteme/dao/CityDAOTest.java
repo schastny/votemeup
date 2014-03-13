@@ -4,71 +4,100 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import up.voteme.domain.City;
 
 
-
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class CityDAOTest {
-
 	private	CityDAO dao = new CityDAO();
+	private static final Logger logger = LoggerFactory
+			.getLogger(CityDAOTest.class);
 
-	@Test
-	public void A_findAllTest() {
+	@Test 
+	public void crudTest(){
+		City item; 
+		long id; 
+		long initSize;
+		final String NAME = "HOHOHOHOHOHO";
+		final String NEW_NAME = "BEBEBEBEBEBE";
+		
+		initSize = findAllItems();
+		assertTrue ("No records in table",initSize > 1);
+		item = createNewCity(NAME);
+		id = store(item);  //auto increment of ID used, so new ID = size + 1
+		assertTrue ("Record in DB not added  ", id == initSize + 1);
+		item = findById(id);
+		assertTrue ("Error in DB record store/retrieve ", item.getCityName().equals(NAME));
+		item.setCityName(NEW_NAME); //modify
+		id = update(item); 
+		item = findById(id);
+		assertTrue ("Error in record update  ", id == initSize + 1);
+		assertTrue ("Error in DB record update ", item.getCityName().equals(NEW_NAME));
+		delete(id);
+		long afterSize = countAllItems();
+		assertTrue ("Error in record delete  ",initSize == afterSize);
+	}
+		
+	public City createNewCity(String name){
+		//create new item by modifying of existent
+		City item = dao.findById(1L);
+		item.setCityId(0);
+		item.setCityName(name);
+		return item;
+	}
+	
+	public long findAllItems() {
 		final int SHOW_ITEMS = 5;
-		System.out.println("Find all items ....");
+		logger.info("Find all items....");
 		List<City> list = dao.findAll();
 		for (int i = 0; i< list.size(); i++){
-			System.out.println(list.get(i));
+			logger.info(list.get(i).toString());
 			// comment if block to show all items
 			if ((i == SHOW_ITEMS-1)&(list.size()>SHOW_ITEMS)) {
-				System.out.println("etc......");
-				System.out.println("total "+list.size()+" items");
+				logger.info("etc... ");
 				break;
 			}
 		}
-		assertTrue ("No records in table",list.size()>1);
+		logger.info("Total collection size="+list.size()+" items");
+		return list.size();
 	}
-
 	
-	@Test
-	public void B_storeTest(){
-		System.out.println("Store new item....");
-		List<City> beforList = dao.findAll();
-		//modify item
-		City item = dao.findById(1L);
-		item.setCityId(0);
-		item.setCityName("OHOHOHOHOHO");
-		
+	public long  store(City item){
+		logger.info("Store new item....");
 		long id =  dao.store(item);
-		List<City> afterList = dao.findAll();
-		System.out.println("New item stored with id="+id);
-		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
+		logger.info("New item stored with id="+id);
+		return id;
 	}
 	
-	@Test
-	public void C_findByIdTest() {
-		System.out.println("Find last record (assume ID = num of rec)....");
-		long id = dao.findAll().size();
+	public City findById(long id) {
+		logger.info("Find record...");
 		City item = dao.findById(id);
-		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
+		logger.info("Item id="+id+" was found, name="+item.getCityName());
+		return item;
 	}
 	
-	@Test
-	public void D_deleteTest() {
-		System.out.println("Delete last record(assume ID = num of rec)....");
-		List<City> beforList = dao.findAll();
-		long id = beforList.size();        // = before size
-		dao.delete(id);
-		List<City> afterList = dao.findAll();
-		System.out.println("Item id="+id+" was deleted");
-		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
+	public long update(City item){
+		logger.info("Update record ....");
+		//modify
+		long id = dao.store(item);
+		logger.info("Item id="+id+" was updated");
+		return id;
 	}
-
+	
+	public void delete(long id) {
+		logger.info("Delete last record....");
+		dao.delete(id);
+		logger.info("Item id="+id+" was deleted");
+	}
+	
+	public long countAllItems() {
+		logger.info("Count records in DB table....");
+		long size =  dao.countAll();
+		logger.info("Size="+size+" records");
+		return size;
+	}
+	
 }

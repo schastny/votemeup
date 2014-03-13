@@ -1,77 +1,102 @@
 package up.voteme.dao;
 
-
-
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import up.voteme.domain.Category;
 
-
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class CategoryDAOTest  {
-
 	private	CategoryDAO dao = new CategoryDAO();
-
-	@Test
-	public void A_findAllTest() {
+	private static final Logger logger = LoggerFactory
+			.getLogger(CategoryDAOTest.class);
+	
+	@Test 
+	public void crudTest(){
+		Category item; 
+		long id; 
+		long initSize;
+		final String NAME = "HOHOHOHOHOHO";
+		final String NEW_NAME = "BEBEBEBEBEBE";
+		
+		initSize = findAllItems();
+		assertTrue ("No records in table",initSize > 1);
+		item = createNewCategory(NAME);
+		id = store(item);  //auto increment of ID used, so new ID = size + 1
+		assertTrue ("Record in DB not added  ", id == initSize + 1);
+		item = findById(id);
+		assertTrue ("Error in DB record store/retrieve ", item.getCategName().equals(NAME));
+		item.setCategName(NEW_NAME); //modify
+		id = update(item); 
+		item = findById(id);
+		assertTrue ("Error in record update  ", id == initSize + 1);
+		assertTrue ("Error in DB record update ", item.getCategName().equals(NEW_NAME));
+		delete(id);
+		long afterSize = countAllItems();
+		assertTrue ("Error in record delete  ",initSize == afterSize);
+	}
+		
+	public Category createNewCategory(String name){
+		//create new item by modifying of existent
+		Category item = dao.findById(1L);
+		item.setCategId(0);
+		item.setCategName(name);
+		return item;
+	}
+	
+	public long findAllItems() {
 		final int SHOW_ITEMS = 5;
-		System.out.println("Find all items....");
+		logger.info("Find all items....");
 		List<Category> list = dao.findAll();
 		for (int i = 0; i< list.size(); i++){
-			System.out.println(list.get(i));
+			logger.info(list.get(i).toString());
 			// comment if block to show all items
 			if ((i == SHOW_ITEMS-1)&(list.size()>SHOW_ITEMS)) {
-				System.out.println("etc......");
-				System.out.println("total "+list.size()+" items");
+				logger.info("etc... ");
 				break;
 			}
 		}
-		assertTrue ("No records in table",list.size()>1);
+		logger.info("Total collection size="+list.size()+" items");
+		return list.size();
 	}
-
 	
-	@Test
-	public void B_storeTest(){
-		System.out.println("Store new item....");
-		List<Category> beforList = dao.findAll();
-		//modify item
-		Category item = dao.findById(1L);
-		item.setCategId(0);
-		item.setCategName("OHOHOHOHOHO");
-		
+	public long  store(Category item){
+		logger.info("Store new item....");
 		long id =  dao.store(item);
-		List<Category> afterList = dao.findAll();
-		System.out.println("New item stored with id="+id);
-		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
+		logger.info("New item stored with id="+id);
+		return id;
 	}
 	
-	@Test
-	public void C_findByIdTest() {
-		System.out.println("Find last record (assume ID = num of rec)....");
-		long id = dao.findAll().size();
+	public Category findById(long id) {
+		logger.info("Find record...");
 		Category item = dao.findById(id);
-		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
+		logger.info("Item id="+id+" was found, name="+item.getCategName());
+		return item;
 	}
 	
-	@Test
-	public void D_deleteTest() {
-		System.out.println("Delete last record(assume ID = num of rec)....");
-		List<Category> beforList = dao.findAll();
-		long id = beforList.size();        // = befor size
+	public long update(Category item){
+		logger.info("Update record ....");
+		//modify
+		long id = dao.store(item);
+		logger.info("Item id="+id+" was updated");
+		return id;
+	}
+	
+	public void delete(long id) {
+		logger.info("Delete last record....");
 		dao.delete(id);
-		List<Category> afterList = dao.findAll();
-		System.out.println("Item id="+id+" was deleted");
-		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
+		logger.info("Item id="+id+" was deleted");
 	}
 	
-	
+	public long countAllItems() {
+		logger.info("Count records in DB table....");
+		long size =  dao.countAll();
+		logger.info("Size="+size+" records");
+		return size;
+	}
 	
 }

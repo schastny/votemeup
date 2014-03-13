@@ -5,9 +5,9 @@
       http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 	version="1.0">
 
-	<persistence-unit name="org.hibernate">
+	<persistence-unit name="org.hibernate" transaction-type="RESOURCE_LOCAL">
         <description>
-            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
+            Persistence unit for the JPA
         </description>
 
          <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
@@ -21,10 +21,10 @@
          <class>up.voteme.domain.ProposalLevel</class>
          <class>up.voteme.domain.ProposalStatus</class>
          <class>up.voteme.domain.UserStatus</class>
-          <class>up.voteme.domain.Country</class>
-           <class>up.voteme.domain.Region</class>
-            <class>up.voteme.domain.City</class>
-             <class>up.voteme.domain.District</class>
+         <class>up.voteme.domain.Country</class>
+         <class>up.voteme.domain.Region</class>
+         <class>up.voteme.domain.City</class>
+         <class>up.voteme.domain.District</class>
  
 		 <properties>
             <property name="hibernate.connection.driver_class"     value="com.mysql.jdbc.Driver" />
