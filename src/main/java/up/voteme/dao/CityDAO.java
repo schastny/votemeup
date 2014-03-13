@@ -76,4 +76,15 @@ public class CityDAO {
 			 manager.close();
 		 }
 		}
+	
+	public long countAll() {
+		 EntityManager manager = entityManagerFactory.createEntityManager();
+		 try {
+			  Query query = manager.createQuery("select count(*) from City");
+			  long result = (long) query.getSingleResult();
+			  return result;
+		 } finally {
+			 manager.close();
+		 }
 	}
+}
