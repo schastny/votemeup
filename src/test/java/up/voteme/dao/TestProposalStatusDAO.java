@@ -128,9 +128,8 @@ public class TestProposalStatusDAO {
 	@Test
 	public void testCountPS() {
 		System.out.println("Find count all items...");
-		int count = psDao.countPS();
+		long count = psDao.countPS();
 		System.out.println("total "+count+" items");
-
 		
 		assertTrue ("No records in table",count>1);		
 	
