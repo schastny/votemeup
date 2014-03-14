@@ -67,7 +67,7 @@ public class TestProposalStatusDAO {
 		long id =  psDao.store(proposalStatus);		 
 		
 		//delete new ProposalStatus
-		//psDao.delete(id);
+		psDao.delete(id);
 		
 		//find ProposalStatus by id
 		proposalStatus = psDao.findById(id);
