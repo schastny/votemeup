@@ -11,7 +11,7 @@ import org.junit.runners.MethodSorters;
 import up.voteme.domain.Country;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //Sorts test methods in lexicographic order
-public class CountryDAOTest {
+public class CountryDAOTest_New {
 
 	private	CountryDAO CountryTable = new CountryDAO();
 

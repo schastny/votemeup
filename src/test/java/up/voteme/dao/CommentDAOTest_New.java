@@ -11,7 +11,7 @@ import org.junit.runners.MethodSorters;
 import up.voteme.domain.Comment;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //Sorts test methods in lexicographic order
-public class CommentDAOTest {
+public class CommentDAOTest_New {
 
 	private	CommentDAO CommentTable = new CommentDAO();
 
