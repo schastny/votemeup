@@ -85,7 +85,7 @@ public class Proposal {
         this.dueDate = dueDate;
     }
 
-    @OneToMany(cascade = CascadeType.REMOVE ) // if we want to delete proposal all it's attachments should be deleted
+    @OneToMany(cascade = CascadeType.REMOVE) // if we want to delete proposal all it's attachments should be deleted
     @JoinTable(name = "PROPOSAL_ATTACHMENT",
             joinColumns = @JoinColumn(name = "proposal_id"),
             inverseJoinColumns = @JoinColumn(name = "attachment_id")

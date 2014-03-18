@@ -6,8 +6,11 @@ import up.voteme.domain.*;
 import up.voteme.service.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 public class HibernateTest {
+
     public static void main(String[] args) throws Exception {
 
         DAOFactory factory = DAOFactory.getFactory(DAOFactory.HibernateDAO);
@@ -24,6 +27,7 @@ public class HibernateTest {
 
         Role user = new Role();
         user.setRole("user");
+
 
         User ivan = new User();
         ivan.setFirstName("Ivan");
@@ -126,9 +130,10 @@ public class HibernateTest {
         commentDAO.addComment(comment);
 
 
+
         //proposal.setAuthor(ivan);
 
-        /*Date date = new Date();
+        Date date = new Date();
 
         Vote vote1 = new Vote();
         vote1.setDate(date);
@@ -139,11 +144,6 @@ public class HibernateTest {
         vote1.setProposal(proposal);
         proposal.getVotes().add(vote1);
 
-
-
-        ProposalDAO proposalDAO1 = factory.createProposalDAO();
-        proposalDAO1.addProposal(proposal);
-        proposalDAO1.addProposal(proposal1);
 
 
         VoteDAO voteDAO = factory.createVoteDAO();
@@ -162,9 +162,12 @@ public class HibernateTest {
 
         // getProposalsByTag
 
-        System.out.println("proposalDAO1.getProposalsByTag(tag)" + proposalDAO1.getProposalsByTag(tag));
-
-          */
+        List<User> users = userDAO.getAllUsers();
+        Set<Proposal> proposals = users.get(0).getProposals();
+        User u = proposals.iterator().next().getAuthor();
+        System.out.println(u);
+        //System.out.println(proposals);
+        //System.out.println(users.get(0).getVotes());
 
         System.exit(0);
     }

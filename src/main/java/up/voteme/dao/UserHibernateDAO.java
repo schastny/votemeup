@@ -13,6 +13,7 @@ import java.util.List;
 import static up.voteme.util.HibernateUtil.*;
 
 public class UserHibernateDAO implements UserDAO {
+
     private SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 
     @Override
@@ -42,8 +43,7 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public User getUserById(int id) throws UserDAOException
-    {
+    public User getUserById(int id) throws UserDAOException {
         User user;
         try {
             begin();
@@ -58,26 +58,30 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws UserDAOException {
         List<User> users = null;
 
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        users = session.createCriteria(User.class).list();
-        session.getTransaction().commit();
-        session.close();
+        try {
+            begin();
+            //users = getSession().createCriteria(User.class).list();
+            users = (List<User>) getSession().createQuery("from User").list();
+            commit();
+            closeSession();
+        } catch(HibernateException e) {
+            rollback();
+            throw new UserDAOException("Could't get all users!", e);
+        }
 
         return users;
     }
 
     @Override
-    public User getUserByLogin(String login) throws UserDAOException
-    {
+    public User getUserByLogin(String login) throws UserDAOException {
         User user = null;
         try {
             begin();
-            user = (User)getSession().createQuery("from User where login =:login")
-                                                   .setString("login", login);
+            user = (User) getSession().createQuery("from User where login =:login")
+                    .setString("login", login);
             commit();
             closeSession();
         } catch(HibernateException e) {
@@ -88,8 +92,7 @@ public class UserHibernateDAO implements UserDAO {
     }
 
     @Override
-    public void updateUser(User user) throws UserDAOException
-    {
+    public void updateUser(User user) throws UserDAOException {
         try {
             begin();
             getSession().update(user);

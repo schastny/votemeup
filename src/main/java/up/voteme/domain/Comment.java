@@ -71,7 +71,7 @@ public class Comment {
         this.publicationDate = publicationDate;
     }
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "COMMENT_ATTACHMENT",
             joinColumns = @JoinColumn(name = "comment_id"),
             inverseJoinColumns = @JoinColumn(name = "attachment_id")

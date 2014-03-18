@@ -15,6 +15,7 @@
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 
         <property name="hbm2ddl.auto">validate</property>
+        <!-- thread - session bound to a thread, for single thread execution if you call a getCurrentSession() then it will return you a same session object.-->
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
 

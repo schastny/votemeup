@@ -136,9 +136,9 @@ public class User {
     }
 
     @OneToMany
-    @JoinTable(name = "USER_ROLE",
+    @JoinTable(name = "USER_VOTE",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            inverseJoinColumns = @JoinColumn(name = "vote_id")
     )
     public Set<Vote> getVotes() {
         return votes;

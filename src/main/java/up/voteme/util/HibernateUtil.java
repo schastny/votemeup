@@ -1,27 +1,21 @@
 package up.voteme.util;
 
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
-/**
- * Created with IntelliJ IDEA.
- * User: St1ch
- * Date: 01.03.14
- * Time: 12:35
- * Package name: up.voteme
- * Project name: votemeup
- */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory = buildSessionFactory();
-    private static final ThreadLocal session = new ThreadLocal();
+
+    private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
+    private static StandardServiceRegistryBuilder registryBuilder;
 
     private static SessionFactory buildSessionFactory() {
         try {
-            return new AnnotationConfiguration().configure()
-                    .buildSessionFactory();
+            Configuration configuration = new Configuration().configure();
+            registryBuilder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+            return configuration.buildSessionFactory(registryBuilder.build());
         } catch(Throwable e) {
             System.err.println("Initial SessionFactory creation failed." + e);
             throw new ExceptionInInitializerError(e);
@@ -29,16 +23,11 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+        return SESSION_FACTORY;
     }
 
     public static Session getSession() {
-        Session session = (Session) HibernateUtil.session.get();
-        if(session == null) {
-            session = sessionFactory.openSession();
-            HibernateUtil.session.set(session);
-        }
-        return session;
+        return  HibernateUtil.SESSION_FACTORY.getCurrentSession();
     }
 
     public static void begin() {
@@ -60,11 +49,28 @@ public class HibernateUtil {
         } catch(HibernateException e) {
             System.out.println("Cannot close: " + e);
         }
-        HibernateUtil.session.set(null);
     }
 
     public static void closeSession() {
         getSession().close();
-        HibernateUtil.session.set(null);
     }
 }
+
+
+/*
+        http://somejavaexamples.blogspot.com/2013/06/difference-between-opensession.html
+
+        private static ServiceRegistry serviceRegistry;
+
+        Configuration configuration = new Configuration().configure();
+        serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        return configuration.buildSessionFactory(serviceRegistry);
+
+        Configuration configuration = new Configuration().configure();
+        serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        return configuration.buildSessionFactory(serviceRegistry);
+
+        Configuration configuration = new Configuration().configure();
+        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        return configuration.buildSessionFactory(builder);
+*/
