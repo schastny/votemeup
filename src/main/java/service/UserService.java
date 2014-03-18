@@ -1,17 +1,17 @@
-package up.voteme.dao;
+package service;
 
 import java.util.List;
 
 import up.voteme.domain.Userd;
 
-public interface UserDAO {
-
+public interface UserService {
+	
 	public void store(Userd user);
 	
 	public void deleteById(Long id);
 	
-	public Userd findById(Long id);
+	public Userd showById(Long id);
 	
-	public List<Userd> findAll();
-	
+	public List<Userd> showAll();
+
 }
