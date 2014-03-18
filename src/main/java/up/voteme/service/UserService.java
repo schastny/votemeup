@@ -1,4 +1,4 @@
-package service;
+package up.voteme.service;
 
 import java.util.List;
 
