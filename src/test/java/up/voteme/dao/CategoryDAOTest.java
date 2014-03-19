@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import up.voteme.domain.Category;
 
 public class CategoryDAOTest  {
-	private	CategoryDAO dao = new CategoryDAO();
+	private	CategoryDAO dao = new CategoryDAOImpl();
 	private static final Logger logger = LoggerFactory
 			.getLogger(CategoryDAOTest.class);
 	
