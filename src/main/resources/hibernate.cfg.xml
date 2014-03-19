@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<mapping class="up.voteme.domain.Userd" />
+		<mapping class="up.voteme.domain.Role" />
+		<mapping class="up.voteme.domain.Category" />
+		<mapping class="up.voteme.domain.City" />
+		<mapping class="up.voteme.domain.Comment" />
+		<mapping class="up.voteme.domain.Country" />
+		<mapping class="up.voteme.domain.Proposal" />
+		<mapping class="up.voteme.domain.District" />
+		<mapping class="up.voteme.domain.Document" />
+		<mapping class="up.voteme.domain.ProposalLevel" />
+		<mapping class="up.voteme.domain.ProposalStatus" />
+		<mapping class="up.voteme.domain.Region" />
+		<mapping class="up.voteme.domain.UserStatus" />
+		<mapping class="up.voteme.domain.Vote" />
+		
+	</session-factory>
+</hibernate-configuration>

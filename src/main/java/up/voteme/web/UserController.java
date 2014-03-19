@@ -22,10 +22,10 @@ public class UserController {
 	@RequestMapping(value = "/users")
 	public ModelAndView listAllUsers() {
 		
-		Map<String, Object> params = new HashMap<String, Object>();       
+		Map<String, Object> model = new HashMap<String, Object>();       
         List<Userd> users = userService.showAll();        
-        params.put("users", users);               
-        return new ModelAndView("users", params);
+        model.put("users", users);               
+        return new ModelAndView("users", model);
 	}
 	
 }

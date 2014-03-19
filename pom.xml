@@ -60,6 +60,12 @@
 			<artifactId>hsqldb</artifactId>
 			<version>1.8.0.10</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+        </dependency>
 <!--  
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
