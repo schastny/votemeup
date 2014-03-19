@@ -18,7 +18,7 @@ import up.voteme.domain.Region;
 
 public class TestRegionDAO {
 	
-	private	RegionDAO regionDao = new RegionDAO();
+	private	RegionDAOOld regionDao = new RegionDAOOld();
 	private	CountryDAO countryDao = new CountryDAO();
 	
 

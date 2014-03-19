@@ -13,7 +13,7 @@ import up.voteme.domain.ProposalStatus;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class ProposalStatusDAOTest {
 
-	private	ProposalStatusDAO dao = new ProposalStatusDAO();
+	private	ProposalStatusDAOOld dao = new ProposalStatusDAOOld();
 
 	@Test
 	public void A_findAllTest() {

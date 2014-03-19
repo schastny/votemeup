@@ -13,7 +13,7 @@ import up.voteme.domain.Region;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class RegionDAOTest {
 
-	private	RegionDAO dao = new RegionDAO();
+	private	RegionDAOOld dao = new RegionDAOOld();
 
 	@Test
 	public void A_findAllTest() {

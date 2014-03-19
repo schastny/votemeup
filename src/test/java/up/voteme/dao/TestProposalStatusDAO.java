@@ -9,7 +9,7 @@ import org.junit.Test;
 import up.voteme.domain.ProposalStatus;
 
 public class TestProposalStatusDAO {
-	private	ProposalStatusDAO psDao = new ProposalStatusDAO();
+	private	ProposalStatusDAOOld psDao = new ProposalStatusDAOOld();
 
 
 	@Test

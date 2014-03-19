@@ -10,10 +10,10 @@ import javax.persistence.Query;
 
 import up.voteme.domain.Region;
 
-public class RegionDAO {
+public class RegionDAOOld {
 	private EntityManagerFactory entityManagerFactory;
 
-	public RegionDAO() {
+	public RegionDAOOld() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
