@@ -6,12 +6,12 @@ import up.voteme.domain.District;
 
 public interface IDistrictDAO {
 
-	public abstract long store(District item);
+	public  long store(District item);
 
-	public abstract void delete(Long Id);
+	public  void delete(Long Id);
 
-	public abstract District findById(Long Id);
+	public  District findById(Long Id);
 
-	public abstract List<District> findAll();
+	public  List<District> findAll();
 
 }

@@ -1,11 +1,12 @@
 package up.voteme.dao;
 
+import java.util.List;
+import up.voteme.domain.District;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import up.voteme.domain.District;
-import java.util.List;
 
 @Repository
 public class DistrictDAO implements IDistrictDAO {
