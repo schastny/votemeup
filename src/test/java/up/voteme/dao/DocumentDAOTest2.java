@@ -12,7 +12,7 @@ import up.voteme.domain.Document;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DocumentDAOTest2 {
-	private IDocumentDAO daoDocument = new DocumentDAO();
+	private IDocumentDAO daoDocument = new DocumentDAOImpl();
 
 	@Test
 	public void A_findAllTest() {

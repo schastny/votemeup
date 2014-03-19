@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import up.voteme.domain.Document;
 
-public class DocumentDAO implements IDocumentDAO {
+public class DocumentDAOImpl implements IDocumentDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 

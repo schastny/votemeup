@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class DistrictDAO implements IDistrictDAO {
+public class DistrictDAOImpl implements IDistrictDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
