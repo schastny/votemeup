@@ -14,7 +14,7 @@ ${controllerMessage}
 
 
 
-<h2>List of Proposals</h2>
+<h2>List of Categories</h2>
 <table>
 	<tr>
 		<th>ID</th>
@@ -22,8 +22,8 @@ ${controllerMessage}
 	</tr>
 	<c:forEach items="${list}" var="userVar" >
 	<tr>
-		<td>${userVar.proposalId}</td>
-		<td>${userVar.proposalName}</td>
+		<td>${userVar.categId}</td>
+		<td>${userVar.categName}</td>
 	</tr>
 	</c:forEach>
 </table>
