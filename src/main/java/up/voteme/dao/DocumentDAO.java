@@ -2,79 +2,40 @@ package up.voteme.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
-
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import up.voteme.domain.Document;
 
-public class DocumentDAO {
-	private EntityManagerFactory entityManagerFactory;
+public class DocumentDAO implements IDocumentDAO {
+	@Autowired
+	private SessionFactory sessionFactory;
 
-	public DocumentDAO() {
-		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
+	@Override
+	public long store(Document document) {
+		long id = 1L;
+		sessionFactory.getCurrentSession().saveOrUpdate(document);
+		return id;
 	}
 
-	public long store(Document item) {
-		 EntityManager manager = entityManagerFactory.createEntityManager();
-		 EntityTransaction tx = manager.getTransaction();
-		 long id; //stored item id
-		 try {
-			 tx.begin();
-			 id= manager.merge(item).getDocId();	//store/update
-			 tx.commit();
-		 } catch (RuntimeException e) {
-			 System.out.println("Persist fail "+e);
-			 tx.rollback();
-		  throw e;
-		 } finally {
-			 manager.close();
-		 }
-		 return id;
-	}
-
-	public void delete(Long Id) {
-		 EntityManager manager = entityManagerFactory.createEntityManager();
-		 EntityTransaction tx = manager.getTransaction();
-		 try {
-			  tx.begin();
-			  Document com = manager.find(Document.class, Id);
-			  manager.remove(com);
-			  tx.commit();
-		 } catch (RuntimeException e) {
-			 tx.rollback();
-		  throw e;
-		 } finally {
-			 manager.close();
-		 }
-	}
-
-	public Document findById(Long Id) {
-		 EntityManager manager = entityManagerFactory.createEntityManager();
-		 try {
-			 return manager.find(Document.class, Id);
-		 } finally {
-			 manager.close();
-		 }
-	}
-
-	public List<Document> findAll() {
-		 EntityManager manager = entityManagerFactory.createEntityManager();
-		 try {
-			  Query query = manager.createQuery("select d from Document d");
-			  @SuppressWarnings("unchecked")
-			  List<Document> items = query.getResultList();
-			  //for (Category item : items) {
-			  // item.getProjects().size();
-			  //}
-			  
-			  return items;
-	
-		 } finally {
-			 manager.close();
-		 }
+	@Override
+	public void delete(Long id) {
+		Document document = findById(id);
+		if (document != null) {
+			sessionFactory.getCurrentSession().delete(document);
 		}
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Document> findAll() {
+		return sessionFactory.getCurrentSession().createQuery("from Document")
+				.list();
+	}
+
+	@Override
+	public Document findById(Long Id) {
+		return (Document) sessionFactory.getCurrentSession().get(
+				Document.class, Id);
+	}
 }

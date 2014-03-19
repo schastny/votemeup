@@ -12,7 +12,7 @@ import up.voteme.domain.District;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DistrictDAOTest2 {
-	private DistrictDAO daoDistrict = new DistrictDAO();
+	private IDistrictDAO daoDistrict = new DistrictDAO();
 
 	@Test
 	public void A_findAllTest() {

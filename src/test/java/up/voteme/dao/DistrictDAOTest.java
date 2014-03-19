@@ -13,7 +13,7 @@ import up.voteme.domain.District;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class DistrictDAOTest {
 
-	private	DistrictDAO dao = new DistrictDAO();
+	private	IDistrictDAO dao = new DistrictDAO();
 
 	@Test
 	public void A_findAllTest() {

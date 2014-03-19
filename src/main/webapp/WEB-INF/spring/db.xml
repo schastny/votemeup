@@ -34,7 +34,9 @@
 				<property name="defaultDataSource" ref="dataSource" />
 			</bean>
 		</property>
-	</bean>
+	</bean> 
+	
+	
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
@@ -44,6 +46,7 @@
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
 	</bean>
+ 
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 
