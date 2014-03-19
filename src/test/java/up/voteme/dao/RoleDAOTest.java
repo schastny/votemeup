@@ -7,13 +7,15 @@ import java.util.List;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import up.voteme.domain.Role;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class RoleDAOTest {
 
-	private	RoleDAO dao = new RoleDAO();
+	@Autowired
+	private	RoleDAO dao;
 
 	@Test
 	public void A_findAllTest() {
@@ -32,7 +34,7 @@ public class RoleDAOTest {
 		assertTrue ("No records in table",list.size()>1);
 	}
 
-	
+	/*
 	@Test
 	public void B_storeTest(){
 		System.out.println("Store new item....");
@@ -47,7 +49,7 @@ public class RoleDAOTest {
 		System.out.println("New item stored with id="+id);
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
-	}
+	}*/
 	
 	@Test
 	public void C_findByIdTest() {
@@ -62,7 +64,7 @@ public class RoleDAOTest {
 		System.out.println("Delete last record(assume ID = num of rec)....");
 		List<Role> beforList = dao.findAll();
 		long id = beforList.size();        // = befor size
-		dao.delete(id);
+		dao.deleteById(id);
 		List<Role> afterList = dao.findAll();
 		System.out.println("Item id="+id+" was deleted");
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());

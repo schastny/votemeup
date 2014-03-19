@@ -13,24 +13,31 @@
 	<!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
-	<!-- Менеджер транзакций -->
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	<!-- Менеджер транзакций -->	
+	 <bean id="transactionManager"
+        class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
 
-	<!-- Настройки бина dataSource будем хранить в отдельном файле -->
-	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:location="/WEB-INF/jdbc.properties" />
+	<!-- Настройки бина dataSource будем хранить в отдельном файле -->				
+	<bean id="propertyConfigurer" 
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    	<property name="locations">
+        	<list>
+        	    <value>/WEB-INF/jdbc.properties</value>
+        	</list>
+    	</property>
+	</bean>
 
 	<!-- Непосредственно бин dataSource -->
 	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
-		p:driverClassName="${jdbc.driverClassName}" 
-		p:url="${jdbc.databaseurl}"
-		p:username="${jdbc.username}" 
-		p:password="${jdbc.password}" />
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"><value>${jdbc.driverClassName}</value></property>
+		<property name="url"><value>${jdbc.databaseurl}</value></property>
+		<property name="username"><value>${jdbc.username}</value></property>
+		<property name="password"><value>${jdbc.password}</value></property>
+	</bean>		
 		
 	<!-- Настройки фабрики сессий Хибернейта -->	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -38,11 +45,9 @@
 		<property name="configLocation">
 			<value>classpath:hibernate.cfg.xml</value>
 		</property>
-		<property name="configurationClass">
-			<value>org.hibernate.cfg.Configuration</value>
-		</property>
 		<property name="hibernateProperties">
 			<props>
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
 				<prop key="hibernate.connection.charSet">UTF-8</prop>
@@ -51,110 +56,4 @@
 
 	</bean>
 	
-	<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-     <property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-
-
-	<!-- Scans within the base package of the application for @Components to configure as beans -->
- 
-	<bean id="placeholderConfig"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:db.properties" />
-	</bean>
-	
 </beans>
- <!-- 
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		
-		<property name="persistenceUnitName" value="org.hibernate" />
-		<property name="dataSource" ref="dataSource" />
-		
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<property name="showSql" 			value="true" />
-				<property name="generateDdl" 		value="false" />
-				<property name="databasePlatform" 	value="org.hibernate.dialect.HSQLDialect" />
-			</bean>
-		</property>		
-		<property name="persistenceUnitManager">
-			<bean class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
-				<property name="defaultDataSource" ref="dataSource" />
-			</bean>
-		</property>
-	</bean>
--->
-
-<!--   <bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation">
-			<value>classpath:hibernate.cfg.xml</value>
-		</property>
-		<property name="configurationClass">
-			<value>org.hibernate.cfg.AnnotationConfiguration</value>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				
-				    validate: 		validate the schema, makes no changes to the database.
-				    update: 		update the schema.
-				    create: 		creates the schema, destroying previous data.
-				    create-drop: 	drop the schema at the end of the session.
-				 -->
-<!--  			<prop key="hibernate.hbm2ddl.auto">create</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.dialect">${jdbc.dialect}</prop>
-				<prop key="hibernate.connection.charSet">UTF-8</prop>
-			</props>
-		</property>
-	</bean> 
--->
-	
-<!-- 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-    <property name="dataSource" ref="dataSource"/>
-    <property name="hibernateProperties">
- <props>
-    <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> 
-    <prop key="hibernate.show_sql">true</prop> 
-    <prop key="hibernate.hbm2ddl.auto">update</prop> 
-    <prop key="hibernate.show_sql">true</prop> 
-  </props>
-     </property>
-        <property name="annotatedClasses">
-      <list>
-        <value>com.vanilla.objects.Student</value>
-        <value>com.vanilla.objects.Address</value>
-
-         </list>
-    </property>
-  </bean>
-
-	<bean id="transactionManager" 
-            class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-    <property name="sessionFactory" ref="sessionFactory"/>
-  </bean>
--->
-
-<!-- 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${db.driver}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-	</bean>
--->	
-	<!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"></bean> -->
-
-<!--	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-	
-</beans>
-  -->

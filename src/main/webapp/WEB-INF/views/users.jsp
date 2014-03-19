@@ -16,7 +16,7 @@
             <th>Username</th>
         </tr>
          
-        <c:forEach items="${users}" var="userVar" varStatus="status">
+        <c:forEach items="${users}" var="userVar">
          
         <tr>
             <td>${userVar.userdId}</td>

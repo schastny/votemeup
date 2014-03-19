@@ -2,28 +2,20 @@ package up.voteme.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
-
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import up.voteme.domain.Userd;
-import up.voteme.domain.Proposal;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class UserdDAOTest {
 
-	private	UserdDAO dao = new UserdDAO();
+	@Autowired
+	private	UserDAO dao;
 
 	@Test
 	public void A_findAllTest() {
@@ -42,7 +34,7 @@ public class UserdDAOTest {
 		assertTrue ("No records in table",list.size()>1);
 	}
 
-	
+	/*
 	@Test
 	public void B_storeTest(){
 		System.out.println("Store new item....");
@@ -57,7 +49,7 @@ public class UserdDAOTest {
 		System.out.println("New item stored with id="+id);
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
-	}
+	}*/
 	
 	@Test
 	public void C_findByIdTest() {
@@ -72,7 +64,7 @@ public class UserdDAOTest {
 		System.out.println("Delete last record(assume ID = num of rec)....");
 		List<Userd> beforList = dao.findAll();
 		long id = beforList.size();        // = befor size
-		dao.delete(id);
+		dao.deleteById(id);
 		List<Userd> afterList = dao.findAll();
 		System.out.println("Item id="+id+" was deleted");
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
