@@ -1,38 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-
-	<persistence-unit name="org.hibernate" transaction-type="RESOURCE_LOCAL">
-        <description>  Persistence unit for the JPA </description>
-       <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-          <class>up.voteme.domain.Category</class>
-         <class>up.voteme.domain.Userd</class>
-         <class>up.voteme.domain.Vote</class>
-         <class>up.voteme.domain.Role</class>
-         <class>up.voteme.domain.Proposal</class>
-         <class>up.voteme.domain.Comment</class>
-         <class>up.voteme.domain.Document</class>
-         <class>up.voteme.domain.ProposalLevel</class>
-         <class>up.voteme.domain.ProposalStatus</class>
-         <class>up.voteme.domain.UserStatus</class>
-         <class>up.voteme.domain.Country</class>
-         <class>up.voteme.domain.Region</class>
-         <class>up.voteme.domain.City</class>
-         <class>up.voteme.domain.District</class>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+ 
+  <persistence-unit name="org.hibernate" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
    
-        
-        
-         <properties>
+    <properties>
             <property name="hibernate.connection.driver_class"     value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url"             value="jdbc:mysql://localhost:3306/votemeup" />
             <property name="hibernate.connection.username"         value="root" />
             <property name="hibernate.connection.password"         value="qwerty123" />
-            <property name="hibernate.dialect"                     value="org.hibernate.dialect.MySQLDialect" />
-            <property name="hibernate.show_sql"                 value="false" />
-           <property name="hibernate.hbm2ddl.auto" value="validate" />
+            <property name="hibernate.dialect"                     value="org.hibernate.dialect.MySQLDialect"  />
+            <property name="hibernate.show_sql"                 value="true" />
+    <!--  set to "update" or "create" to auto create table, manually create DB Guests FIRST-->
+            <property name="hibernate.hbm2ddl.auto" value="update" />  
         </properties>
-        
-        
-    </persistence-unit>
-	
+  </persistence-unit>
+ 
 </persistence>

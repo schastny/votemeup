@@ -1,44 +1,47 @@
 package up.voteme.dao;
 
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Component;
+
 import up.voteme.domain.District;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
-
-@Repository
+@Component
 public class DistrictDAOImpl implements IDistrictDAO {
-	@Autowired
-	private SessionFactory sessionFactory;
+	@PersistenceContext
+	private EntityManager manager;
 
 	@Override
 	public long store(District district) {
-		long id = 1L;
-		sessionFactory.getCurrentSession().saveOrUpdate(district);
+		long id = manager.merge(district).getDistrictId();	
 		return id;
 	}
 
 	@Override
 	public void delete(Long id) {
-		District district = findById(id);
-		if (district != null) {
-			sessionFactory.getCurrentSession().delete(district);
-		}
+		District district = manager.find(District.class,id);
+		manager.remove(district);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<District> findAll() {
-		return sessionFactory.getCurrentSession().createQuery("from District")
-				.list();
+		 TypedQuery<District> query = manager.createQuery("SELECT * FROM District ", District.class);
+		  List<District> district = query.getResultList();
+		  for (District dist  : district ) {
+		  System.out.println(dist);
+		  }
+	  
+	  return district;
 	}
 
 	@Override
-	public District findById(Long Id) {
-		return (District) sessionFactory.getCurrentSession().get(
-				District.class, Id);
+	public District findById(Long id) {
+		return manager.find(District.class, id);
 	}
 
 }

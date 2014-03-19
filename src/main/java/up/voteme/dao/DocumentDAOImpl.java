@@ -2,40 +2,46 @@ package up.voteme.dao;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Document;
 
+@Component
 public class DocumentDAOImpl implements IDocumentDAO {
-	@Autowired
-	private SessionFactory sessionFactory;
+	//@Autowired
+	@PersistenceContext
+	private EntityManager manager;
 
 	@Override
 	public long store(Document document) {
-		long id = 1L;
-		sessionFactory.getCurrentSession().saveOrUpdate(document);
+		long id = manager.merge(document).getDocId();
 		return id;
 	}
 
 	@Override
 	public void delete(Long id) {
-		Document document = findById(id);
-		if (document != null) {
-			sessionFactory.getCurrentSession().delete(document);
-		}
+		Document document = manager.find(Document.class, id);
+		manager.remove(document);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public List<Document> findAll() {
-		return sessionFactory.getCurrentSession().createQuery("from Document")
-				.list();
+		TypedQuery<Document> query = manager.createQuery(
+				"SELECT * FROM Document ", Document.class);
+		List<Document> docs = query.getResultList();
+		for (Document doc : docs) {
+			System.out.println(doc);
+		}
+
+		return docs;
 	}
 
 	@Override
-	public Document findById(Long Id) {
-		return (Document) sessionFactory.getCurrentSession().get(
-				Document.class, Id);
+	public Document findById(Long id) {
+		return manager.find(Document.class, id);
 	}
 }

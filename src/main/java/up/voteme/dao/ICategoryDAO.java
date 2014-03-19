@@ -4,7 +4,7 @@ import java.util.List;
 
 import up.voteme.domain.Category;
 
-public interface CategoryDAO {
+public interface ICategoryDAO {
 
 	public abstract long store(Category item);
 

@@ -5,12 +5,12 @@ import java.util.List;
 import up.voteme.domain.District;
 
 public interface DistrictService {
-	public void store(District district);
+	public abstract void store(District district);
 
-	public void delete(Long id);
+	public abstract void delete(Long id);
 
-	public District findById(Long id);
+	public abstract District findById(Long id);
 
-	public List<District> findAll();
+	public abstract List<District> findAll();
 
 }

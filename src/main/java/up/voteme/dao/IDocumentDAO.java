@@ -6,12 +6,12 @@ import up.voteme.domain.Document;
 
 public interface IDocumentDAO {
 
-	public  long store(Document item);
+	public abstract long store(Document item);
 
-	public  void delete(Long Id);
+	public abstract void delete(Long Id);
 
-	public  Document findById(Long Id);
+	public abstract Document findById(Long Id);
 
-	public  List<Document> findAll();
+	public abstract List<Document> findAll();
 
 }
