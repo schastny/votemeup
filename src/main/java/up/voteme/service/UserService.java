@@ -13,5 +13,7 @@ public interface UserService {
 	public Userd showById(Long id);
 	
 	public List<Userd> showAll();
+	
+	public void addRandomUsers();
 
 }

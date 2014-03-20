@@ -1,7 +1,5 @@
 package up.voteme.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +16,19 @@ public class UserController {
 	
 	// show all users
 	@RequestMapping(value = "/users") // { "/", "/index", "/users" }
-	public String listAllUsers(Model model) {
-		      
+	public String listAllUsers(Model model) {					
         List<Userd> users = userService.showAll(); 
         model.addAttribute("users", users);            
         return "users";
+	}
+	
+	// add some new users
+	@RequestMapping(value = "/addusers") // { "/", "/index", "/users" }
+	public String addRandomUsers(Model model) {
+		
+		userService.addRandomUsers();	               
+	    return listAllUsers(model);
+	        
 	}
 	
 	/*@RequestMapping(value = "/users")
