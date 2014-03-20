@@ -30,7 +30,7 @@ public class DistrictDAOImpl implements IDistrictDAO {
 
 	@Override
 	public List<District> findAll() {
-		 TypedQuery<District> query = manager.createQuery("SELECT * FROM District ", District.class);
+		 TypedQuery<District> query = manager.createQuery("SELECT d FROM District d", District.class);
 		  List<District> district = query.getResultList();
 		  for (District dist  : district ) {
 		  System.out.println(dist);

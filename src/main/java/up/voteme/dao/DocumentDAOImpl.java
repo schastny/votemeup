@@ -12,7 +12,7 @@ import up.voteme.domain.Document;
 
 @Component
 public class DocumentDAOImpl implements IDocumentDAO {
-	//@Autowired
+	
 	@PersistenceContext
 	private EntityManager manager;
 
@@ -31,11 +31,12 @@ public class DocumentDAOImpl implements IDocumentDAO {
 	@Override
 	public List<Document> findAll() {
 		TypedQuery<Document> query = manager.createQuery(
-				"SELECT * FROM Document ", Document.class);
+				"SELECT d FROM Document d", Document.class);
 		List<Document> docs = query.getResultList();
-		for (Document doc : docs) {
-			System.out.println(doc);
-		}
+//		for (Document doc : docs) {
+//			
+//			System.out.println(doc);
+//		}
 
 		return docs;
 	}
