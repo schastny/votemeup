@@ -75,7 +75,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [commentId=" + commentId + ", userd=" + userd.getUserdId()
+		return "Comment [commentId=" + commentId + ", userd=" + userd.getId()
 				+ ", proposal=" + proposal.getProposalId() + ", commentText=" + commentText
 				+ ", commentDate=" + commentDate + "]";
 	}
