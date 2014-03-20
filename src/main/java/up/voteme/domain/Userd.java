@@ -22,27 +22,27 @@ import org.hibernate.annotations.GenericGenerator;
 public class Userd {
 	@Override
 	public String toString() {
-		return "Userd [userdId=" + userdId + ", firstName=" + firstName
+		return "Userd [userdId=" + id + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", birthYear=" + birthYear
 				+ ", sex=" + sex + ", registrationDate=" + registrationDate
-				+ ", email=" + email + ", userLogin=" + userLogin
-				+ ", userPassword=" + userPassword + ", role=" + role.getRoleId()
-				+ ", userStatus=" + userStatus.getId() + ", country=" + country.getCountryId()
+				+ ", email=" + email + ", userLogin=" + login
+				+ ", userPassword=" + password + ", role=" + role.getRoleId()
+				+ ", userStatus=" + status.getId() + ", country=" + country.getCountryId()
 				+ ", region=" + region.getRegionId() + ", city=" + city.getCityId() + ", district="
 				+ district.getDistrictId() + ", proposals=" + proposals.size() + ", commentd="
 				+ commentd.size() + ", votes=" + votes.size() + "]";
 	}
-	private long userdId;
+	private long id;
 	private String firstName;
 	private String lastName;
 	private int birthYear;
 	private String sex ;// "male", "female"
 	private Date registrationDate;
 	private String email;
-	private String userLogin;
-	private String userPassword;
+	private String login;
+	private String password;
 	private Role role; 
-	private UserStatus userStatus;
+	private UserStatus status;
 	private Country country;
 	private Region region;
 	private City city;
@@ -73,10 +73,10 @@ public class Userd {
 	@GenericGenerator(name="increment", strategy = "increment")
 	@Column(name = "userd_id")
 	public long getUserdId() {
-		return userdId;
+		return id;
 	}
 	public void setUserdId(long userdId) {
-		this.userdId = userdId;
+		this.id = userdId;
 	}
 	
 	@Column(name = "first_name")
@@ -127,18 +127,18 @@ public class Userd {
 	
 	@Column(name = "user_login")
 	public String getUserLogin() {
-		return userLogin;
+		return login;
 	}
 	public void setUserLogin(String userLogin) {
-		this.userLogin = userLogin;
+		this.login = userLogin;
 	}
 	
 	@Column(name = "user_password")
 	public String getUserPassword() {
-		return userPassword;
+		return password;
 	}
 	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+		this.password = userPassword;
 	}
 	
 	@OneToMany (mappedBy="userd")
@@ -161,10 +161,10 @@ public class Userd {
 	@ManyToOne
 	@JoinColumn(name = "user_status_id")
 	public UserStatus getUserStatus() {
-		return userStatus;
+		return status;
 	}
 	public void setUserStatus(UserStatus userStatus) {
-		this.userStatus = userStatus;
+		this.status = userStatus;
 	}
 	
 	@ManyToOne
