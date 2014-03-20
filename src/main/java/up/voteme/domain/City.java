@@ -21,7 +21,11 @@ public class City {
 	private String cityName;
 	private Collection<District> districts = new HashSet<>();
 	
-	
+	public City (){}
+	public City (String name, Region region){
+		this.cityName = name;
+		this.region = region;
+	}
 	
 	@Id
 	@GeneratedValue(generator="increment")

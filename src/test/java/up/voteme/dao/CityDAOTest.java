@@ -5,18 +5,29 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.City;
 
-
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)  
 public class CityDAOTest {
-	private	CityDAO dao = new CityDAO();
+	
+	@Autowired
+	private	CityDAO dao;
 	private static final Logger logger = LoggerFactory
 			.getLogger(CityDAOTest.class);
 
 	@Test 
+	@Transactional
 	public void crudTest(){
 		City item; 
 		long id; 
@@ -43,9 +54,7 @@ public class CityDAOTest {
 		
 	public City createNewCity(String name){
 		//create new item by modifying of existent
-		City item = dao.findById(1L);
-		item.setCityId(0);
-		item.setCityName(name);
+		City item = new City(name,findById(1L).getRegion());
 		return item;
 	}
 	
@@ -88,7 +97,7 @@ public class CityDAOTest {
 	}
 	
 	public void delete(long id) {
-		logger.info("Delete last record....");
+		logger.info("Delete last record id="+id);
 		dao.delete(id);
 		logger.info("Item id="+id+" was deleted");
 	}

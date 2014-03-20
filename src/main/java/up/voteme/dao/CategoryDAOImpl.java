@@ -1,7 +1,5 @@
 package up.voteme.dao;
 
-
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -19,55 +17,45 @@ public class CategoryDAOImpl implements CategoryDAO {
 	
 	@PersistenceContext
 	private EntityManager em;
-	
-	
 		
 	@Override
 	public long store(Category item) {
-		 long id= em.merge(item).getCategId();	//store-update
-	
-		 return id;
+		long id= em.merge(item).getCategId();	//store-update
+		return id;
 	}
 	
 	
 	@Override
-	public void delete(Long categoryId) {
-
-			Category category = em.find(Category.class, categoryId);
-			em.remove(category);
+	public void delete(long categoryId) {
+		Category category = em.find(Category.class, categoryId);
+		em.remove(category);
+	}
 		
-	}
-	
 	
 	@Override
-	public Category findById(Long categoryId) {
-
-			 return em.find(Category.class, categoryId);
+	public Category findById(long categoryId) {
+		 return em.find(Category.class, categoryId);
 		
 	}
 	
 	
 	@Override
 	public List<Category> findAll() {
-	
-			  TypedQuery<Category> query = em.createQuery(
-			            "SELECT c FROM Category c", Category.class);
-			  @SuppressWarnings("unchecked")
-			  List<Category> items = query.getResultList();
-			  for (Category item : items) {
-			 // item.getProposals().size();
-			  System.out.println(item);
-			  }
-		  
-		  return items;
-		
+		TypedQuery<Category> query = em.createQuery(
+		"SELECT c FROM Category c", Category.class);
+		List<Category> items = query.getResultList();
+		for (Category item : items) {
+			item.getProposals().size();
+			System.out.println(item);
+		}
+		return items;
 	}
 	
 	
 	@Override
 	public long countAll() {
-			  Query query = em.createQuery("select count(*) from Category");
-			  long result = (long) query.getSingleResult();
-			  return result;
+		Query query = em.createQuery("select count(*) from Category");
+		long result = (long) query.getSingleResult();
+		return result;
 	}
 }
