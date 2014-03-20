@@ -19,6 +19,13 @@ public class Category  {
 	private String categName;
 	private Collection<Proposal> proposals= new HashSet<>(); 
 	
+	
+	public Category(){}
+	
+	
+	public Category(String name){
+		this.categName = name;
+	}
 
 	@ManyToMany (mappedBy = "categories")
 	@Column (name="proposal_id")
@@ -58,7 +65,7 @@ public class Category  {
 	@Override
 	public String toString() {
 		return "Category [categId=" + categId + ", categName=" + categName
-				+"]";
+				+" proposalse.size()="+proposals.size()+"]";
 	}
 
 }

@@ -13,10 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
+
 import up.voteme.dao.CategoryDAO;
 import up.voteme.dao.CategoryDAOImpl;
 import up.voteme.domain.Category;
+import up.voteme.domain.City;
 import up.voteme.service.CategoryService;
+import up.voteme.service.CityService;
 
 
 
@@ -29,6 +33,9 @@ public class HomeController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	@Autowired
+	private CityService cityService;
+	
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 
@@ -40,10 +47,11 @@ public class HomeController {
 	public String home(Model model) {
 		logger.info("Welcome home!");
 		
-		List<Category> list = categoryService.getAll();
-
-		//add all proposals as attribute to show on home.jsp 
-		model.addAttribute("list",list);
+		List<Category> catList = categoryService.getAll();
+		model.addAttribute("catList",catList);
+		
+		List<City> cityList = cityService.getAll();
+		model.addAttribute("cityList",cityList);
 	
 		
 		model.addAttribute("controllerMessage",

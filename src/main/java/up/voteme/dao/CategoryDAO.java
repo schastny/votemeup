@@ -8,9 +8,9 @@ public interface CategoryDAO {
 
 	public abstract long store(Category item);
 
-	public abstract void delete(Long categoryId);
+	public abstract void delete(long categoryId);
 
-	public abstract Category findById(Long categoryId);
+	public abstract Category findById(long categoryId);
 
 	public abstract List<Category> findAll();
 

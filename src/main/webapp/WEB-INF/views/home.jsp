@@ -20,15 +20,27 @@ ${controllerMessage}
 		<th>ID</th>
 		<th>Text</th>
 	</tr>
-	<c:forEach items="${list}" var="userVar" >
+	<c:forEach items="${catList}" var="userVar" >
 	<tr>
 		<td>${userVar.categId}</td>
 		<td>${userVar.categName}</td>
 	</tr>
 	</c:forEach>
+</table><br><br>
+
+<h2>List of Cities</h2>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Text</th>
+	</tr>
+	<c:forEach items="${cityList}" var="userVar" >
+	<tr>
+		<td>${userVar.cityId}</td>
+		<td>${userVar.cityName}</td>
+	</tr>
+	</c:forEach>
 </table>
-
-
 
 
 

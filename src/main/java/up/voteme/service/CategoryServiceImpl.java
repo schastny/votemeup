@@ -20,6 +20,7 @@ public class CategoryServiceImpl implements CategoryService{
 	 * @see up.voteme.service.CategoryService#getAll()
 	 */
     @Override
+    @Transactional
 	public List<Category> getAll() {
 
         return categoryDAO.findAll();

@@ -1,22 +1,31 @@
 package up.voteme.dao;
 
 import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 import up.voteme.domain.Category;
 
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)  
 public class CategoryDAOTest  {
-	private	CategoryDAO dao = new CategoryDAOImpl();
+	
+	@Autowired
+	private	CategoryDAO categoryDAO ;
 	private static final Logger logger = LoggerFactory
 			.getLogger(CategoryDAOTest.class);
 	
 	@Test 
-	public void crudTest(){
+	@Transactional 
+		public void crudTest(){
 		Category item; 
 		long id; 
 		long initSize;
@@ -42,16 +51,15 @@ public class CategoryDAOTest  {
 		
 	public Category createNewCategory(String name){
 		//create new item by modifying of existent
-		Category item = dao.findById(1L);
-		item.setCategId(0);
-		item.setCategName(name);
+		Category item = new Category(name);
 		return item;
 	}
+	
 	
 	public long findAllItems() {
 		final int SHOW_ITEMS = 5;
 		logger.info("Find all items....");
-		List<Category> list = dao.findAll();
+		List<Category> list = categoryDAO.findAll();
 		for (int i = 0; i< list.size(); i++){
 			logger.info(list.get(i).toString());
 			// comment if block to show all items
@@ -66,14 +74,14 @@ public class CategoryDAOTest  {
 	
 	public long  store(Category item){
 		logger.info("Store new item....");
-		long id =  dao.store(item);
+		long id =  categoryDAO.store(item);
 		logger.info("New item stored with id="+id);
 		return id;
 	}
 	
 	public Category findById(long id) {
 		logger.info("Find record...");
-		Category item = dao.findById(id);
+		Category item = categoryDAO.findById(id);
 		logger.info("Item id="+id+" was found, name="+item.getCategName());
 		return item;
 	}
@@ -81,22 +89,25 @@ public class CategoryDAOTest  {
 	public long update(Category item){
 		logger.info("Update record ....");
 		//modify
-		long id = dao.store(item);
+		long id = categoryDAO.store(item);
 		logger.info("Item id="+id+" was updated");
 		return id;
 	}
 	
 	public void delete(long id) {
 		logger.info("Delete last record....");
-		dao.delete(id);
+		categoryDAO.delete(id);
 		logger.info("Item id="+id+" was deleted");
 	}
 	
 	public long countAllItems() {
 		logger.info("Count records in DB table....");
-		long size =  dao.countAll();
+		long size =  categoryDAO.countAll();
 		logger.info("Size="+size+" records");
 		return size;
 	}
+	
+	
+	
 	
 }

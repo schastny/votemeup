@@ -34,7 +34,7 @@ public class RegionDAO {
 		 return id;
 	}
 
-	public void delete(Long Id) {
+	public void delete(long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 try {
@@ -50,7 +50,7 @@ public class RegionDAO {
 		 }
 	}
 
-	public Region findById(Long Id) {
+	public Region findById(long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
 			 return manager.find(Region.class, Id);
