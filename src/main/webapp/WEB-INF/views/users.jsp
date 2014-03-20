@@ -34,7 +34,8 @@
 	<style>
 		.important
 		{
-			font-weight:bold;
+			font-weight: bold;
+			background-color: #FFFFCC;
 		}
 		.center
 		{
