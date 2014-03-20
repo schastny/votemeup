@@ -70,7 +70,7 @@ public class Vote {
 	
 	@Override
 	public String toString() {
-		return "Vote [voteId=" + voteId + ", userd=" + userd.getUserdId() + ", proposal="
+		return "Vote [voteId=" + voteId + ", userd=" + userd.getId() + ", proposal="
 				+ proposal.getProposalId() + ", vote=" + vote + ", voteDate=" + voteDate + "]";
 	}
 
