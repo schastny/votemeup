@@ -71,12 +71,12 @@ public class Userd {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	@Column(name = "userd_id")
-	public long getUserdId() {
+	@Column(name = "id")
+	public long getId() {
 		return id;
 	}
-	public void setUserdId(long userdId) {
-		this.id = userdId;
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 	@Column(name = "first_name")
@@ -125,19 +125,19 @@ public class Userd {
 		this.email = email;
 	}
 	
-	@Column(name = "user_login")
-	public String getUserLogin() {
+	@Column(name = "login")
+	public String getLogin() {
 		return login;
 	}
-	public void setUserLogin(String userLogin) {
+	public void setLogin(String userLogin) {
 		this.login = userLogin;
 	}
 	
-	@Column(name = "user_password")
-	public String getUserPassword() {
+	@Column(name = "password")
+	public String getPassword() {
 		return password;
 	}
-	public void setUserPassword(String userPassword) {
+	public void setPassword(String userPassword) {
 		this.password = userPassword;
 	}
 	
@@ -160,10 +160,10 @@ public class Userd {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_status_id")
-	public UserStatus getUserStatus() {
+	public UserStatus getStatus() {
 		return status;
 	}
-	public void setUserStatus(UserStatus userStatus) {
+	public void setStatus(UserStatus userStatus) {
 		this.status = userStatus;
 	}
 	
