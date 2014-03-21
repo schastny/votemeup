@@ -61,6 +61,6 @@ public class Document {
 	
 	@Override
 	public String toString() {
-		return "Document [docId=" + docId + ", docName=" + docName;
+		return "Document [docId=" + docId + ", docName=" + docName + "]";
 	}
 }
