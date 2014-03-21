@@ -1,20 +1,32 @@
 package up.voteme.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.District;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)  
 public class DistrictDAOTest2 {
-	private DistrictDAO daoDistrict = new DistrictDAO();
+	@Autowired
+	private IDistrictDAO daoDistrict ;
 
 	@Test
+	@Transactional
 	public void A_findAllTest() {
 		System.out.println("Starting test FIND ALL....");
 		List<District> listItem = daoDistrict.findAll();
@@ -27,6 +39,7 @@ public class DistrictDAOTest2 {
 	}
 
 	@Test
+	@Transactional
 	public void B_findByIdTest() {
 		System.out.println("Find first record in table....");
 		long id = daoDistrict.findAll().size()
@@ -39,13 +52,15 @@ public class DistrictDAOTest2 {
 	}
 	
 	@Test
+	@Transactional
 	public void C_storeTest(){
 		System.out.println("Starting STORE test....");
 		List<District> beforList = daoDistrict.findAll();
 		long listSizeBefore = beforList.size();
-		District item = daoDistrict.findById(1L);
-	    item.setDistrictId(0);
+		District item = new District();
 		item.setDistrictName("Universitetska22");
+		item.setCity(daoDistrict.findById(1L).getCity());
+		
 		long id =  daoDistrict.store(item);
 		List<District> afterList = daoDistrict.findAll();
 		long listSizeAfter = afterList.size();
@@ -55,6 +70,7 @@ public class DistrictDAOTest2 {
 	}
 
 	@Test
+	@Transactional
 	public void D_deleteTest() {
 		System.out.println("Starting DELETE last item test....");
 		List<District> beforList = daoDistrict.findAll();
