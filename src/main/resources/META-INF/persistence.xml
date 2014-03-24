@@ -5,7 +5,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 	<persistence-unit name="org.hibernate" transaction-type="RESOURCE_LOCAL">
         <description>  Persistence unit for the JPA </description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-          <class>up.voteme.domain.Category</class>
+         <class>up.voteme.domain.Category</class>
          <class>up.voteme.domain.Userd</class>
          <class>up.voteme.domain.Vote</class>
          <class>up.voteme.domain.Role</class>
@@ -26,7 +26,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
             <property name="hibernate.connection.driver_class"     value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url"             value="jdbc:mysql://localhost:3306/votemeup" />
             <property name="hibernate.connection.username"         value="root" />
-            <property name="hibernate.connection.password"         value="mareng_75" />
+            <property name="hibernate.connection.password"         value="root" />
             <property name="hibernate.dialect"                     value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.show_sql"                 value="true" />
            <property name="hibernate.hbm2ddl.auto" value="validate" />
