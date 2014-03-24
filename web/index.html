@@ -19,7 +19,7 @@
 				<h1> Общественная инициатива<br><small>Всего инициатив: 666 </small></h1>
 			</div>
 			<div class="pull-right">
-				<p class="pull-right"><a href="#">Войти</a></p>
+				<p><a class="pull-right" href="#" role="button">Помощь</a></p>
 				<p>
 				   <button type="button" class="btn btn-primary btn-lg ">
 				      Опубликовать<br>инициативу
@@ -27,15 +27,64 @@
 				</p>
 			</div>
 	   </div>
+
+
+
+
 	
-	   <ul class="breadcrumb span12">
-			<li class="active">Показывать инициативы: все</li>
-			
-			<li class="active">Инициативы: 1..10</li>
-			<li><a href="#">Показывать по 10</a> </li>
-			<li><a href="#">Показывать по 20</a> </li>
-			
-	   </ul>
+	 <nav class="navbar navbar-default" role="navigation">
+	   <div class="container-fluid">
+	     <!-- Brand and toggle get grouped for better mobile display -->
+	     <div class="navbar-header">
+	       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+	         <span class="sr-only">Toggle navigation</span>
+	         <span class="icon-bar"></span>
+	         <span class="icon-bar"></span>
+	         <span class="icon-bar"></span>
+	       </button>
+	       <a class="navbar-brand" href="#">Главная</a>
+	     </div>
+	 
+	     <!-- Collect the nav links, forms, and other content for toggling -->
+	     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	       <ul class="nav navbar-nav">
+	 	<li><a href="#">Все</a></li>
+	         <li class="active"><a href="#">Популярные</a></li>
+	         <li><a href="#">Последние</a></li>
+	         <li class="dropdown">
+	           <a href="#" class="dropdown-toggle" data-toggle="dropdown">По возрастанию <b class="caret"></b></a>
+	           <ul class="dropdown-menu">
+	             <li><a href="#">По возрастанию</a></li>
+	             <li><a href="#">По убыванию</a></li>
+	           </ul>
+	         </li>
+	       
+	 	
+	         
+	         <li class="dropdown">
+	           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Показывать по 10 <b class="caret"></b></a>
+	           <ul class="dropdown-menu">
+	             <li><a href="#">Показывать по 10</a></li>
+	             <li><a href="#">Показывать по 25</a></li>
+	             <li><a href="#">Показывать по 50</a></li>
+	            
+	           </ul>
+	         </li>
+	       
+	        </ul>
+	       <form class="navbar-form navbar-right" role="search">
+	         <div class="form-group">
+	           <input type="text" class="form-control" placeholder="Поиск инициатив...">
+	         </div>
+	         <button type="submit" class="btn btn-default">Поиск</button>
+	       </form>
+	       
+	     </div><!-- /.navbar-collapse -->
+	   </div><!-- /.container-fluid -->
+	 </nav>
+
+
+
 
 
       <div class="row">
@@ -88,7 +137,7 @@
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
 				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 <br> Уровень: федеральный</em>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		<div class="col-md-6 spacer ">
@@ -119,48 +168,49 @@
         <div class="col-sm-3" role="navigation">
 	   
            <div class="well sidebar-nav">
-		 <div class="input-group">
-			Показывать инициативы
-	      		<div class="radio">
-			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-			    Популярные
-			  </label>
-			</div>
-			<div class="radio">
-			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-			    Последние
-			  </label>
-			</div>
-			<div class="radio">
-			  <label>
-			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-			    Все
-			  </label>
-			</div>
-			Уровень инициативы
-			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="">
-			    Федеральный
-			  </label>
-			</div>
-			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="">
-			    Региональный
-			  </label>
-			</div>
-			<div class="checkbox">
-			  <label>
-			    <input type="checkbox" value="">
-			    Местный
-			  </label>
-			</div>
-
-	    	 </div><!-- /input-group -->
-           
+		<form role="form">
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Имя</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Пароль</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Запомнить меня
+		    </label>
+		  </div>
+		  <button type="submit" class="btn btn-default">Войти</button>
+		  <a class="pull-right" href="#" role="button">Регистрация</a>
+		</form>
+          </div><!--/.well -->
+	  <div class="well sidebar-nav">
+		<form role="form">
+		  Фильтрация запроса.
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Федеральный
+		    </label>
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Региональный
+		    </label>
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Муниципальный
+		    </label>
+		  </div>
+		  <div class="checkbox">
+		    <label>
+		      <input type="checkbox"> Что-то еще
+		    </label>
+		  </div>
+		  <button type="submit" class="btn btn-default">Применить</button>
+		</form>           
               
             
           </div><!--/.well -->
