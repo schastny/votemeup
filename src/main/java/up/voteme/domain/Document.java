@@ -61,9 +61,6 @@ public class Document {
 	
 	@Override
 	public String toString() {
-		return "Document [docId=" + docId + ", docName=" + docName
-				+  ", docUrl=" + docUrl
-				+ ", proposal ID=" + proposal.getProposalId() 
-				+ "]";
+		return "Document [docId=" + docId + ", docName=" + docName + "]";
 	}
 }
