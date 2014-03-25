@@ -23,6 +23,8 @@
  
   <!-- Use @Controller annotations for MVC controller definitions -->
   <mvc:annotation-driven />
+  
+  <mvc:resources mapping="/resources/**" location="/resources/" />
  
   <!-- Add JPA support -->
   <bean id="emf" class=
