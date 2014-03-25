@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false" %>
 
 <!DOCTYPE html>
@@ -11,7 +12,7 @@
 	<link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />" >
 
 	<style media="screen" type="text/css">
-		.spacer{margin-bottom: 5%; }
+		.spacer{margin-bottom: 6px; }
 	</style>
 
    </head>
@@ -21,6 +22,7 @@
 	<div class="row page-header">
 			<div class="pull-left">
 				<h1> Общественная инициатива<br><small>Всего инициатив: ${amount} </small></h1>
+				
 			</div>
 			<div class="pull-right">
 				<p><a class="pull-right" href="#" >Помощь</a></p>
@@ -52,8 +54,8 @@
 	     <!-- Collect the nav links, forms, and other content for toggling -->
 	     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	       <ul class="nav navbar-nav">
-	 		 <li><a href="#">Все</a></li>
-	         <li class="active"><a href="#">Популярные</a></li>
+	 		 <li class="active"><a href="#">Все</a></li>
+	         <li><a href="#">Популярные</a></li>
 	         <li><a href="#">Последние</a></li>
 	         <li class="active"><a href="#">Показывать по 10</a></li> 
 	         <li class=""><a href="#">Показывать по 25</a></li> 
@@ -77,102 +79,59 @@
 
       <div class="row">
 
+
+
+
         <div class="col-sm-9">
             <div class="row">
-	            <div  class="col-md-6 spacer" >
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-	            <div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus coDonec id elit non mi porta gravida at eget metus. Fusce dapibus, mmodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-		    <div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentumDonec id elit non mi porta gravida at eget metus. Fusce dapibus, Donec id elit non mi porta gravida at eget metus. Fusce dapibus,  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-		    <div class="col-md-6 spacer">
-	              <p>Donec id eommodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-		<div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-		<div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-		<div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-		<div class="col-md-6 spacer ">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
-		      </p>
-	            </div><!--/span-->
-
-	
-
-          </div><!--/row-->
-<!-- Pagination -->
-	<div >
-		<ul class="pagination ">
-		  <li><a href="#">&laquo;</a></li>
-		  <li class="active"><a href="#">1</a></li>
-		  <li class="disabled"><a href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		  <li><a href="#">&raquo;</a></li>
-		</ul>
-	</div>
+            	<c:forEach items="${proposalList}" var="tmpVar" >
+		            <div  class="panel panel-default col-md-6 spacer" >
+		            	<div class="panel-body">
+			              <p>${tmpVar.proposalName} </p>
+			              <p>	
+							<a class="pull-right" href="#" role="button">Подробнее»</a>
+							<em class="pull-left">Количество голосов: ${fn:length(tmpVar.votes)} </em>
+					      </p>
+						</div>
+		            </div><!--/span-->
+				</c:forEach>
+           </div><!--/row-->
+		<!-- Pagination -->
+			<div >
+				<ul class="pagination ">
+				  <li><a href="#">&laquo;</a></li>
+				  <li class="active"><a href="#">1</a></li>
+				  <li class="disabled"><a href="#">2</a></li>
+				  <li><a href="#">3</a></li>
+				  <li><a href="#">4</a></li>
+				  <li><a href="#">5</a></li>
+				  <li><a href="#">&raquo;</a></li>
+				</ul>
+			</div>
         </div><!--/span-->
 
         <div class="col-sm-3" role="navigation">
 	   
            <div class="well sidebar-nav">
-		<form role="form">
-		  <div class="form-group">
-		    <label for="exampleInputEmail1">Имя</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
-		  </div>
-		  <div class="form-group">
-		    <label for="exampleInputPassword1">Пароль</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
-		  </div>
-		  <div class="checkbox">
-		    <label>
-		      <input type="checkbox"> Запомнить меня
-		    </label>
-		  </div>
-		  <button type="submit" class="btn btn-default">Войти</button>
-		  <a class="pull-right" href="#" role="button">Регистрация</a>
-		</form>
+           		<p>${tMes}</p>
+				<form role="form" method="POST" action="login">
+				  <div class="form-group">
+				    <label for="inputName">Имя</label>
+				    <input type="text" class="form-control" id="inputName" name="name" placeholder="Введите имя">
+				  </div>
+				  <div class="form-group">
+				    <label for="InputPassword">Пароль</label>
+				    <input type="password" class="form-control" name="password" id="InputPassword" placeholder="Пароль">
+				  </div>
+			<!-- 	  <div class="checkbox">
+				    <label>
+				      <input type="checkbox"> Запомнить меня
+				    </label>
+			  		</div>
+			   -->	
+				  <button type="submit" class="btn btn-default" >Войти</button>
+				  <a class="pull-right" href="#" role="button">Регистрация</a>
+				</form>
           </div><!--/.well -->
 	  <div class="well sidebar-nav">
 		<form role="form">
