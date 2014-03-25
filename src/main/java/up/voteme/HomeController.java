@@ -15,12 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
+
+
+import org.springframework.web.servlet.ModelAndView;
+
 import up.voteme.dao.CategoryDAO;
 import up.voteme.dao.CategoryDAOImpl;
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
+import up.voteme.domain.ProposalStatus;
+import up.voteme.domain.Region;
 import up.voteme.service.CategoryService;
 import up.voteme.service.CityService;
+import up.voteme.service.ProposalStatusService;
+import up.voteme.service.RegionService;
 
 
 
@@ -35,6 +43,12 @@ public class HomeController {
 	
 	@Autowired
 	private CityService cityService;
+
+	@Autowired
+	private RegionService regionService;
+	
+	@Autowired
+	private ProposalStatusService psService;
 	
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
@@ -44,19 +58,51 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	
-	public String home(Model model) {
-		logger.info("Welcome home!");
+	public String index(Model model) {
 		
+		return "index";
+	}
+
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	
+	public String homePage(Model model) {
 		List<Category> catList = categoryService.getAll();
 		model.addAttribute("catList",catList);
 		
 		List<City> cityList = cityService.getAll();
 		model.addAttribute("cityList",cityList);
-	
 		
 		model.addAttribute("controllerMessage",
 				"This is the message from the controller! "+new Date());
+		
+		
 		return "home";
 	}
+	
+	
+	@RequestMapping(value = "/about", method = RequestMethod.GET)
+	public String about(Model model) {
 
+		List<Region> regList = regionService.getAllRegion();
+		model.addAttribute("regList",regList);
+
+		
+		model.addAttribute("controllerMessage", "This is the message from the controller! "+new Date());
+		return "about";
+	}
+	
+	@RequestMapping(value = "/ps", method = RequestMethod.GET)
+	public ModelAndView allPS() {
+		
+		ModelAndView modelAndView = new ModelAndView();
+
+		List<ProposalStatus> psList = psService.getAllPS();
+		modelAndView.addObject("psList", psList);
+		modelAndView.setViewName("ps");
+		
+		
+		return modelAndView;
+	}
+
+	
 }

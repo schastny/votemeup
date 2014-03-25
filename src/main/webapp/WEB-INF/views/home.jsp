@@ -11,8 +11,8 @@
 </h1>
 ${controllerMessage}
 
-
-
+<br/>
+<a href="about">Страница ABOUT!!!</a>
 
 <h2>List of Categories</h2>
 <table>
