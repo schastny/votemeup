@@ -1,10 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Общественная инициатива</title>
+      <title>РћР±С‰РµСЃС‚РІРµРЅРЅР°СЏ РёРЅРёС†РёР°С‚РёРІР°</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <!-- Bootstrap -->
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />" >
 
 	<style media="screen" type="text/css">
 		.spacer{margin-bottom: 5%; }
@@ -16,13 +20,13 @@
     <div class="container">
 	<div class="row page-header">
 			<div class="pull-left">
-				<h1> Общественная инициатива<br><small>Всего инициатив: 666 </small></h1>
+				<h1> РћР±С‰РµСЃС‚РІРµРЅРЅР°СЏ РёРЅРёС†РёР°С‚РёРІР°<br><small>Р’СЃРµРіРѕ РёРЅРёС†РёР°С‚РёРІ: ${amount} </small></h1>
 			</div>
 			<div class="pull-right">
-				<p><a class="pull-right" href="#" role="button">Помощь</a></p>
+				<p><a class="pull-right" href="#" >РџРѕРјРѕС‰СЊ</a></p>
 				<p>
 				   <button type="button" class="btn btn-primary btn-lg ">
-				      Опубликовать<br>инициативу
+				      РћРїСѓР±Р»РёРєРѕРІР°С‚СЊ<br>РёРЅРёС†РёР°С‚РёРІСѓ
 				   </button>
 				</p>
 			</div>
@@ -42,24 +46,25 @@
 	         <span class="icon-bar"></span>
 	         <span class="icon-bar"></span>
 	       </button>
-	       <a class="navbar-brand" href="#">Главная</a>
+	       <a class="navbar-brand" href="#">Р“Р»Р°РІРЅР°СЏ</a>
 	     </div>
 	 
 	     <!-- Collect the nav links, forms, and other content for toggling -->
 	     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	       <ul class="nav navbar-nav">
-	 	<li><a href="#">Все</a></li>
-	         <li class="active"><a href="#">Популярные</a></li>
-	         <li><a href="#">Последние</a></li>
-		 <li class="active"><a href="#">Показывать по 10</a></li> 
-	         <li class=""><a href="#">Показывать по 25</a></li> 
+	 		 <li><a href="#">Р’СЃРµ</a></li>
+	         <li class="active"><a href="#">РџРѕРїСѓР»СЏСЂРЅС‹Рµ</a></li>
+	         <li><a href="#">РџРѕСЃР»РµРґРЅРёРµ</a></li>
+	         <li class="active"><a href="#">РџРѕРєР°Р·С‹РІР°С‚СЊ РїРѕ 10</a></li> 
+	         <li class=""><a href="#">РџРѕРєР°Р·С‹РІР°С‚СЊ РїРѕ 25</a></li> 
+
 	       
 	        </ul>
 	       <form class="navbar-form navbar-right" role="search">
 	         <div class="form-group">
-	           <input type="text" class="form-control" placeholder="Поиск инициатив...">
+	           <input type="text" class="form-control" placeholder="РџРѕРёСЃРє РёРЅРёС†РёР°С‚РёРІ...">
 	         </div>
-	         <button type="submit" class="btn btn-default">Поиск</button>
+	         <button type="submit" class="btn btn-default">РџРѕРёСЃРє</button>
 	       </form>
 	       
 	     </div><!-- /.navbar-collapse -->
@@ -77,57 +82,57 @@
 	            <div  class="col-md-6 spacer" >
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 	            <div class="col-md-6 spacer">
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus coDonec id elit non mi porta gravida at eget metus. Fusce dapibus, mmodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		    <div class="col-md-6 spacer">
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentumDonec id elit non mi porta gravida at eget metus. Fusce dapibus, Donec id elit non mi porta gravida at eget metus. Fusce dapibus,  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		    <div class="col-md-6 spacer">
 	              <p>Donec id eommodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		<div class="col-md-6 spacer">
 	              <p>Donec id elit non mi porta gravida at eget metus. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		<div class="col-md-6 spacer">
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		<div class="col-md-6 spacer">
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 		<div class="col-md-6 spacer ">
 	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">Подробнее»</a>
-				<em class="pull-left">Количество голосов: 32 </em>
+				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
+				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
 		      </p>
 	            </div><!--/span-->
 
@@ -153,46 +158,46 @@
            <div class="well sidebar-nav">
 		<form role="form">
 		  <div class="form-group">
-		    <label for="exampleInputEmail1">Имя</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
+		    <label for="exampleInputEmail1">РРјСЏ</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Р’РІРµРґРёС‚Рµ РёРјСЏ">
 		  </div>
 		  <div class="form-group">
-		    <label for="exampleInputPassword1">Пароль</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+		    <label for="exampleInputPassword1">РџР°СЂРѕР»СЊ</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="РџР°СЂРѕР»СЊ">
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Запомнить меня
+		      <input type="checkbox"> Р—Р°РїРѕРјРЅРёС‚СЊ РјРµРЅСЏ
 		    </label>
 		  </div>
-		  <button type="submit" class="btn btn-default">Войти</button>
-		  <a class="pull-right" href="#" role="button">Регистрация</a>
+		  <button type="submit" class="btn btn-default">Р’РѕР№С‚Рё</button>
+		  <a class="pull-right" href="#" role="button">Р РµРіРёСЃС‚СЂР°С†РёСЏ</a>
 		</form>
           </div><!--/.well -->
 	  <div class="well sidebar-nav">
 		<form role="form">
-		  Фильтрация запроса.
+		  Р¤РёР»СЊС‚СЂР°С†РёСЏ Р·Р°РїСЂРѕСЃР°.
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Федеральный
+		      <input type="checkbox"> Р¤РµРґРµСЂР°Р»СЊРЅС‹Р№
 		    </label>
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Региональный
+		      <input type="checkbox"> Р РµРіРёРѕРЅР°Р»СЊРЅС‹Р№
 		    </label>
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Муниципальный
+		      <input type="checkbox"> РњСѓРЅРёС†РёРїР°Р»СЊРЅС‹Р№
 		    </label>
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Что-то еще
+		      <input type="checkbox"> Р§С‚Рѕ-С‚Рѕ РµС‰Рµ
 		    </label>
 		  </div>
-		  <button type="submit" class="btn btn-default">Применить</button>
+		  <button type="submit" class="btn btn-default">РџСЂРёРјРµРЅРёС‚СЊ</button>
 		</form>           
               
             
@@ -205,7 +210,7 @@
 	
 
       <footer>
-        <p>В© Company 2014</p>
+        <p>В© BArygaCompany 2014</p>
       </footer>
 
     </div><!--/.container-->
@@ -215,9 +220,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery-2.1.0.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
+    <script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
+	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
   
 
 </body></html>
