@@ -8,14 +8,12 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-		$("tr").mouseenter(function(){
-			$(this).fadeTo('fast', 1);
+		$("tr").mouseenter(function(){		
 	        $(this).css('font-weight', 'bold');
 	        $(this).css('color', 'red');
 		});
 		
-		$("tr").mouseleave(function(){
-			$(this).fadeTo('fast', 1);
+		$("tr").mouseleave(function(){			
 	        $(this).css('font-weight', 'normal');
 	        $(this).css('color', 'black');
 		});	
@@ -30,14 +28,7 @@
 	        $(this).css('font-weight', 'normal');
 	        $(this).css('color', 'black');
 		});	
-		
-		$("#div").mouseenter(function(){
-			$(this).fadeTo('fast', 0.5);
-		});	
-		$("#div").mouseleave(function(){
-			$(this).fadeTo('fast', 1);
-		});	
-   
+		   
 	});
 </script>
 
