@@ -41,9 +41,6 @@ public class GuestPageController {
 			model.addAttribute("gpModel",gpModel);
 			logger.info("new GuestPageModel() created");
 		}
-
-		
-		
 		return "guestpage";
 	}
 	
