@@ -41,6 +41,7 @@ public class ProposalServiceImpl implements ProposalService {
 	@Override
 	@Transactional
     public long countAll() {
+		System.out.println("Service - countAll()");
     	return dao.countAll();
     }
 	    

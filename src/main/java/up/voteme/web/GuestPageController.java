@@ -2,6 +2,10 @@ package up.voteme.web;
 
 
 
+
+
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,29 +15,41 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
 import up.voteme.model.GuestLogin;
+import up.voteme.model.GuestPageModel;
+import up.voteme.model.GuestPageModelImpl;
 import up.voteme.service.ProposalService;
 
 @Controller
-public class HomePageController {
+@SessionAttributes("gp")
+public class GuestPageController {
 	
 	private static final Logger logger = LoggerFactory
 			.getLogger(HomeController.class);
 	@Autowired
-	ProposalService propServ;
+	GuestPageModel gpModel;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String homepage(Model model) {
-		logger.info("Welcome user!");
-		model.addAttribute("amount", propServ.countAll());
-		model.addAttribute("proposalList", propServ.getAll());
-		return "homepage";
+	public String homepage(@RequestParam(value="showType", required=false) String showType, Model model) {
+		logger.info("Welcome GuestPageController GET method!");
+		if (!model.containsAttribute("gpModel")){
+			gpModel.initialize(new Date());
+			model.addAttribute("gpModel",gpModel);
+			logger.info("new GuestPageModel() created");
+		}
+
+		
+		
+		return "guestpage";
 	}
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String addContact(@ModelAttribute("logIn")
+	
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+    public String addContact(@ModelAttribute
                             GuestLogin guest, BindingResult result, Model model) {
 		if (result.hasErrors()){
     		//return ... - error handling
@@ -51,9 +67,9 @@ public class HomePageController {
         	model.addAttribute("tMes", "Ошибка ввода данных");
         }
         
-        model.addAttribute("amount", propServ.countAll());
-		model.addAttribute("proposalList", propServ.getAll());
-        return "homepage";
+       // model.addAttribute("amount", propServ.countAll());
+		//model.addAttribute("proposalList", propServ.getAll());
+        return "guestpage";
     }
 
 
