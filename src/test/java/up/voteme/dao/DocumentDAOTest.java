@@ -13,7 +13,7 @@ import up.voteme.domain.Document;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class DocumentDAOTest {
 
-	private	DocumentDAO dao = new DocumentDAO();
+	private	IDocumentDAO dao = new DocumentDAOImpl();
 
 	@Test
 	public void A_findAllTest() {

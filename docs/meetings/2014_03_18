@@ -1,0 +1,12 @@
+1. SOLID principles:
+    http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
+    http://igor.quatrocode.com/2008/09/solid-top-5.html
+2. JSP:
+    http://docs.oracle.com/javaee/5/tutorial/doc/bnagy.html
+3. Spring as IoC:
+    III. Core Technologies - 5. The IoC container - http://docs.spring.io/spring/docs/3.2.8.RELEASE/spring-framework-reference/html/beans.html
+    http://martinfowler.com/articles/injection.html
+4. Spring as MVC framework:
+    http://docs.spring.io/spring/docs/3.2.8.RELEASE/spring-framework-reference/html/mvc.html
+5. JPA with EntityManager example
+    http://stackoverflow.com/a/5377330/593415
