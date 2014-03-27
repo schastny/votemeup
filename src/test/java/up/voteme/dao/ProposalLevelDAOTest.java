@@ -12,7 +12,7 @@ import up.voteme.domain.ProposalLevel;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class ProposalLevelDAOTest {
-	private	ProposalLevelDAO dao = new ProposalLevelDAO();
+	private	ProposalLevelDAO dao = new ProposalLevelDAOImpl();
 
 	@Test
 	public void A_findAllTest() {
