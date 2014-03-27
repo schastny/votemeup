@@ -46,7 +46,6 @@ public class HomeController {
 	@Autowired
 	private ProposalStatusService psService;
 	
-
 	/**
 	 * Selects the home page and populates the model with a message
 	 */
