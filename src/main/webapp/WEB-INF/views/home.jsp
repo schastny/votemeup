@@ -1,4 +1,4 @@
-%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
@@ -11,8 +11,8 @@
 </h1>
 ${controllerMessage}
 
-
-
+<br/>
+<a href="about">Страница ABOUT!!!</a>
 
 <h2>List of Categories</h2>
 <table>

@@ -13,5 +13,9 @@ public interface ProposalService {
 	public abstract void delete(long id);
 
 	public abstract long countAll();
+	
+	public List<Proposal> getAllbyDate();
+	
+	public List<Proposal> getAllbyVoteNum();
 
 }

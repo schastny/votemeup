@@ -29,16 +29,16 @@ public class Region {
 	public long getRegionId() {
 		return regionId;
 	}
-	public void setRegionId(long regionId) {
-		this.regionId = regionId;
+	public void setRegionId(long id) {
+		this.regionId = id;
 	}
 	
 	@Column (name = "region_name")
 	public String getRegionName() {
 		return regionName;
 	}
-	public void setRegionName(String regionName) {
-		this.regionName = regionName;
+	public void setRegionName(String name) {
+		this.regionName = name;
 	}
 	
 	@ManyToOne
