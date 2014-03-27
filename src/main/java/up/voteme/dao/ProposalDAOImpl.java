@@ -74,6 +74,18 @@ public class ProposalDAOImpl implements ProposalDAO {
 		return items;
 	}
 	
+	public List<Proposal> findAllbyDate() {
+		TypedQuery<Proposal> query = em.createQuery(
+		"SELECT p FROM Proposal p ORDER BY creation_date", Proposal.class);
+		List<Proposal> items = query.getResultList();
+		for (Proposal item : items) {
+			item.getCategories().size();
+			item.getComments().size();
+			item.getVotes().size();
+			item.getDocuments().size();
+		}
+		return items;
+	}
 	
 	
 	/* (non-Javadoc)
