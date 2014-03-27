@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 
 
 <!DOCTYPE html>
@@ -28,6 +28,8 @@
 	<div class="row page-header">
 			<div class="pull-left">
 				<h1> Общественная инициатива<br><small>Всего инициатив: ${gpModel.propCount} </small></h1>
+				Session created: ${gpModel.creationDate}
+				${welcomeMes}
 			</div>
 			<div class="pull-right">
 				<p>
@@ -117,14 +119,14 @@
         <div class="col-sm-3" role="navigation">
 	   
            <div class="well sidebar-nav">
-		<form role="form">
+		<form role="form" method="POST" action="login" >
 		  <div class="form-group">
-		    <label for="exampleInputEmail1">Имя</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
+		    <label for="exampleInputEmail1">Имя ${fNameMes}</label>
+		    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
 		  </div>
 		  <div class="form-group">
-		    <label for="exampleInputPassword1">Пароль</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+		    <label for="exampleInputPassword1">Пароль ${fPassMes}</label>
+		    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
 		  </div>
 		  <div class="checkbox">
 		    <label>

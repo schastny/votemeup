@@ -25,7 +25,8 @@ import up.voteme.model.GuestPageModelImpl;
 import up.voteme.service.ProposalService;
 
 @Controller
-@SessionAttributes("gp")
+@SessionAttributes({"welcomeMes","gpModel"})
+
 public class GuestPageController {
 	
 	private static final Logger logger = LoggerFactory
@@ -33,39 +34,55 @@ public class GuestPageController {
 	@Autowired
 	GuestPageModel gpModel;
 	
+	@Autowired
+	ProposalService propServ;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="showType", required=false) String showType, Model model) {
-		logger.info("Welcome GuestPageController GET method!");
+		logger.info("GET method");
 		if (!model.containsAttribute("gpModel")){
 			gpModel.initialize(new Date());
 			model.addAttribute("gpModel",gpModel);
 			logger.info("new GuestPageModel() created");
 		}
+		if (showType!=null){
+			if (showType.equals("all")){
+				logger.info("showType = all");
+				gpModel.setProposalList(propServ.getAll());
+			}else if (showType.equals("last")){
+				logger.info("showType = last");
+				gpModel.setProposalList(propServ.getAllbyDate());
+			}else if (showType.equals("popular")){
+				logger.info("showType = popular");
+				gpModel.setProposalList(propServ.getAllbyVoteNum());
+			}
+		}else {
+			logger.info("showType==null");
+		}
+		
+		
 		return "guestpage";
 	}
 	
 	
-	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
     public String addContact(@ModelAttribute
                             GuestLogin guest, BindingResult result, Model model) {
+		logger.info("POST method");
 		if (result.hasErrors()){
-    		//return ... - error handling
-			System.out.println("Binding error");
+			logger.info("Binding error");
     	} 
-		
         String name =  guest.getName();
         String password =  guest.getPassword();
-        System.out.println("Name:" + name);
-        System.out.println("Password:" + password);
+        logger.info("Name:" + name);
+        logger.info("Password:" + password);
         
-        if (Math.random()*100 < 40){
-        	model.addAttribute("tMes", "Добро пожаловать: "+name);
-        }else{
-        	model.addAttribute("tMes", "Ошибка ввода данных");
-        }
+        if (!name.equals("user")){
+        	model.addAttribute("fNameMes", "неверное!");
+        }else if(!password.equals("user")){
+        	model.addAttribute("fPassMes", "неверный!");
+        }else model.addAttribute("welcomeMes", "Welcome: user");
         
-       // model.addAttribute("amount", propServ.countAll());
-		//model.addAttribute("proposalList", propServ.getAll());
         return "guestpage";
     }
 

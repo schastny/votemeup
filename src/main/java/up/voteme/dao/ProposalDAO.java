@@ -15,5 +15,7 @@ public interface ProposalDAO {
 	public abstract List<Proposal> findAll();
 
 	public abstract long countAll();
+	
+	public List<Proposal> findAllbyDate();
 
 }
