@@ -3,6 +3,6 @@ votemeup
 
 A place to promote some initiative online.
 
-Р’РµСЂРЅСѓР» РѕР±СЂР°С‚РЅРѕ.
+Вернул обратно.
 
 Use branches for work!
