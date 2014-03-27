@@ -7,37 +7,37 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>РћР±С‰РµСЃС‚РІРµРЅРЅР°СЏ РёРЅРёС†РёР°С‚РёРІР°</title>
+      <title>Общественная инициатива</title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <!-- Bootstrap -->
 	<link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />" >
-	
+
 	<style media="screen" type="text/css">
-		.spacer{margin-bottom: 5%; }
+		.spacer{margin-bottom: 5px; }
 	</style>
 
    </head>
   <body>
 
+
+ 
+
+
     <div class="container">
 	<div class="row page-header">
 			<div class="pull-left">
-				<h1> РћР±С‰РµСЃС‚РІРµРЅРЅР°СЏ РёРЅРёС†РёР°С‚РёРІР°<br><small>Р’СЃРµРіРѕ РёРЅРёС†РёР°С‚РёРІ: 666 </small></h1>
+				<h1> Общественная инициатива<br><small>Всего инициатив: 666 </small></h1>
 			</div>
 			<div class="pull-right">
-				<p><a class="pull-right" href="#" role="button">РџРѕРјРѕС‰СЊ</a></p>
+				<p><a class="pull-right" href="#" role="button">Помощь</a></p>
 				<p>
 				   <button type="button" class="btn btn-primary btn-lg ">
-				      РћРїСѓР±Р»РёРєРѕРІР°С‚СЊ<br>РёРЅРёС†РёР°С‚РёРІСѓ
+				      Опубликовать<br>инициативу
 				   </button>
 				</p>
 			</div>
 	   </div>
 
-
-
-
-	
 	 <nav class="navbar navbar-default" role="navigation">
 	   <div class="container-fluid">
 	     <!-- Brand and toggle get grouped for better mobile display -->
@@ -48,41 +48,21 @@
 	         <span class="icon-bar"></span>
 	         <span class="icon-bar"></span>
 	       </button>
-	       <a class="navbar-brand" href="#">Р“Р»Р°РІРЅР°СЏ</a>
+	       <a class="navbar-brand" href="#">Главная</a>
 	     </div>
 	 
 	     <!-- Collect the nav links, forms, and other content for toggling -->
 	     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	       <ul class="nav navbar-nav">
-	 	<li><a href="#">Р’СЃРµ</a></li>
-	         <li class="active"><a href="#">РџРѕРїСѓР»СЏСЂРЅС‹Рµ</a></li>
-	         <li><a href="#">РџРѕСЃР»РµРґРЅРёРµ</a></li>
-	         <li class="dropdown">
-	           <a href="#" class="dropdown-toggle" data-toggle="dropdown">РџРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ <b class="caret"></b></a>
-	           <ul class="dropdown-menu">
-	             <li><a href="#">РџРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ</a></li>
-	             <li><a href="#">РџРѕ СѓР±С‹РІР°РЅРёСЋ</a></li>
-	           </ul>
-	         </li>
-	       
-	 	
-	         
-	         <li class="dropdown">
-	           <a href="#" class="dropdown-toggle" data-toggle="dropdown">РџРѕРєР°Р·С‹РІР°С‚СЊ РїРѕ 10 <b class="caret"></b></a>
-	           <ul class="dropdown-menu">
-	             <li><a href="#">РџРѕРєР°Р·С‹РІР°С‚СЊ РїРѕ 10</a></li>
-	             <li><a href="#">РџРѕРєР°Р·С‹РІР°С‚СЊ РїРѕ 25</a></li>
-	             <li><a href="#">РџРѕРєР°Р·С‹РІР°С‚СЊ РїРѕ 50</a></li>
-	            
-	           </ul>
-	         </li>
-	       
+	 	<li><a href="#">О проекте</a></li>
+	         <li><a href="#">Контакты</a></li>
+	         <li><a href="#">Помощь</a></li>
 	        </ul>
 	       <form class="navbar-form navbar-right" role="search">
 	         <div class="form-group">
-	           <input type="text" class="form-control" placeholder="РџРѕРёСЃРє РёРЅРёС†РёР°С‚РёРІ...">
+	           <input type="text" class="form-control" placeholder="Поиск инициатив...">
 	         </div>
-	         <button type="submit" class="btn btn-default">РџРѕРёСЃРє</button>
+	         <button type="submit" class="btn btn-default">Поиск</button>
 	       </form>
 	       
 	     </div><!-- /.navbar-collapse -->
@@ -93,65 +73,104 @@
 
 
 
+
+
+
       <div class="row">
 
         <div class="col-sm-9">
             <div class="row">
-	            <div  class="col-md-6 spacer" >
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+			
+			<ul class="nav nav-pills" >
+	  		    <li><a href="#"><b>Все</b></a></li>
+	  		    <li><a href="#">Популярные</a></li>
+	  		    <li><a href="#">Последние</a></li>
+			    <li class="pull-right disabled "><a href="#">Фильтр выкл.</a></li>
+			 
+			  <li class="dropdown pull-right">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			      Показывать по 10<span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu">
+				    <li><a href="#">Показывать по 10</a></li>
+				    <li><a href="#">Показывать по 25</a></li>
+				    <li><a href="#">Показывать по 50</a></li>
+     			    </ul>
+			  </li>
+			</ul>
+
+	
+	            <div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>Donec id elit nollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-	            <div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus coDonec id elit non mi porta gravida at eget metus. Fusce dapibus, mmodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+	            <div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>Donec id elit non mi pota sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-		    <div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentumDonec id elit non mi porta gravida at eget metus. Fusce dapibus, Donec id elit non mi porta gravida at eget metus. Fusce dapibus,  nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		    <div  class="panel panel-default  spacer" >
+		      <div class="panel-body">
+		              <p>Donec id elit non da magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-		    <div class="col-md-6 spacer">
-	              <p>Donec id eommodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		    <div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>Donec id eliassa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-		<div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. </p>
+		    <div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>Donec id elit non mi porta gcondimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-		<div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		<div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>Donec id elit non mi porta gravidto sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-		<div class="col-md-6 spacer">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		<div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>rtor maursem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
-		<div class="col-md-6 spacer ">
-	              <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+		<div  class="panel panel-default spacer" >
+		      <div class="panel-body">
+		              <p>Donec id elit nonermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
 	              <p>	
-				<a class="pull-right" href="#" role="button">РџРѕРґСЂРѕР±РЅРµРµВ»</a>
-				<em class="pull-left">РљРѕР»РёС‡РµСЃС‚РІРѕ РіРѕР»РѕСЃРѕРІ: 32 </em>
+				<a class="pull-right" href="#" role="button">Подробнее»</a>
+				<em class="pull-left">Количество голосов: 32 </em>
 		      </p>
+			</div>
 	            </div><!--/span-->
 
 	
@@ -176,46 +195,99 @@
            <div class="well sidebar-nav">
 		<form role="form">
 		  <div class="form-group">
-		    <label for="exampleInputEmail1">РРјСЏ</label>
-		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Р’РІРµРґРёС‚Рµ РёРјСЏ">
+		    <label for="exampleInputEmail1">Имя</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите имя">
 		  </div>
 		  <div class="form-group">
-		    <label for="exampleInputPassword1">РџР°СЂРѕР»СЊ</label>
-		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="РџР°СЂРѕР»СЊ">
+		    <label for="exampleInputPassword1">Пароль</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Р—Р°РїРѕРјРЅРёС‚СЊ РјРµРЅСЏ
+		      <input type="checkbox"> Запомнить меня
 		    </label>
 		  </div>
-		  <button type="submit" class="btn btn-default">Р’РѕР№С‚Рё</button>
-		  <a class="pull-right" href="#" role="button">Р РµРіРёСЃС‚СЂР°С†РёСЏ</a>
+		  <button type="submit" class="btn btn-default">Войти</button>
+		  <a class="pull-right" href="#" role="button">Регистрация</a>
 		</form>
           </div><!--/.well -->
 	  <div class="well sidebar-nav">
 		<form role="form">
-		  Р¤РёР»СЊС‚СЂР°С†РёСЏ Р·Р°РїСЂРѕСЃР°.
+		     Статус инициативы
+		     <div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+			    На голосовании
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+			    Проверяется
+			  </label>
+			</div>
+			<div class="radio">
+			  <label>
+			    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+			    Голосование окончено
+			  </label>
+			</div>
+		     </div>
+		     Уровень
+		     <div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Р¤РµРґРµСЂР°Р»СЊРЅС‹Р№
+		      <input type="checkbox"> Федеральный
 		    </label>
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> Р РµРіРёРѕРЅР°Р»СЊРЅС‹Р№
+		      <input type="checkbox"> Региональный
 		    </label>
 		  </div>
 		  <div class="checkbox">
 		    <label>
-		      <input type="checkbox"> РњСѓРЅРёС†РёРїР°Р»СЊРЅС‹Р№
+		      <input type="checkbox"> Муниципальный
 		    </label>
 		  </div>
-		  <div class="checkbox">
-		    <label>
-		      <input type="checkbox"> Р§С‚Рѕ-С‚Рѕ РµС‰Рµ
-		    </label>
 		  </div>
-		  <button type="submit" class="btn btn-default">РџСЂРёРјРµРЅРёС‚СЊ</button>
+		     <p> Категория</p>		
+		      <div >
+		      		<select class="form-control">
+				  <option>---Выберите категорию---</option>
+				  <option>Транспорт</option>
+				  <option>Здравоохранение</option>
+				  <option>Общественная безопасность</option>
+				  <option>5</option>
+				</select>
+		      </div><br>
+			<p>Территориальное расположение  </p>
+		      <div>
+			
+				<p>		
+	  			    <select  class="form-control">
+					<option>---Государство---</option>
+	  			      <option>Россия</option>
+	  			      <option>Украина</option>
+	  			    </select>
+				<select class="form-control">
+				  <option>---Регион---</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				</select>
+				<select class="form-control">
+				  <option>---Населенный пункт---</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				</select>
+			</p>
+			</div>
+		  <button type="submit" class="btn btn-default">Применить фильтр</button>
 		</form>           
               
             
@@ -228,7 +300,7 @@
 	
 
       <footer>
-        <p>Р’В© Company 2014</p>
+        <p>В© Company 2014</p>
       </footer>
 
     </div><!--/.container-->
@@ -238,10 +310,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script> -->
-	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-  
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 </body></html>
-
+  
 

@@ -50,7 +50,7 @@ public class HomeController {
 	/**
 	 * Selects the home page and populates the model with a message
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	
 	public String index(Model model) {
 		
