@@ -21,7 +21,8 @@
   
   <!-- Use @Component annotations for bean definitions -->
   <context:component-scan base-package="up.voteme"/>
- 
+  <mvc:annotation-driven />
+  <mvc:resources mapping="/resources/**" location="/resources/" />
  
   <!-- Add JPA support -->
   <bean id="emf" class=
@@ -50,9 +51,6 @@
  </bean>
 
 
-  <mvc:resources mapping="/resources/**" location="/resources/" />
 
-  <!-- Use @Controller annotations for MVC controller definitions -->
-  <mvc:annotation-driven />
  
 </beans>
