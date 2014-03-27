@@ -2,11 +2,8 @@ package up.voteme.model;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
 import up.voteme.domain.Proposal;
 import up.voteme.service.ProposalService;
 
@@ -26,14 +23,12 @@ public class GuestPageModelImpl implements GuestPageModel {
 	
 	public  void initialize (Date date){
 		this.creationDate = date;
-		System.out.println(propServ);
 		this.propCount = propServ.countAll();
 		this.proposalList = propServ.getAll();
 		
 	}
 
 	public GuestPageModelImpl(){
-		
 	}
 	
 	/* (non-Javadoc)
