@@ -23,11 +23,6 @@ public class Comment {
 	private String commentText;
 	private Date commentDate;
 	
-	
-
-	
-	
-	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
