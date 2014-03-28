@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
+import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
 import up.voteme.model.GuestPageModelImpl;
@@ -39,6 +40,7 @@ public class GuestPageController {
 			gpModel.initialize(new Date());
 			model.addAttribute("gpModel",gpModel);
 			model.addAttribute("tab", 1);
+			
 			logger.info("new GuestPageModel() created");
 		}
 		if (showType!=null){
@@ -54,12 +56,16 @@ public class GuestPageController {
 				logger.info("showType = last");
 				model.addAttribute("tab", 3);
 				gpModel.setProposalList(propServ.getAllbyDate());
+			}else if (showType.equals("commented")){
+				logger.info("showType = commented");
+				model.addAttribute("tab", 4);
+				//gpModel.setProposalList(propServ.getAllbyDate());
 			}else {
 				logger.info("showType==null");
 			}
 		}
 		
-		
+		model.addAttribute("filtrform", new FiltrForm());
 		return "guestpage";
 	}
 
@@ -85,6 +91,20 @@ public class GuestPageController {
 		return "guestpage";
 	}
 	
+	@RequestMapping(value = "/filtr", method = RequestMethod.GET)
+	public String filtr(@ModelAttribute FiltrForm fForm,
+			BindingResult result, Model model) {
+		logger.info("GET method");
+		if (result.hasErrors()) {
+			logger.info("Binding error");
+		}
+		logger.info(fForm.getCategory());
+		logger.info(fForm.getCity());
+
+	
+
+		return "guestpage";
+	}
 	@RequestMapping(value = "/about")
 	public String aboutPage(Model model){
 		model.addAttribute("welcomeMes", "Welcome: user");
@@ -100,6 +120,5 @@ public class GuestPageController {
 		model.addAttribute("welcomeMes", "Welcome: user");
 		return "help";
 	}
-	
 
 }
