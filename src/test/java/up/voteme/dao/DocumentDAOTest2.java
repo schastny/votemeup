@@ -57,14 +57,10 @@ public class DocumentDAOTest2 {
 		long listSizeBefore = beforList.size();
 	
 		Document item = new Document();
-		//Document item = daoDocument.findById(1L);
 	    item.setDocId(0);
 		item.setDocName("cool document2222");
 		item.setDocUrl("http:/google.com/img.png");
 		item.setProposal(daoDocument.findById(1L).getProposal());
-		//item.setProposal(daoDocument.findById(1L).getProposal());
-		
-		
 		long id =  daoDocument.store(item);
 		List<Document> afterList = daoDocument.findAll();
 		long listSizeAfter = afterList.size();
