@@ -84,5 +84,22 @@ public class GuestPageController {
 
 		return "guestpage";
 	}
+	
+	@RequestMapping(value = "/about")
+	public String aboutPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "about";
+	}
+	@RequestMapping(value = "/contact")
+	public String contactPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "contact";
+	}
+	@RequestMapping(value = "/help")
+	public String helpPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "help";
+	}
+	
 
 }
