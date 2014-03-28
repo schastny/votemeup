@@ -3,6 +3,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="true"%>
 
 
@@ -88,6 +89,7 @@
 						<li class="<c:if test="${tab == 1}">active</c:if>"> <a href="/voteme/?showType=all"  >Все</a></li>
 						<li class="<c:if test="${tab == 2}">active</c:if>"><a href="/voteme/?showType=popular" >Популярные</a></li>
 						<li class="<c:if test="${tab == 3}">active</c:if>"><a href="/voteme/?showType=last" >Последние</a></li>
+						<li class="<c:if test="${tab == 4}">active</c:if>"><a href="/voteme/?showType=commented" >Комментируемые</a></li>
 						<li class="pull-right disabled "><a href="#">Фильтр выкл.</a></li>
 						<li class="dropdown pull-right"><a class="dropdown-toggle"
 							data-toggle="dropdown" href="#"> Показывать по 10<span
@@ -157,8 +159,8 @@
 				<!--/.well -->
 				<div class="well sidebar-nav">
 					<form role="form">
-						Статус инициативы
 						<div>
+							<p>Статус инициативы</p>
 							<div class="radio">
 								<label> <input type="radio" name="optionsRadios"
 									id="optionsRadios1" value="option1" checked> На
@@ -177,35 +179,27 @@
 								</label>
 							</div>
 						</div>
-						Уровень
 						<div>
-							<div class="checkbox">
-								<label> <input type="checkbox"> Федеральный
-								</label>
-							</div>
-							<div class="checkbox">
-								<label> <input type="checkbox"> Региональный
-								</label>
-							</div>
-							<div class="checkbox">
-								<label> <input type="checkbox"> Муниципальный
-								</label>
-							</div>
-						</div>
-						<p>Категория</p>
-						<div>
+							<p>Уровень</p>
 							<select class="form-control">
-								<option>---Выберите категорию---</option>
-								<option>Транспорт</option>
-								<option>Здравоохранение</option>
-								<option>Общественная безопасность</option>
-								<option>5</option>
+								<option>---Выберите уровень---</option>
+								<option>Федеральный</option>
+								<option>Региональный</option>
+								<option>Муниципальный</option>
 							</select>
-						</div>
-						<br>
-						<p>Территориальное расположение</p>
+						</div><br>
 						<div>
+							<p>Категория</p>
+							<select class="form-control" onchange="document.location=this.options[this.selectedIndex].value">
+								<option>---Выберите категорию---</option>
+								<c:forEach items="${gpModel.categoryList}" var="tmpVar">
+									<option value="${tmpVar}">${tmpVar}</option>
+								</c:forEach>
 
+							</select>
+						</div><br>
+						<div>
+							<p>Территориальное расположение</p>
 							<p>
 								<select class="form-control">
 									<option>---Государство---</option>
@@ -213,12 +207,16 @@
 									<option>Украина</option>
 								</select> <select class="form-control">
 									<option>---Регион---</option>
+									
+								</select> <select class="form-control">
+									<option>---Город---</option>
 									<option>2</option>
 									<option>3</option>
 									<option>4</option>
 									<option>5</option>
+								</select>
 								</select> <select class="form-control">
-									<option>---Населенный пункт---</option>
+									<option>---Район---</option>
 									<option>2</option>
 									<option>3</option>
 									<option>4</option>
@@ -229,6 +227,8 @@
 						<button type="submit" class="btn btn-default">Применить
 							фильтр</button>
 					</form>
+					
+				
 
 
 				</div>

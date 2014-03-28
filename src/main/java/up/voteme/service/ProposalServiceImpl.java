@@ -17,6 +17,8 @@ public class ProposalServiceImpl implements ProposalService {
 	
     @Autowired
     private ProposalDAO dao;
+  
+    
     
 
     /* (non-Javadoc)
@@ -26,6 +28,7 @@ public class ProposalServiceImpl implements ProposalService {
 	@Transactional
 	public List<Proposal> getAll() {
         return dao.findAll();
+       
     }
     
 

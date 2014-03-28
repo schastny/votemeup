@@ -46,7 +46,6 @@ public class CategoryDAOImpl implements CategoryDAO {
 		List<Category> items = query.getResultList();
 		for (Category item : items) {
 			item.getProposals().size();
-			System.out.println(item);
 		}
 		return items;
 	}
