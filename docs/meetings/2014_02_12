@@ -1,0 +1,15 @@
+1. Install jdk7
+2. Install maven, git
+3. Create github account if none
+4. Git clone from https://github.com/schastny/votemeup.git
+5. >cd votemeup
+6. >mvn tomcat:run
+7. Open localhost:8080/voteme in browser
+8. Install SpringToolSuite (STS) from http://spring.io/tools/sts/
+9. Install some MySQL 5
+10. Create initial DB schema and populate it with some data
+
+misc
+consider looking through docs/progit.en.pdf and docs/MasteringSpringMVC3.pdf 
+to get top level overview of SpringMVC and git.
+SCJP Kathy Sierra

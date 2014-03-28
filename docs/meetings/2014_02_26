@@ -1,0 +1,11 @@
+ 1. schema.sql - paste queries to create schema
+ 2. package up.voteme.domain - add java classes and mark them as jpa entities
+ 3. add jpa annotations to the fields
+ 4. run 'mvn tomcat:run' to validate results
+ 
+ 
+ todo
+ - java code conventions http://www.oracle.com/technetwork/java/codeconventions-150003.pdf
+ - java annotations
+ - jpa spec
+ - (optional) jdbc vs ORM
