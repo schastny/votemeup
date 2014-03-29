@@ -2,15 +2,48 @@ package up.voteme.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import up.voteme.domain.Category;
 import up.voteme.domain.Proposal;
+import up.voteme.service.CategoryService;
 import up.voteme.service.ProposalService;
 
 public interface GuestPageModel {
 
+	public abstract void reset();
+
+	public abstract ProposalService getPropServ();
+
+	public abstract void setPropServ(ProposalService propServ);
+
+	public abstract CategoryService getCategServ();
+
+	public abstract void setCategServ(CategoryService categServ);
+
+	public abstract long getPropCount();
+
+	public abstract void setPropCount(long propCount);
+
+	public abstract List<Proposal> getProposalList();
+
+	public abstract void setProposalList(List<Proposal> proposalList);
+
+	public abstract Date getCreationDate();
+
+	public abstract void setCreationDate(Date creationDate);
+
 	public abstract List<String> getStatusList();
 
 	public abstract void setStatusList(List<String> statusList);
+
+	public abstract List<Category> getCategoryList();
+
+	public abstract void setCategoryList(List<Category> categoryList);
+
+	public abstract int getSelectedCategoryId();
+
+	public abstract void setSelectedCategoryId(int selectedCategoryId);
 
 	public abstract List<String> getLevelList();
 
@@ -32,44 +65,8 @@ public interface GuestPageModel {
 
 	public abstract void setDistrictList(List<String> districtList);
 
-	public abstract ProposalService getPropServ();
+	public abstract Map<String, String> getConfigMap();
 
-	public abstract void setPropServ(ProposalService propServ);
-
-	public abstract void initialize(Date date);
-	
-	public abstract List<String> getCategoryList();
-
-	public abstract void setCategoryList(List<String> countryList);
-
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#getPropCount()
-	 */
-	public abstract long getPropCount();
-
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#setPropCount(long)
-	 */
-	public abstract void setPropCount(long propCount);
-
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#getList()
-	 */
-	public abstract List<Proposal> getProposalList();
-
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#setList(java.util.List)
-	 */
-	public abstract void setProposalList(List<Proposal> list);
-
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#getCreationDate()
-	 */
-	public abstract Date getCreationDate();
-
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#setCreationDate(java.util.Date)
-	 */
-	public abstract void setCreationDate(Date creationDate);
+	public abstract void setConfigMap(Map<String, String> configMap);
 
 }

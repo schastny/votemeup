@@ -32,40 +32,47 @@ public class GuestPageController {
 
 	@Autowired
 	ProposalService propServ;
+	
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="showType", required=false) String showType, Model model) {
-		logger.info("GET method");
-		if (!model.containsAttribute("gpModel")){
-			gpModel.initialize(new Date());
+		logger.info("GET method /");
+		if (!model.containsAttribute("gpModel")){// new session
+			gpModel.setCreationDate(new Date()); // for debug purposes to track session
 			model.addAttribute("gpModel",gpModel);
-			model.addAttribute("tab", 1);
-			
 			logger.info("new GuestPageModel() created");
-		}
-		if (showType!=null){
-			if (showType.equals("all")){
-				logger.info("showType = all");
-				model.addAttribute("tab", 1);
-				gpModel.setProposalList(propServ.getAll());
-			}else if (showType.equals("popular")){
-				logger.info("showType = popular");
-				model.addAttribute("tab", 2);
-				gpModel.setProposalList(propServ.getAllbyVoteNum());
-			}else if (showType.equals("last")){
-				logger.info("showType = last");
-				model.addAttribute("tab", 3);
-				gpModel.setProposalList(propServ.getAllbyDate());
-			}else if (showType.equals("commented")){
-				logger.info("showType = commented");
-				model.addAttribute("tab", 4);
-				//gpModel.setProposalList(propServ.getAllbyDate());
-			}else {
-				logger.info("showType==null");
-			}
+		//	model.addAttribute("filtrform", new FiltrForm());
 		}
 		
-		model.addAttribute("filtrform", new FiltrForm());
+		// request come without parameters
+		if (showType == null){
+			gpModel.reset();
+			return "guestpage";
+		};
+		
+		if (showType.equals("all")){
+			logger.info("showType = all");
+			model.addAttribute("tab", 1);
+			gpModel.setProposalList(propServ.getAll());
+		}else if (showType.equals("popular")){
+			logger.info("showType = popular");
+			model.addAttribute("tab", 2);
+			gpModel.setProposalList(propServ.getAllbyVoteNum());
+		}else if (showType.equals("last")){
+			logger.info("showType = last");
+			model.addAttribute("tab", 3);
+			gpModel.setProposalList(propServ.getAllbyDate());
+		}else if (showType.equals("commented")){
+			logger.info("showType = commented");
+			model.addAttribute("tab", 4);
+			//gpModel.setProposalList(propServ.getAllbyDate());
+		}else {
+			logger.info("showType==null");
+		}
+		
+		
+		
 		return "guestpage";
 	}
 
@@ -94,7 +101,7 @@ public class GuestPageController {
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)
 	public String filtr(@ModelAttribute FiltrForm fForm,
 			BindingResult result, Model model) {
-		logger.info("GET method");
+		logger.info("GET method /filtr");
 		if (result.hasErrors()) {
 			logger.info("Binding error");
 		}

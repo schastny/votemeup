@@ -158,30 +158,30 @@
 				</div>
 				<!--/.well -->
 				<div class="well sidebar-nav">
-					<form role="form">
+					<form role="form" method="GET" action="filtr">
 						<div>
 							<p>Статус инициативы</p>
 							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios1" value="option1" checked> На
+								 <input type="radio" name="status"
+									 value="1" checked> На
 									голосовании
 								</label>
 							</div>
 							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios2" value="option2"> Проверяется
+								<label> <input type="radio" name="status"
+									value="1"> Проверяется
 								</label>
 							</div>
 							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios2" value="option2"> Голосование
+								<label> <input type="radio" name="status"
+									 value="3"> Голосование
 									окончено
 								</label>
 							</div>
 						</div>
 						<div>
 							<p>Уровень</p>
-							<select class="form-control">
+							<select name=level class="form-control">
 								<option>---Выберите уровень---</option>
 								<option>Федеральный</option>
 								<option>Региональный</option>
@@ -190,10 +190,10 @@
 						</div><br>
 						<div>
 							<p>Категория</p>
-							<select class="form-control" onchange="document.location=this.options[this.selectedIndex].value">
-								<option>---Выберите категорию---</option>
-								<c:forEach items="${gpModel.categoryList}" var="tmpVar">
-									<option value="${tmpVar}">${tmpVar}</option>
+							<select class="form-control" name=category onchange="document.location=this.options[this.selectedIndex].value">
+								<option >---Выберите категорию---</option>
+								<c:forEach items="${gpModel.categoryList}" var="item">
+									<option value="${item.categId}" ${item.categId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.categName}</option>
 								</c:forEach>
 
 							</select>
@@ -201,21 +201,21 @@
 						<div>
 							<p>Территориальное расположение</p>
 							<p>
-								<select class="form-control">
+								<select name=state class="form-control">
 									<option>---Государство---</option>
 									<option>Россия</option>
 									<option>Украина</option>
-								</select> <select class="form-control">
+								</select> 
+								<select name=region class="form-control">
 									<option>---Регион---</option>
-									
-								</select> <select class="form-control">
+								</select name=city> <select class="form-control">
 									<option>---Город---</option>
 									<option>2</option>
 									<option>3</option>
 									<option>4</option>
 									<option>5</option>
 								</select>
-								</select> <select class="form-control">
+								</select name=district> <select class="form-control">
 									<option>---Район---</option>
 									<option>2</option>
 									<option>3</option>
