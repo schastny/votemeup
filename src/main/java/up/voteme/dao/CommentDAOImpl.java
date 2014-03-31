@@ -49,4 +49,10 @@ public class CommentDAOImpl implements CommentDAO {
 		long result = (long) query.getSingleResult();
 		return result;
 	}
+
+	@Override
+	public List<Comment> findCommentByProposal(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

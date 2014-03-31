@@ -10,6 +10,7 @@ public interface VoteDAO {
 	public abstract Vote findById(long id);
 	public abstract List<Vote> findAll();
 	public abstract long countAll();
-	public abstract long countVoteByProposal(long id);
+	public abstract long countVoteByProposalYes(long id);
+	public abstract long countVoteByProposalNo(long id);
 
 }

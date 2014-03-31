@@ -49,8 +49,14 @@ public class VoteServiceImpl implements VoteService {
 
 	@Override
 	@Transactional
-	public long getCountVoteByProposal(long id) {
-		return voteDAO.countVoteByProposal(id);
+	public long getCountVoteByProposalYes(long id) {
+		return voteDAO.countVoteByProposalYes(id);
 	}
 
+	@Override
+	@Transactional
+	public long getCountVoteByProposalNo(long id) {
+		return voteDAO.countVoteByProposalNo(id);
+	}
+	
 }

@@ -51,9 +51,19 @@ public class VoteDAOImpl implements VoteDAO {
 	}
 
 	@Override
-	public long countVoteByProposal(long id) {
-		  Query query = em.createQuery("SELECT COUNT(*) FROM Vote AS v WHERE v.proposal = :id");
+	public long countVoteByProposalYes(long id) {
+		
+		  Query query = em.createQuery("SELECT COUNT(*) FROM Vote AS v WHERE v.proposal.id="+id+" AND v.vote = 1");
 		  long count = (long) query.getSingleResult();
+		  System.out.println("count YES = "+count);
+		  return count;
+	}
+
+	@Override
+	public long countVoteByProposalNo(long id) {
+		  Query query = em.createQuery("SELECT COUNT(*) FROM Vote AS v WHERE v.proposal.id="+id+" AND v.vote = 0");
+		  long count = (long) query.getSingleResult();
+		  System.out.println("count NO = "+count);
 		  return count;
 	}
 

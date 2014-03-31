@@ -16,4 +16,6 @@ public interface CommentDAO {
 
 	public abstract long countAll();
 
+	public abstract List<Comment> findCommentByProposal(long id);
+	
 }

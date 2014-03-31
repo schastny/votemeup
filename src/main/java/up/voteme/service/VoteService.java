@@ -12,6 +12,7 @@ public interface VoteService {
 	public abstract List<Vote> getAllVote();
 	public abstract Vote getById(long id);
 	public abstract long getCount();
-	public abstract long getCountVoteByProposal(long id);
+	public abstract long getCountVoteByProposalYes(long id);
+	public abstract long getCountVoteByProposalNo(long id);
 
 }

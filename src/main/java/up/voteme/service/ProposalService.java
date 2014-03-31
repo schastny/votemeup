@@ -20,7 +20,8 @@ public interface ProposalService {
 	//Ponomarenko
 	public abstract Proposal getById(long id);
 
-	public abstract long getCountVote(long id);
+	public abstract long getCountVoteYes(long id);
+	public abstract long getCountVoteNo(long id);
 	
 	
 	// public abstract List<Proposal> getByParams(HashMap<String, String> map);

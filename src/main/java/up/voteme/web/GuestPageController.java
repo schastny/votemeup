@@ -129,7 +129,8 @@ public class GuestPageController {
 		//System.out.println("numberProposal = "+numberProposal);
 		Proposal proposalMore=propServ.getById((Long) numberProposal);
 		model.addAttribute("proposalMore", proposalMore);
-		//model.addAttribute("proposalMoreVote", propServ.getCountVote((Long) numberProposal));
+		model.addAttribute("proposalMoreVoteYes", propServ.getCountVoteYes((Long) numberProposal));
+		model.addAttribute("proposalMoreVoteNo", propServ.getCountVoteNo((Long) numberProposal));
 		
 		
 		

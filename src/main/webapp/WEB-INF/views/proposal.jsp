@@ -95,10 +95,10 @@
 				</div>
 			
 				<div class="voting-solution">
-					<div class="addr title">За инициативу подано: <span><b>${proposalMoreVote}</b> голосов</span></div>
+					<div class="addr title">За инициативу подано: <span><b>${proposalMoreVoteYes}</b> голос(ов)</span></div>
 				</div>
 				<div class="voting-solution">
-					<div class="addr negative">Против инициативы подано: <span><b>________</b> голос</span></div>
+					<div class="addr negative">Против инициативы подано: <span><b>${proposalMoreVoteNo}</b> голос(ов)</span></div>
 				</div>
 			
 				<br>
@@ -117,7 +117,7 @@
 						</div>
 					</div>
 														
-					<div class="" id="voting-status">
+					<div>
 				
 						<div class="alert alert-warning">Для голосования вы должны быть <a href="/voteme/">авторизованы</a></div>
 				

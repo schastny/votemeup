@@ -46,7 +46,7 @@ public class Vote {
 	public Proposal getProposal() {
 		return proposal;
 	}
-	public void setProposalId(Proposal proposal) {
+	public void setProposal(Proposal proposal) {
 		this.proposal = proposal;
 	}
 	

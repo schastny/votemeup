@@ -84,8 +84,15 @@ public class ProposalServiceImpl implements ProposalService {
 
 	@Override
 	@Transactional
-	public long getCountVote(long id) {
-		return voteDao.countVoteByProposal(id);
+	public long getCountVoteYes(long id) {
+		return voteDao.countVoteByProposalYes(id);
+	}
+
+
+	@Override
+	@Transactional
+	public long getCountVoteNo(long id) {
+		return voteDao.countVoteByProposalNo(id);
 	}
 	
  
