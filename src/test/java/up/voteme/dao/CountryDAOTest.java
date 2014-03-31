@@ -10,63 +10,75 @@ import org.junit.runners.MethodSorters;
 
 import up.voteme.domain.Country;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class) 
+
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) //Sorts test methods in lexicographic order
+
 public class CountryDAOTest {
-
-	private	CountryDAO dao = new CountryDAO();
+	@Autowired
+	private	CountryDAO CountryTable;
 
 	@Test
-	public void A_findAllTest() {
-		final int SHOW_ITEMS = 5;
-		System.out.println("Find all items....");
-		List<Country> list = dao.findAll();
-		for (int i = 0; i< list.size(); i++){
-			System.out.println(list.get(i));
-			// comment if block to show all items
-			if ((i == SHOW_ITEMS-1)&(list.size()>SHOW_ITEMS)) {
-				System.out.println("etc......");
-				System.out.println("total "+list.size()+" items");
-				break;
+	@Transactional
+	
+	public void Test_A_SelectAll() {
+
+		System.out.println("Trying to select all records from table...");
+
+		List<Country> CountryList = CountryTable.findAll();	// Creating list from table Country
+
+		for (int i = 0; i < CountryList.size(); i++) {
+			System.out.println("Record " + i + ": " + CountryList.get(i));
 			}
-		}
-		assertTrue ("No records in table",list.size()>1);
+
+		System.out.println("Selecting " + CountryList.size() + " records.");
+		assertFalse("No records found.", CountryList.size() == 0);
 	}
 
 	
 	@Test
-	public void B_storeTest(){
-		System.out.println("Store new item....");
-		List<Country> beforList = dao.findAll();
-		//modify item
-		Country item = dao.findById(1L);
-		item.setCountryId(0);
-		item.setCountryName("OHOHOHOHOHO");
+	@Transactional
+	public void Test_B_InsertNewRecord(){
+		List<Country> CountryBasicList = CountryTable.findAll();
+		System.out.println("Table contains " + CountryBasicList.size() + " records.");
 		
-		long id =  dao.store(item);
-		List<Country> afterList = dao.findAll();
-		System.out.println("New item stored with id="+id);
-		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
+		System.out.println("Trying to insert new record...");
+		
+			Country NewCountry = new Country();
+			NewCountry.setCountryName("Крым");
+			CountryTable.store(NewCountry);
+		
+		List<Country> CountryChangedList = CountryTable.findAll();
+		System.out.println("Now table contains " + CountryChangedList.size() + " records.");
+		
+		assertFalse("Record appending failure.", CountryBasicList.size() == CountryChangedList.size());
 	}
 	
 	@Test
-	public void C_findByIdTest() {
-		System.out.println("Find last record (assume ID = num of rec)....");
-		long id = dao.findAll().size();
-		Country item = dao.findById(id);
-		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
+	@Transactional
+	public void Test_C_DeleteLastRecord(){
+
+		List<Country> CountryBasicList = CountryTable.findAll();
+		System.out.println("Table contains " + CountryBasicList.size() + " records.");
+
+		System.out.println("Trying to delete last record...");
+		long LastRecordID = CountryBasicList.size();
+		CountryTable.delete(LastRecordID);
+
+		List<Country> CountryChangedList = CountryTable.findAll();
+		System.out.println("Now table contains " + CountryChangedList.size() + " records.");
+		
+		assertFalse("Record deletion failure.", CountryBasicList.size() == CountryChangedList.size());
 	}
-	
-	@Test
-	public void D_deleteTest() {
-		System.out.println("Delete last record(assume ID = num of rec)....");
-		List<Country> beforList = dao.findAll();
-		long id = beforList.size();        // = befor size
-		dao.delete(id);
-		List<Country> afterList = dao.findAll();
-		System.out.println("Item id="+id+" was deleted");
-		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
-	}
+
 
 }

@@ -14,12 +14,12 @@ import up.voteme.service.DistrictService;
 @Controller
 public class DistrictController {
 	@Autowired
-	DistrictService districtServise;
+	DistrictService districtService;
 
        
 	@RequestMapping(value = "/district") 
 	public String listAllDistrict(Model model) {					
-        List<District>  district = districtServise.findAll(); 
+        List<District>  district = districtService.findAll(); 
         model.addAttribute("district", district);            
         return "district";
 	}

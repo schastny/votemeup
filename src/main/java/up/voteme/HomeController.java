@@ -3,8 +3,6 @@ package up.voteme;
 import java.util.Date;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import up.voteme.dao.CategoryDAO;
-import up.voteme.dao.CategoryDAOImpl;
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
 import up.voteme.domain.ProposalStatus;
@@ -50,13 +46,10 @@ public class HomeController {
 	@Autowired
 	private ProposalStatusService psService;
 	
-	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
-
 	/**
 	 * Selects the home page and populates the model with a message
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	
 	public String index(Model model) {
 		
@@ -79,17 +72,6 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String about(Model model) {
-
-		List<Region> regList = regionService.getAllRegion();
-		model.addAttribute("regList",regList);
-
-		
-		model.addAttribute("controllerMessage", "This is the message from the controller! "+new Date());
-		return "about";
-	}
 	
 	@RequestMapping(value = "/ps", method = RequestMethod.GET)
 	public ModelAndView allPS() {

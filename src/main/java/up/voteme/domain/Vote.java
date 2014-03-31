@@ -2,7 +2,6 @@ package up.voteme.domain;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -47,7 +46,7 @@ public class Vote {
 	public Proposal getProposal() {
 		return proposal;
 	}
-	public void setProposal(Proposal proposal) {
+	public void setProposalId(Proposal proposal) {
 		this.proposal = proposal;
 	}
 	

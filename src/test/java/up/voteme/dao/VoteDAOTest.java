@@ -13,7 +13,7 @@ import up.voteme.domain.Vote;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class VoteDAOTest {
 
-	private	VoteDAO dao = new VoteDAO();
+	private	VoteDAO dao = new VoteDAOImpl();
 
 	@Test
 	public void A_findAllTest() {
