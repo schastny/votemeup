@@ -1,6 +1,7 @@
 package up.voteme.web;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import up.voteme.HomeController;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
-import up.voteme.model.GuestPageModelImpl;
 import up.voteme.service.ProposalService;
 
 @Controller
@@ -47,7 +47,11 @@ public class GuestPageController {
 			if (showType.equals("all")){
 				logger.info("showType = all");
 				model.addAttribute("tab", 1);
-				gpModel.setProposalList(propServ.getAll());
+				
+				HashMap<String, String> map = new HashMap<>();
+				map.put("sortBy", "creationDate");
+						
+				gpModel.setProposalList(propServ.getByParams(map));
 			}else if (showType.equals("popular")){
 				logger.info("showType = popular");
 				model.addAttribute("tab", 2);

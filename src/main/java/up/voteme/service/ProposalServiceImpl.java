@@ -71,8 +71,9 @@ public class ProposalServiceImpl implements ProposalService {
     }
 	
 	@Override
-	public List<Proposal> getByParams(HashMap<String,String> map) {
-		return dao.findAll();
+	@Transactional
+	public List<Proposal> getByParams(HashMap<String,String> map) {	
+		return dao.findByParams(map);
 	}
 	
 }
