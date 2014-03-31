@@ -24,7 +24,7 @@ public interface ProposalService {
 	public abstract long getCountVoteNo(long id);
 	
 	
-	// public abstract List<Proposal> getByParams(HashMap<String, String> map);
+	public abstract List<Proposal> getByParams(HashMap<String, String> map);
 
 	/*
 	 * !!! ( 1.noSort = showAll; 2. use .equalseIgnoreCase(); 3.hint: int num =
