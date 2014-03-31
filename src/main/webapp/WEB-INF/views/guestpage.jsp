@@ -85,21 +85,26 @@
 		<div class="row">
 			<div class="col-sm-9">
 				<div class="row">
+				
 					  	<ul class="nav nav-tabs">
-						<li class="<c:if test="${tab == 1}">active</c:if>"> <a href="/voteme/?showType=all"  >Все</a></li>
-						<li class="<c:if test="${tab == 2}">active</c:if>"><a href="/voteme/?showType=popular" >Популярные</a></li>
-						<li class="<c:if test="${tab == 3}">active</c:if>"><a href="/voteme/?showType=last" >Последние</a></li>
-						<li class="<c:if test="${tab == 4}">active</c:if>"><a href="/voteme/?showType=commented" >Комментируемые</a></li>
-						<li class="pull-right disabled "><a href="#">Фильтр выкл.</a></li>
+					  	
+					  	
+						<li ${gpModel.sortBy == 'noSort' ? 'class="active"' : ''}> <a href="/voteme/?sortBy=noSort&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=${gpModel.filtrOn}"  >Все</a></li>
+						<li ${gpModel.sortBy == 'voteCount' ? 'class="active"' : ''}><a href="/voteme/?sortBy=voteCount&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=${gpModel.filtrOn}">Популярные</a></li>
+						<li ${gpModel.sortBy == 'creationDate' ? 'class="active"' : ''}><a href="/voteme/?sortBy=creationDate&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=${gpModel.filtrOn}" >Последние</a></li>
+						<li ${gpModel.sortBy == 'commentCount' ? 'class="active"' : ''}><a href="/voteme/?sortBy=commentCount&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=${gpModel.filtrOn}">Комментируемые</a></li>
+						<li class="pull-right ${gpModel.filtrOn == 'true' ? '' : 'disabled'}" >
+							<a href="/voteme/?sortBy=noSort&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=false">${gpModel.filtrOn == "true" ? 'Очистить фильтр' : 'Фильтр выкл.'}</a>
+						</li>
 						<li class="dropdown pull-right"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> Показывать по 10<span
-								class="caret"></span>
-						</a>											
+							data-toggle="dropdown" href="#"> Показывать по ${gpModel.pageQuant}
+								<span class="caret"></span></a>											
 							<ul class="dropdown-menu">
-								<li><a href="#">Показывать по 10</a></li>
-								<li><a href="#">Показывать по 25</a></li>
-								<li><a href="#">Показывать по 50</a></li>
-							</ul></li>
+								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=10&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 10</a></li>
+								<li ><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=25&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 25</a></li>
+								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=50&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 50</a></li>
+							</ul>
+						</li>
 					</ul>
 					
 
@@ -124,7 +129,7 @@
 					<ul class="pagination ">
 						<li><a href="#">&laquo;</a></li>
 						<li class="active"><a href="#">1</a></li>
-						<li class="disabled"><a href="#">2</a></li>
+						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
 						<li><a href="#">4</a></li>
 						<li><a href="#">5</a></li>
@@ -139,9 +144,9 @@
 				<div class="well sidebar-nav">
 					<form role="form" method="POST" action="login">
 						<div class="form-group">
-							<label for="exampleInputEmail1">Имя ${fNameMes}</label> <input
+							<label for="name1">Имя ${fNameMes}</label> <input
 								type="text" name="name" class="form-control"
-								id="exampleInputEmail1" placeholder="Введите имя">
+								id="name1" placeholder="Введите имя">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Пароль ${fPassMes}</label> <input
@@ -159,68 +164,60 @@
 				<!--/.well -->
 				<div class="well sidebar-nav">
 					<form role="form" method="GET" action="filtr">
+
 						<div>
 							<p>Статус инициативы</p>
-							<div class="radio">
-								 <input type="radio" name="status"
-									 value="1" checked> На
-									голосовании
-								</label>
-							</div>
-							<div class="radio">
-								<label> <input type="radio" name="status"
-									value="1"> Проверяется
-								</label>
-							</div>
-							<div class="radio">
-								<label> <input type="radio" name="status"
-									 value="3"> Голосование
-									окончено
-								</label>
-							</div>
+							<select name=status class="form-control">
+								<option value="0">---Выберите статус---</option>
+								<c:forEach items="${gpModel.statusList}" var="item">
+									<option value="${item.id}" ${item.id == gpModel.selectedPropStatusId ? 'selected="selected"' : ''}>${item.status}</option>
+								</c:forEach>
+							</select>
 						</div>
 						<div>
 							<p>Уровень</p>
 							<select name=level class="form-control">
-								<option>---Выберите уровень---</option>
-								<option>Федеральный</option>
-								<option>Региональный</option>
-								<option>Муниципальный</option>
+								<option value="0">---Выберите уровень---</option>
+								<c:forEach items="${gpModel.levelList}" var="item">
+									<option value="${item.id}" ${item.id == gpModel.selectedLevelId ? 'selected="selected"' : ''}>${item.level}</option>
+								</c:forEach>
 							</select>
 						</div><br>
 						<div>
 							<p>Категория</p>
-							<select class="form-control" name=category onchange="document.location=this.options[this.selectedIndex].value">
-								<option >---Выберите категорию---</option>
+							<select name=category class="form-control" >
+								<option value="0" >---Выберите категорию---</option>
 								<c:forEach items="${gpModel.categoryList}" var="item">
 									<option value="${item.categId}" ${item.categId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.categName}</option>
 								</c:forEach>
-
 							</select>
 						</div><br>
 						<div>
 							<p>Территориальное расположение</p>
 							<p>
-								<select name=state class="form-control">
-									<option>---Государство---</option>
-									<option>Россия</option>
-									<option>Украина</option>
+								<select name=state class="form-control" onchange="document.location=this.options[this.selectedIndex].href">
+									<option value="0">---Государство---</option>
+									<c:forEach items="${gpModel.countryList}" var="item">
+										<option id="/voteme/select?terName=region&fkId=${item.countryId}" value="${item.countryId}" ${item.countryId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.countryName}</option>
+									</c:forEach>
 								</select> 
-								<select name=region class="form-control">
-									<option>---Регион---</option>
-								</select name=city> <select class="form-control">
-									<option>---Город---</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
+								<select name=region class="form-control" onchange="document.location=this.options[this.selectedIndex].id">
+									<option value="0">---Регион---</option>
+									<c:forEach items="${gpModel.regionList}" var="item">
+										<option id="/voteme/select?terName=region&fkId=0" value="${item.regionId}" ${item.regionId == gpModel.selectedRegionId ? 'selected="selected"' : ''}>${item.regionName}</option>
+									</c:forEach>
+								</select> 
+								<select name=city class="form-control" onchange="document.location=this.options[this.selectedIndex].id">
+									<option value="0">---Город---</option>
+									<c:forEach items="${gpModel.cityList}" var="item">
+										<option id="/voteme/select?terName=region&fkId=0" value="${item.cityId}" ${item.cityId == gpModel.selectedCityId ? 'selected="selected"' : ''}>${item.cityName}</option>
+									</c:forEach>
 								</select>
-								</select name=district> <select class="form-control">
-									<option>---Район---</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
+								<select name=district class="form-control">
+									<option value="0">---Район---</option>
+									<c:forEach items="${gpModel.districtList}" var="item">
+										<option value="${item.districtId}" ${item.districtId == gpModel.selectedDistrictId ? 'selected="selected"' : ''}>${item.districtName}</option>
+									</c:forEach>
 								</select>
 							</p>
 						</div>
