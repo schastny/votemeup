@@ -1,8 +1,8 @@
 package up.voteme.service;
 
-import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +70,9 @@ public class ProposalServiceImpl implements ProposalService {
         return list;
     }
 	
- 
+	@Override
+	public List<Proposal> getByParams(HashMap<String,String> map) {
+		return dao.findAll();
+	}
+	
 }

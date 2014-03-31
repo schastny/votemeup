@@ -1,0 +1,8 @@
+Korobitsyn: Category, City
+Agarkov: Comment, Country
+Salidinov: District, Document
+Lebedev: Proposal, ProposalLevel
+Ponomarenko: ProposalStatus, Region
+Saprikyn: Role, User
+Koval: UserStatus, Vote
+
