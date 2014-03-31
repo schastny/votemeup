@@ -1,9 +1,6 @@
 package up.voteme.service;
 
-import java.util.HashMap;
 import java.util.List;
-
-import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.Proposal;
 
@@ -20,7 +17,12 @@ public interface ProposalService {
 	// service methods for guesthomepage
 
 	public abstract long countAll();
+	//Ponomarenko
+	public abstract Proposal getById(long id);
 
+	public abstract long getCountVote(long id);
+	
+	
 	// public abstract List<Proposal> getByParams(HashMap<String, String> map);
 
 	/*

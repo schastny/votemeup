@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
+import up.voteme.domain.Proposal;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
-import up.voteme.model.GuestPageModelImpl;
 import up.voteme.service.ProposalService;
 
 @Controller
@@ -32,6 +32,8 @@ public class GuestPageController {
 
 	@Autowired
 	ProposalService propServ;
+	
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="showType", required=false) String showType, Model model) {
@@ -122,4 +124,17 @@ public class GuestPageController {
 		return "help";
 	}
 
+	@RequestMapping(value = "/proposal")
+	public String helpPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
+		//System.out.println("numberProposal = "+numberProposal);
+		Proposal proposalMore=propServ.getById((Long) numberProposal);
+		model.addAttribute("proposalMore", proposalMore);
+		//model.addAttribute("proposalMoreVote", propServ.getCountVote((Long) numberProposal));
+		
+		
+		
+		
+		return "proposal";
+	}
+	
 }

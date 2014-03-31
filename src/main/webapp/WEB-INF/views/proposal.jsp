@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="true"%>
 
 
@@ -83,55 +84,52 @@
 
 		<div class="row">
 			<div class="col-sm-9">
-				<div class="row">
-					  	<ul class="nav nav-tabs">
-						<li class="<c:if test="${tab == 1}">active</c:if>"> <a href="/voteme/?showType=all"  >Все</a></li>
-						<li class="<c:if test="${tab == 2}">active</c:if>"><a href="/voteme/?showType=popular" >Популярные</a></li>
-						<li class="<c:if test="${tab == 3}">active</c:if>"><a href="/voteme/?showType=last" >Последние</a></li>
-						<li class="<c:if test="${tab == 4}">active</c:if>"><a href="/voteme/?showType=commented" >Комментируемые</a></li>
-						<li class="pull-right disabled "><a href="#">Фильтр выкл.</a></li>
-						<li class="dropdown pull-right"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> Показывать по 10<span
-								class="caret"></span>
-						</a>											
-							<ul class="dropdown-menu">
-								<li><a href="#">Показывать по 10</a></li>
-								<li><a href="#">Показывать по 25</a></li>
-								<li><a href="#">Показывать по 50</a></li>
-							</ul></li>
-					</ul>
-					
-
-
-					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
-						<div class="panel panel-default spacer">
-							<div class="panel-body">
-								<p>${tmpVar.proposalName}</p>
-								<p>
-									<a class="pull-right" href="/voteme/proposal?numberProposal=${tmpVar.proposalId}" role="button">Подробнее»</a> <em
-										class="pull-left">Количество голосов:
-										${fn:length(tmpVar.votes)} </em>
-								</p>
-							</div>
+		
+				<h1>${proposalMore.proposalName}</h1>
+			
+				<div class="addr">Инициатива № ${proposalMore.proposalId}</div>
+			
+				<div class="jurisdiction">Уровень инициативы: ${proposalMore.proposalLevel.level}</div>
+				<div class="date-share">
+					<div class="date"><fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></div>
+				</div>
+			
+				<div class="voting-solution">
+					<div class="addr title">За инициативу подано: <span><b>${proposalMoreVote}</b> голосов</span></div>
+				</div>
+				<div class="voting-solution">
+					<div class="addr negative">Против инициативы подано: <span><b>________</b> голос</span></div>
+				</div>
+			
+				<br>
+			
+				<div class="block petition-text-block">
+			
+					<div class="paragraph-transform">
+						${proposalMore.proposalText}
+						
+						<br>
+				
+						<h2>Практический результат</h2>
+				
+						<div class="paragraph-transform">
+							${proposalMore.proposalResult}	
 						</div>
-						<!--/span-->
-					</c:forEach>
+					</div>
+														
+					<div class="" id="voting-status">
+				
+						<div class="alert alert-warning">Для голосования вы должны быть <a href="/voteme/">авторизованы</a></div>
+				
+						<p>Для рассмотрения варианта решения на <b>${proposalMore.proposalLevel.level} уровне</b> осталось <b>__________</b> голосов</p>
+			
+			
+					</div>		
 				</div>
-				<!--/row-->
-				<!-- Pagination -->
-				<div>
-					<ul class="pagination ">
-						<li><a href="#">&laquo;</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li class="disabled"><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&raquo;</a></li>
-					</ul>
-				</div>
+				<p>&larr; <a href="/voteme/">К началу списка инициатив</a></p>
 			</div>
-			<!--/span-->
+		
+			
 
 			<div class="col-sm-3" role="navigation">
 
@@ -204,17 +202,22 @@
 									<option>---Государство---</option>
 									<option>Россия</option>
 									<option>Украина</option>
-								</select> <select class="form-control">
+								</select>
+								
+								<select class="form-control">
 									<option>---Регион---</option>
 									
-								</select> <select class="form-control">
+								</select>
+								
+								<select class="form-control">
 									<option>---Город---</option>
 									<option>2</option>
 									<option>3</option>
 									<option>4</option>
 									<option>5</option>
 								</select>
-								</select> <select class="form-control">
+								
+								<select class="form-control">
 									<option>---Район---</option>
 									<option>2</option>
 									<option>3</option>
