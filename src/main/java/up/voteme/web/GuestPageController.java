@@ -1,6 +1,7 @@
 package up.voteme.web;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
+import up.voteme.domain.Proposal;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
-import up.voteme.model.GuestPageModelImpl;
 import up.voteme.service.ProposalService;
 
 @Controller
@@ -113,4 +114,34 @@ public class GuestPageController {
 		return "guestpage";
 	}
 
+	@RequestMapping(value = "/about")
+	public String aboutPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "about";
+	}
+	@RequestMapping(value = "/contact")
+	public String contactPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "contact";
+	}
+	@RequestMapping(value = "/help")
+	public String helpPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "help";
+	}
+
+	@RequestMapping(value = "/proposal")
+	public String helpPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
+		//System.out.println("numberProposal = "+numberProposal);
+		Proposal proposalMore=propServ.getById((Long) numberProposal);
+		model.addAttribute("proposalMore", proposalMore);
+		model.addAttribute("proposalMoreVoteYes", propServ.getCountVoteYes((Long) numberProposal));
+		model.addAttribute("proposalMoreVoteNo", propServ.getCountVoteNo((Long) numberProposal));
+		
+		
+		
+		
+		return "proposal";
+	}
+	
 }

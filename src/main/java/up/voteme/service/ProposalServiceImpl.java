@@ -1,8 +1,8 @@
 package up.voteme.service;
 
-import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.dao.ProposalDAO;
+import up.voteme.dao.VoteDAO;
 import up.voteme.domain.Proposal;
 
 @Service
@@ -18,6 +19,8 @@ public class ProposalServiceImpl implements ProposalService {
     @Autowired
     private ProposalDAO dao;
   
+    @Autowired
+    private VoteDAO voteDao;
     
     
 
@@ -51,11 +54,13 @@ public class ProposalServiceImpl implements ProposalService {
     	return dao.countAll();
     }
 	
+	@Override
 	@Transactional
 	public List<Proposal> getAllbyDate() {
         return dao.findAllbyDate();
     }
 	
+	@Override
 	@Transactional
 	public List<Proposal> getAllbyVoteNum() {
 		List<Proposal> list = dao.findAll();
@@ -69,6 +74,32 @@ public class ProposalServiceImpl implements ProposalService {
 		 Collections.reverse(list);
         return list;
     }
+
+
+	@Override
+	@Transactional
+	public Proposal getById(long id) {
+		return dao.findById(id);
+	}
+
+
+	@Override
+	@Transactional
+	public long getCountVoteYes(long id) {
+		return voteDao.countVoteByProposalYes(id);
+	}
+
+
+	@Override
+	@Transactional
+	public long getCountVoteNo(long id) {
+		return voteDao.countVoteByProposalNo(id);
+	}
 	
- 
+	@Override
+	@Transactional
+	public List<Proposal> getByParams(HashMap<String,String> map) {	
+		return dao.findByParams(map);
+	}
+	
 }

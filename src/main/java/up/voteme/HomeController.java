@@ -73,17 +73,6 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping(value = "/about", method = RequestMethod.GET)
-	public String about(Model model) {
-
-		List<Region> regList = regionService.getAllRegion();
-		model.addAttribute("regList",regList);
-
-		
-		model.addAttribute("controllerMessage", "This is the message from the controller! "+new Date());
-		return "about";
-	}
-	
 	@RequestMapping(value = "/ps", method = RequestMethod.GET)
 	public ModelAndView allPS() {
 		

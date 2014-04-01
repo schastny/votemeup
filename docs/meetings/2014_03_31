@@ -1,0 +1,35 @@
+1. ¬сем завершить написание дао и сервис слоев
+
+Korobitsyn: Category, City
+Agarkov: Comment, Country
+Salidinov: District, Document
+Lebedev: Proposal, ProposalLevel
+Ponomarenko: ProposalStatus, Region
+Saprikyn: Role, User
+Koval: UserStatus, Vote
+
+2. ѕропозал подробно - дописать
+
+3. public abstract List<Proposal> getByParams (HashMap<String,String> map);
+ - дописать
+
+4. public abstract int countByParams (HashMap<String,String> map); 
+- написать, входные параметры те же, что и в пред случае
+
+5. 3 сервисных класса - уже не актуально, по желанию как задел на будущее
+a.	public abstract List<Region> getByCountryId (int countryId);
+b.	public abstract List<City> getByRegionId (int regionId);
+c.	public abstract List<District> getByCityId (int cityId);
+etc.
+
+
+6.	GuestPage.jsp (+Model) - дописать
+(»ван+јлександр) 
+
+
+
+7.  ƒобавить в пропозал параметр requiredVotes - 
+необходимое кол-во голосов дл€ прин€ти€ предложени€.
+
+8. ƒополнить базу данных ,
+предложений должно быть не менее 30.

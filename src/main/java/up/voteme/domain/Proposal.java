@@ -105,7 +105,7 @@ public class Proposal {
 	public void setUserd(Userd userd) {
 		this.userd = userd;
 	}
-	@OneToMany(mappedBy = "userd")
+	@OneToMany(mappedBy = "proposal")
 	public Collection<Vote> getVotes() {
 		return votes;
 	}
