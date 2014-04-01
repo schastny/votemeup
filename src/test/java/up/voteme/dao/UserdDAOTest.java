@@ -1,24 +1,14 @@
 package up.voteme.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
-
-
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import up.voteme.domain.Userd;
-import up.voteme.domain.Proposal;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class UserdDAOTest {

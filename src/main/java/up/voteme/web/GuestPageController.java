@@ -1,7 +1,6 @@
 package up.voteme.web;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,7 @@ import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
 import up.voteme.service.ProposalService;
+
 
 @Controller
 @SessionAttributes({ "welcomeMes", "gpModel" })

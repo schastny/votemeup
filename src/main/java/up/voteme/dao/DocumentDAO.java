@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-
 import up.voteme.domain.Document;
 
 public class DocumentDAO {
