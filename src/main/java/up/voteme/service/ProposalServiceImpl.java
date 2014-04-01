@@ -1,5 +1,6 @@
 package up.voteme.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import up.voteme.dao.ProposalDAO;
 import up.voteme.dao.VoteDAO;
 import up.voteme.domain.Proposal;
+import up.voteme.model.RequestResult;
 
 @Service
 public class ProposalServiceImpl implements ProposalService {
@@ -54,28 +56,7 @@ public class ProposalServiceImpl implements ProposalService {
     	return dao.countAll();
     }
 	
-	@Override
-	@Transactional
-	public List<Proposal> getAllbyDate() {
-        return dao.findAllbyDate();
-    }
 	
-	@Override
-	@Transactional
-	public List<Proposal> getAllbyVoteNum() {
-		List<Proposal> list = dao.findAll();
-		 Collections.sort(list, new Comparator<Proposal>() {
-		        public int compare(Proposal o1, Proposal o2) {
-			        int x1 = o1.getVotes().size();
-			        int x2 = o2.getVotes().size();
-	                return x1 - x2;
-		        }
-		 });
-		 Collections.reverse(list);
-        return list;
-    }
-
-
 	@Override
 	@Transactional
 	public Proposal getById(long id) {
@@ -100,6 +81,52 @@ public class ProposalServiceImpl implements ProposalService {
 	@Transactional
 	public List<Proposal> getByParams(HashMap<String,String> map) {	
 		return dao.findByParams(map);
+		
+	}
+
+
+
+	@Override
+	@Transactional
+	public RequestResult findByParams(HashMap<String, String> map) {
+		//Mock implementation
+		int count = dao.findAll().size();
+		
+		//Mock implementation
+		/*
+		 * !!! ( 0 = noSort = showAll); 
+		 * map structure(key = value), expected parameters in
+		 * curly braces : 
+		 * 
+		 * sortBy = {noSort, voteCount, creationDate, commentCount};
+		 * pageNum = {1..countAll() / PageQuant};
+		 * pageQuant = {1..100};
+		 * filtrByLevelId = {0, Collection: proposalLevel.findAll().getLevelId};
+		 * filtrByStatusId = {0, Collection: proposalStatus.findAll().getStatusId};
+		 * filtrByCategoryId = {0, Collection:proposalCategory.findAll().getCategoryId}; 
+		 * filtrByCountryId = {0,Collection: country.findAll().getCountryId}; 
+		 * filtrByRegionId = {0, Collection: region.findAll().get..}; 
+		 * filtrByCityId = {0, Collection:city.findAll().get..}; 
+		 * filtrByDistrictId = {0, Collection:district.findAll().get..};
+		 */
+		List<Proposal> resultList = new ArrayList<>();
+		if (map.containsKey("pageNum")&&map.containsKey("pageQuant")){
+			List<Proposal> listAll = dao.findAll();
+			long size = listAll.size();
+			int pageNum = Integer.parseInt(map.get("pageNum"));
+			int pageQuant = Integer.parseInt(map.get("pageQuant"));
+			long first = (pageNum-1)*pageQuant;
+			long last = first+pageQuant;
+			if (last > size){ // last page not full
+				last = size;
+			}
+			for (long i=first; i<last; i++){
+				resultList.add(listAll.get((int)i));
+			}
+		}
+		
+		
+		return new RequestResult(count, resultList);
 	}
 	
 }

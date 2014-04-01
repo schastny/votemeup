@@ -96,9 +96,9 @@
 							data-toggle="dropdown" href="#"> Показывать по ${gpModel.pageQuant}
 								<span class="caret"></span></a>											
 							<ul class="dropdown-menu">
-								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=10&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 10</a></li>
-								<li ><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=25&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 25</a></li>
-								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=50&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 50</a></li>
+								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=5&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 5</a></li>
+								<li ><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=10&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 10</a></li>
+								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=15&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 15</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -141,13 +141,14 @@
 				<!-- Pagination -->
 				<div>
 					<ul class="pagination ">
-						<li><a href="#">&laquo;</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&raquo;</a></li>
+		<!-- 			<li><a href="#">&laquo;</a></li>	 -->
+						<c:forEach begin="1" end="${gpModel.pagesTotal}" var="val">
+							<li ${gpModel.pageNum == val ? 'class="active"' : ''}>
+								<a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${val}&filtrOn=${gpModel.filtrOn}">
+									${val}</a>
+							</li>
+						</c:forEach>
+		<!-- 			<li><a href="#">&raquo;</a></li> 	 -->
 					</ul>
 				</div>
 			</div>
@@ -187,13 +188,13 @@
 									<option value="${item.id}" ${item.id == gpModel.selectedPropStatusId ? 'selected="selected"' : ''}>${item.status}</option>
 								</c:forEach>
 							</select>
-						</div>
+						</div><br>
 						<div>
 							<p>Уровень</p>
 							<select name=level class="form-control">
 								<option value="0">---Выберите уровень---</option>
 								<c:forEach items="${gpModel.levelList}" var="item">
-									<option value="${item.id}" ${item.id == gpModel.selectedLevelId ? 'selected="selected"' : ''}>${item.level}</option>
+									<option value="${item.id}" ${item.id == gpModel.selectedPropLevelId ? 'selected="selected"' : ''}>${item.level}</option>
 								</c:forEach>
 							</select>
 						</div><br>
@@ -209,22 +210,22 @@
 						<div>
 							<p>Территориальное расположение</p>
 							<p>
-								<select name=state class="form-control" onchange="document.location=this.options[this.selectedIndex].href">
+								<select name=state class="form-control" >
 									<option value="0">---Государство---</option>
 									<c:forEach items="${gpModel.countryList}" var="item">
-										<option id="/voteme/select?terName=region&fkId=${item.countryId}" value="${item.countryId}" ${item.countryId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.countryName}</option>
+										<option value="${item.countryId}" ${item.countryId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.countryName}</option>
 									</c:forEach>
 								</select> 
-								<select name=region class="form-control" onchange="document.location=this.options[this.selectedIndex].id">
+								<select name=region class="form-control">
 									<option value="0">---Регион---</option>
 									<c:forEach items="${gpModel.regionList}" var="item">
-										<option id="/voteme/select?terName=region&fkId=0" value="${item.regionId}" ${item.regionId == gpModel.selectedRegionId ? 'selected="selected"' : ''}>${item.regionName}</option>
+										<option value="${item.regionId}" ${item.regionId == gpModel.selectedRegionId ? 'selected="selected"' : ''}>${item.regionName}</option>
 									</c:forEach>
 								</select> 
-								<select name=city class="form-control" onchange="document.location=this.options[this.selectedIndex].id">
+								<select name=city class="form-control">
 									<option value="0">---Город---</option>
 									<c:forEach items="${gpModel.cityList}" var="item">
-										<option id="/voteme/select?terName=region&fkId=0" value="${item.cityId}" ${item.cityId == gpModel.selectedCityId ? 'selected="selected"' : ''}>${item.cityName}</option>
+										<option value="${item.cityId}" ${item.cityId == gpModel.selectedCityId ? 'selected="selected"' : ''}>${item.cityName}</option>
 									</c:forEach>
 								</select>
 								<select name=district class="form-control">

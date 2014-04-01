@@ -1,6 +1,7 @@
 package up.voteme.model;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,9 +104,9 @@ public interface GuestPageModel {
 
 	public abstract void setSelectedDistrictId(int selectedDistrictId);
 
-	public abstract Map<String, String> getConfigMap();
+	public abstract HashMap<String, String> getConfigMap();
 
-	public abstract void setConfigMap(Map<String, String> configMap);
+	public abstract void setConfigMap(HashMap<String, String> configMap);
 
 	public abstract long getPropCount();
 
@@ -125,17 +126,17 @@ public interface GuestPageModel {
 
 	public void setSortBy(String sortBy) ;
 	
-	public String getPageQuant();
+	public int getPageQuant();
 
 
 
-	public void setPageQuant(String pageQuant) ;
+	public void setPageQuant(int pageQuant) ;
 
 
-	public String getPageNum() ;
+	public int getPageNum() ;
 
 
-	public void setPageNum(String pageNum) ;
+	public void setPageNum(int pageNum) ;
 
 
 	public String getFiltrOn() ;

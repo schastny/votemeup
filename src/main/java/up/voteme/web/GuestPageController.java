@@ -45,26 +45,23 @@ public class GuestPageController {
 					@RequestParam(value="filtrOn", required = false) String filtrOn,
 						Model model) {
 		logger.info("GET method /");
-		// new session
+		//mark new session
 		if (!model.containsAttribute("gpModel")){
 			Date date = new Date();
 			gpModel.setCreationDate(date); // for debug purposes to track session
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
-			
 		}
 		
 		// request come without parameters
 		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
 			logger.info("gpModel.reset()");
-			gpModel.update();
 			return "guestpage";
 		}
-		logger.info(" sortBy="+sortBy+" pageQuant="+pageQuant+" pageNum="+pageNum+" filtrOn="+filtrOn);
 		gpModel.setSortBy(sortBy);
-		gpModel.setPageQuant(pageQuant);
-		gpModel.setPageNum(pageNum);
+		gpModel.setPageQuant(Integer.parseInt(pageQuant));
+		gpModel.setPageNum(Integer.parseInt(pageNum));
 		gpModel.setFiltrOn(filtrOn);
 		if (filtrOn.equals("false")){ //clear filtr form
 			gpModel.clearFiltr();
@@ -103,11 +100,10 @@ public class GuestPageController {
 		if (result.hasErrors()) {
 			logger.info("Binding error");
 		}
-		logger.info(""+fForm.getStatus()+fForm.getCategory()+fForm.getLevel()+fForm.getCity()+ fForm.getDistrict());
-		
+
 		gpModel.setFiltrOn("true");
 		gpModel.setSortBy("noSort");
-		gpModel.setPageNum("1");
+		gpModel.setPageNum(1);
 		
 		gpModel.setSelectedPropStatusId(fForm.getStatus());
 		gpModel.setSelectedCategoryId(fForm.getCategory());
@@ -122,31 +118,6 @@ public class GuestPageController {
 		return "guestpage";
 	}
 	
-	@RequestMapping(value = "/select", method = RequestMethod.GET)
-	public String homepage(@RequestParam(value="terName", required = false) String terName, 
-			@RequestParam(value="id", required = false) String terId,
-				 Model model) {
-		logger.info("GET method /select");
-		
-		
-		
-		return "guestpage";
-	}
-	@RequestMapping(value = "/about")
-	public String aboutPage(Model model){
-		model.addAttribute("welcomeMes", "Welcome: user");
-		return "about";
-	}
-	@RequestMapping(value = "/contact")
-	public String contactPage(Model model){
-		model.addAttribute("welcomeMes", "Welcome: user");
-		return "contact";
-	}
-	@RequestMapping(value = "/help")
-	public String helpPage(Model model){
-		model.addAttribute("welcomeMes", "Welcome: user");
-		return "help";
-	}
 
 	@RequestMapping(value = "/proposal")
 	public String helpPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
