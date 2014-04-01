@@ -1,5 +1,6 @@
 package up.voteme.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import up.voteme.domain.Proposal;
