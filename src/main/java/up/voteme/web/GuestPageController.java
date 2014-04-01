@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +24,8 @@ import up.voteme.model.GuestPageModel;
 import up.voteme.service.ProposalService;
 
 @Controller
-@SessionAttributes({ "welcomeMes", "gpModel", "tab" })
+@SessionAttributes({ "welcomeMes", "gpModel" })
+@Scope("request")
 public class GuestPageController {
 
 	private static final Logger logger = LoggerFactory
@@ -37,46 +39,41 @@ public class GuestPageController {
 	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String homepage(@RequestParam(value="showType", required=false) String showType, Model model) {
+	public String homepage(@RequestParam(value="sortBy", required = false) String sortBy, 
+			@RequestParam(value="pageQuant", required = false) String pageQuant,
+				@RequestParam(value="pageNum", required = false) String pageNum,
+					@RequestParam(value="filtrOn", required = false) String filtrOn,
+						Model model) {
 		logger.info("GET method /");
-		if (!model.containsAttribute("gpModel")){// new session
-			gpModel.setCreationDate(new Date()); // for debug purposes to track session
+		// new session
+		if (!model.containsAttribute("gpModel")){
+			Date date = new Date();
+			gpModel.setCreationDate(date); // for debug purposes to track session
+			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
-			logger.info("new GuestPageModel() created");
-		//	model.addAttribute("filtrform", new FiltrForm());
+			
 		}
 		
 		// request come without parameters
-		if (showType == null){
+		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
+			logger.info("gpModel.reset()");
+			gpModel.update();
 			return "guestpage";
-		};
-		
-		if (showType.equals("all")){
-			logger.info("showType = all");
-			model.addAttribute("tab", 1);
-			gpModel.setProposalList(propServ.getAll());
-		}else if (showType.equals("popular")){
-			logger.info("showType = popular");
-			model.addAttribute("tab", 2);
-			gpModel.setProposalList(propServ.getAllbyVoteNum());
-		}else if (showType.equals("last")){
-			logger.info("showType = last");
-			model.addAttribute("tab", 3);
-			gpModel.setProposalList(propServ.getAllbyDate());
-		}else if (showType.equals("commented")){
-			logger.info("showType = commented");
-			model.addAttribute("tab", 4);
-			//gpModel.setProposalList(propServ.getAllbyDate());
-		}else {
-			logger.info("showType==null");
 		}
-		
-		
-		
+		logger.info(" sortBy="+sortBy+" pageQuant="+pageQuant+" pageNum="+pageNum+" filtrOn="+filtrOn);
+		gpModel.setSortBy(sortBy);
+		gpModel.setPageQuant(pageQuant);
+		gpModel.setPageNum(pageNum);
+		gpModel.setFiltrOn(filtrOn);
+		if (filtrOn.equals("false")){ //clear filtr form
+			gpModel.clearFiltr();
+		}
+		gpModel.update();
 		return "guestpage";
 	}
 
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String addContact(@ModelAttribute GuestLogin guest,
 			BindingResult result, Model model) {
@@ -106,14 +103,35 @@ public class GuestPageController {
 		if (result.hasErrors()) {
 			logger.info("Binding error");
 		}
-		logger.info(fForm.getCategory());
-		logger.info(fForm.getCity());
+		logger.info(""+fForm.getStatus()+fForm.getCategory()+fForm.getLevel()+fForm.getCity()+ fForm.getDistrict());
+		
+		gpModel.setFiltrOn("true");
+		gpModel.setSortBy("noSort");
+		gpModel.setPageNum("1");
+		
+		gpModel.setSelectedPropStatusId(fForm.getStatus());
+		gpModel.setSelectedCategoryId(fForm.getCategory());
+		gpModel.setSelectedPropLevelId(fForm.getLevel());
+		gpModel.setSelectedCountryId(fForm.getCountry());
+		gpModel.setSelectedRegionId(fForm.getRegion());
+		gpModel.setSelectedCityId(fForm.getCity());
+		gpModel.setSelectedDistrictId(fForm.getDistrict());
 
-	
+		gpModel.update();
 
 		return "guestpage";
 	}
-
+	
+	@RequestMapping(value = "/select", method = RequestMethod.GET)
+	public String homepage(@RequestParam(value="terName", required = false) String terName, 
+			@RequestParam(value="id", required = false) String terId,
+				 Model model) {
+		logger.info("GET method /select");
+		
+		
+		
+		return "guestpage";
+	}
 	@RequestMapping(value = "/about")
 	public String aboutPage(Model model){
 		model.addAttribute("welcomeMes", "Welcome: user");
