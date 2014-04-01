@@ -2,10 +2,10 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 
-INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_date, proposal_status_id, proposal_level_id, userd_id, proposal_vote)VALUES 
+INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_date, proposal_status_id, proposal_level_id, userd_id, required_votes)VALUES 
 	('Likvidirovat GAI','blabla','blablabla','2014-01-12 20:00:00', 1,1,3,100),
 	('Pereimenovat militsiu v poitsiu','blabla','blablabla','2014-01-12 20:00:00',  1,3,1,200),
-	('Pereimenovat Berkut v Omon','blabla','blablabla','2014-01-12 20:00:00',  1,1,6.300),
+	('Pereimenovat Berkut v Omon','blabla','blablabla','2014-01-12 20:00:00',  1,1,6,300),
 	('Razrewit korotkostvol','blabla','blablabla','2013-12-12 20:00:00', 1,1,2,400),
 	('Ликвидировать автономию Крыма','blabla','blablabla','2014-01-01 20:00:00',  1,3,1,500),
 	('Открывать переднюю дверь на троллейбусах','blabla','blablabla','2014-01-12 20:00:00',  1,2,4,600),

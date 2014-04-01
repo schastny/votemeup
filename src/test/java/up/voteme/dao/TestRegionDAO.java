@@ -7,20 +7,21 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.Country;
 import up.voteme.domain.Region;
 
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)  
 public class TestRegionDAO {
-	
-	//private	RegionDAO regionDao = new RegionDAOImpl();
-	//private	CountryDAO countryDao = new CountryDAOImpl();
 	
 	@Autowired
 	private	RegionDAO regionDao;
@@ -28,28 +29,15 @@ public class TestRegionDAO {
 	@Autowired
 	private	CountryDAO countryDao;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
+	@Transactional 
 	public void testRegionDAO() {
 		fail("Not yet implemented");
 	}
 
 	@Test
+	@Transactional 
 	public void testCreateNewRegion() {
 		
 		Country country = new Country();
@@ -77,6 +65,7 @@ System.out.println("country = "+country);
 	}
 
 	@Test
+	@Transactional 
 	public void testChangeCountryInRegion() {
 		
 		//create new region
@@ -103,6 +92,7 @@ System.out.println("country = "+country);
 	
 
 	@Test
+	@Transactional 
 	public void testRenameRegion() {
 		
 		//create new region
@@ -131,6 +121,7 @@ System.out.println("country = "+country);
 	
 	
 	@Test
+	@Transactional 
 	public void testDelete() {
 		
 		//create new region
@@ -153,6 +144,7 @@ System.out.println("country = "+country);
 	}
 
 	@Test
+	@Transactional 
 	public void testFindById() {
 		//create new region
 		Country country = new Country();
@@ -171,6 +163,7 @@ System.out.println("country = "+country);
 	}
 
 	@Test
+	@Transactional 
 	public void testFindByIdNotExsist() {
 		//create new region
 		Country country = new Country();
@@ -192,6 +185,7 @@ System.out.println("country = "+country);
 	
 	
 	@Test
+	@Transactional 
 	public void testFindAll() {
 		//FindAll - 
 		System.out.println("Find all items...");

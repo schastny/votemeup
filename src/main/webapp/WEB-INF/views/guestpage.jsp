@@ -14,14 +14,9 @@
 <title>Общественная инициатива</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
-<link type="text/css" rel="stylesheet"
-	href="<c:url value="/resources/css/bootstrap.min.css" />">
+<link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css" />">
+<link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css" />">
 
-<style media="screen" type="text/css">
-.spacer {
-	margin-bottom: 5px;
-}
-</style>
 
 </head>
 <body>
@@ -129,7 +124,7 @@
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
 							
-								<div><h3><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h3></div>
+								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h4></div>
 								<div class="jurisdiction">Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
 								<div><p>Количество голосов: ${fn:length(tmpVar.votes)}</p></div>
 								<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>

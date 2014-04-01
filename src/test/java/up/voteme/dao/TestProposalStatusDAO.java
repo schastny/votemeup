@@ -5,20 +5,33 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.ProposalStatus;
 
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)  
 public class TestProposalStatusDAO {
-	private	ProposalStatusDAOOld psDao = new ProposalStatusDAOOld();
 
+	@Autowired
+	private	ProposalStatusDAO psDao;
+	
 
 	@Test
+	@Transactional 
 	public void testProposalStatusDAO() {
 		fail("Not yet implemented");
 	}
 
 
 	@Test
+	@Transactional 
 	public void testCreateNewProposalStatus() {
 		
 		ProposalStatus proposalStatus = new ProposalStatus();
@@ -35,6 +48,7 @@ public class TestProposalStatusDAO {
 	
 
 	@Test
+	@Transactional 
 	public void testRenameProposalStatus() {
 		
 		//create new ProposalStatus
@@ -60,6 +74,7 @@ public class TestProposalStatusDAO {
 	
 	
 	@Test
+	@Transactional 
 	public void testDeleteProposalStatus() {
 		//create new ProposalStatus
 		ProposalStatus proposalStatus = new ProposalStatus();
@@ -77,6 +92,7 @@ public class TestProposalStatusDAO {
 	}
 
 	@Test
+	@Transactional 
 	public void testFindById() {
 
 		//create new ProposalStatus
@@ -93,6 +109,7 @@ public class TestProposalStatusDAO {
 	}
 
 	@Test
+	@Transactional 
 	public void testFindByIdNotExsist() {
 		//create new ProposalStatus
 		ProposalStatus proposalStatus = new ProposalStatus();
@@ -110,6 +127,7 @@ public class TestProposalStatusDAO {
 	
 	
 	@Test
+	@Transactional 
 	public void testFindAll() {
 		System.out.println("Find all items...");
 		List<ProposalStatus> list = psDao.findAll();
@@ -126,9 +144,10 @@ public class TestProposalStatusDAO {
 	}
 
 	@Test
+	@Transactional 
 	public void testCountPS() {
 		System.out.println("Find count all items...");
-		long count = psDao.countPS();
+		long count = psDao.countAll();
 		System.out.println("total "+count+" items");
 		
 		assertTrue ("No records in table",count>1);		
