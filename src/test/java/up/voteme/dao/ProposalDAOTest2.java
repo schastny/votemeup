@@ -49,7 +49,8 @@ public class ProposalDAOTest2 {
 		System.out.println("Finish test FIND BY ID....");
 
 	}
-	
+
+/*
 	@Test
 	@Transactional
 	public void C_storeTest(){ 
@@ -79,7 +80,8 @@ public class ProposalDAOTest2 {
 		System.out.println("Finish STORE test....");
 		assertTrue ("Error  writing! ",listSizeBefore == listSizeAfter-1);
 	}
-
+*/
+	
 //	@Test
 //	@Transactional
 //	public void D_deleteTest() {
