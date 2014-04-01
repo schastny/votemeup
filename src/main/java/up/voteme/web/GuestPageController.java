@@ -120,7 +120,7 @@ public class GuestPageController {
 	
 
 	@RequestMapping(value = "/proposal")
-	public String helpPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
+	public String proposalPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
 		//System.out.println("numberProposal = "+numberProposal);
 		
 		Proposal proposalMore=propServ.getById((Long) numberProposal);
@@ -133,5 +133,22 @@ public class GuestPageController {
 		
 		return "proposal";
 	}
+
+	
+	@RequestMapping(value = "/about")
+	public String aboutPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "about";
+	}
+	@RequestMapping(value = "/contact")
+	public String contactPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "contact";
+	}
+	@RequestMapping(value = "/help")
+	public String helpPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "help";
+	}	
 	
 }

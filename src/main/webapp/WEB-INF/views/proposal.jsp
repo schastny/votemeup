@@ -26,9 +26,6 @@
 <body>
 
 
-
-
-
 	<div class="container">
 		<div class="row page-header">
 			<div class="pull-left">
@@ -123,7 +120,9 @@
 		
 				</div>		
 				
-				<p>&larr; <a href="/voteme/">К началу списка инициатив</a></p>
+				<p>&larr; <a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${gpModel.pageNum}&filtrOn=${gpModel.filtrOn}">К началу списка инициатив</a></p>
+				
+				
 			</div>
 		
 			
