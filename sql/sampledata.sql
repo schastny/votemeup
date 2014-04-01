@@ -2,14 +2,14 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 
-INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_date, proposal_status_id, proposal_level_id, userd_id )VALUES 
-	('Likvidirovat GAI','blabla','blablabla','2014-01-12 20:00:00', 1,1,3),
-	('Pereimenovat militsiu v poitsiu','blabla','blablabla','2014-01-12 20:00:00',  1,3,1),
-	('Pereimenovat Berkut v Omon','blabla','blablabla','2014-01-12 20:00:00',  1,1,6),
-	('Razrewit korotkostvol','blabla','blablabla','2013-12-12 20:00:00', 1,1,2),
-	('Ликвидировать автономию Крыма','blabla','blablabla','2014-01-01 20:00:00',  1,3,1),
-	('Открывать переднюю дверь на троллейбусах','blabla','blablabla','2014-01-12 20:00:00',  1,2,4),
-	('Снизить акциз на пиво','blabla','blablabla','2014-01-01 8:00:00',  1,1,2);
+INSERT INTO proposal (proposal_name, proposal_text, proposal_result, creation_date, proposal_status_id, proposal_level_id, userd_id, proposal_vote)VALUES 
+	('Likvidirovat GAI','blabla','blablabla','2014-01-12 20:00:00', 1,1,3,100),
+	('Pereimenovat militsiu v poitsiu','blabla','blablabla','2014-01-12 20:00:00',  1,3,1,200),
+	('Pereimenovat Berkut v Omon','blabla','blablabla','2014-01-12 20:00:00',  1,1,6.300),
+	('Razrewit korotkostvol','blabla','blablabla','2013-12-12 20:00:00', 1,1,2,400),
+	('Ликвидировать автономию Крыма','blabla','blablabla','2014-01-01 20:00:00',  1,3,1,500),
+	('Открывать переднюю дверь на троллейбусах','blabla','blablabla','2014-01-12 20:00:00',  1,2,4,600),
+	('Снизить акциз на пиво','blabla','blablabla','2014-01-01 8:00:00',  1,1,2,700);
 
 
 INSERT INTO userd (first_name, last_name, birth_year, sex, registration_date, email, user_login, user_password, user_status_id, role_id, country_id, region_id, city_id, district_id ) VALUES 

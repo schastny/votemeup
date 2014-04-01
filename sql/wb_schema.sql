@@ -172,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`proposal` (
   `proposal_text` TEXT NULL DEFAULT NULL,
   `proposal_result` TEXT NULL DEFAULT NULL,
   `creation_date` DATETIME NULL DEFAULT NULL,
+  `proposal_vote` BIGINT NULL DEFAULT NULL,
   `proposal_status_id` BIGINT NOT NULL,
   `proposal_level_id` BIGINT NOT NULL,
   `userd_id` BIGINT NOT NULL,

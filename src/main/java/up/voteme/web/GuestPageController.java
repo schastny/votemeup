@@ -151,6 +151,7 @@ public class GuestPageController {
 	@RequestMapping(value = "/proposal")
 	public String helpPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
 		//System.out.println("numberProposal = "+numberProposal);
+		
 		Proposal proposalMore=propServ.getById((Long) numberProposal);
 		model.addAttribute("proposalMore", proposalMore);
 		model.addAttribute("proposalMoreVoteYes", propServ.getCountVoteYes((Long) numberProposal));

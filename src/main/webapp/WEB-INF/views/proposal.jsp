@@ -103,29 +103,26 @@
 			
 				<br>
 			
-				<div class="block petition-text-block">
+				<div>
 			
-					<div class="paragraph-transform">
-						${proposalMore.proposalText}
-						
-						<br>
-				
-						<h2>Практический результат</h2>
-				
-						<div class="paragraph-transform">
-							${proposalMore.proposalResult}	
-						</div>
-					</div>
+					<div>${proposalMore.proposalText}</div>
+					
+			
+					<h3>Практический результат</h3>
+			
+					<div>${proposalMore.proposalResult}</div>
 														
-					<div>
-				
-						<div class="alert alert-warning">Для голосования вы должны быть <a href="/voteme/">авторизованы</a></div>
-				
-						<p>Для рассмотрения варианта решения на <b>${proposalMore.proposalLevel.level} уровне</b> осталось <b>__________</b> голосов</p>
-			
-			
-					</div>		
 				</div>
+				
+				<div>
+					<br>		
+					<div class="alert alert-warning">Для голосования вы должны быть <a href="/voteme/">авторизованы</a></div>
+			
+					<p>Для рассмотрения варианта решения на ${proposalMore.proposalLevel.level} уровне осталось ${proposalMore.requiredVotes-proposalMoreVoteYes-proposalMoreVoteNo} (из: ${proposalMore.requiredVotes}) голосов</p>
+					
+		
+				</div>		
+				
 				<p>&larr; <a href="/voteme/">К началу списка инициатив</a></p>
 			</div>
 		
@@ -153,88 +150,6 @@
 						<a class="pull-right" href="#" role="button">Регистрация</a>
 					</form>
 				</div>
-				<!--/.well -->
-				<div class="well sidebar-nav">
-					<form role="form">
-						<div>
-							<p>Статус инициативы</p>
-							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios1" value="option1" checked> На
-									голосовании
-								</label>
-							</div>
-							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios2" value="option2"> Проверяется
-								</label>
-							</div>
-							<div class="radio">
-								<label> <input type="radio" name="optionsRadios"
-									id="optionsRadios2" value="option2"> Голосование
-									окончено
-								</label>
-							</div>
-						</div>
-						<div>
-							<p>Уровень</p>
-							<select class="form-control">
-								<option>---Выберите уровень---</option>
-								<option>Федеральный</option>
-								<option>Региональный</option>
-								<option>Муниципальный</option>
-							</select>
-						</div><br>
-						<div>
-							<p>Категория</p>
-							<select class="form-control" onchange="document.location=this.options[this.selectedIndex].value">
-								<option>---Выберите категорию---</option>
-								<c:forEach items="${gpModel.categoryList}" var="tmpVar">
-									<option value="${tmpVar}">${tmpVar}</option>
-								</c:forEach>
-
-							</select>
-						</div><br>
-						<div>
-							<p>Территориальное расположение</p>
-							<p>
-								<select class="form-control">
-									<option>---Государство---</option>
-									<option>Россия</option>
-									<option>Украина</option>
-								</select>
-								
-								<select class="form-control">
-									<option>---Регион---</option>
-									
-								</select>
-								
-								<select class="form-control">
-									<option>---Город---</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
-								
-								<select class="form-control">
-									<option>---Район---</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
-							</p>
-						</div>
-						<button type="submit" class="btn btn-default">Применить
-							фильтр</button>
-					</form>
-					
-				
-
-
-				</div>
-				<!--/.well -->
 			</div>
 			<!--/span-->
 		</div>

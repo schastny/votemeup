@@ -12,15 +12,21 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import up.voteme.domain.Country;
 import up.voteme.domain.Region;
 
 public class TestRegionDAO {
 	
-	private	RegionDAOOld regionDao = new RegionDAOOld();
-	private	CountryDAO countryDao = new CountryDAOImpl();
+	//private	RegionDAO regionDao = new RegionDAOImpl();
+	//private	CountryDAO countryDao = new CountryDAOImpl();
 	
+	@Autowired
+	private	RegionDAO regionDao;
+	
+	@Autowired
+	private	CountryDAO countryDao;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -48,6 +54,7 @@ public class TestRegionDAO {
 		
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		
 		//City city = new City();
 		//city = cityDao.findById((long) 2);
@@ -75,6 +82,7 @@ public class TestRegionDAO {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_2");
 		region.setCountry(country);
@@ -100,6 +108,7 @@ public class TestRegionDAO {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_2");
 		region.setCountry(country);
@@ -127,6 +136,7 @@ public class TestRegionDAO {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_3");
 		region.setCountry(country);
@@ -147,6 +157,7 @@ public class TestRegionDAO {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_3");
 		region.setCountry(country);
@@ -164,6 +175,7 @@ public class TestRegionDAO {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_3");
 		region.setCountry(country);

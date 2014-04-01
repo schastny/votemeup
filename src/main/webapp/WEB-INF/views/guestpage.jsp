@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <%@ page session="true"%>
 
 
@@ -108,7 +110,7 @@
 					
 
 
-					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
+<%-- 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
 								<p>${tmpVar.proposalName}</p>
@@ -121,6 +123,24 @@
 						</div>
 						<!--/span-->
 					</c:forEach>
+ --%>					
+					
+ 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
+						<div class="panel panel-default spacer">
+							<div class="panel-body">
+							
+								<div><h3><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h3></div>
+								<div class="jurisdiction">Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
+								<div><p>Количество голосов: ${fn:length(tmpVar.votes)}</p></div>
+								<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>
+								
+							</div>
+						</div>
+						<!--/span-->
+					</c:forEach>
+					
+					
+					
 				</div>
 				<!--/row-->
 				<!-- Pagination -->

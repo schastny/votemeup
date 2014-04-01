@@ -11,7 +11,6 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.GenericGenerator;
 
-
 @Entity
 public class Country {
 	

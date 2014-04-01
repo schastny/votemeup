@@ -8,9 +8,9 @@ public interface CountryDAO {
 
 	public abstract long store(Country item);
 
-	public abstract void delete(long CountryId);
+	public abstract void delete(long countryId);
 
-	public abstract Country findById(long CountryId);
+	public abstract Country findById(long countryId);
 
 	public abstract List<Country> findAll();
 
