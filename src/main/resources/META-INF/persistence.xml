@@ -4,18 +4,16 @@
  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
  http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
  
-  <persistence-unit name="GuestbookPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-    <class>guest.Guest</class>
     <properties>
             <property name="hibernate.connection.driver_class"     value="com.mysql.jdbc.Driver" />
             <property name="hibernate.connection.url"             value="jdbc:mysql://localhost:3306/votemeup" />
             <property name="hibernate.connection.username"         value="root" />
             <property name="hibernate.connection.password"         value="qwerty123" />
             <property name="hibernate.dialect"                     value="org.hibernate.dialect.MySQLDialect"  />
-            <property name="hibernate.show_sql"                 value="true" />
-    <!--  set to "update" or "create" to auto create table, manually create DB Guests FIRST-->
-            <property name="hibernate.hbm2ddl.auto" value="update" />  
+            <property name="hibernate.show_sql"                 value="false" />
+            <property name="hibernate.hbm2ddl.auto" value="validate" />  
         </properties>
   </persistence-unit>
  

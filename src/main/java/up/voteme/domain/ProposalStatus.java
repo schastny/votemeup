@@ -14,6 +14,13 @@ public class ProposalStatus {
 	
 	private long id;
 	private String status;
+
+	public ProposalStatus(){}
+	
+	
+	public ProposalStatus(String status){
+		this.status = status;
+	}
 	
 	
 	@Id

@@ -11,9 +11,9 @@ import org.junit.runners.MethodSorters;
 import up.voteme.domain.Proposal;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
-public class ProposalDAOTest {
+public class _ProposalDAOTest {
 
-	private	ProposalDAO dao = new ProposalDAO();
+	private	ProposalDAO dao = new ProposalDAOImpl();
 
 	@Test
 	public void A_findAllTest() {
