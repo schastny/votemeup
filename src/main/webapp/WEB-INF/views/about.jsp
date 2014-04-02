@@ -63,7 +63,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li><a href="/voteme/about">О проекте</a></li>
+						<li class="active"><a href="/voteme/about">О проекте</a></li>
 						<li><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>
 					</ul>
