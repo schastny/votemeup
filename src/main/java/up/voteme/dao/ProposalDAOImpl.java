@@ -9,9 +9,11 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.mapping.Map;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Proposal;
+import up.voteme.service.VoteService;
 
 @Component
 public class ProposalDAOImpl implements ProposalDAO {
@@ -20,6 +22,8 @@ public class ProposalDAOImpl implements ProposalDAO {
 	@PersistenceContext
 	private EntityManager em;
 		
+	@Autowired
+	VoteDAO voteDAO;
 	
 	/* (non-Javadoc)
 	 * @see up.voteme.dao.ProposalDAO#store(up.voteme.domain.Proposal)
@@ -96,6 +100,8 @@ public class ProposalDAOImpl implements ProposalDAO {
 	
 	@Override
 	public List<Proposal> findByParams(HashMap<String,String> map) {
+		
+		
 		String queryText = "SELECT p FROM Proposal p";
 		
 		/* PARAMETERS:
@@ -111,18 +117,23 @@ public class ProposalDAOImpl implements ProposalDAO {
 		filterByDistrict = {noSort, Collection: district.findAll().get..};			
 		*/
 		
+		
+		
 		// (1) Analize HashMap & Form the Query text
 		if (map.size() != 0) { // If The Parameters Of Sorting Are Exist
 			if (map.containsKey("sortBy")) {
 				String sortString = " ";
 				String sort = map.get("sortBy");
+				
+				
+				
 				switch (sort) {
 				case "noSort" : sortString = " "; break;
 				case "creationDate" : sortString = " ORDER BY p.creationDate"; break;
 				
 				// Need To Form Table with Proposal & Sort *Here*?
 	
-				case "voteCount" : sortString = " "; break;
+				case "voteCount" : sortString = "  "; break;
 				case "commentCount" : sortString = " "; break;
 				
 				 default : ;
@@ -135,47 +146,47 @@ public class ProposalDAOImpl implements ProposalDAO {
 			// String filterString = " WHERE p.";
 			String filterString = "";
 			
-			String filterByLevel = ""; 
-			String filterByStatus = ""; 
-			String filterByCategory = ""; 
-			String filterByCountry = ""; 
-			String filterByRegion = ""; 
-			String filterByCity = ""; 
-			String filterByDistrict = ""; 
+			String filterByLevelId = ""; 
+			String filterByStatusId = ""; 
+			String filterByCategoryId = ""; 
+			String filterByCountryId = ""; 
+			String filterByRegionId = ""; 
+			String filterByCityId = ""; 
+			String filterByDistrictId = ""; 
 
-			if (map.containsKey("filterByLevel")) {
+			if (map.containsKey("filterByLevelId")) {
 				flFilter = true;
-				filterByLevel = "p.level.id=" + map.get("filterByLevel");
+				filterByLevelId = "p.level.id=" + map.get("filterByLevelId");
 			}
 
-			if (map.containsKey("filterByStatus")) {
+			if (map.containsKey("filterByStatusId")) {
 				flFilter = true;
-				filterByStatus = "p.proposal_status_id=" + map.get("filterByStatus");
+				filterByStatusId = "p.proposal_status_id=" + map.get("filterByStatusId");
 			}
 
-			if (map.containsKey("filterByCategory")) {
+			if (map.containsKey("filterByCategoryId")) {
 				flFilter = true;
-				filterByCategory = "p.category.id=" + map.get("filterByCategory");
+				filterByCategoryId = "p.category.id=" + map.get("filterByCategoryId");
 			}
 
-			if (map.containsKey("filterByCountry")) {
+			if (map.containsKey("filterByCountryId")) {
 				flFilter = true;
-				filterByCountry = "p.country.id=" + map.get("filterByCountry");
+				filterByCountryId = "p.country.id=" + map.get("filterByCountryId");
 			}
 
-			if (map.containsKey("filterByRegion")) {
+			if (map.containsKey("filterByRegionId")) {
 				flFilter = true;
-				filterByRegion = "p.region.id=" + map.get("filterByRegion");
+				filterByRegionId = "p.region.id=" + map.get("filterByRegionId");
 			}
 
-			if (map.containsKey("filterByCity")) {
+			if (map.containsKey("filterByCityId")) {
 				flFilter = true;
-				filterByCity = "p.city.id=" + map.get("filterByCity");
+				filterByCityId = "p.city.id=" + map.get("filterByCityId");
 			}
 
-			if (map.containsKey("filterByDistrict")) {
+			if (map.containsKey("filterByDistrictId")) {
 				flFilter = true;
-				filterByDistrict = "p.district.id="	+ map.get("filterByDistrict");
+				filterByDistrictId = "p.district.id="	+ map.get("filterByDistrictId");
 			}
 	
 		if (flFilter == true){

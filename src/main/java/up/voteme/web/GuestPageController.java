@@ -152,7 +152,7 @@ public class GuestPageController {
 		
 		List<Document> documentProposal = docServ.getDocumentByProposal((Long) numberProposal);
 		model.addAttribute("documentProposal", documentProposal);
-//		model.addAttribute("countDoc", proposalMore.getDocuments().size());
+		model.addAttribute("countDoc", proposalMore.getDocuments().size());
 		
 		
 		
