@@ -139,24 +139,30 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		 * filtrByCityId = {0, Collection:city.findAll().get..}; 
 		 * filtrByDistrictId = {0, Collection:district.findAll().get..};
 		 */
-		configMap = new HashMap<String,String>();
+		//configMap = new HashMap<String,String>();
 
+		//System.out.println("sortBy = "+sortBy+", pageNum = "+pageNum+", pageQuant = "+pageQuant);		
+		
+		
 		configMap.put("sortBy", sortBy);
 		configMap.put("pageNum", String.valueOf(pageNum));
 		configMap.put("pageQuant", String.valueOf(pageQuant));
-		configMap.put("filtrByLevelId", String.valueOf(selectedPropLevelId));
-		configMap.put("filtrByStatusId", String.valueOf(selectedPropStatusId));
-		configMap.put("filtrByCategoryId", String.valueOf(selectedCategoryId));
-		configMap.put("filtrByCountryId", String.valueOf(selectedCountryId));
-		configMap.put("filtrByRegionId", String.valueOf(selectedRegionId));
-		configMap.put("filtrByCityId", String.valueOf(selectedCityId));
-		configMap.put("filtrByDistrictId", String.valueOf(selectedDistrictId));
+		configMap.put("filterByLevelId", String.valueOf(selectedPropLevelId));
+		configMap.put("filterByStatusId", String.valueOf(selectedPropStatusId));
+		configMap.put("filterByCategoryId", String.valueOf(selectedCategoryId));
+		configMap.put("filterByCountryId", String.valueOf(selectedCountryId));
+		configMap.put("filterByRegionId", String.valueOf(selectedRegionId));
+		configMap.put("filterByCityId", String.valueOf(selectedCityId));
+		configMap.put("filterByDistrictId", String.valueOf(selectedDistrictId));
 
-System.out.println(configMap);		
 		
 		// Ahtung!!! СountByParams & getByParams must be in one transaction!!!!
 		RequestResult result = propServ.findByParams(configMap);
+
 		int num = (int) result.count/pageQuant;
+
+		System.out.println("num = "+num+", result.count = "+result.count+", pageQuant = "+pageQuant+", pageNum = "+pageNum);		
+		
 		pagesTotal = (result.count % pageQuant != 0) ? (num + 1) : num;
 		proposalList = result.list;
 		

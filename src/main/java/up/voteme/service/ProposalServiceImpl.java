@@ -85,8 +85,8 @@ public class ProposalServiceImpl implements ProposalService {
 	@Transactional
 	public RequestResult findByParams(HashMap<String, String> map) {
 
-		long count = dao.countAll();
-		return new RequestResult(count, dao.findByParams(map));
+//		long count = dao.countAll();
+		return new RequestResult(dao.findByParams(map));
 	
 //		//Mock implementation
 //		long count = dao.countAll();

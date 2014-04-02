@@ -1,5 +1,6 @@
 package up.voteme.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,10 +119,97 @@ public class ProposalDAOImpl implements ProposalDAO {
 		*/
 		
 System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);		
+System.out.println("key filterByCountryId = "+map.containsKey("filterByCountryId"));
+
+for (String key : map.keySet()) {
+    System.out.println("Key: " + key);
+}
 		
 		
 		// (1) Analize HashMap & Form the Query text
 		if (map.size() != 0) { // If The Parameters Of Sorting Are Exist
+			Boolean flFilter = false;
+
+			if (map.containsKey("filterByLevelId")) {
+				
+				if (Integer.parseInt(map.get("filterByLevelId")) != 0 ) {
+					if (flFilter == false) {
+						queryText = queryText + " WHERE p.proposalLevel.id=" + map.get("filterByLevelId");
+						flFilter = true;
+					}	
+					else {
+						queryText = queryText + " AND p.proposalLevel.id=" + map.get("filterByLevelId");
+					}
+				}
+			}
+
+			if (map.containsKey("filterByStatusId")) {
+				if (Integer.parseInt(map.get("filterByStatusId")) != 0 ) {
+					if (flFilter == false) {
+						queryText = queryText + " WHERE p.proposalStatus.id=" + map.get("filterByStatusId");
+						flFilter = true;
+					}	
+					else {
+						queryText = queryText + " AND p.proposalStatus.id=" + map.get("filterByStatusId");
+					}
+				}
+			}
+
+//			if (map.containsKey("filterByCategoryId")) {
+//				flFilter = true;
+//				filterByCategoryId = "p.category.id=" + map.get("filterByCategoryId");
+//			}
+
+				if (map.containsKey("filterByCountryId")) {
+					long tmp = Long.parseLong(map.get("filterByCountryId"));
+					
+					if (tmp != 0 ) {
+						if (flFilter == false) {
+							queryText = queryText + " WHERE p.country.countryId=" + tmp;
+							flFilter = true;
+						}	
+						else {
+							queryText = queryText + " AND p.country.countryId=" + tmp;
+						}
+					}
+				}
+
+			if (map.containsKey("filterByRegionId")) {
+				if (Integer.parseInt(map.get("filterByRegionId")) != 0 ) {
+					if (flFilter == false) {
+						queryText = queryText + " WHERE p.region.regionId=" + map.get("filterByRegionId");
+						flFilter = true;
+					}	
+					else {
+						queryText = queryText + " AND p.region.regionId=" + map.get("filterByRegionId");
+					}
+				}
+			}
+
+			if (map.containsKey("filterByCityId")) {
+				if (Integer.parseInt(map.get("filterByCityId")) != 0 ) {
+					if (flFilter == false) {
+						queryText = queryText + " WHERE p.city.cityId=" + map.get("filterByCityId");
+						flFilter = true;
+					}	
+					else {
+						queryText = queryText + " AND p.city.cityId=" + map.get("filterByCityId");
+					}
+				}
+			}
+
+			if (map.containsKey("filterByDistrictId")) {
+				if (Integer.parseInt(map.get("filterByDistrictId")) != 0 ) {
+					if (flFilter == false) {
+						queryText = queryText + " WHERE p.district.districtId=" + map.get("filterByDistrictId");
+						flFilter = true;
+					}	
+					else {
+						queryText = queryText + " AND p.district.districtId=" + map.get("filterByDistrictId");
+					}
+				}
+			}
+	
 			if (map.containsKey("sortBy")) {
 				String sortString = " ";
 				String sort = map.get("sortBy");
@@ -130,7 +218,7 @@ System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);
 				
 				switch (sort) {
 				case "noSort" : sortString = " "; break;
-				case "creationDate" : sortString = " ORDER BY p.creationDate"; break;
+				case "creationDate" : sortString = " ORDER BY p.creationDate DESC"; break;
 				
 				// Need To Form Table with Proposal & Sort *Here*?
 	
@@ -140,96 +228,6 @@ System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);
 				 default : ;
 				}
 				queryText = queryText + sortString;
-			}
-			
-			// Does Filter Exist?
-			Boolean flFilter = false;
-			// String filterString = " WHERE p.";
-			String filterString = "";
-			
-			String filterByLevelId = ""; 
-			String filterByStatusId = ""; 
-			String filterByCategoryId = ""; 
-			String filterByCountryId = ""; 
-			String filterByRegionId = ""; 
-			String filterByCityId = ""; 
-			String filterByDistrictId = ""; 
-
-			if (map.containsKey("filterByLevelId")) {
-				flFilter = true;
-				filterByLevelId = "p.level.id=" + map.get("filterByLevelId");
-			}
-
-			if (map.containsKey("filterByStatusId")) {
-				flFilter = true;
-				filterByStatusId = "p.proposal_status_id=" + map.get("filterByStatusId");
-			}
-
-			if (map.containsKey("filterByCategoryId")) {
-				flFilter = true;
-				filterByCategoryId = "p.category.id=" + map.get("filterByCategoryId");
-			}
-
-			if (map.containsKey("filterByCountryId")) {
-				flFilter = true;
-				filterByCountryId = "p.country.id=" + map.get("filterByCountryId");
-			}
-
-			if (map.containsKey("filterByRegionId")) {
-				flFilter = true;
-				filterByRegionId = "p.region.id=" + map.get("filterByRegionId");
-			}
-
-			if (map.containsKey("filterByCityId")) {
-				flFilter = true;
-				filterByCityId = "p.city.id=" + map.get("filterByCityId");
-			}
-
-			if (map.containsKey("filterByDistrictId")) {
-				flFilter = true;
-				filterByDistrictId = "p.district.id="	+ map.get("filterByDistrictId");
-			}
-	
-			Boolean wasFilters = false;
-			String wasFiltersStr = " ";
-	System.out.println("^^^^^^^^^flFilter =  " + flFilter); // debugging
-
-			if (flFilter == true) {
-				
-				// queryText = queryText + filterString;
-				queryText = queryText + " WHERE ";
-
-				if (!(filterByLevelId.isEmpty())) {
-					queryText = queryText + filterByLevelId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByStatusId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByStatusId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByCategoryId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByCategoryId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByCountryId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByCountryId;
-					wasFiltersStr = " AND ";
-	System.out.println("^^^^^^^^^country   " + queryText); // debugging
-
-				}
-
-				if (!(filterByRegionId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByRegionId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByDistrictId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByDistrictId;
-					wasFiltersStr = " AND "; // not need (last par-r)
-				}
 			}
 			
 		System.out.println("*****   " + queryText); // debugging
@@ -242,12 +240,29 @@ System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);
 		
 		List<Proposal> items = query.getResultList();
 		
-		for (Proposal item : items) {
+		List<Proposal> resultList = new ArrayList<>();
+		long size = items.size();
+		int pageNum = Integer.parseInt(map.get("pageNum"));
+		int pageQuant = Integer.parseInt(map.get("pageQuant"));
+		long first = (pageNum-1)*pageQuant;
+		long last = first+pageQuant;
+		if (last > size){ // last page not full
+			last = size;
+		}
+		for (long i=first; i<last; i++){
+			resultList.add(items.get((int)i));
+		}		
+		
+		for (Proposal item : resultList) {
+			
+			System.out.println(">>>>>>>>   " + item); // debugging
+			
+			
 			item.getCategories().size();
 			item.getComments().size();
 			item.getVotes().size();
 			item.getDocuments().size();
 		}
-		return items;
+		return resultList;
 	}
 }

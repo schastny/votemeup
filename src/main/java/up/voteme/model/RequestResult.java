@@ -14,4 +14,11 @@ public class RequestResult {
 		this.list = list;
 	}
 
+	public RequestResult(List<Proposal> list) {
+		
+System.out.println("list.size() ================ "+list.size());		
+		this.count = list.size();
+		this.list = list;
+	}
+
 }

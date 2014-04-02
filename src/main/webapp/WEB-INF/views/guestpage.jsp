@@ -128,7 +128,7 @@
 								<c:set var="sizeDoc" scope="session" value="${tmpVar.documents.size()}"/>
 								<c:set var="sizeCat" scope="session" value="${tmpVar.categories.size()}"/>
 							
-								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h4></div>
+								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a> <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.creationDate}" /></h4></div>
 								<div>Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
 								
 								<c:choose>
