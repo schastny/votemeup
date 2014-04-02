@@ -178,10 +178,43 @@ public class ProposalDAOImpl implements ProposalDAO {
 				filterByDistrict = "p.district.id="	+ map.get("filterByDistrict");
 			}
 	
-		if (flFilter == true){
-			queryText = queryText + filterString;
-		}
-			
+			Boolean wasFilters = false;
+			String wasFiltersStr = " ";
+
+			if (flFilter == true) {
+				// queryText = queryText + filterString;
+				queryText = queryText + " WHERE ";
+
+				if (!(filterByLevel.isEmpty())) {
+					queryText = queryText + filterByLevel;
+					wasFiltersStr = " AND ";
+				}
+
+				if (!(filterByStatus.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByStatus;
+					wasFiltersStr = " AND ";
+				}
+
+				if (!(filterByCategory.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByCategory;
+					wasFiltersStr = " AND ";
+				}
+
+				if (!(filterByCountry.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByCountry;
+					wasFiltersStr = " AND ";
+				}
+
+				if (!(filterByRegion.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByRegion;
+					wasFiltersStr = " AND ";
+				}
+
+				if (!(filterByDistrict.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByDistrict;
+					wasFiltersStr = " AND "; // not need (last par-r)
+				}
+			}
 			
 		System.out.println("*****   " + queryText); // debugging
 			
