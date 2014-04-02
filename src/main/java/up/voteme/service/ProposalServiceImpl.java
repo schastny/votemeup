@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import up.voteme.dao.CommentDAO;
 import up.voteme.dao.ProposalDAO;
 import up.voteme.dao.VoteDAO;
+import up.voteme.domain.Comment;
 import up.voteme.domain.Proposal;
 import up.voteme.model.RequestResult;
 
@@ -19,9 +21,6 @@ public class ProposalServiceImpl implements ProposalService {
     @Autowired
     private ProposalDAO dao;
   
-    @Autowired
-    private VoteDAO voteDao;
-    
     
 
     /* (non-Javadoc)
@@ -62,18 +61,6 @@ public class ProposalServiceImpl implements ProposalService {
 	}
 
 
-	@Override
-	@Transactional
-	public long getCountVoteYes(long id) {
-		return voteDao.countVoteByProposalYes(id);
-	}
-
-
-	@Override
-	@Transactional
-	public long getCountVoteNo(long id) {
-		return voteDao.countVoteByProposalNo(id);
-	}
 	
 	@Override
 	@Transactional
@@ -126,5 +113,7 @@ public class ProposalServiceImpl implements ProposalService {
 		
 		return new RequestResult(count, resultList);
 	}
+
+
 	
 }

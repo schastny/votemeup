@@ -12,4 +12,6 @@ public interface DocumentService {
 	public Document findById(Long id);
 
 	public List<Document> findAll();
+
+	public List<Document> getDocumentByProposal(Long id);
 }

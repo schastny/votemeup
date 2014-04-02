@@ -1,6 +1,7 @@
 package up.voteme.web;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,11 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
+import up.voteme.domain.Comment;
+import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
+import up.voteme.service.CommentService;
+import up.voteme.service.DocumentService;
 import up.voteme.service.ProposalService;
+import up.voteme.service.VoteService;
 
 
 @Controller
@@ -36,8 +42,16 @@ public class GuestPageController {
 	@Autowired
 	ProposalService propServ;
 	
+	@Autowired
+	VoteService voteServ;
 	
+	@Autowired
+	CommentService commentServ;
 
+	@Autowired
+	DocumentService docServ;
+
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="sortBy", required = false) String sortBy, 
 			@RequestParam(value="pageQuant", required = false) String pageQuant,
@@ -52,7 +66,8 @@ public class GuestPageController {
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
-		
+
+
 		// request come without parameters
 		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
@@ -125,8 +140,16 @@ public class GuestPageController {
 		
 		Proposal proposalMore=propServ.getById((Long) numberProposal);
 		model.addAttribute("proposalMore", proposalMore);
-		model.addAttribute("proposalMoreVoteYes", propServ.getCountVoteYes((Long) numberProposal));
-		model.addAttribute("proposalMoreVoteNo", propServ.getCountVoteNo((Long) numberProposal));
+		model.addAttribute("proposalMoreVoteYes", voteServ.getCountVoteByProposalYes((Long) numberProposal));
+		model.addAttribute("proposalMoreVoteNo", voteServ.getCountVoteByProposalNo((Long) numberProposal));
+		
+		List<Comment> commentProposal = commentServ.getCommentByProposal((Long) numberProposal);
+		model.addAttribute("commentProposal", commentProposal);
+		model.addAttribute("countComment", commentServ.getCountComment((Long) numberProposal));
+		
+		List<Document> documentProposal = docServ.getDocumentByProposal((Long) numberProposal);
+		model.addAttribute("documentProposal", documentProposal);
+//		model.addAttribute("countDoc", proposalMore.getDocuments().size());
 		
 		
 		
@@ -151,21 +174,7 @@ public class GuestPageController {
 		return "help";
 	}	
 	
-	@RequestMapping(value = "/about")
-	public String aboutPage(Model model){
-		model.addAttribute("welcomeMes", "Welcome: user");
-		return "about";
-	}
-	@RequestMapping(value = "/contact")
-	public String contactPage(Model model){
-		model.addAttribute("welcomeMes", "Welcome: user");
-		return "contact";
-	}
-	@RequestMapping(value = "/help")
-	public String helpPage(Model model){
-		model.addAttribute("welcomeMes", "Welcome: user");
-		return "help";
-	}
+	
 
 	
 }

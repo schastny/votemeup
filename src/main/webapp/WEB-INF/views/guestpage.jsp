@@ -123,11 +123,28 @@
  					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
+								<c:set var="sizeVotes" scope="session" value="${tmpVar.votes.size()}"/>
+								<c:set var="sizeComment" scope="session" value="${tmpVar.comments.size()}"/>
+								<c:set var="sizeDoc" scope="session" value="${tmpVar.documents.size()}"/>
+								<c:set var="sizeCat" scope="session" value="${tmpVar.categories.size()}"/>
 							
 								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h4></div>
-								<div class="jurisdiction">Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
-								<div><p>Количество голосов: ${fn:length(tmpVar.votes)}</p></div>
-								<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>
+								<div>Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
+								
+								<c:choose>
+								    <c:when test="${sizeVotes == 0}">
+										<div> За инициативу еще не был дан ни один голос.</div>
+								    </c:when>
+								    <c:when test="${sizeVotes > 0}">
+										<div>Количество голосов: <b>${sizeVotes}</b>. Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>
+								    </c:when>
+								    <c:otherwise>
+<%-- 										<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div> --%>
+								    </c:otherwise>
+								</c:choose>							
+								<div>Количество комментариев: <b>${sizeComment}</b>
+								Количество документов: <b>${sizeDoc}</b>
+								Количество категорий: <b>${sizeCat}</b></div>
 								
 							</div>
 						</div>

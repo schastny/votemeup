@@ -14,4 +14,6 @@ public interface IDocumentDAO {
 
 	public abstract List<Document> findAll();
 
+	public abstract List<Document> findDocumentByProposal(Long id);
+
 }

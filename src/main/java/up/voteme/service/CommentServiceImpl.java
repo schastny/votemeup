@@ -12,8 +12,9 @@ import up.voteme.domain.Comment;
 @Service
 public class CommentServiceImpl implements CommentService {
 
-@Autowired
-private CommentDAO commentDAO;
+	@Autowired
+	private CommentDAO commentDAO;
+	
 
 	@Transactional
 	@Override
@@ -45,4 +46,18 @@ private CommentDAO commentDAO;
 		return commentDAO.countAll();
 	}
 
+	@Override
+	@Transactional
+	public List<Comment> getCommentByProposal(long id) {
+		return commentDAO.findCommentByProposal(id);
+	}
+
+	@Override
+	@Transactional
+	public long getCountComment(long id) {
+		return commentDAO.countCommentByProposal(id);
+	}
+
+	
+	
 }

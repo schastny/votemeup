@@ -81,22 +81,26 @@
 
 		<div class="row">
 			<div class="col-sm-9">
+				<c:set var="sizeComment" scope="session" value="${countComment}"/>
 		
 				<h1>${proposalMore.proposalName}</h1>
 			
-				<div class="addr">Инициатива № ${proposalMore.proposalId}</div>
+				<div><p>Инициатива № ${proposalMore.proposalId}</p></div>
 			
-				<div class="jurisdiction">Уровень инициативы: ${proposalMore.proposalLevel.level}</div>
-				<div class="date-share">
-					<div class="date"><fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></div>
-				</div>
+				<div>Уровень инициативы: ${proposalMore.proposalLevel.level}</div>
+				<div>Автор инициативы: <b>${proposalMore.userd.lastName} ${proposalMore.userd.firstName}</b></div>
+				<div><p>Дата создания инициативы:<fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></p></div>
 			
-				<div class="voting-solution">
-					<div class="addr title">За инициативу подано: <span><b>${proposalMoreVoteYes}</b> голос(ов)</span></div>
-				</div>
-				<div class="voting-solution">
-					<div class="addr negative">Против инициативы подано: <span><b>${proposalMoreVoteNo}</b> голос(ов)</span></div>
-				</div>
+				<div>За инициативу подано: <b>${proposalMoreVoteYes}</b> голос(ов)</div>
+				<div>Против инициативы подано: <b>${proposalMoreVoteNo}</b> голос(ов)</div>
+				<div><p>Количество комментариев: <b>${sizeComment}</b></p></div>
+				
+				<div>Страна: <b>${proposalMore.country.countryName}</b></div>
+				<div>Регион: <b>${proposalMore.region.regionName}</b></div>
+				<div>Город: <b>${proposalMore.city.cityName}</b></div>
+				<div><p>Район: <b>${proposalMore.district.districtName}</b></p></div>
+
+				<div>Количество документов: <b>${countDoc}</b></div>
 			
 				<br>
 			
@@ -110,12 +114,39 @@
 					<div>${proposalMore.proposalResult}</div>
 														
 				</div>
+<!-- 				Page comment -->
+
+				<div>
+					<c:if test="${sizeComment > 0}">
+						<h4>Комментарии:</h4>
+						<c:forEach items="${commentProposal}" var="tmpVar">
+
+							<div class="panel panel-default spacer">
+								<div class="panel-body">
+									<div>${tmpVar.userd.lastName}</div>
+									<div>
+										<fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss"
+											value="${tmpVar.commentDate}" />
+									</div>
+									<br>
+									<div>${tmpVar.commentText}</div>
+
+
+								</div>
+							</div>
+							<!--/span-->
+						</c:forEach>
+					</c:if>					
+			
+														
+				</div>
+				
 				
 				<div>
 					<br>		
 					<div class="alert alert-warning">Для голосования вы должны быть <a href="/voteme/">авторизованы</a></div>
 			
-					<p>Для рассмотрения варианта решения на ${proposalMore.proposalLevel.level} уровне осталось ${proposalMore.requiredVotes-proposalMoreVoteYes-proposalMoreVoteNo} (из: ${proposalMore.requiredVotes}) голосов</p>
+					<p>Для рассмотрения варианта решения на ${proposalMore.proposalLevel.level} уровне осталось ${proposalMore.requiredVotes-proposalMoreVoteYes} (из: ${proposalMore.requiredVotes}) голосов</p>
 					
 		
 				</div>		
