@@ -15,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import up.voteme.HomeController;
 import up.voteme.domain.Proposal;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
 import up.voteme.service.ProposalService;
+
+
 
 
 @Controller
@@ -29,7 +30,7 @@ import up.voteme.service.ProposalService;
 public class GuestPageController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+			.getLogger(GuestPageController.class);
 	@Autowired
 	GuestPageModel gpModel;
 
@@ -59,6 +60,7 @@ public class GuestPageController {
 			logger.info("gpModel.reset()");
 			return "guestpage";
 		}
+		
 		gpModel.setSortBy(sortBy);
 		gpModel.setPageQuant(Integer.parseInt(pageQuant));
 		gpModel.setPageNum(Integer.parseInt(pageNum));

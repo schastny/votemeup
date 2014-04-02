@@ -32,7 +32,7 @@
 					Общественная инициатива<br> <small>Всего инициатив:
 						${gpModel.propCount} </small>
 				</h1>
-				Session created: ${gpModel.creationDate} ${welcomeMes}
+<!-- 			Session created: ${gpModel.creationDate} ${welcomeMes}  -->	
 			</div>
 			<div class="pull-right">
 				<p>
@@ -105,7 +105,7 @@
 					
 
 
-<%-- 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
+<!-- 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
 								<p>${tmpVar.proposalName}</p>
@@ -116,22 +116,21 @@
 								</p>
 							</div>
 						</div>
-						<!--/span-->
+						
 					</c:forEach>
- --%>					
+ -->					
 					
  					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
-							
+							 
 								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h4></div>
 								<div class="jurisdiction">Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
 								<div><p>Количество голосов: ${fn:length(tmpVar.votes)}</p></div>
-								<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>
 								
 							</div>
 						</div>
-						<!--/span-->
+					
 					</c:forEach>
 					
 					
@@ -210,10 +209,10 @@
 						<div>
 							<p>Территориальное расположение</p>
 							<p>
-								<select name=state class="form-control" >
+								<select name=country class="form-control" >
 									<option value="0">---Государство---</option>
 									<c:forEach items="${gpModel.countryList}" var="item">
-										<option value="${item.countryId}" ${item.countryId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.countryName}</option>
+										<option value="${item.countryId}" ${item.countryId == gpModel.selectedCountryId ? 'selected="selected"' : ''}>${item.countryName}</option>
 									</c:forEach>
 								</select> 
 								<select name=region class="form-control">

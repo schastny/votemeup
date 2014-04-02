@@ -9,7 +9,7 @@ public class RequestResult {
 	public List<Proposal> list;
 	long count;
 	
-	public RequestResult(int count, List<Proposal> list){
+	public RequestResult(long count, List<Proposal> list){
 		this.count = count;
 		this.list = list;
 	}
