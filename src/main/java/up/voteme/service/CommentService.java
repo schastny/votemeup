@@ -14,4 +14,9 @@ public interface CommentService {
 	public abstract List<Comment> findAll();
 
 	public abstract long getCount();
+	
+	
+	public abstract List<Comment> getCommentByProposal(long id);
+	public abstract long getCountComment(long id);
+	
 }

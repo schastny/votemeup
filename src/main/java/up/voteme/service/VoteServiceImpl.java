@@ -59,4 +59,6 @@ public class VoteServiceImpl implements VoteService {
 		return voteDAO.countVoteByProposalNo(id);
 	}
 	
+	
+	
 }

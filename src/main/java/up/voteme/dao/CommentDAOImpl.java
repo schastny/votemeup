@@ -53,7 +53,21 @@ public class CommentDAOImpl implements CommentDAO {
 
 	@Override
 	public List<Comment> findCommentByProposal(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		  TypedQuery<Comment> query =  eMgr.createQuery("SELECT com FROM Comment com WHERE proposal_id = " + id + " ORDER BY comment_date DESC", Comment.class);
+			  List<Comment> items = query.getResultList();
+			  for (Comment item : items) {
+			   System.out.println(item);
+			  }
+			  return items;
+	
+	}
+
+	@Override
+	public long countCommentByProposal(long id) {
+
+		Query query = eMgr.createQuery("SELECT COUNT(*) FROM Comment AS c WHERE c.proposal.id like "+id);
+		long count = (long) query.getSingleResult();
+		System.out.println("count comment for proposal("+id+") = " + count);
+		return count;
 	}
 }

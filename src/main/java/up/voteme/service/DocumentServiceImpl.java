@@ -3,12 +3,14 @@ package up.voteme.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.dao.IDocumentDAO;
 import up.voteme.domain.Document;
-
+@Service
 public class DocumentServiceImpl implements DocumentService {
+
 	@Autowired
 	private IDocumentDAO documentDAO;
 
@@ -34,6 +36,12 @@ public class DocumentServiceImpl implements DocumentService {
 	@Override
 	public List<Document> findAll() {
 		return documentDAO.findAll();
+	}
+
+	@Override
+	@Transactional
+	public List<Document> getDocumentByProposal(Long id) {
+		return documentDAO.findDocumentByProposal(id);
 	}
 
 }

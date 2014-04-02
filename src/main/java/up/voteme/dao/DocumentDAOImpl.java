@@ -45,4 +45,11 @@ public class DocumentDAOImpl implements IDocumentDAO {
 	public Document findById(Long id) {
 		return manager.find(Document.class, id);
 	}
+
+	@Override
+	public List<Document> findDocumentByProposal(Long id) {
+		  TypedQuery<Document> query =  manager.createQuery("SELECT doc FROM Document doc WHERE proposal_id = " + id, Document.class);
+		  List<Document> items = query.getResultList();
+		  return items;
+	}
 }
