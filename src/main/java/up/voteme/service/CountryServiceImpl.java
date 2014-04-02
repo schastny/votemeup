@@ -13,37 +13,37 @@ import up.voteme.domain.Country;
 public class CountryServiceImpl implements CountryService {
 
 @Autowired
-private CountryDAO CountryDAO;
+private CountryDAO countryDAO;
 
 	@Transactional
 	@Override
-	public void store(Country Country) {
-		CountryDAO.store(Country);
+	public void store(Country country) {
+		countryDAO.store(country);
 
 	}
 
 	@Transactional
 	@Override
 	public void delete(Long id) {
-		CountryDAO.delete(id);
+		countryDAO.delete(id);
 
 	}
 
 	@Transactional
 	@Override
 	public Country findById(Long id) {		
-		return  CountryDAO.findById(id);
+		return  countryDAO.findById(id);
 	}
 
 	@Transactional
 	@Override
 	public List<Country> findAll() {		
-		return  CountryDAO.findAll();
+		return  countryDAO.findAll();
 	}
 
 	@Override
 	@Transactional
 	public long getCount() {
-		return CountryDAO.countAll();
+		return countryDAO.countAll();
 	}
 }

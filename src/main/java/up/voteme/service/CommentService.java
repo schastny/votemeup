@@ -5,7 +5,7 @@ import java.util.List;
 import up.voteme.domain.Comment;
 
 public interface CommentService {
-	public abstract void store(Comment Comment);
+	public abstract void store(Comment comment);
 
 	public abstract void delete(Long id);
 

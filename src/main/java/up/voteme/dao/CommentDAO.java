@@ -8,9 +8,9 @@ public interface CommentDAO {
 
 	public abstract long store(Comment item);
 
-	public abstract void delete(long CommentID);
+	public abstract void delete(long commentID);
 
-	public abstract Comment findById(long CommentID);
+	public abstract Comment findById(long commentID);
 
 	public abstract List<Comment> findAll();
 
