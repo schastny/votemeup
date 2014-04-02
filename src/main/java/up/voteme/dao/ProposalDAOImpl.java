@@ -117,6 +117,7 @@ public class ProposalDAOImpl implements ProposalDAO {
 		filterByDistrict = {noSort, Collection: district.findAll().get..};			
 		*/
 		
+System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);		
 		
 		
 		// (1) Analize HashMap & Form the Query text
@@ -191,8 +192,10 @@ public class ProposalDAOImpl implements ProposalDAO {
 	
 			Boolean wasFilters = false;
 			String wasFiltersStr = " ";
+	System.out.println("^^^^^^^^^flFilter =  " + flFilter); // debugging
 
 			if (flFilter == true) {
+				
 				// queryText = queryText + filterString;
 				queryText = queryText + " WHERE ";
 
@@ -214,6 +217,8 @@ public class ProposalDAOImpl implements ProposalDAO {
 				if (!(filterByCountryId.isEmpty())) {
 					queryText = queryText + wasFiltersStr + filterByCountryId;
 					wasFiltersStr = " AND ";
+	System.out.println("^^^^^^^^^country   " + queryText); // debugging
+
 				}
 
 				if (!(filterByRegionId.isEmpty())) {

@@ -139,6 +139,8 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		 * filtrByCityId = {0, Collection:city.findAll().get..}; 
 		 * filtrByDistrictId = {0, Collection:district.findAll().get..};
 		 */
+		configMap = new HashMap<String,String>();
+
 		configMap.put("sortBy", sortBy);
 		configMap.put("pageNum", String.valueOf(pageNum));
 		configMap.put("pageQuant", String.valueOf(pageQuant));
@@ -149,6 +151,8 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		configMap.put("filtrByRegionId", String.valueOf(selectedRegionId));
 		configMap.put("filtrByCityId", String.valueOf(selectedCityId));
 		configMap.put("filtrByDistrictId", String.valueOf(selectedDistrictId));
+
+System.out.println(configMap);		
 		
 		// Ahtung!!! СountByParams & getByParams must be in one transaction!!!!
 		RequestResult result = propServ.findByParams(configMap);
