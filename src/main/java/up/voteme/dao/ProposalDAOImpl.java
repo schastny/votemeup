@@ -196,33 +196,33 @@ public class ProposalDAOImpl implements ProposalDAO {
 				// queryText = queryText + filterString;
 				queryText = queryText + " WHERE ";
 
-				if (!(filterByLevel.isEmpty())) {
-					queryText = queryText + filterByLevel;
+				if (!(filterByLevelId.isEmpty())) {
+					queryText = queryText + filterByLevelId;
 					wasFiltersStr = " AND ";
 				}
 
-				if (!(filterByStatus.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByStatus;
+				if (!(filterByStatusId.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByStatusId;
 					wasFiltersStr = " AND ";
 				}
 
-				if (!(filterByCategory.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByCategory;
+				if (!(filterByCategoryId.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByCategoryId;
 					wasFiltersStr = " AND ";
 				}
 
-				if (!(filterByCountry.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByCountry;
+				if (!(filterByCountryId.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByCountryId;
 					wasFiltersStr = " AND ";
 				}
 
-				if (!(filterByRegion.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByRegion;
+				if (!(filterByRegionId.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByRegionId;
 					wasFiltersStr = " AND ";
 				}
 
-				if (!(filterByDistrict.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByDistrict;
+				if (!(filterByDistrictId.isEmpty())) {
+					queryText = queryText + wasFiltersStr + filterByDistrictId;
 					wasFiltersStr = " AND "; // not need (last par-r)
 				}
 			}
