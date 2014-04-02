@@ -8,19 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
-
-
-
-
-
 import org.springframework.web.servlet.ModelAndView;
 
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
 import up.voteme.domain.ProposalStatus;
-import up.voteme.domain.Region;
 import up.voteme.service.CategoryService;
 import up.voteme.service.CityService;
 import up.voteme.service.ProposalStatusService;

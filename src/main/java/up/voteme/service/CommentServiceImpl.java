@@ -13,36 +13,36 @@ import up.voteme.domain.Comment;
 public class CommentServiceImpl implements CommentService {
 
 @Autowired
-private CommentDAO CommentDAO;
+private CommentDAO commentDAO;
 
 	@Transactional
 	@Override
-	public void store(Comment Comment) {
-		CommentDAO.store(Comment);
+	public void store(Comment comment) {
+		commentDAO.store(comment);
 	}
 
 	@Transactional
 	@Override
 	public void delete(Long id) {
-		CommentDAO.delete(id);
+		commentDAO.delete(id);
 	}
 	
 	@Transactional
 	@Override
 	public Comment findById(Long id) {		
-		return  CommentDAO.findById(id);
+		return  commentDAO.findById(id);
 	}
 
 	@Transactional
 	@Override
 	public List<Comment> findAll() {		
-		return  CommentDAO.findAll();
+		return  commentDAO.findAll();
 	}
 
 	@Override
 	@Transactional
 	public long getCount() {
-		return CommentDAO.countAll();
+		return commentDAO.countAll();
 	}
 
 }

@@ -1,7 +1,6 @@
 package up.voteme.web;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +21,7 @@ import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
 import up.voteme.service.ProposalService;
+
 
 @Controller
 @SessionAttributes({ "welcomeMes", "gpModel" })
@@ -150,5 +150,22 @@ public class GuestPageController {
 		model.addAttribute("welcomeMes", "Welcome: user");
 		return "help";
 	}	
+	
+	@RequestMapping(value = "/about")
+	public String aboutPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "about";
+	}
+	@RequestMapping(value = "/contact")
+	public String contactPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "contact";
+	}
+	@RequestMapping(value = "/help")
+	public String helpPage(Model model){
+		model.addAttribute("welcomeMes", "Welcome: user");
+		return "help";
+	}
+
 	
 }

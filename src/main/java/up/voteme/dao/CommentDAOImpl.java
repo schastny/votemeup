@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
+
 import up.voteme.domain.Comment;
 
 @Component
@@ -18,19 +19,19 @@ public class CommentDAOImpl implements CommentDAO {
 	
 	@Override
 	public long store(Comment item) {                 // store record
-		long Id = eMgr.merge(item).getCommentId();
-		return Id;
+		long id = eMgr.merge(item).getCommentId();
+		return id;
 	}
 
 	@Override
-	public void delete(long CommentId) {              // delete record
-		Comment Comment = eMgr.find(Comment.class, CommentId);
-		eMgr.remove(Comment);
+	public void delete(long commentId) {              // delete record
+		Comment comment = eMgr.find(Comment.class, commentId);
+		eMgr.remove(comment);
 	}
 
 	@Override
-	public Comment findById(long CommentId) {         // find record
-		return eMgr.find(Comment.class, CommentId);
+	public Comment findById(long commentId) {         // find record
+		return eMgr.find(Comment.class, commentId);
 	}
 
 	@Override

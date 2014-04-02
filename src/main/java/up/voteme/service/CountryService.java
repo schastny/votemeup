@@ -5,7 +5,7 @@ import java.util.List;
 import up.voteme.domain.Country;
 
 public interface CountryService {
-	public abstract void store(Country Country);
+	public abstract void store(Country country);
 
 	public abstract void delete(Long id);
 

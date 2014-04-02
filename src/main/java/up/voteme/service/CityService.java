@@ -2,8 +2,6 @@ package up.voteme.service;
 
 import java.util.List;
 
-
-
 import up.voteme.domain.City;
 
 public interface CityService {

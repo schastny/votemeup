@@ -8,7 +8,6 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
-import up.voteme.domain.District;
 import up.voteme.domain.ProposalLevel;
 
 @Component

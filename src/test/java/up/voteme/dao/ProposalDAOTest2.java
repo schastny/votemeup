@@ -1,7 +1,6 @@
 package up.voteme.dao;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -16,7 +15,6 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.Proposal;
-import up.voteme.domain.ProposalLevel;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @TransactionConfiguration(defaultRollback = false)

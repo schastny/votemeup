@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
-
 import up.voteme.domain.Category;
 
 @Component
