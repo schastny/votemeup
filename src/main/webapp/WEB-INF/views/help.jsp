@@ -193,7 +193,7 @@ p {
 		<!--/row-->
 		<hr>
 		<footer>
-			<p>© BArygaCompany 2014</p>
+			© BArygaCompany 2014
 		</footer>
 
 	</div>

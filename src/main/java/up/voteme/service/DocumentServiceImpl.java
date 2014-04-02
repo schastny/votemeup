@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.dao.IDocumentDAO;
 import up.voteme.domain.Document;
-
 @Service
 public class DocumentServiceImpl implements DocumentService {
 

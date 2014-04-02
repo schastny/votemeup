@@ -32,7 +32,7 @@
 					Общественная инициатива<br> <small>Всего инициатив:
 						${gpModel.propCount} </small>
 				</h1>
-				Session created: ${gpModel.creationDate} ${welcomeMes}
+<!-- 			Session created: ${gpModel.creationDate} ${welcomeMes}  -->	
 			</div>
 			<div class="pull-right">
 				<p>
@@ -105,7 +105,7 @@
 					
 
 
-<%-- 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
+<!-- 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
 								<p>${tmpVar.proposalName}</p>
@@ -116,9 +116,9 @@
 								</p>
 							</div>
 						</div>
-						<!--/span-->
+						
 					</c:forEach>
- --%>					
+ -->					
 					
  					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
@@ -148,7 +148,7 @@
 								
 							</div>
 						</div>
-						<!--/span-->
+					
 					</c:forEach>
 					
 					
@@ -227,10 +227,10 @@
 						<div>
 							<p>Территориальное расположение</p>
 							<p>
-								<select name=state class="form-control" >
+								<select name=country class="form-control" >
 									<option value="0">---Государство---</option>
 									<c:forEach items="${gpModel.countryList}" var="item">
-										<option value="${item.countryId}" ${item.countryId == gpModel.selectedCategoryId ? 'selected="selected"' : ''}>${item.countryName}</option>
+										<option value="${item.countryId}" ${item.countryId == gpModel.selectedCountryId ? 'selected="selected"' : ''}>${item.countryName}</option>
 									</c:forEach>
 								</select> 
 								<select name=region class="form-control">

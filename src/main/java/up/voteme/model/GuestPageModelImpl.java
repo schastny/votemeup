@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,7 @@ import up.voteme.service.ProposalLevelService;
 import up.voteme.service.ProposalService;
 import up.voteme.service.ProposalStatusService;
 import up.voteme.service.RegionService;
+
 
 @Component
 @Scope("session")
@@ -47,6 +50,9 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	@Autowired
 	DistrictService districtServ;
 
+	private static final Logger logger = LoggerFactory
+			.getLogger(GuestPageModelImpl.class);
+	
 	private List<ProposalStatus> statusList;
 	private int selectedPropStatusId;
 	private List<ProposalLevel> levelList;
@@ -66,17 +72,17 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	private long propCount;
 	private List<Proposal> proposalList;
 	private String sortBy;
-	private int pageQuant; // proposalse to display - 5, 10, 15.
+	private int pageQuant; // proposals to display - 5, 10, 15.
 	private int pageNum;   // current page number.		
 	private int pagesTotal; // total pages.
 	private Date creationDate;
 	private String filtrOn;
-	private RequestResult requestResult;
+
 
 
 	
 	public GuestPageModelImpl(){
-		System.out.println("GuestPageModel constructor");
+		logger.info("GuestPageModel constructor");
 	}
 
 	
@@ -147,8 +153,9 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		// Ahtung!!! СountByParams & getByParams must be in one transaction!!!!
 		RequestResult result = propServ.findByParams(configMap);
 		int num = (int) result.count/pageQuant;
-		pagesTotal = (num % 2 != 0) ? (num + 1) : num;
+		pagesTotal = (result.count % pageQuant != 0) ? (num + 1) : num;
 		proposalList = result.list;
+		
 	}
 	
 	

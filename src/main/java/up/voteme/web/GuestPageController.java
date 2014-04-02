@@ -29,13 +29,15 @@ import up.voteme.service.ProposalService;
 import up.voteme.service.VoteService;
 
 
+
+
 @Controller
 @SessionAttributes({ "welcomeMes", "gpModel" })
 @Scope("request")
 public class GuestPageController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(HomeController.class);
+			.getLogger(GuestPageController.class);
 	@Autowired
 	GuestPageModel gpModel;
 
@@ -74,6 +76,7 @@ public class GuestPageController {
 			logger.info("gpModel.reset()");
 			return "guestpage";
 		}
+		
 		gpModel.setSortBy(sortBy);
 		gpModel.setPageQuant(Integer.parseInt(pageQuant));
 		gpModel.setPageNum(Integer.parseInt(pageNum));

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import up.voteme.dao.CommentDAO;
+import up.voteme.HomeController;
 import up.voteme.dao.ProposalDAO;
 import up.voteme.dao.VoteDAO;
 import up.voteme.domain.Comment;
@@ -18,6 +20,8 @@ import up.voteme.model.RequestResult;
 @Service
 public class ProposalServiceImpl implements ProposalService {
 	
+	private static final Logger logger = LoggerFactory
+			.getLogger(ProposalServiceImpl.class);
     @Autowired
     private ProposalDAO dao;
   
@@ -49,7 +53,7 @@ public class ProposalServiceImpl implements ProposalService {
 	@Override
 	@Transactional
     public long countAll() {
-		System.out.println("Service - countAll()");
+		//System.out.println("Service - countAll()");
     	return dao.countAll();
     }
 	
@@ -75,7 +79,7 @@ public class ProposalServiceImpl implements ProposalService {
 	@Transactional
 	public RequestResult findByParams(HashMap<String, String> map) {
 		//Mock implementation
-		int count = dao.findAll().size();
+		long count = dao.countAll();
 		
 		//Mock implementation
 		/*
@@ -108,9 +112,8 @@ public class ProposalServiceImpl implements ProposalService {
 			for (long i=first; i<last; i++){
 				resultList.add(listAll.get((int)i));
 			}
+			
 		}
-		
-		
 		return new RequestResult(count, resultList);
 	}
 
