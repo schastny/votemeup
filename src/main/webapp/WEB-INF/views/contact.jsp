@@ -64,7 +64,7 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="/voteme/about">О проекте</a></li>
-						<li><a href="/voteme/contact">Контакты</a></li>
+						<li class="active"><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>
 					</ul>
 					<form class="navbar-form navbar-right" role="search">
