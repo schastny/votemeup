@@ -8,13 +8,14 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
+
 import up.voteme.domain.Country;
 
 @Component
 public class CountryDAOImpl implements CountryDAO {
 	
 	@PersistenceContext
-	EntityManager eMgr;
+	private EntityManager eMgr;
 	
 	@Override
 	public long store(Country item) {                 // store record
@@ -23,14 +24,22 @@ public class CountryDAOImpl implements CountryDAO {
 	}
 
 	@Override
-	public void delete(long CountryId) {              // delete record
-		Country Country = eMgr.find(Country.class, CountryId);
-		eMgr.remove(Country);
+	public void delete(long countryId) {              // delete record
+		Country country = eMgr.find(Country.class, countryId);
+		eMgr.remove(country);
 	}
 
 	@Override
-	public Country findById(long CountryId) {         // find record
-		return eMgr.find(Country.class, CountryId);
+	public Country findById(long countryId) {         // find record
+System.out.println("countryID !!! = "+countryId);
+		Country con = new Country();
+		
+		con = eMgr.find(Country.class, countryId);
+
+System.out.println("country = "+con);		
+		
+		return con;
+		//return eMgr.find(Country.class, countryId);
 	}
 
 	@Override

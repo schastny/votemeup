@@ -8,24 +8,25 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.ProposalStatus;
+import up.voteme.domain.Document;
 
-public class ProposalStatusDAOOld {
+public class DocumentDAO {
 	private EntityManagerFactory entityManagerFactory;
 
-	public ProposalStatusDAOOld() {
+	public DocumentDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
-	public long store(ProposalStatus item) {
+	public long store(Document item) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 long id; //stored item id
 		 try {
 			 tx.begin();
-			 id= manager.merge(item).getId();	//store/update
+			 id= manager.merge(item).getDocId();	//store/update
 			 tx.commit();
 		 } catch (RuntimeException e) {
+			 System.out.println("Persist fail "+e);
 			 tx.rollback();
 		  throw e;
 		 } finally {
@@ -39,7 +40,7 @@ public class ProposalStatusDAOOld {
 		 EntityTransaction tx = manager.getTransaction();
 		 try {
 			  tx.begin();
-			  ProposalStatus com = manager.find(ProposalStatus.class, Id);
+			  Document com = manager.find(Document.class, Id);
 			  manager.remove(com);
 			  tx.commit();
 		 } catch (RuntimeException e) {
@@ -50,44 +51,29 @@ public class ProposalStatusDAOOld {
 		 }
 	}
 
-	public ProposalStatus findById(Long Id) {
+	public Document findById(Long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			 return manager.find(ProposalStatus.class, Id);
+			 return manager.find(Document.class, Id);
 		 } finally {
 			 manager.close();
 		 }
 	}
 
-	public List<ProposalStatus> findAll() {
-	 EntityManager manager = entityManagerFactory.createEntityManager();
-	 try {
-		  Query query = manager.createQuery("select com from ProposalStatus com");
-		  @SuppressWarnings("unchecked")
-		  List<ProposalStatus> items = query.getResultList();
-		  //for (ProposalStatus item : items) {
-		  //item.getProjects().size();
-		  //}
-	  
-	  return items;
-
-	 } finally {
-		 manager.close();
-	 }
-	}
-
-	public long countPS() {
+	public List<Document> findAll() {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			  Query query = manager.createQuery("SELECT COUNT(*) FROM ProposalStatus ps");
-			  long count = (long) query.getSingleResult();
+			  Query query = manager.createQuery("select d from Document d");
+			  @SuppressWarnings("unchecked")
+			  List<Document> items = query.getResultList();
+			  //for (Category item : items) {
+			  // item.getProjects().size();
+			  //}
 			  
-			  return count;
-
+			  return items;
+	
 		 } finally {
 			 manager.close();
 		 }
 		}
-
 }
-

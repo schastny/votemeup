@@ -1,7 +1,6 @@
 package up.voteme.dao;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -48,31 +47,39 @@ public class ProposalDAOTest2 {
 		System.out.println("Finish test FIND BY ID....");
 
 	}
-	
-//	@Test
-//	@Transactional
-//	public void C_storeTest(){ 
-//		System.out.println("Starting STORE test....");
-//		List<Proposal> beforList = daoProposal.findAll();
-//		long listSizeBefore = beforList.size();
-//	
-//		Proposal item = new Proposal();
-//		//Document item = daoDocument.findById(1L);
-//	    //item.setDocId(0);
-//		//item.setDocName("cool document2222");
-//		//item.setDocUrl("http:/google.com/img.png");
-//		//item.setProposal(daoProposal.findById(1L).getProposal());
-//		//item.setProposal(daoDocument.findById(1L).getProposal());
-//		item.setProposalId(1L);
-//		
-//		long id =  daoProposal.store(item);
-//		List<Proposal> afterList = daoProposal.findAll();
-//		long listSizeAfter = afterList.size();
-//		System.out.println("New item stored with id="+id);
-//		System.out.println("Finish STORE test....");
-//		assertTrue ("Error  writing! ",listSizeBefore == listSizeAfter-1);
-//	}
 
+/*
+	@Test
+	@Transactional
+	public void C_storeTest(){ 
+		System.out.println("Starting STORE test....");
+		List<Proposal> beforList = daoProposal.findAll();
+		long listSizeBefore = beforList.size();
+	
+		Proposal item = new Proposal();
+		
+		//Document item = daoDocument.findById(1L);
+	    //item.setDocId(0);
+		//item.setDocName("cool document2222");
+		//item.setDocUrl("http:/google.com/img.png");
+		//item.setProposal(daoProposal.findById(1L).getProposal());
+		//item.setProposal(daoDocument.findById(1L).getProposal());
+		
+		//ProposalLevel itemPL = new ProposalLevel();
+		
+		List<ProposalLevel> beforList = daoProposal.findAll();
+		ProposalLevel itemPL = daoProposal.findById(1L)
+		item.setProposalLevel(itemPL);
+		
+		long id =  daoProposal.store(item);
+		List<Proposal> afterList = daoProposal.findAll();
+		long listSizeAfter = afterList.size();
+		System.out.println("New item stored with id="+id);
+		System.out.println("Finish STORE test....");
+		assertTrue ("Error  writing! ",listSizeBefore == listSizeAfter-1);
+	}
+*/
+	
 //	@Test
 //	@Transactional
 //	public void D_deleteTest() {

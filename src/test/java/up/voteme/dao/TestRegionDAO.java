@@ -3,51 +3,50 @@
  */
 package up.voteme.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.Country;
 import up.voteme.domain.Region;
 
+@TransactionConfiguration(defaultRollback = false)
+@ContextConfiguration({ "classpath:test-context.xml" })
+@RunWith(SpringJUnit4ClassRunner.class)  
 public class TestRegionDAO {
 	
-	private	RegionDAOOld regionDao = new RegionDAOOld();
-	private	CountryDAO countryDao = new CountryDAOImpl();
+	@Autowired
+	private	RegionDAO regionDao;
 	
+	@Autowired
+	private	CountryDAO countryDao;
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
+	@Transactional 
 	public void testRegionDAO() {
 		fail("Not yet implemented");
 	}
 
 	@Test
+	@Transactional 
 	public void testCreateNewRegion() {
 		
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		
 		//City city = new City();
 		//city = cityDao.findById((long) 2);
@@ -70,11 +69,13 @@ public class TestRegionDAO {
 	}
 
 	@Test
+	@Transactional 
 	public void testChangeCountryInRegion() {
 		
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_2");
 		region.setCountry(country);
@@ -95,11 +96,13 @@ public class TestRegionDAO {
 	
 
 	@Test
+	@Transactional 
 	public void testRenameRegion() {
 		
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_2");
 		region.setCountry(country);
@@ -122,11 +125,13 @@ public class TestRegionDAO {
 	
 	
 	@Test
+	@Transactional 
 	public void testDelete() {
 		
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_3");
 		region.setCountry(country);
@@ -143,10 +148,12 @@ public class TestRegionDAO {
 	}
 
 	@Test
+	@Transactional 
 	public void testFindById() {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_3");
 		region.setCountry(country);
@@ -160,10 +167,12 @@ public class TestRegionDAO {
 	}
 
 	@Test
+	@Transactional 
 	public void testFindByIdNotExsist() {
 		//create new region
 		Country country = new Country();
 		country = countryDao.findById((long) 1);
+System.out.println("country = "+country);		
 		Region region = new Region();
 		region.setRegionName("GAGARIN_140313_3");
 		region.setCountry(country);
@@ -180,6 +189,7 @@ public class TestRegionDAO {
 	
 	
 	@Test
+	@Transactional 
 	public void testFindAll() {
 		//FindAll - 
 		System.out.println("Find all items...");

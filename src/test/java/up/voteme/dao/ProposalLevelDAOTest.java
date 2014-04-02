@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,6 +51,7 @@ public class ProposalLevelDAOTest {
 
 	}
 
+	@Transactional
 	@Test
 	public void A_findAllTest() {
 		final int SHOW_ITEMS = 5;
@@ -66,13 +69,19 @@ public class ProposalLevelDAOTest {
 		assertTrue("No records in table", list.size() > 1);
 	}
 
+	@Transactional
 	@Test
 	public void B_storeTest() {
 		System.out.println("Store new item....");
 		List<ProposalLevel> beforList = dao.findAll();
 		// modify item
-		ProposalLevel item = dao.findById(1L);
-		item.setId(0);
+		//ProposalLevel item = dao.findById(1L);
+		
+		ProposalLevel item = new ProposalLevel();
+		
+		//System.out.println(item); // debug
+		
+		//item.setId(1);
 		item.setLevel("OHOHOHOHOHO");
 
 		long id = dao.store(item);
@@ -81,9 +90,10 @@ public class ProposalLevelDAOTest {
 		System.out.println("Befor size = " + beforList.size()
 				+ ", after size = " + afterList.size());
 		assertTrue("Error in DB record store ",
-				beforList.size() == afterList.size() - 1);
+				beforList.size() == afterList.size()-1);
 	}
 
+	@Transactional
 	@Test
 	public void C_findByIdTest() {
 		System.out.println("Find last record (assume ID = num of rec)....");
@@ -93,6 +103,7 @@ public class ProposalLevelDAOTest {
 				+ item.getClass());
 	}
 
+	@Transactional
 	@Test
 	public void D_deleteTest() {
 		System.out.println("Delete last record(assume ID = num of rec)....");

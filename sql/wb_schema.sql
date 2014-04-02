@@ -3,7 +3,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 DROP SCHEMA IF EXISTS `votemeup` ;
-CREATE SCHEMA IF NOT EXISTS `votemeup` ;
+CREATE SCHEMA IF NOT EXISTS `votemeup` CHARACTER SET cp1251;
 USE `votemeup` ;
 
 -- -----------------------------------------------------
@@ -172,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `votemeup`.`proposal` (
   `proposal_text` TEXT NULL DEFAULT NULL,
   `proposal_result` TEXT NULL DEFAULT NULL,
   `creation_date` DATETIME NULL DEFAULT NULL,
+  `required_votes` BIGINT NULL DEFAULT NULL,
   `proposal_status_id` BIGINT NOT NULL,
   `proposal_level_id` BIGINT NOT NULL,
   `userd_id` BIGINT NOT NULL,

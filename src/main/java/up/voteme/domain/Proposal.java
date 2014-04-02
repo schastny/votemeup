@@ -35,6 +35,7 @@ public class Proposal {
 	private Collection<Vote> votes = new HashSet<>();//for one-to-many relation
 	private Collection<Document> documents = new HashSet<>();//for one-to-many relation
 	private Collection<Category> categories = new HashSet<>();//many-to-many rel.
+	private long requiredVotes;
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -105,7 +106,7 @@ public class Proposal {
 	public void setUserd(Userd userd) {
 		this.userd = userd;
 	}
-	@OneToMany(mappedBy = "userd")
+	@OneToMany(mappedBy = "proposal")
 	public Collection<Vote> getVotes() {
 		return votes;
 	}
@@ -187,6 +188,14 @@ public class Proposal {
 				+ ", documents.size=" + documents.size() 
 				+ ", categories.size=" + categories.size()
 				+ "]";
+	}
+
+	@Column (name = "required_votes")
+	public long getRequiredVotes() {
+		return requiredVotes;
+	}
+	public void setRequiredVotes(long requiredVotes) {
+		this.requiredVotes = requiredVotes;
 	}
 	
 	

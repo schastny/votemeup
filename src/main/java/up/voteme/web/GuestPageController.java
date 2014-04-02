@@ -1,11 +1,11 @@
 package up.voteme.web;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
+import up.voteme.domain.Proposal;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
 import up.voteme.service.ProposalService;
 
+
 @Controller
-@SessionAttributes({ "welcomeMes", "gpModel", "tab" })
+@SessionAttributes({ "welcomeMes", "gpModel" })
+@Scope("request")
 public class GuestPageController {
 
 	private static final Logger logger = LoggerFactory
@@ -32,47 +35,42 @@ public class GuestPageController {
 
 	@Autowired
 	ProposalService propServ;
+	
+	
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String homepage(@RequestParam(value="showType", required=false) String showType, Model model) {
-		logger.info("GET method");
+	public String homepage(@RequestParam(value="sortBy", required = false) String sortBy, 
+			@RequestParam(value="pageQuant", required = false) String pageQuant,
+				@RequestParam(value="pageNum", required = false) String pageNum,
+					@RequestParam(value="filtrOn", required = false) String filtrOn,
+						Model model) {
+		logger.info("GET method /");
+		//mark new session
 		if (!model.containsAttribute("gpModel")){
-			gpModel.initialize(new Date());
+			Date date = new Date();
+			gpModel.setCreationDate(date); // for debug purposes to track session
+			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
-			model.addAttribute("tab", 1);
-			
-			logger.info("new GuestPageModel() created");
-		}
-		if (showType!=null){
-			if (showType.equals("all")){
-				logger.info("showType = all");
-				model.addAttribute("tab", 1);
-				
-				HashMap<String, String> map = new HashMap<>();
-				map.put("sortBy", "creationDate");
-						
-				gpModel.setProposalList(propServ.getByParams(map));
-			}else if (showType.equals("popular")){
-				logger.info("showType = popular");
-				model.addAttribute("tab", 2);
-				gpModel.setProposalList(propServ.getAllbyVoteNum());
-			}else if (showType.equals("last")){
-				logger.info("showType = last");
-				model.addAttribute("tab", 3);
-				gpModel.setProposalList(propServ.getAllbyDate());
-			}else if (showType.equals("commented")){
-				logger.info("showType = commented");
-				model.addAttribute("tab", 4);
-				//gpModel.setProposalList(propServ.getAllbyDate());
-			}else {
-				logger.info("showType==null");
-			}
 		}
 		
-		model.addAttribute("filtrform", new FiltrForm());
+		// request come without parameters
+		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
+			gpModel.reset();
+			logger.info("gpModel.reset()");
+			return "guestpage";
+		}
+		gpModel.setSortBy(sortBy);
+		gpModel.setPageQuant(Integer.parseInt(pageQuant));
+		gpModel.setPageNum(Integer.parseInt(pageNum));
+		gpModel.setFiltrOn(filtrOn);
+		if (filtrOn.equals("false")){ //clear filtr form
+			gpModel.clearFiltr();
+		}
+		gpModel.update();
 		return "guestpage";
 	}
 
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String addContact(@ModelAttribute GuestLogin guest,
 			BindingResult result, Model model) {
@@ -98,18 +96,44 @@ public class GuestPageController {
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)
 	public String filtr(@ModelAttribute FiltrForm fForm,
 			BindingResult result, Model model) {
-		logger.info("GET method");
+		logger.info("GET method /filtr");
 		if (result.hasErrors()) {
 			logger.info("Binding error");
 		}
-		logger.info(fForm.getCategory());
-		logger.info(fForm.getCity());
 
-	
+		gpModel.setFiltrOn("true");
+		gpModel.setSortBy("noSort");
+		gpModel.setPageNum(1);
+		
+		gpModel.setSelectedPropStatusId(fForm.getStatus());
+		gpModel.setSelectedCategoryId(fForm.getCategory());
+		gpModel.setSelectedPropLevelId(fForm.getLevel());
+		gpModel.setSelectedCountryId(fForm.getCountry());
+		gpModel.setSelectedRegionId(fForm.getRegion());
+		gpModel.setSelectedCityId(fForm.getCity());
+		gpModel.setSelectedDistrictId(fForm.getDistrict());
+
+		gpModel.update();
 
 		return "guestpage";
 	}
+	
 
+	@RequestMapping(value = "/proposal")
+	public String helpPage(@RequestParam(value="numberProposal", required=false) long numberProposal,Model model){
+		//System.out.println("numberProposal = "+numberProposal);
+		
+		Proposal proposalMore=propServ.getById((Long) numberProposal);
+		model.addAttribute("proposalMore", proposalMore);
+		model.addAttribute("proposalMoreVoteYes", propServ.getCountVoteYes((Long) numberProposal));
+		model.addAttribute("proposalMoreVoteNo", propServ.getCountVoteNo((Long) numberProposal));
+		
+		
+		
+		
+		return "proposal";
+	}
+	
 	@RequestMapping(value = "/about")
 	public String aboutPage(Model model){
 		model.addAttribute("welcomeMes", "Welcome: user");
@@ -126,4 +150,5 @@ public class GuestPageController {
 		return "help";
 	}
 
+	
 }

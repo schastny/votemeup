@@ -8,22 +8,22 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import up.voteme.domain.Region;
+import up.voteme.domain.District;
 
-public class RegionDAOOld {
+public class DistrictDAO {
 	private EntityManagerFactory entityManagerFactory;
 
-	public RegionDAOOld() {
+	public DistrictDAO() {
 		entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
 	}
 
-	public long store(Region item) {
+	public long store(District item) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 long id; //stored item id
 		 try {
 			 tx.begin();
-			 id= manager.merge(item).getRegionId();	//store/update
+			 id= manager.merge(item).getDistrictId();	//store/update
 			 tx.commit();
 		 } catch (RuntimeException e) {
 			 tx.rollback();
@@ -34,12 +34,12 @@ public class RegionDAOOld {
 		 return id;
 	}
 
-	public void delete(long Id) {
+	public void delete(Long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 EntityTransaction tx = manager.getTransaction();
 		 try {
 			  tx.begin();
-			  Region com = manager.find(Region.class, Id);
+			  District com = manager.find(District.class, Id);
 			  manager.remove(com);
 			  tx.commit();
 		 } catch (RuntimeException e) {
@@ -50,24 +50,24 @@ public class RegionDAOOld {
 		 }
 	}
 
-	public Region findById(long Id) {
+	public District findById(Long Id) {
 		 EntityManager manager = entityManagerFactory.createEntityManager();
 		 try {
-			 return manager.find(Region.class, Id);
+			 return manager.find(District.class, Id);
 		 } finally {
 			 manager.close();
 		 }
 	}
 
-	public List<Region> findAll() {
+	public List<District> findAll() {
 	 EntityManager manager = entityManagerFactory.createEntityManager();
 	 try {
-		  Query query = manager.createQuery("select com from Region com");
+		  Query query = manager.createQuery("select com from District com");
 		  @SuppressWarnings("unchecked")
-		  List<Region> items = query.getResultList();
-		  for (Region item : items) {
-			  item.getCities().size();
-		  }
+		  List<District> items = query.getResultList();
+		  //for (District item : items) {
+		  //item.getProjects().size();
+		  //}
 	  
 	  return items;
 
