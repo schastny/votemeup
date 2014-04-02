@@ -129,22 +129,31 @@
 								<c:set var="sizeCat" scope="session" value="${tmpVar.categories.size()}"/>
 							
 								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a></h4></div>
-								<div>Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
+								<div>
+									Инициатива №: <b>${tmpVar.proposalId}</b>
+									Уровень инициативы: ${tmpVar.proposalLevel.level}
+								</div>
 								
 								<c:choose>
 								    <c:when test="${sizeVotes == 0}">
 										<div> За инициативу еще не был дан ни один голос.</div>
 								    </c:when>
 								    <c:when test="${sizeVotes > 0}">
-										<div>Количество голосов: <b>${sizeVotes}</b>. Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>
+										<div>
+											Количество голосов: <b>${sizeVotes}</b>. 
+											Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" />
+										</div>
 								    </c:when>
 								    <c:otherwise>
 <%-- 										<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div> --%>
 								    </c:otherwise>
 								</c:choose>							
-								<div>Количество комментариев: <b>${sizeComment}</b>
-								Количество документов: <b>${sizeDoc}</b>
-								Количество категорий: <b>${sizeCat}</b></div>
+								<div>
+									Количество комментариев: <b>${sizeComment}</b>
+						<%--		Количество документов: <b>${sizeDoc}</b>	--%>
+						<%--			Количество категорий: <b>${sizeCat}</b> --%>
+									Дата создания:<fmt:formatDate pattern="dd-MM-yyyy" value="${tmpVar.creationDate}" />
+								</div>
 								
 							</div>
 						</div>

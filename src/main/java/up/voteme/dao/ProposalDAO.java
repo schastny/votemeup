@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import up.voteme.domain.Proposal;
+import up.voteme.model.RequestResult;
 
 public interface ProposalDAO {
 
@@ -19,6 +20,7 @@ public interface ProposalDAO {
 	
 	public List<Proposal> findAllbyDate();
 	
-	public List<Proposal> findByParams(HashMap<String,String> map);
+	public RequestResult findByParams(HashMap<String,String> map);
+
 
 }

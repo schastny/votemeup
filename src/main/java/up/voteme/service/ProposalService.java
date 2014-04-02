@@ -19,8 +19,6 @@ public interface ProposalService {
 	//Ponomarenko
 	public abstract Proposal getById(long id);
 	
-	public abstract List<Proposal> getByParams(HashMap<String, String> map);
-	
 	public abstract RequestResult findByParams(HashMap<String, String> map);
 
 	/*

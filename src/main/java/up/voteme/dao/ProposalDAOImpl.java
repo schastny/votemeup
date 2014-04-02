@@ -1,7 +1,9 @@
 package up.voteme.dao;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,11 +11,15 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.mapping.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Proposal;
+import up.voteme.model.RequestResult;
 import up.voteme.service.VoteService;
+import up.voteme.web.GuestPageController;
 
 @Component
 public class ProposalDAOImpl implements ProposalDAO {
@@ -24,6 +30,9 @@ public class ProposalDAOImpl implements ProposalDAO {
 		
 	@Autowired
 	VoteDAO voteDAO;
+	
+	private static final Logger logger = LoggerFactory
+			.getLogger(ProposalDAOImpl.class);
 	
 	/* (non-Javadoc)
 	 * @see up.voteme.dao.ProposalDAO#store(up.voteme.domain.Proposal)
@@ -98,151 +107,129 @@ public class ProposalDAOImpl implements ProposalDAO {
 		return result;
 	}
 	
+	
+	public String queryBuilder  (HashMap<String,String> map){
+		
+		String resultString = "";
+		Set<String> needSet = new HashSet<>();
+		needSet.add("sortBy");
+		needSet.add("pageNum");
+		needSet.add("pageQuant");
+		needSet.add("filtrByStatusId");
+		needSet.add("filtrByLevelId");
+		needSet.add("filtrByCategoryId");
+		needSet.add("filtrByCountryId");
+		needSet.add("filtrByRegionId");
+		needSet.add("filtrByCityId");
+		needSet.add("filtrByDistrictId");
+		
+		if (!map.keySet().containsAll(needSet)){
+			throw new RuntimeException("Configuration map is uncorrect");
+		}
+		
+		
+		String fString = "";
+		String wasFiltr = "";
+		if (!map.get("filtrByStatusId").equals("0") ){
+			fString +=(wasFiltr+"p.proposalStatus.id=" + map.get("filtrByStatusId"));
+			wasFiltr = " AND ";
+		}
+		if (!map.get("filtrByLevelId").equals("0") ){
+			fString +=(wasFiltr+"p.proposalLevel.id=" + map.get("filtrByLevelId"));
+			wasFiltr = " AND ";
+		}
+		if (!map.get("filtrByCountryId").equals("0") ){
+			fString +=(wasFiltr+"p.country.countryId=" + map.get("filtrByCountryId"));
+			wasFiltr = " AND ";
+		}
+		if (!map.get("filtrByRegionId").equals("0") ){
+			fString +=(wasFiltr+"p.region.regionId=" + map.get("filtrByRegionId"));
+			wasFiltr = " AND ";
+		}
+		if (!map.get("filtrByCityId").equals("0") ){
+			fString +=(wasFiltr+"p.city.cityId=" + map.get("filtrByCityId"));
+			wasFiltr = " AND ";
+		}
+		if (!map.get("filtrByDistrictId").equals("0") ){
+			fString +=(wasFiltr+"p.district.districtId=" + map.get("filtrByDistrictId"));
+		}
+
+		if (!map.get("filtrByCategoryId").equals("0") ){
+			
+			// example IN (n.sections) AS s WHERE s.id=
+			resultString += ", IN (p.categories) AS s WHERE s.categId=" + map.get("filtrByCategoryId")	;	
+			resultString += (wasFiltr+fString);
+
+		}else if (fString.length()>0){
+			resultString += (" WHERE "+fString);
+		}
+		
+		String sort = map.get("sortBy");
+		switch (sort) {
+			case "noSort" : 
+				resultString += ""; 
+				break;
+			case "creationDate" : 
+				resultString += " ORDER BY p.creationDate DESC"; 
+				break;
+			// Need To Form Table with Proposal & Sort *Here*?
+// ***************************************put you code here******************************************
+				
+				
+				
+// ***************************************put you code here******************************************				
+			case "voteCount" : 
+				resultString += ""; 
+				break;
+			case "commentCount" : 
+				resultString += ""; 
+				break;
+		}
+		
+		return resultString;
+	}
+	
+	
+	
+	
 	@Override
-	public List<Proposal> findByParams(HashMap<String,String> map) {
+	public RequestResult findByParams(HashMap<String,String> map) {
+		
+		String mainQuery = queryBuilder(map);
+		String queryText = "";
+		
+		queryText = "SELECT COUNT(*) FROM Proposal p" + mainQuery;
+		logger.info("queryText:  " + queryText);
+		Query query1 = em.createQuery(queryText);
+		long resultSize =(long) query1.getSingleResult();
+		logger.info("resultSize:  " + resultSize); 
 		
 		
-		String queryText = "SELECT p FROM Proposal p";
-		
-		/* PARAMETERS:
-		sortBy = {noSort, voteCount, creationDate, commentCount};
-		pageNum = {1..countAll() / PageQuant};
-		pageQuant = {10,25,50};
-		filterByLevel = {noSort, Collection: proposalLevel.findAll().getLevel};
-		filterByStatus = {noSort, Collection: proposalStatus.findAll().getStatus};
-		filterByCategory = {noSort, Collection: proposalCategory.findAll().getCategoryName()};
-		filterByCountry = {noSort, Collection: country.findAll().getCountryName};
-		filterByRegion = {noSort, Collection: region.findAll().get..};
-		filterByCity = {noSort, Collection: city.findAll().get..};
-		filterByDistrict = {noSort, Collection: district.findAll().get..};			
-		*/
-		
-		
-		
-		// (1) Analize HashMap & Form the Query text
-		if (map.size() != 0) { // If The Parameters Of Sorting Are Exist
-			if (map.containsKey("sortBy")) {
-				String sortString = " ";
-				String sort = map.get("sortBy");
-				
-				
-				
-				switch (sort) {
-				case "noSort" : sortString = " "; break;
-				case "creationDate" : sortString = " ORDER BY p.creationDate"; break;
-				
-				// Need To Form Table with Proposal & Sort *Here*?
-	
-				case "voteCount" : sortString = "  "; break;
-				case "commentCount" : sortString = " "; break;
-				
-				 default : ;
-				}
-				queryText = queryText + sortString;
-			}
+		queryText = "SELECT p FROM Proposal p" + mainQuery;
+		logger.info("queryText:  " + queryText); 
+		TypedQuery<Proposal> query2 = em.createQuery(queryText, Proposal.class);
+		//calculate paging
+		int pageNum = Integer.parseInt(map.get("pageNum"));
+		int pageQuant = Integer.parseInt(map.get("pageQuant"));
+		long first = (pageNum-1)*pageQuant;
+		query2.setFirstResult((int)first);
+		query2.setMaxResults(pageQuant);
+		List<Proposal> resultList = query2.getResultList();
 			
-			// Does Filter Exist?
-			Boolean flFilter = false;
-			// String filterString = " WHERE p.";
-			String filterString = "";
-			
-			String filterByLevelId = ""; 
-			String filterByStatusId = ""; 
-			String filterByCategoryId = ""; 
-			String filterByCountryId = ""; 
-			String filterByRegionId = ""; 
-			String filterByCityId = ""; 
-			String filterByDistrictId = ""; 
-
-			if (map.containsKey("filterByLevelId")) {
-				flFilter = true;
-				filterByLevelId = "p.level.id=" + map.get("filterByLevelId");
-			}
-
-			if (map.containsKey("filterByStatusId")) {
-				flFilter = true;
-				filterByStatusId = "p.proposal_status_id=" + map.get("filterByStatusId");
-			}
-
-			if (map.containsKey("filterByCategoryId")) {
-				flFilter = true;
-				filterByCategoryId = "p.category.id=" + map.get("filterByCategoryId");
-			}
-
-			if (map.containsKey("filterByCountryId")) {
-				flFilter = true;
-				filterByCountryId = "p.country.id=" + map.get("filterByCountryId");
-			}
-
-			if (map.containsKey("filterByRegionId")) {
-				flFilter = true;
-				filterByRegionId = "p.region.id=" + map.get("filterByRegionId");
-			}
-
-			if (map.containsKey("filterByCityId")) {
-				flFilter = true;
-				filterByCityId = "p.city.id=" + map.get("filterByCityId");
-			}
-
-			if (map.containsKey("filterByDistrictId")) {
-				flFilter = true;
-				filterByDistrictId = "p.district.id="	+ map.get("filterByDistrictId");
-			}
-	
-			Boolean wasFilters = false;
-			String wasFiltersStr = " ";
-
-			if (flFilter == true) {
-				// queryText = queryText + filterString;
-				queryText = queryText + " WHERE ";
-
-				if (!(filterByLevelId.isEmpty())) {
-					queryText = queryText + filterByLevelId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByStatusId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByStatusId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByCategoryId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByCategoryId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByCountryId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByCountryId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByRegionId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByRegionId;
-					wasFiltersStr = " AND ";
-				}
-
-				if (!(filterByDistrictId.isEmpty())) {
-					queryText = queryText + wasFiltersStr + filterByDistrictId;
-					wasFiltersStr = " AND "; // not need (last par-r)
-				}
-			}
-			
-		System.out.println("*****   " + queryText); // debugging
-			
-			}
-			
-		// Run query
-		//queryText = "SELECT p FROM Proposal p"; // debugging
-		TypedQuery<Proposal> query = em.createQuery(queryText, Proposal.class);
-		
-		List<Proposal> items = query.getResultList();
-		
-		for (Proposal item : items) {
+		for (Proposal item : resultList) {
 			item.getCategories().size();
 			item.getComments().size();
 			item.getVotes().size();
 			item.getDocuments().size();
 		}
-		return items;
+		logger.info("resultList:  " + resultList);
+		return new RequestResult(resultSize,resultList );
 	}
+
+
+
+
+	
+	
+	
 }
