@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.mapping.Map;
 import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Proposal;
@@ -83,7 +84,6 @@ public class ProposalDAOImpl implements ProposalDAO {
 		return items;
 	}
 	
-	
 	/* (non-Javadoc)
 	 * @see up.voteme.dao.ProposalDAO#countAll()
 	 */
@@ -98,43 +98,92 @@ public class ProposalDAOImpl implements ProposalDAO {
 	public List<Proposal> findByParams(HashMap<String,String> map) {
 		String queryText = "SELECT p FROM Proposal p";
 		
-		// Analize HashMap & Form the Query text
-		if (map.size() == 0) {
-			queryText = "SELECT p FROM Proposal AS p";
-		}
-		else {
-			/* PARAMETERS:
-			sortBy = {noSort, voteCount, creationDate, commentCount};
-			pageNum = {1..countAll() / PageQuant};
-			pageQuant = {10,25,50};
-			filtrByLevel = {noSort, Collection: proposalLevel.findAll().getLevel};
-			filtrByStatus = {noSort, Collection: proposalStatus.findAll().getStatus};
-			filtrByCategory = {noSort, Collection: proposalCategory.findAll().getCategoryName()};
-			filtrByCountry = {noSort, Collection: country.findAll().getCountryName};
-			filtrByRegion = {noSort, Collection: region.findAll().get..};
-			filtrByCity = {noSort, Collection: city.findAll().get..};
-			filtrByDistrict = {noSort, Collection: district.findAll().get..};			
-			*/
-			
+		/* PARAMETERS:
+		sortBy = {noSort, voteCount, creationDate, commentCount};
+		pageNum = {1..countAll() / PageQuant};
+		pageQuant = {10,25,50};
+		filterByLevel = {noSort, Collection: proposalLevel.findAll().getLevel};
+		filterByStatus = {noSort, Collection: proposalStatus.findAll().getStatus};
+		filterByCategory = {noSort, Collection: proposalCategory.findAll().getCategoryName()};
+		filterByCountry = {noSort, Collection: country.findAll().getCountryName};
+		filterByRegion = {noSort, Collection: region.findAll().get..};
+		filterByCity = {noSort, Collection: city.findAll().get..};
+		filterByDistrict = {noSort, Collection: district.findAll().get..};			
+		*/
+		
+		// (1) Analize HashMap & Form the Query text
+		if (map.size() != 0) { // If The Parameters Of Sorting Are Exist
 			if (map.containsKey("sortBy")) {
-				String sortString = " ORDER BY ";
-				
+				String sortString = " ";
 				String sort = map.get("sortBy");
-				
 				switch (sort) {
-					case "creationDate" : sortString = sortString + "p.creationDate"; break;
-					default : ;
+				case "noSort" : sortString = " "; break;
+				case "creationDate" : sortString = " ORDER BY p.creationDate"; break;
+				
+				// Need To Form Table with Proposal & Sort *Here*?
+	
+				case "voteCount" : sortString = " "; break;
+				case "commentCount" : sortString = " "; break;
+				
+				 default : ;
 				}
-				
-				// queryText = queryText + sortString; // debugging
-				
-				if (sort != "noSort") {
-					queryText = queryText + sortString;
-				}
-				
+				queryText = queryText + sortString;
 			}
 			
-		// System.out.println(queryText); // debugging
+			// Does Filter Exist?
+			Boolean flFilter = false;
+			// String filterString = " WHERE p.";
+			String filterString = "";
+			
+			String filterByLevel = ""; 
+			String filterByStatus = ""; 
+			String filterByCategory = ""; 
+			String filterByCountry = ""; 
+			String filterByRegion = ""; 
+			String filterByCity = ""; 
+			String filterByDistrict = ""; 
+
+			if (map.containsKey("filterByLevel")) {
+				flFilter = true;
+				filterByLevel = "p.level.id=" + map.get("filterByLevel");
+			}
+
+			if (map.containsKey("filterByStatus")) {
+				flFilter = true;
+				filterByStatus = "p.proposal_status_id=" + map.get("filterByStatus");
+			}
+
+			if (map.containsKey("filterByCategory")) {
+				flFilter = true;
+				filterByCategory = "p.category.id=" + map.get("filterByCategory");
+			}
+
+			if (map.containsKey("filterByCountry")) {
+				flFilter = true;
+				filterByCountry = "p.country.id=" + map.get("filterByCountry");
+			}
+
+			if (map.containsKey("filterByRegion")) {
+				flFilter = true;
+				filterByRegion = "p.region.id=" + map.get("filterByRegion");
+			}
+
+			if (map.containsKey("filterByCity")) {
+				flFilter = true;
+				filterByCity = "p.city.id=" + map.get("filterByCity");
+			}
+
+			if (map.containsKey("filterByDistrict")) {
+				flFilter = true;
+				filterByDistrict = "p.district.id="	+ map.get("filterByDistrict");
+			}
+	
+		if (flFilter == true){
+			queryText = queryText + filterString;
+		}
+			
+			
+		System.out.println("*****   " + queryText); // debugging
 			
 			}
 			
