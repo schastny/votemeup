@@ -55,4 +55,12 @@ public class RegionDAOImpl implements RegionDAO {
 		  return count;
 	}
 
+	@Override
+	public List<Region> getByCountryId(long id) {
+		TypedQuery<Region> query = em.createQuery(
+		"SELECT r FROM Region r WHERE r.country.id = " + id, Region.class);
+		List<Region> items = query.getResultList();
+		return items;
+	}
+
 }
