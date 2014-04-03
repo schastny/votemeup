@@ -27,17 +27,6 @@ public class Category  {
 		this.categName = name;
 	}
 
-	@ManyToMany (mappedBy = "categories")
-	@Column (name="proposal_id")
-	public Collection<Proposal> getProposals() {
-		return proposals;
-	}
-
-	public void setProposals(Collection<Proposal> proposals) {
-		this.proposals = proposals;
-	}
-
-	
 	
 	@Id
 	@GeneratedValue(generator="increment")
@@ -65,7 +54,20 @@ public class Category  {
 	@Override
 	public String toString() {
 		return "Category [categId=" + categId + ", categName=" + categName
-				+" proposalse.size()="+proposals.size()+"]";
+				+" proposals.size()="+proposals.size()+"]";
 	}
 
+	@ManyToMany (mappedBy = "categories")
+	@Column (name="proposal_id")
+	public Collection<Proposal> getProposals() {
+		return proposals;
+	}
+
+	public void setProposals(Collection<Proposal> proposals) {
+		this.proposals = proposals;
+	}
+
+	
+	
+	
 }

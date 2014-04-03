@@ -9,6 +9,8 @@ public class FiltrForm {
 	private int region;
 	private int city;
 	private int district;
+	
+	
 	public int getStatus() {
 		return status;
 	}

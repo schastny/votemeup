@@ -128,23 +128,27 @@
 								<c:set var="sizeDoc" scope="session" value="${tmpVar.documents.size()}"/>
 								<c:set var="sizeCat" scope="session" value="${tmpVar.categories.size()}"/>
 							
-								<div><h4><a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a> <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.creationDate}" /></h4></div>
-								<div>Уровень инициативы: ${tmpVar.proposalLevel.level}</div>
+								<div><h4>${tmpVar.proposalId}. <a href="/voteme/proposal?numberProposal=${tmpVar.proposalId}">${tmpVar.proposalName}</a> от <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.creationDate}" /></h4></div>
 								
 								<c:choose>
 								    <c:when test="${sizeVotes == 0}">
-										<div> За инициативу еще не был дан ни один голос.</div>
+										<div> За инициативу еще не был дан ни один голос.
+										Количество комментариев: <b>${sizeComment}</b>
+										Количество документов: <b>${sizeDoc}</b>
+										</div>
 								    </c:when>
 								    <c:when test="${sizeVotes > 0}">
-										<div>Количество голосов: <b>${sizeVotes}</b>. Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div>
+										<div>Количество голосов: <b>${sizeVotes}</b>.
+										 Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" />
+										 Количество комментариев: <b>${sizeComment}</b>
+										 Количество документов: <b>${sizeDoc}</b>
+										 </div>
 								    </c:when>
-								    <c:otherwise>
-<%-- 										<div> Последний голос был: <fmt:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${tmpVar.votes.get(tmpVar.votes.size()-1).voteDate}" /></div> --%>
-								    </c:otherwise>
 								</c:choose>							
-								<div>Количество комментариев: <b>${sizeComment}</b>
-								Количество документов: <b>${sizeDoc}</b>
-								Количество категорий: <b>${sizeCat}</b></div>
+
+								<div>Уровень: ${tmpVar.proposalLevel.level} |
+								Статус: ${tmpVar.proposalStatus.status} |
+								Категорий: <b>${sizeCat}</b></div>
 								
 							</div>
 						</div>
@@ -159,6 +163,12 @@
 				<div>
 					<ul class="pagination ">
 		<!-- 			<li><a href="#">&laquo;</a></li>	 -->
+
+						<c:if test="${gpModel.pagesTotal == 0}">
+						   <p>Данных соответствующих данному фильтру нет в базе данных. Измените условия фильтра...<p>
+						</c:if>						
+		
+		
 						<c:forEach begin="1" end="${gpModel.pagesTotal}" var="val">
 							<li ${gpModel.pageNum == val ? 'class="active"' : ''}>
 								<a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${val}&filtrOn=${gpModel.filtrOn}">

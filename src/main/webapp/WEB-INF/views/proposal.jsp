@@ -87,13 +87,25 @@
 			
 				<div><p>Инициатива № ${proposalMore.proposalId}</p></div>
 			
-				<div>Уровень инициативы: ${proposalMore.proposalLevel.level}</div>
+				<div>Уровень инициативы: <b>${proposalMore.proposalLevel.level}</b></div>
+				<div>Статус инициативы: <b>${proposalMore.proposalStatus.status}</b></div>
 				<div>Автор инициативы: <b>${proposalMore.userd.lastName} ${proposalMore.userd.firstName}</b></div>
-				<div><p>Дата создания инициативы:<fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></p></div>
+				<div><p>Дата создания инициативы:<b></b><fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></b></p></div>
+				<div>
+					<c:if test="${countCat > 0}">
+						<h5>Категории:</h5>
+						<c:forEach items="${categoryProposal}" var="tmpVar">
+								<div>- ${tmpVar.categName}</div>
+						</c:forEach>
+					</c:if>					
+			
+														
+				</div>
 			
 				<div>За инициативу подано: <b>${proposalMoreVoteYes}</b> голос(ов)</div>
 				<div>Против инициативы подано: <b>${proposalMoreVoteNo}</b> голос(ов)</div>
 				<div><p>Количество комментариев: <b>${sizeComment}</b></p></div>
+
 				
 				<div>Страна: <b>${proposalMore.country.countryName}</b></div>
 				<div>Регион: <b>${proposalMore.region.regionName}</b></div>
@@ -140,6 +152,26 @@
 			
 														
 				</div>
+
+				<div>
+					<c:if test="${countDoc > 0}">
+						<h4>Список документов:</h4>
+						<c:forEach items="${documentProposal}" var="tmpVar">
+
+							<div class="panel panel-default spacer">
+								<div class="panel-body">
+									<div>${tmpVar.docId}</div>
+									<div>${tmpVar.docName}</div>
+									<div>${tmpVar.docUrl}</div>
+
+								</div>
+							</div>
+							<!--/span-->
+						</c:forEach>
+					</c:if>					
+			
+														
+				</div>
 				
 				
 				<div>
@@ -151,7 +183,7 @@
 		
 				</div>		
 				
-				<p>&larr; <a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${gpModel.pageNum}&filtrOn=${gpModel.filtrOn}">К началу списка инициатив</a></p>
+				<p>&larr; <a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${gpModel.pageNum}&filtrOn=${gpModel.filtrOn}">Вернуться к списку инициатив</a></p>
 				
 				
 			</div>

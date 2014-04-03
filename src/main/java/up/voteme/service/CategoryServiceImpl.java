@@ -33,5 +33,11 @@ public class CategoryServiceImpl implements CategoryService{
     	categoryDAO.delete(id);
         
     }
+
+	@Override
+	@Transactional
+	public List<Category> getCategoryByProposal(long id) {
+		return categoryDAO.findCategoryByProposal(id);
+	}
     
 }

@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.HomeController;
+import up.voteme.domain.Category;
 import up.voteme.domain.Comment;
 import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
+import up.voteme.service.CategoryService;
 import up.voteme.service.CommentService;
 import up.voteme.service.DocumentService;
 import up.voteme.service.ProposalService;
@@ -53,6 +55,8 @@ public class GuestPageController {
 	@Autowired
 	DocumentService docServ;
 
+	@Autowired
+	CategoryService catServ;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="sortBy", required = false) String sortBy, 
@@ -154,6 +158,9 @@ public class GuestPageController {
 		model.addAttribute("documentProposal", documentProposal);
 		model.addAttribute("countDoc", proposalMore.getDocuments().size());
 		
+		List<Category> categoryProposal = catServ.getCategoryByProposal((Long) numberProposal);
+		model.addAttribute("categoryProposal", categoryProposal);
+		model.addAttribute("countCat", proposalMore.getCategories().size());
 		
 		
 		
