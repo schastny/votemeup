@@ -53,7 +53,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/voteme/">Главная</a>
+					<a class="navbar-brand" href="/voteme/"><b>Главная</b></a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
