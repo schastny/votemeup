@@ -2,8 +2,8 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="true"%>
 
 
@@ -34,7 +34,6 @@
 					Общественная инициатива<br> <small>Всего инициатив:
 						${gpModel.propCount} </small>
 				</h1>
-				Session created: ${gpModel.creationDate} ${welcomeMes}
 			</div>
 			<div class="pull-right">
 				<p>
@@ -55,13 +54,13 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/voteme/">Главная</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						<li><a href="/voteme/">Главная</a></li>
 						<li><a href="/voteme/about">О проекте</a></li>
 						<li><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>
@@ -82,51 +81,87 @@
 
 		<div class="row">
 			<div class="col-sm-9">
-				<c:set var="sizeComment" scope="session" value="${countComment}"/>
-		
-				<h1>${proposalMore.proposalName}</h1>
-			
-				<div><p>Инициатива № ${proposalMore.proposalId}</p></div>
-			
-				<div>Уровень инициативы: <b>${proposalMore.proposalLevel.level}</b></div>
-				<div>Статус инициативы: <b>${proposalMore.proposalStatus.status}</b></div>
-				<div>Автор инициативы: <b>${proposalMore.userd.lastName} ${proposalMore.userd.firstName}</b></div>
-				<div><p>Дата создания инициативы:<b></b><fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></b></p></div>
+				<c:set var="sizeComment" scope="session" value="${countComment}" />
+
+				<h3>${proposalMore.proposalName}</h3>
+
+				<div>
+					<p>Инициатива № ${proposalMore.proposalId}</p>
+				</div>
+
+				<div>
+					Уровень инициативы: <b>${proposalMore.proposalLevel.level}</b>
+				</div>
+				<div>
+					Статус инициативы: <b>${proposalMore.proposalStatus.status}</b>
+				</div>
+				<div>
+					Автор инициативы: <b>${proposalMore.userd.lastName}
+						${proposalMore.userd.firstName}</b>
+				</div>
+				<div>
+					<p>
+						Дата создания инициативы:<b></b>
+						<fmt:formatDate pattern="dd-MM-yyyy"
+							value="${proposalMore.creationDate}" />
+						</b>
+					</p>
+				</div>
 				<div>
 					<c:if test="${countCat > 0}">
 						<b>Категории:</b>
 						<c:forEach items="${categoryProposal}" var="tmpVar">
-								<div>- ${tmpVar.categName}</div>
+							<div>- ${tmpVar.categName}</div>
 						</c:forEach>
-					</c:if>					
+					</c:if>
 				</div>
 				<br>
-			
-				<div>За инициативу подано: <b>${proposalMoreVoteYes}</b> голос(ов)</div>
-				<div>Против инициативы подано: <b>${proposalMoreVoteNo}</b> голос(ов)</div>
-				<div><p>Количество комментариев: <b>${sizeComment}</b></p></div>
 
-				
-				<div>Страна: <b>${proposalMore.country.countryName}</b></div>
-				<div>Регион: <b>${proposalMore.region.regionName}</b></div>
-				<div>Город: <b>${proposalMore.city.cityName}</b></div>
-				<div><p>Район: <b>${proposalMore.district.districtName}</b></p></div>
-
-				<div>Количество документов: <b>${countDoc}</b></div>
-			
-				<br>
-			
 				<div>
-			
-					<div class = "proposal_text">${proposalMore.proposalText}</div>
-					
-			
-					<h3>Практический результат</h3>
-			
-					<div class = "proposal_text">${proposalMore.proposalResult}</div>
-														
+					За инициативу подано: <b>${proposalMoreVoteYes}</b> голос(ов)
 				</div>
-<!-- 				Page comment -->
+				<div>
+					Против инициативы подано: <b>${proposalMoreVoteNo}</b> голос(ов)
+				</div>
+				<div>
+					<p>
+						Количество комментариев: <b>${sizeComment}</b>
+					</p>
+				</div>
+
+
+				<div>
+					Страна: <b>${proposalMore.country.countryName}</b>
+				</div>
+				<div>
+					Регион: <b>${proposalMore.region.regionName}</b>
+				</div>
+				<div>
+					Город: <b>${proposalMore.city.cityName}</b>
+				</div>
+				<div>
+					<p>
+						Район: <b>${proposalMore.district.districtName}</b>
+					</p>
+				</div>
+
+				<div>
+					Количество документов: <b>${countDoc}</b>
+				</div>
+
+				<br>
+
+				<div>
+
+					<div class="proposal_text">${proposalMore.proposalText}</div>
+
+
+					<h3>Практический результат</h3>
+
+					<div class="proposal_text">${proposalMore.proposalResult}</div>
+
+				</div>
+				<!-- 				Page comment -->
 
 				<div>
 					<c:if test="${sizeComment > 0}">
@@ -148,9 +183,9 @@
 							</div>
 							<!--/span-->
 						</c:forEach>
-					</c:if>					
-			
-														
+					</c:if>
+
+
 				</div>
 
 				<div>
@@ -163,33 +198,42 @@
 									<div>${tmpVar.docId}</div>
 									<div>${tmpVar.docName}</div>
 									<div>${tmpVar.docUrl}</div>
-									
+
 
 								</div>
 							</div>
 							<!--/span-->
 						</c:forEach>
-					</c:if>					
-			
-														
+					</c:if>
+
+
 				</div>
-				
-				
+
+
 				<div>
-					<br>		
-					<div class="alert alert-warning">Для голосования вы должны быть <a href="/voteme/">авторизованы</a></div>
-			
-					<p>Для рассмотрения варианта решения на ${proposalMore.proposalLevel.level} уровне осталось ${proposalMore.requiredVotes-proposalMoreVoteYes} (из: ${proposalMore.requiredVotes}) голосов</p>
-					
-		
-				</div>		
-				
-				<p>&larr; <a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${gpModel.pageNum}&filtrOn=${gpModel.filtrOn}">Вернуться к списку инициатив</a></p>
-				
-				
+					<br>
+					<div class="alert alert-warning">
+						Для голосования вы должны быть <a href="/voteme/">авторизованы</a>
+					</div>
+
+					<p>Для рассмотрения варианта решения на
+						${proposalMore.proposalLevel.level} уровне осталось
+						${proposalMore.requiredVotes-proposalMoreVoteYes} (из:
+						${proposalMore.requiredVotes}) голосов.</p>
+
+
+				</div>
+
+				<p>
+					&larr; <a
+						href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=${gpModel.pageQuant}&pageNum=${gpModel.pageNum}&filtrOn=${gpModel.filtrOn}">Вернуться
+						к списку инициатив</a>
+				</p>
+
+
 			</div>
-		
-			
+
+
 
 			<div class="col-sm-3" role="navigation">
 
