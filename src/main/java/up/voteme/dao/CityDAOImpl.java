@@ -65,4 +65,16 @@ public class CityDAOImpl implements CityDAO {
 		long result = (long) query.getSingleResult();
 		return result;
 	}
+
+	/* (non-Javadoc)
+	 * @see up.voteme.dao.CityDAO#getByRegionId(java.lang.Long)
+	 */
+	@Override
+	public List<City> getByRegionId(long id) {
+		TypedQuery<City> query = em.createQuery(
+		"SELECT c FROM City c WHERE c.region.id = " + id, City.class);
+		List<City> items = query.getResultList();
+		return items;
+	}
+
 }

@@ -39,7 +39,6 @@ p {
 					Общественная инициатива<br> <small>Всего инициатив:
 						${gpModel.propCount} </small>
 				</h1>
-				Session created: ${gpModel.creationDate} ${welcomeMes}
 			</div>
 			<div class="pull-right">
 				<p>
@@ -60,16 +59,16 @@ p {
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/voteme/">Главная</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						<li><a href="/voteme/">Главная</a></li>
 						<li><a href="/voteme/about">О проекте</a></li>
 						<li><a href="/voteme/contact">Контакты</a></li>
-						<li><a href="/voteme/help">Помощь</a></li>
+						<li class="active"><a href="/voteme/help">Помощь</a></li>
 					</ul>
 					<form class="navbar-form navbar-right" role="search">
 						<div class="form-group">
@@ -95,7 +94,7 @@ p {
 					<div id="help">
 
 						<div class="help-header">
-							<p> Преимущества регистрации</p>
+							<p>► Преимущества регистрации</p>
 						</div>
 						<div class="help-inf">
 
@@ -115,7 +114,7 @@ p {
 
 						</div>
 						<div class="help-header">
-							<p> Авторизация и выход</p>
+							<p>► Авторизация и выход</p>
 						</div>
 
 						<div class="help-inf">
@@ -140,7 +139,7 @@ p {
 						</div>
 
 						<div class="help-header">
-							<p> Правила размещения инициативы</p>
+							<p>► Правила размещения инициативы</p>
 						</div>
 						<div class="help-inf">Неавторизированный пользователь может
 							только просматривать информацию о имещихся инициативах. Для того
@@ -149,7 +148,7 @@ p {
 							инициативу и проголосовать за уже имеющиеся.</div>
 
 						<div class="help-header">
-							<p> Поиск по сайту</p>
+							<p>► Поиск по сайту</p>
 						</div>
 						<div class="help-inf">На нашем сайте предусмотерн поиск по
 							инициативам. Также имеется возможность отфильтровать инициативы
@@ -192,9 +191,7 @@ p {
 		</div>
 		<!--/row-->
 		<hr>
-		<footer>
-			© BArygaCompany 2014
-		</footer>
+		<footer> © BArygaCompany 2014 </footer>
 
 	</div>
 	<!--/.container-->
@@ -207,14 +204,17 @@ p {
 
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
-<!--  	<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>-->
- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+	<!--  	<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>-->
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$("#help").accordion({
 				collapsible : true,
-				active : false
+				active : false,
+				heightStyle : "content"
 			});
+			$("#help").css("cursor", "pointer");
 		});
 	</script>
 

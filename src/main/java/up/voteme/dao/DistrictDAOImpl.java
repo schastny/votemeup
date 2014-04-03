@@ -45,4 +45,13 @@ public class DistrictDAOImpl implements IDistrictDAO {
 		return manager.find(District.class, id);
 	}
 
+	@Override
+	public List<District> getByCityId(long id) {
+		TypedQuery<District> query = manager.createQuery(
+		"SELECT d FROM District d WHERE d.city.id = " + id, District.class);
+		List<District> items = query.getResultList();
+		return items;
+	}
+
+
 }

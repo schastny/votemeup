@@ -22,6 +22,7 @@ import up.voteme.domain.District;
 @ContextConfiguration({ "classpath:test-context.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)  
 public class DistrictDAOTest2 {
+
 	@Autowired
 	private IDistrictDAO daoDistrict ;
 
@@ -31,7 +32,7 @@ public class DistrictDAOTest2 {
 		System.out.println("Starting test FIND ALL....");
 		List<District> listItem = daoDistrict.findAll();
 		for (int i = 0; i < listItem.size(); i++) {
-			System.out.println("Item :" + listItem.get(i));
+			System.out.println("Item: " + listItem.get(i));
 		}
 		assertFalse("The table is empty!", listItem.size() == 0);
 		// assertTrue("The table is empty!", listItem.size() == 0);
@@ -82,6 +83,20 @@ public class DistrictDAOTest2 {
 		System.out.println("Finish DELETE test....");
 		assertFalse ("Error deleting ",beforList.size() == afterList.size());
 	
+	}
+
+	@Test
+	@Transactional
+	public void E_FindByCityId() {
+		System.out.println("Find all items by CityID...");
+		List<District> list = daoDistrict.getByCityId((long) 522);
+		for (int i = 0; i< list.size(); i++){
+			System.out.println(list.get(i));
+		}
+		System.out.println("etc......");
+		System.out.println("total "+list.size()+" items");
+
+		assertTrue ("No records in table",list.size()>1);		
 	}
 
 }

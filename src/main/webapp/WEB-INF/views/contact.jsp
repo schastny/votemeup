@@ -35,7 +35,6 @@
 					Общественная инициатива<br> <small>Всего инициатив:
 						${gpModel.propCount} </small>
 				</h1>
-				Session created: ${gpModel.creationDate} ${welcomeMes}
 			</div>
 			<div class="pull-right">
 				<p>
@@ -56,15 +55,15 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/voteme/">Главная</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						<li><a href="/voteme/">Главная</a></li>
 						<li><a href="/voteme/about">О проекте</a></li>
-						<li><a href="/voteme/contact">Контакты</a></li>
+						<li class="active"><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>
 					</ul>
 					<form class="navbar-form navbar-right" role="search">

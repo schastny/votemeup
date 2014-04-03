@@ -46,4 +46,10 @@ public class RegionServiceImpl implements RegionService {
 		return regionDAO.countAll();
 	}
 
+	@Override
+	@Transactional
+	public List<Region> getByCountryId(long id) {
+		return regionDAO.getByCountryId(id);
+	}
+
 }

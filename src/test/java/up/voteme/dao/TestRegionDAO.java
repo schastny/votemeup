@@ -204,4 +204,20 @@ System.out.println("country = "+country);
 		assertTrue ("No records in table",list.size()>1);		
 	}
 
+	@Test
+	@Transactional 
+	public void testFindByCoutnryId() {
+		//FindByCountryId
+		System.out.println("Find all items by CountryID...");
+		List<Region> list = regionDao.getByCountryId((long) 1);
+		for (int i = 0; i< list.size(); i++){
+			System.out.println(list.get(i));
+		}
+		System.out.println("etc......");
+		System.out.println("total "+list.size()+" items");
+
+		
+		assertTrue ("No records in table",list.size()>1);		
+	}
+
 }

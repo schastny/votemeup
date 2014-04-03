@@ -13,5 +13,5 @@ public interface RegionService {
 	public abstract Region getById(long id);
 	public abstract long getCount();
 	
-
+	public abstract List<Region> getByCountryId(long id);
 }

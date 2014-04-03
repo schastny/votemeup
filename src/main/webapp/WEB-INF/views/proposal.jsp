@@ -15,7 +15,8 @@
 <!-- Bootstrap -->
 <link type="text/css" rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.min.css" />">
-
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/resources/css/style.css" />">
 <style media="screen" type="text/css">
 .spacer {
 	margin-bottom: 5px;
@@ -117,12 +118,12 @@
 			
 				<div>
 			
-					<div>${proposalMore.proposalText}</div>
+					<div class = "proposal_text">${proposalMore.proposalText}</div>
 					
 			
 					<h3>Практический результат</h3>
 			
-					<div>${proposalMore.proposalResult}</div>
+					<div class = "proposal_text">${proposalMore.proposalResult}</div>
 														
 				</div>
 <!-- 				Page comment -->

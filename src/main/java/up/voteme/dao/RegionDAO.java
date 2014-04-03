@@ -11,4 +11,5 @@ public interface RegionDAO {
 	public abstract List<Region> findAll();
 	public abstract long countAll();
 
+	public abstract List<Region> getByCountryId(long id);
 }

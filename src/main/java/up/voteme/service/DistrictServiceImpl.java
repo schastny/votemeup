@@ -14,27 +14,37 @@ public class DistrictServiceImpl implements DistrictService {
 	@Autowired
 	private IDistrictDAO districtDAO;
 
-	@Transactional
 	@Override
+	@Transactional
 	public void store(District district) {
 		districtDAO.store(district);
 
 	}
-	@Transactional
+
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		districtDAO.delete(id);
 
 	}
-	@Transactional
+
 	@Override
+	@Transactional
 	public District findById(Long id) {		
 		return  districtDAO.findById(id);
 	}
-	@Transactional
+
 	@Override
+	@Transactional
 	public List<District> findAll() {		
 		return  districtDAO.findAll();
 	}
+
+	@Override
+	@Transactional
+	public List<District> getByCityId(long id) {
+		return districtDAO.getByCityId(id);
+	}
+
 
 }

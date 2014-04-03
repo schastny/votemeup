@@ -108,5 +108,20 @@ public class CityDAOTest {
 		logger.info("Size="+size+" records");
 		return size;
 	}
+
+	@Test
+	@Transactional 
+	public void testFindByRegionId() { 		//FindByRegionId
+		System.out.println("Find all items by RegionID...");
+		List<City> list = dao.getByRegionId((long) 1);
+		for (int i = 0; i< list.size(); i++){
+			System.out.println(list.get(i));
+		}
+		System.out.println("etc......");
+		System.out.println("total "+list.size()+" items");
+
+		
+		assertTrue ("No records in table",list.size()>1);		
+	}
 	
 }

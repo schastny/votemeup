@@ -12,26 +12,33 @@ import up.voteme.domain.City;
 @Service
 public class CityServiceImpl implements CityService {
 	
-	 	@Autowired
-	    private CityDAO cityDAO;
+	@Autowired
+	private CityDAO cityDAO;
 	    
 	    
-	    /* (non-Javadoc)
-		 * @see up.voteme.service.CityService#getAll()
-		 */
-	    @Override
-		@Transactional
-		public List<City> getAll() {
+	/* (non-Javadoc)
+	 * @see up.voteme.service.CityService#getAll()
+	 */
+	@Override
+	@Transactional
+	public List<City> getAll() {
 	        return cityDAO.findAll();
-	    }
+	}
 	    
 	    
-		/* (non-Javadoc)
-		 * @see up.voteme.service.CityService#delete(long)
-		 */
-		@Override
-		@Transactional
-	    public void delete(long id) {
+	/* (non-Javadoc)
+	 * @see up.voteme.service.CityService#delete(long)
+	 */
+	@Override
+	@Transactional
+	public void delete(long id) {
 	    	cityDAO.delete(id);
-		}
+	}
+
+	@Override
+	@Transactional
+	public List<City> getByRegionId(long id) {
+		return cityDAO.getByRegionId(id);
+	}
+
 }
