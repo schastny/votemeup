@@ -93,14 +93,13 @@
 				<div><p>Дата создания инициативы:<b></b><fmt:formatDate pattern="dd-MM-yyyy" value="${proposalMore.creationDate}" /></b></p></div>
 				<div>
 					<c:if test="${countCat > 0}">
-						<h5>Категории:</h5>
+						<b>Категории:</b>
 						<c:forEach items="${categoryProposal}" var="tmpVar">
 								<div>- ${tmpVar.categName}</div>
 						</c:forEach>
 					</c:if>					
-			
-														
 				</div>
+				<br>
 			
 				<div>За инициативу подано: <b>${proposalMoreVoteYes}</b> голос(ов)</div>
 				<div>Против инициативы подано: <b>${proposalMoreVoteNo}</b> голос(ов)</div>
@@ -163,6 +162,7 @@
 									<div>${tmpVar.docId}</div>
 									<div>${tmpVar.docName}</div>
 									<div>${tmpVar.docUrl}</div>
+									
 
 								</div>
 							</div>

@@ -158,8 +158,8 @@ public class GuestPageController {
 		model.addAttribute("documentProposal", documentProposal);
 		model.addAttribute("countDoc", proposalMore.getDocuments().size());
 		
-		List<Category> categoryProposal = catServ.getCategoryByProposal((Long) numberProposal);
-		model.addAttribute("categoryProposal", categoryProposal);
+		//List<Category> categoryProposal = catServ.getCategoryByProposal((Long) numberProposal);
+		model.addAttribute("categoryProposal", proposalMore.getCategories());
 		model.addAttribute("countCat", proposalMore.getCategories().size());
 		
 		
