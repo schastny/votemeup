@@ -109,7 +109,6 @@ public class ProposalDAOImpl implements ProposalDAO {
 		String queryText = "";
 		
 System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);		
-System.out.println("key filterByCountryId = "+map.containsKey("filterByCountryId"));
 
 		
 		String sortString = " ";
@@ -220,14 +219,14 @@ System.out.println("key filterByCountryId = "+map.containsKey("filterByCountryId
 					
 				}
 				case "voteCount" :{ 
-//					queryVote = ", (SELECT COUNT(v) FROM  Vote AS v  WHERE p.proposalId = v.proposal) AS vot";
+					queryVote = ", (SELECT COUNT(v) FROM  Vote AS v  WHERE p.proposalId = v.proposal) AS vot";
 					
 //					SELECT u.*, 
 //					(select COUNT(user_id) from  friends  where u.id = user_id) AS friends, 
 //					(select COUNT(owner_id) from  items where u.id = owner_id) AS items
 //					FROM users u					
 					
-//					sortString = " ORDER BY vot DESC "; 
+					sortString = " ORDER BY vot DESC "; 
 					break;
 				}	
 
@@ -239,21 +238,26 @@ System.out.println("key filterByCountryId = "+map.containsKey("filterByCountryId
 				}
 				//queryText = queryText + sortString;
 			}
-			
-			
-			}
+		}
 			
 
 		String queryTextProposal = "SELECT p "+queryVote+" FROM Proposal AS p";
 		String queryTextCount = "SELECT COUNT(p) FROM Proposal AS p";
 
-//		Query query = em.createQuery(queryTextProposal+queryText+sortString);
-//		List<Object[]> result5 = query.getResultList();		
-//		for (Object item : result5) {
-//			System.out.println("---------- "+item);
-//		}		
+		String queryTextProposal2 = "SELECT p "+queryVote+" FROM Proposal AS p";
 		
+//==============================================================
+		Query q = em.createQuery(queryTextProposal2 + queryText + sortString);
+//		List<Proposal> results = new ArrayList<Proposal>();
 		
+		List<Object[]> results = q.getResultList();		
+
+		for(int i = 0 ; i < results.size() ; i++){
+			 System.out.println("............ "+ results.get(i));
+
+			}
+		
+//============================================================================		
 		
 		System.out.println("**    1  **   " + queryTextCount+queryText); // debugging
 		Query queryCount = em.createQuery(queryTextCount+queryText);
