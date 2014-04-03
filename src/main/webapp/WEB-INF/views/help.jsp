@@ -39,7 +39,6 @@ p {
 					Общественная инициатива<br> <small>Всего инициатив:
 						${gpModel.propCount} </small>
 				</h1>
-				Session created: ${gpModel.creationDate} ${welcomeMes}
 			</div>
 			<div class="pull-right">
 				<p>
@@ -60,13 +59,13 @@ p {
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/voteme/" class ="activ">Главная</a>
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
+						<li><a href="/voteme/">Главная</a></li>
 						<li><a href="/voteme/about">О проекте</a></li>
 						<li><a href="/voteme/contact">Контакты</a></li>
 						<li class="active"><a href="/voteme/help">Помощь</a></li>
@@ -192,9 +191,7 @@ p {
 		</div>
 		<!--/row-->
 		<hr>
-		<footer>
-			© BArygaCompany 2014
-		</footer>
+		<footer> © BArygaCompany 2014 </footer>
 
 	</div>
 	<!--/.container-->
@@ -207,16 +204,17 @@ p {
 
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
-<!--  	<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>-->
- <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+	<!--  	<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>-->
+	<script
+		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script>
 		$(document).ready(function() {
 			$("#help").accordion({
 				collapsible : true,
 				active : false,
-				heightStyle: "content"
+				heightStyle : "content"
 			});
-			$("#help").css("cursor","pointer");
+			$("#help").css("cursor", "pointer");
 		});
 	</script>
 
