@@ -207,8 +207,8 @@ System.out.println("country = "+country);
 	@Test
 	@Transactional 
 	public void testFindByCoutnryId() {
-		//FindByCoutnryId
-		System.out.println("Find all items...");
+		//FindByCountryId
+		System.out.println("Find all items by CountryID...");
 		List<Region> list = regionDao.getByCountryId((long) 1);
 		for (int i = 0; i< list.size(); i++){
 			System.out.println(list.get(i));

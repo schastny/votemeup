@@ -69,4 +69,18 @@ public class DistrictDAOTest {
 		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
 	}
 
+	@Test
+	public void E_FindByCityId() {
+		System.out.println("Find all items...");
+		List<District> list = dao.getByCityId((long) 522);
+		for (int i = 0; i< list.size(); i++){
+			System.out.println(list.get(i));
+		}
+		System.out.println("etc......");
+		System.out.println("total "+list.size()+" items");
+
+		
+		assertTrue ("No records in table",list.size()>1);		
+	}
+
 }
