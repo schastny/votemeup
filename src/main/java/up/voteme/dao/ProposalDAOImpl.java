@@ -1,25 +1,40 @@
 package up.voteme.dao;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
-import org.hibernate.mapping.Map;
+
+
+
+
+
+import javax.persistence.criteria.SetJoin;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import up.voteme.domain.Category;
+import up.voteme.domain.Comment;
 import up.voteme.domain.Proposal;
 import up.voteme.model.RequestResult;
-import up.voteme.service.VoteService;
-import up.voteme.web.GuestPageController;
 
 @Component
 public class ProposalDAOImpl implements ProposalDAO {
@@ -111,6 +126,7 @@ public class ProposalDAOImpl implements ProposalDAO {
 	public String queryBuilder  (HashMap<String,String> map){
 		
 		String resultString = "";
+		
 		Set<String> needSet = new HashSet<>();
 		needSet.add("sortBy");
 		needSet.add("pageNum");
@@ -195,41 +211,112 @@ public class ProposalDAOImpl implements ProposalDAO {
 	@Override
 	public RequestResult findByParams(HashMap<String,String> map) {
 		
-		String mainQuery = queryBuilder(map);
-		String queryText = "";
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Proposal> cq = cb.createQuery(Proposal.class); 
+        Root<Proposal> proposal = cq.from(Proposal.class); 
 		
-		queryText = "SELECT COUNT(*) FROM Proposal p" + mainQuery;
-		logger.info("queryText:  " + queryText);
-		Query query1 = em.createQuery(queryText);
-		long resultSize =(long) query1.getSingleResult();
-		logger.info("resultSize:  " + resultSize); 
+		Set<String> expectedSet = new HashSet<>();
+		expectedSet.add("sortBy");
+		expectedSet.add("pageNum");
+		expectedSet.add("pageQuant");
+		expectedSet.add("filtrByStatusId");
+		expectedSet.add("filtrByLevelId");
+		expectedSet.add("filtrByCategoryId");
+		expectedSet.add("filtrByCountryId");
+		expectedSet.add("filtrByRegionId");
+		expectedSet.add("filtrByCityId");
+		expectedSet.add("filtrByDistrictId");
+		if (!map.keySet().containsAll(expectedSet)){
+			throw new RuntimeException("Configuration map is uncorrect");
+		}
+				
+		Predicate predicate = cb.conjunction();
+		if (!map.get("filtrByStatusId").equals("0") ){
+			Predicate np = cb.equal(proposal.get("proposalStatus").get("id"), map.get("filtrByStatusId") );
+		    predicate = cb.and(predicate, np);
+		}
+		if (!map.get("filtrByLevelId").equals("0") ){
+			Predicate np = cb.equal(proposal.get("proposalLevel").get("id"), map.get("filtrByLevelId") );
+		    predicate = cb.and(predicate, np);
+		}
+		if (!map.get("filtrByCountryId").equals("0") ){
+			Predicate np = cb.equal(proposal.get("country").get("countryId"), map.get("filtrByCountryId") );
+		    predicate = cb.and(predicate, np);
+		}
+		if (!map.get("filtrByRegionId").equals("0") ){
+			Predicate np = cb.equal(proposal.get("region").get("regionId"), map.get("filtrByRegionId") );
+		    predicate = cb.and(predicate, np);
+		}
+		if (!map.get("filtrByCityId").equals("0") ){
+			Predicate np = cb.equal(proposal.get("city").get("cityId"), map.get("filtrByCityId") );
+		    predicate = cb.and(predicate, np);
+		}
+		if (!map.get("filtrByDistrictId").equals("0") ){
+			Predicate np = cb.equal(proposal.get("district").get("districtId"), map.get("filtrByDistrictId") );
+		    predicate = cb.and(predicate, np);
+		}
+		 
 		
 		
-		queryText = "SELECT p FROM Proposal p" + mainQuery;
-		logger.info("queryText:  " + queryText); 
-		TypedQuery<Proposal> query2 = em.createQuery(queryText, Proposal.class);
-		//calculate paging
-		int pageNum = Integer.parseInt(map.get("pageNum"));
+		/*
+		CriteriaQuery<Department> q = cb.createQuery(Department.class);
+		Root<Department> dept = q.from(Department.class);
+		Join<Department,Employee> emp = d.join(Department_.employees);
+		q.where(cb.equal(emp.get(Employee_.name),"edalorzo"));
+		*/
+		Join<Proposal,Category> categories = proposal.join("categories");
+		if (!map.get("filtrByCategoryId").equals("0") ){
+
+			Predicate np = cb.equal(categories.get("categId") ,map.get("filtrByCategoryId"));
+			predicate = cb.and(predicate, np);		
+		}
+		
+		if (predicate != null) {
+			cq.where(predicate);
+		}
+		logger.info("predicate:  " + predicate);
+		
+		String sort = map.get("sortBy");
+		switch (sort) {
+			case "noSort" : 
+				break;
+			case "creationDate" : 
+				cq.orderBy (cb.desc(proposal.get("creationDate")));
+				break;
+			case "voteCount" : 
+				cq.orderBy(cb.desc(cb.size(proposal.<Collection<Comment>>get("votes"))));
+				break;
+			case "commentCount" : 
+				cq.orderBy(cb.desc(cb.size(proposal.<Collection<Comment>>get("comments")))); 
+				break;
+		}
+		
+        cq.select(proposal);       
+        TypedQuery<Proposal> q = em.createQuery(cq); 
+        int pageNum = Integer.parseInt(map.get("pageNum"));
 		int pageQuant = Integer.parseInt(map.get("pageQuant"));
 		long first = (pageNum-1)*pageQuant;
-		query2.setFirstResult((int)first);
-		query2.setMaxResults(pageQuant);
-		List<Proposal> resultList = query2.getResultList();
-			
-		for (Proposal item : resultList) {
+		q.setFirstResult((int)first);
+		q.setMaxResults(pageQuant);
+        List<Proposal> resultList = q.getResultList(); 
+        for (Proposal item : resultList) {
 			item.getCategories().size();
 			item.getComments().size();
 			item.getVotes().size();
 			item.getDocuments().size();
 		}
-		logger.info("resultList:  " + resultList);
-		return new RequestResult(resultSize,resultList );
-	}
-
-
-
-
+        
+        CriteriaQuery<Long> cq2 = cb.createQuery(Long.class);
+//        Root<Proposal> prop = cq2.from(Proposal.class); 
+        cq2.select(cb.count(cq2.from(Proposal.class)));
+        em.createQuery(cq2);
+        cq2.where(predicate);
+        Long resultSize = em.createQuery(cq2).getSingleResult();
 	
+	logger.info("resultSize: "+resultSize+" / "+"resultList:  " + resultList);
+	return new RequestResult(resultSize, resultList);
+
+	}
 	
 	
 }
