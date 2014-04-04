@@ -210,11 +210,13 @@ public class ProposalDAOImpl implements ProposalDAO {
 	
 	@Override
 	public RequestResult findByParams(HashMap<String,String> map) {
-		
+	
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Proposal> cq = cb.createQuery(Proposal.class); 
+		CriteriaQuery<Long> cq2 = cb.createQuery(Long.class);
         Root<Proposal> proposal = cq.from(Proposal.class); 
-		
+        Root<Proposal> proposal2 = cq2.from(Proposal.class); 
+	
 		Set<String> expectedSet = new HashSet<>();
 		expectedSet.add("sortBy");
 		expectedSet.add("pageNum");
@@ -255,30 +257,11 @@ public class ProposalDAOImpl implements ProposalDAO {
 			Predicate np = cb.equal(proposal.get("district").get("districtId"), map.get("filtrByDistrictId") );
 		    predicate = cb.and(predicate, np);
 		}
-		 
-		
-		
-		/*
-		CriteriaQuery<Department> q = cb.createQuery(Department.class);
-		Root<Department> dept = q.from(Department.class);
-		Join<Department,Employee> emp = d.join(Department_.employees);
-		q.where(cb.equal(emp.get(Employee_.name),"edalorzo"));
-		*/
-		Join<Proposal,Category> categories = proposal.join("categories");
-		if (!map.get("filtrByCategoryId").equals("0") ){
 
-			Predicate np = cb.equal(categories.get("categId") ,map.get("filtrByCategoryId"));
-			predicate = cb.and(predicate, np);		
-		}
-		
-		if (predicate != null) {
-			cq.where(predicate);
-		}
-		logger.info("predicate:  " + predicate);
-		
 		String sort = map.get("sortBy");
 		switch (sort) {
 			case "noSort" : 
+				cq.orderBy(cb.asc(proposal.get("proposalId")));
 				break;
 			case "creationDate" : 
 				cq.orderBy (cb.desc(proposal.get("creationDate")));
@@ -291,7 +274,14 @@ public class ProposalDAOImpl implements ProposalDAO {
 				break;
 		}
 		
-        cq.select(proposal);       
+        cq.select(proposal).distinct(true);    
+        if (!map.get("filtrByCategoryId").equals("0") ){
+			Join<Proposal,Category> categ = proposal.join("categories");
+			Predicate np = cb.equal(categ.get("categId") ,map.get("filtrByCategoryId"));
+			cq.where(cb.and(predicate, np));
+		} else {
+			cq.where(predicate);
+		}
         TypedQuery<Proposal> q = em.createQuery(cq); 
         int pageNum = Integer.parseInt(map.get("pageNum"));
 		int pageQuant = Integer.parseInt(map.get("pageQuant"));
@@ -299,19 +289,18 @@ public class ProposalDAOImpl implements ProposalDAO {
 		q.setFirstResult((int)first);
 		q.setMaxResults(pageQuant);
         List<Proposal> resultList = q.getResultList(); 
-        for (Proposal item : resultList) {
-			item.getCategories().size();
-			item.getComments().size();
-			item.getVotes().size();
-			item.getDocuments().size();
+
+        cq2.select(cb.count(proposal2));
+        if (!map.get("filtrByCategoryId").equals("0") ){
+			Join<Proposal,Category> categ = proposal2.join("categories");
+			Predicate np = cb.equal(categ.get("categId") ,map.get("filtrByCategoryId"));
+			cq2.where(cb.and(predicate, np));		
+		} else {
+			cq2.where(predicate);
 		}
+        long resultSize = em.createQuery(cq2).getSingleResult();
         
-        CriteriaQuery<Long> cq2 = cb.createQuery(Long.class);
-//        Root<Proposal> prop = cq2.from(Proposal.class); 
-        cq2.select(cb.count(cq2.from(Proposal.class)));
-        em.createQuery(cq2);
-        cq2.where(predicate);
-        Long resultSize = em.createQuery(cq2).getSingleResult();
+		
 	
 	logger.info("resultSize: "+resultSize+" / "+"resultList:  " + resultList);
 	return new RequestResult(resultSize, resultList);
