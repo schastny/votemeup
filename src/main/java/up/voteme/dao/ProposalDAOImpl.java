@@ -1,22 +1,22 @@
 package up.voteme.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Proposal;
 import up.voteme.model.RequestResult;
-import up.voteme.service.VoteService;
 
 @Component
 public class ProposalDAOImpl implements ProposalDAO {
@@ -105,18 +105,14 @@ public class ProposalDAOImpl implements ProposalDAO {
 	@Override
 	public RequestResult findByParams(HashMap<String,String> map) {
 		
+//		System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);		
 		
 		String queryText = "";
-		
-System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);		
-
-		
-		String sortString = " ";
-		String queryVote = " ";
+		String sortString = "";
+		String queryVote = "";
 
 
-		// (1) Analize HashMap & Form the Query text
-		if (map.size() != 0) { // If The Parameters Of Sorting Are Exist
+		if (map.size() != 0) { 
 			Boolean flFilter = false;
 
 			if (map.containsKey("filterByCategoryId")) {
@@ -207,8 +203,6 @@ System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);
 
 				String sort = map.get("sortBy");
 				
-				
-				
 				switch (sort) {
 				case "noSort" : { 
 					break;
@@ -221,17 +215,15 @@ System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);
 				case "voteCount" :{ 
 					queryVote = ", (SELECT COUNT(v) FROM  Vote AS v  WHERE p.proposalId = v.proposal) AS vot";
 					
-//					SELECT u.*, 
-//					(select COUNT(user_id) from  friends  where u.id = user_id) AS friends, 
-//					(select COUNT(owner_id) from  items where u.id = owner_id) AS items
-//					FROM users u					
-					
 					sortString = " ORDER BY vot DESC "; 
 					break;
 				}	
 
 				case "commentCount" : {
-					sortString = " "; break;
+					queryVote = ", (SELECT COUNT(v) FROM  Comment AS v  WHERE p.proposalId = v.proposal) AS vot";
+					
+					sortString = " ORDER BY vot DESC "; 
+					break;
 				}
 				
 				 default : ;
@@ -239,40 +231,51 @@ System.out.println("!!!!!!!!!!!!!!!!!!!! map = "+map);
 				//queryText = queryText + sortString;
 			}
 		}
-			
 
-		String queryTextProposal = "SELECT p "+queryVote+" FROM Proposal AS p";
 		String queryTextCount = "SELECT COUNT(p) FROM Proposal AS p";
-
-		String queryTextProposal2 = "SELECT p "+queryVote+" FROM Proposal AS p";
-		
-//==============================================================
-		Query q = em.createQuery(queryTextProposal2 + queryText + sortString);
-//		List<Proposal> results = new ArrayList<Proposal>();
-		
-		List<Object[]> results = q.getResultList();		
-
-		for(int i = 0 ; i < results.size() ; i++){
-			 System.out.println("............ "+ results.get(i));
-
-			}
-		
-//============================================================================		
-		
 		System.out.println("**    1  **   " + queryTextCount+queryText); // debugging
 		Query queryCount = em.createQuery(queryTextCount+queryText);
 		long size =(long) queryCount.getSingleResult();
-		
-		System.out.println("**    2  **   " + queryTextProposal+queryText + sortString); // debugging
-		TypedQuery<Proposal> queryProposal = em.createQuery(queryTextProposal+queryText+sortString, Proposal.class);
+		List<Proposal> resultList = new ArrayList<Proposal>();
 
-		int pageNum = Integer.parseInt(map.get("pageNum"));
-		int pageQuant = Integer.parseInt(map.get("pageQuant"));
-		long first = (pageNum-1)*pageQuant;
-		queryProposal.setFirstResult((int)first);
-		queryProposal.setMaxResults(pageQuant);
+		if (queryVote.isEmpty()) {
+			String queryTextProposal = "SELECT p FROM Proposal AS p";
+			System.out.println("**    2  **   " + queryTextProposal+queryText + sortString); // debugging
+			TypedQuery<Proposal> queryProposal = em.createQuery(queryTextProposal+queryText+sortString, Proposal.class);
+			int pageNum = Integer.parseInt(map.get("pageNum"));
+			int pageQuant = Integer.parseInt(map.get("pageQuant"));
+			long first = (pageNum-1)*pageQuant;
+			queryProposal.setFirstResult((int)first);
+			queryProposal.setMaxResults(pageQuant);
+	
+			resultList = queryProposal.getResultList();
+			
+		}	
+		else {
+			String queryTextProposal = "SELECT p.proposalId"+queryVote+" FROM Proposal AS p";
+			Query qvr = em.createQuery(queryTextProposal + queryText + sortString);
+			int pageNum = Integer.parseInt(map.get("pageNum"));
+			int pageQuant = Integer.parseInt(map.get("pageQuant"));
+			long first = (pageNum-1)*pageQuant;
+			qvr.setFirstResult((int)first);
+			qvr.setMaxResults(pageQuant);
 
-		List<Proposal> resultList = queryProposal.getResultList();
+			List<Object[]> results = qvr.getResultList();
+			System.out.println(results.size());
+			System.out.println(results.getClass());
+
+			for (int i = 0; i < results.size(); i++) {
+				System.out.println("---------" + results.get(i)[0].getClass()
+						+ "  --------- " + (Long) results.get(i)[0]);
+				System.out.println(">>>>>>>>>" + results.get(i)[1].getClass()
+						+ "  >>>>>>>>> " + (Long) results.get(i)[1]);
+
+				resultList.add(findById((Long) results.get(i)[0]));
+
+			}
+				
+		}
+
 
 		for (Proposal item : resultList) {
 			item.getCategories().size();

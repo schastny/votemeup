@@ -165,7 +165,9 @@
 
 				<div>
 					<c:if test="${sizeComment > 0}">
-						<h4>Комментарии:</h4>
+						<div class="alert bg-info">
+							<h4>Комментарии:</h4>
+						</div>
 						<c:forEach items="${commentProposal}" var="tmpVar">
 
 							<div class="panel panel-default spacer">
@@ -190,7 +192,9 @@
 
 				<div>
 					<c:if test="${countDoc > 0}">
-						<h4>Список документов:</h4>
+						<div class="alert bg-info">
+							<h4>Список документов:</h4>
+						</div>
 						<c:forEach items="${documentProposal}" var="tmpVar">
 
 							<div class="panel panel-default spacer">
@@ -198,6 +202,7 @@
 									<div>${tmpVar.docId}</div>
 									<div>${tmpVar.docName}</div>
 									<div>${tmpVar.docUrl}</div>
+									<div><img src=${tmpVar.docUrl} class="img-rounded img-responsive" alt="xa"></div>
 
 
 								</div>
@@ -212,7 +217,7 @@
 
 				<div>
 					<br>
-					<div class="alert alert-warning">
+					<div class="alert bg-danger">
 						Для голосования вы должны быть <a href="/voteme/">авторизованы</a>
 					</div>
 
