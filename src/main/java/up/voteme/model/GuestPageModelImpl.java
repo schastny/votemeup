@@ -1,6 +1,7 @@
 package up.voteme.model;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -78,17 +79,12 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	private Date creationDate;
 	private String filtrOn;
 
-
-
 	
 	public GuestPageModelImpl(){
 		logger.info("GuestPageModel constructor");
 	}
 
-	
-	/* (non-Javadoc)
-	 * @see up.voteme.model.GuestPageModel#reset()
-	 */
+
 	@Override
 	public  void reset(){
 
@@ -97,10 +93,11 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		statusList = statusServ.getAllPS();
 		levelList = levelServ.findAll();					
 		categoryList = categServ.getAll();
-		countryList = countryServ.findAll();          
-		regionList = regionServ.getAllRegion();
-		cityList = cityServ.getAll();
-		districtList = districtServ.findAll();
+		countryList = countryServ.findAll();  
+		regionList = new ArrayList<>();
+		cityList = new ArrayList<>();
+		districtList = new ArrayList<>();
+		
 		clearFiltr();
 		
 		// for database to retrieve RequestResult
@@ -120,30 +117,14 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		selectedRegionId = 0;
 		selectedCityId = 0;
 		selectedDistrictId = 0;
-		
+		regionList.clear();
+		cityList.clear(); 
+		districtList.clear();
 	}
 
 	
 	public  void update(){
-		
-		propCount = propServ.countAll();
-		// update configMap;
-		 /* sortBy = {noSort, voteCount, creationDate, commentCount};
-		 * pageNum = {1..countAll() / PageQuant};
-		 * pageQuant = {1..100};
-		 * filtrByLevelId = {0, Collection: proposalLevel.findAll().getLevelId};
-		 * filtrByStatusId = {0, Collection: proposalStatus.findAll().getStatusId};
-		 * filtrByCategoryId = {0, Collection:proposalCategory.findAll().getCategoryId}; 
-		 * filtrByCountryId = {0,Collection: country.findAll().getCountryId}; 
-		 * filtrByRegionId = {0, Collection: region.findAll().get..}; 
-		 * filtrByCityId = {0, Collection:city.findAll().get..}; 
-		 * filtrByDistrictId = {0, Collection:district.findAll().get..};
-		 */
-		//configMap = new HashMap<String,String>();
 
-		//System.out.println("sortBy = "+sortBy+", pageNum = "+pageNum+", pageQuant = "+pageQuant);		
-		
-		
 		configMap.put("sortBy", sortBy);
 		configMap.put("pageNum", String.valueOf(pageNum));
 		configMap.put("pageQuant", String.valueOf(pageQuant));
@@ -154,15 +135,10 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		configMap.put("filterByRegionId", String.valueOf(selectedRegionId));
 		configMap.put("filterByCityId", String.valueOf(selectedCityId));
 		configMap.put("filterByDistrictId", String.valueOf(selectedDistrictId));
-
 		
-		// Ahtung!!! СountByParams & getByParams must be in one transaction!!!!
 		RequestResult result = propServ.findByParams(configMap);
 
 		int num = (int) result.count/pageQuant;
-
-		System.out.println("num = "+num+", result.count = "+result.count+", pageQuant = "+pageQuant+", pageNum = "+pageNum);		
-		
 		pagesTotal = (result.count % pageQuant != 0) ? (num + 1) : num;
 		proposalList = result.list;
 		

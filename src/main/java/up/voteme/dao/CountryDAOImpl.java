@@ -47,7 +47,8 @@ System.out.println("country = "+con);
 		TypedQuery<Country> query = eMgr.createQuery("SELECT c FROM Country c", Country.class);
 		List<Country> items = query.getResultList();
 		for (Country item : items) {
-			System.out.println(item);
+			//System.out.println(item);
+			item.getRegions().size();
 		}
 		return items;
 	}

@@ -60,6 +60,9 @@ public class RegionDAOImpl implements RegionDAO {
 		TypedQuery<Region> query = em.createQuery(
 		"SELECT r FROM Region r WHERE r.country.id = " + id, Region.class);
 		List<Region> items = query.getResultList();
+		for (Region r :items){
+			r.getCities().size();
+		}
 		return items;
 	}
 

@@ -247,7 +247,7 @@
 									<option value="0">---Регион---</option>
 									<c:forEach items="${gpModel.regionList}" var="item">
 										<option value="${item.regionId}" ${item.regionId == gpModel.selectedRegionId ? 'selected="selected"' : ''}>${item.regionName}</option>
-									</c:forEach>
+									</c:forEach> 
 								</select> 
 								<select name=city class="form-control">
 									<option value="0">---Город---</option>
@@ -295,6 +295,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+	<script type="text/javascript" src="<c:url value="/resources/js/guestpage.js" />"></script>	
 
 
 

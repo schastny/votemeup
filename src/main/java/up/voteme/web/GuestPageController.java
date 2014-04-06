@@ -1,7 +1,10 @@
 package up.voteme.web;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,20 +17,35 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+
+
+
+
+
+
+
 
 import up.voteme.HomeController;
 import up.voteme.domain.Category;
+import up.voteme.domain.City;
 import up.voteme.domain.Comment;
+import up.voteme.domain.District;
 import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
+import up.voteme.domain.Region;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
 import up.voteme.service.CategoryService;
+import up.voteme.service.CityService;
 import up.voteme.service.CommentService;
+import up.voteme.service.DistrictService;
 import up.voteme.service.DocumentService;
 import up.voteme.service.ProposalService;
+import up.voteme.service.RegionService;
 import up.voteme.service.VoteService;
 
 
@@ -42,21 +60,22 @@ public class GuestPageController {
 			.getLogger(GuestPageController.class);
 	@Autowired
 	GuestPageModel gpModel;
-
 	@Autowired
 	ProposalService propServ;
-	
 	@Autowired
 	VoteService voteServ;
-	
 	@Autowired
 	CommentService commentServ;
-
 	@Autowired
 	DocumentService docServ;
-
 	@Autowired
 	CategoryService catServ;
+	@Autowired
+	RegionService regServ;
+	@Autowired
+	CityService cityServ;
+	@Autowired
+	DistrictService districtServ;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="sortBy", required = false) String sortBy, 
@@ -65,10 +84,10 @@ public class GuestPageController {
 					@RequestParam(value="filtrOn", required = false) String filtrOn,
 						Model model) {
 		logger.info("GET method /");
-		//mark new session
+		//mark new session to track
 		if (!model.containsAttribute("gpModel")){
 			Date date = new Date();
-			gpModel.setCreationDate(date); // for debug purposes to track session
+			gpModel.setCreationDate(date); 
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
@@ -126,7 +145,6 @@ public class GuestPageController {
 		gpModel.setFiltrOn("true");
 		gpModel.setSortBy("noSort");
 		gpModel.setPageNum(1);
-		
 		gpModel.setSelectedPropStatusId(fForm.getStatus());
 		gpModel.setSelectedCategoryId(fForm.getCategory());
 		gpModel.setSelectedPropLevelId(fForm.getLevel());
@@ -134,11 +152,66 @@ public class GuestPageController {
 		gpModel.setSelectedRegionId(fForm.getRegion());
 		gpModel.setSelectedCityId(fForm.getCity());
 		gpModel.setSelectedDistrictId(fForm.getDistrict());
-
 		gpModel.update();
 
 		return "guestpage";
 	}
+	
+	
+	
+	@RequestMapping(value = "/api/regions", method = RequestMethod.GET)
+	public @ResponseBody
+	List<Region> regionsForCountry(
+			@RequestParam(value = "countryId", required = true) String countryId) {
+		logger.debug("finding regions for country " + countryId);
+		List<Region> list = regServ.getByCountryId(Long.parseLong(countryId));
+		gpModel.setRegionList(list);
+		gpModel.setCityList(new ArrayList<City>());
+		gpModel.setDistrictList(new ArrayList<District>());
+		//avoid infinite loops
+		for (Region r : list){
+			r.setCountry(null);
+			r.setCities(null);
+		}
+		return list;
+	}
+	
+	
+	@RequestMapping(value = "/api/cities", method = RequestMethod.GET)
+	public @ResponseBody
+	List<City> citiesForRegion(
+			@RequestParam(value = "regionId", required = true) String regionId) {
+		logger.debug("finding cities for region " + regionId);
+		List<City> list = cityServ.getByRegionId(Long.parseLong(regionId));
+		gpModel.setCityList(list);
+		gpModel.setDistrictList(new ArrayList<District>());
+		//avoid infinite loops
+		for (City c : list){
+			c.setRegion(null);
+			c.setDistricts(null);
+		}
+		return list;
+	}
+	
+	
+	@RequestMapping(value = "/api/districts", method = RequestMethod.GET)
+	public @ResponseBody
+	List<District> districtsForCity(
+			@RequestParam(value = "cityId", required = true) String cityId) {
+		logger.debug("finding districts for city " + cityId);
+		List<District> list = districtServ.getByCityId(Long.parseLong(cityId));
+		gpModel.setDistrictList(list);
+		//avoid infinite loops
+		for (District d : list){
+			d.setCity(null);
+		}
+		return list;
+	}
+	
+	
+	
+	
+	
 	
 
 	@RequestMapping(value = "/proposal")
