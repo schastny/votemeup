@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 
+
 import up.voteme.HomeController;
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
@@ -36,6 +37,7 @@ import up.voteme.domain.District;
 import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
 import up.voteme.domain.Region;
+import up.voteme.domain.User;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
@@ -82,7 +84,9 @@ public class GuestPageController {
 			@RequestParam(value="pageQuant", required = false) String pageQuant,
 				@RequestParam(value="pageNum", required = false) String pageNum,
 					@RequestParam(value="filtrOn", required = false) String filtrOn,
-						Model model) {
+					Model model) {
+		
+		
 		logger.info("GET method /");
 		//mark new session to track
 		if (!model.containsAttribute("gpModel")){
@@ -112,26 +116,21 @@ public class GuestPageController {
 	}
 
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute GuestLogin guest,
-			BindingResult result, Model model) {
-		logger.info("POST method");
-		if (result.hasErrors()) {
-			logger.info("Binding error");
-		}
-		String name = guest.getName();
-		String password = guest.getPassword();
-		logger.info("Name:" + name);
-		logger.info("Password:" + password);
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String addContact(@ModelAttribute Model model) {
 
-		if (!name.equals("user")) {
-			model.addAttribute("fNameMes", "неверное!");
-		} else if (!password.equals("user")) {
-			model.addAttribute("fPassMes", "неверный!");
-		} else
-			model.addAttribute("welcomeMes", "Welcome: user");
+		session
+		System.out.println("user.getAuthorities():" + user.getAuthorities());
+		http://howtodoinjava.com/2013/04/16/custom-userdetailsservice-example-for-spring-3-security/
 
-		return "guestpage";
+//		if (!name.equals("user")) {
+//			model.addAttribute("fNameMes", "неверное!");
+//		} else if (!password.equals("user")) {
+//			model.addAttribute("fPassMes", "неверный!");
+//		} else
+//			model.addAttribute("welcomeMes", "Welcome: user");
+
+		return "admin/admin";
 	}
 	
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)

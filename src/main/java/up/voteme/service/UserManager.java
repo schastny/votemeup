@@ -13,8 +13,8 @@ public class UserManager {
 
 	public UserManager() {
 		users = new HashMap<String, User>();
-		users.put("john", new User("john", "1", "ROLE_USER"));
-		users.put("bob", new User("bob", "2", "ROLE_USER, ROLE_ADMIN"));
+		users.put("pop", new User("pop", "1", "ROLE_USER"));
+		users.put("bob", new User("bob", "2", "ROLE_ADMIN"));
 	}
 	
 	public User getUser(String username) throws UsernameNotFoundException{

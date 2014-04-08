@@ -184,24 +184,60 @@
 			<div class="col-sm-3" role="navigation">
 
 				<div class="well sidebar-nav">
-					<form role="form" method="POST" action="login">
+<%-- 					<form role="form" method="POST" action="login"> --%>
+<!-- 						<div class="form-group"> -->
+<%-- 							<label for="name1">Имя ${fNameMes}</label> <input --%>
+<!-- 								type="text" name="name" class="form-control" -->
+<!-- 								id="name1" placeholder="Введите имя"> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<%-- 							<label for="exampleInputPassword1">Пароль ${fPassMes}</label> <input --%>
+<!-- 								type="password" name="password" class="form-control" -->
+<!-- 								id="exampleInputPassword1" placeholder="Пароль"> -->
+<!-- 						</div> -->
+<!-- 						<div class="checkbox"> -->
+<!-- 							<label> <input type="checkbox"> Запомнить меня -->
+<!-- 							</label> -->
+<!-- 						</div> -->
+<!-- 						<button type="submit" class="btn btn-default">Войти</button> -->
+<!-- 						<a class="pull-right" href="#" role="button">Регистрация</a> -->
+<%-- 					</form> --%>
+
+					<form role="form" method="POST" action="j_spring_security_check">
 						<div class="form-group">
-							<label for="name1">Имя ${fNameMes}</label> <input
-								type="text" name="name" class="form-control"
-								id="name1" placeholder="Введите имя">
+							<label for="j_username">Имя ${j_username}</label> <input
+								type="text" name="j_username" class="form-control"
+								id="j_username" placeholder="Введите имя">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputPassword1">Пароль ${fPassMes}</label> <input
-								type="password" name="password" class="form-control"
-								id="exampleInputPassword1" placeholder="Пароль">
+							<label for="j_password">Пароль ${j_password}</label> <input
+								type="password" name="j_password" class="form-control"
+								id="j_password" placeholder="Пароль">
 						</div>
 						<div class="checkbox">
 							<label> <input type="checkbox"> Запомнить меня
 							</label>
 						</div>
-						<button type="submit" class="btn btn-default">Войти</button>
+						<button type="submit" value="Login" class="btn btn-default">Войти</button>
 						<a class="pull-right" href="#" role="button">Регистрация</a>
 					</form>
+
+					
+<%-- 					<form class="login-form" action="j_spring_security_check" method="post"> --%>
+<!-- 							<label for="j_username">Username: </label> -->
+<!-- 						 	<input id="j_username" name="j_username" size="20" maxlength="50" type="text" /> -->
+				
+<!-- 							<label for="j_password">Password: </label> -->
+<!-- 							<input id="j_password" name="j_password" size="20" maxlength="50" type="password" /> -->
+							
+<!-- 							<input type="submit" value="Login" /> -->
+<%-- 					</form> --%>
+					
+					
+					
+					
+					
+					
 				</div>
 				<!--/.well -->
 				<div class="well sidebar-nav">
