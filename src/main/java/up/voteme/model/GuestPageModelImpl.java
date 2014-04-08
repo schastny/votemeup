@@ -138,10 +138,11 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		
 		RequestResult result = propServ.findByParams(configMap);
 
+		
 		int num = (int) result.count/pageQuant;
 		pagesTotal = (result.count % pageQuant != 0) ? (num + 1) : num;
 		proposalList = result.list;
-		
+		propCount = result.count;
 	}
 	
 	
