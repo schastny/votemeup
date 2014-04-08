@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                    http://www.springframework.org/schema/security 
+                    http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/css/**" security="none" />
+
+	<http auto-config="true">
+		<intercept-url pattern="/secure/**" access="ROLE_USER" />
+		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<form-login login-page="/signin"
+			authentication-failure-url="/signin-failure" default-target-url="/" />
+	</http>
+	
+	
+<!-- 	<http auto-config="true"> -->
+<!-- 		<intercept-url pattern="/secure/**" access="ROLE_USER" /> -->
+<!-- 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" /> -->
+<!-- 		<intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/> -->
+<!-- 		<form-login login-page="/signin" -->
+<!-- 				authentication-failure-url="/signin-failure" default-target-url="/" always-use-default-target="true" /> -->
+<!-- 	</http>	 -->
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="customUserDetailsService">
+		</authentication-provider>
+	</authentication-manager>
+	
+	
+<!-- 		 <http use-expressions="true"> -->
+<!-- 09	         <intercept-url pattern="/employee/**" access="isAuthenticated()" /> -->
+<!-- 10	         <form-login /> -->
+<!-- 11	         <logout logout-url="/logout"/> -->
+<!-- 12	     </http> -->
+<!-- 13	  -->
+<!-- 14	    <authentication-manager> -->
+<!-- 15	        <authentication-provider user-service-ref="userService"> -->
+<!-- 16	            <password-encoder hash="sha-256" > -->
+<!-- 17	                <salt-source user-property="username"/> -->
+<!-- 18	            </password-encoder> -->
+<!-- 19	        </authentication-provider> -->
+<!-- 20	    </authentication-manager>	 -->
+<!-- http://www.beingjavaguys.com/2013/09/spring-security-example.html -->
+	
+</beans:beans>
