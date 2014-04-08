@@ -11,13 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 
 @Entity
-public class Userd {
+public class Userd implements UserDetails{
 	@Override
 	public String toString() {
 		return "Userd [userdId=" + userdId + ", firstName=" + firstName
@@ -198,6 +201,51 @@ public class Userd {
 	}
 	public void setDistrict(District district) {
 		this.district = district;
+	}
+	
+	@Override
+	@Transient
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		HashSet<Role> set = new HashSet<>();
+		set.add(role);
+		return set;
+	}
+	@Override
+	@Transient
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return userPassword;
+	}
+	@Override
+	@Transient
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return userLogin;
+	}
+	@Override
+	@Transient
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	@Transient
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	@Transient
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	@Transient
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

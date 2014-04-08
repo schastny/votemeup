@@ -7,12 +7,11 @@
 </head>
 <body>
 <h1> 
-	Hello, this is UserPage.
+	Hello, this is AdminPage.
 </h1>
 <p>Пользователь: ${user.firstName} ${user.lastName}</p>
 <p>Логин: ${user.userLogin}</p>
 <p>Роль: ${user.role.roleName}</p>
 <a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
-
 </body>
 </html>

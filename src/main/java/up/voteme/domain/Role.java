@@ -8,11 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-public class Role {
+public class Role implements GrantedAuthority {
 	
 	private long roleId;
 	private String roleName;
@@ -56,8 +58,13 @@ public class Role {
 	
 	@Override
 	public String toString() {
-		return "Role [roleId=" + roleId + ", roleName=" + roleName
-				+ ", roleDescr=" + roleDescr + ", users=" + users.size() + "]";
+		return "Role [roleId=" + roleId + ", roleName=" + roleName +"]";
+	}
+	@Override
+	@Transient
+	public String getAuthority() {
+		// TODO Auto-generated method stub
+		return roleName;
 	}
 
 }

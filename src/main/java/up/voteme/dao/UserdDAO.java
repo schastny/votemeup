@@ -14,7 +14,7 @@ public class UserdDAO {
 	private EntityManagerFactory entityManagerFactory;
 
 	public UserdDAO() {
-	 entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate");
+	 entityManagerFactory = Persistence.createEntityManagerFactory("default");
 	}
 
 	public long store(Userd item) {
