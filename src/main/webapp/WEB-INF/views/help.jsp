@@ -33,21 +33,8 @@ p {
 <body>
 
 	<div class="container">
-		<div class="row page-header">
-			<div class="pull-left">
-				<h1>
-					Общественная инициатива<br> <small>Всего инициатив:
-						${gpModel.propCount} </small>
-				</h1>
-			</div>
-			<div class="pull-right">
-				<p>
-					<button type="button" class="btn btn-primary btn-lg ">
-						Опубликовать<br>инициативу
-					</button>
-				</p>
-			</div>
-		</div>
+
+		<jsp:include page="header.jsp" />
 
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
@@ -191,7 +178,7 @@ p {
 		</div>
 		<!--/row-->
 		<hr>
-		<footer> © BArygaCompany 2014 </footer>
+		<footer> <p>© Sv-051Company 2014</p> </footer>
 
 	</div>
 	<!--/.container-->

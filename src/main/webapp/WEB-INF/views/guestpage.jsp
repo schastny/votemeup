@@ -20,40 +20,12 @@
 
 </head>
 <body>
-
-
-
-
-
 	<div class="container">
-		<div class="row page-header">
-			<div class="pull-left">
-				<h1>
-					Общественная инициатива<br> <small>Всего инициатив:
-						${gpModel.propCount} </small>
-				</h1>
-<!-- 			Session created: ${gpModel.creationDate} ${welcomeMes}  -->	
-			</div>
-			<div class="pull-right">
-				<p>
-					<button type="button" class="btn btn-primary btn-lg ">
-						Опубликовать<br>инициативу
-					</button>
-				</p>
-			</div>
-		</div>
-
+	
+	 <jsp:include page="header.jsp" /> 
+	
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
-			 	<!--  <div class="navbar-header">
-					<button type="button" class="navbar-toggle" data-toggle="collapse"
-						data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-				</div>-->
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse"
@@ -82,8 +54,7 @@
 			<div class="col-sm-9">
 				<div class="row">
 				
-					  	<ul class="nav nav-tabs">
-					  	
+					  	<ul class="nav nav-tabs">					
 					  	
 						<li ${gpModel.sortBy == 'noSort' ? 'class="active"' : ''}> <a href="/voteme/?sortBy=noSort&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=${gpModel.filtrOn}"  >Все</a></li>
 						<li ${gpModel.sortBy == 'voteCount' ? 'class="active"' : ''}><a href="/voteme/?sortBy=voteCount&pageQuant=${gpModel.pageQuant}&pageNum=1&filtrOn=${gpModel.filtrOn}">Популярные</a></li>
@@ -101,25 +72,7 @@
 								<li><a href="/voteme/?sortBy=${gpModel.sortBy}&pageQuant=15&pageNum=1&filtrOn=${gpModel.filtrOn}">Показывать по 15</a></li>
 							</ul>
 						</li>
-					</ul>
-					
-
-
-<!-- 					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
-						<div class="panel panel-default spacer">
-							<div class="panel-body">
-								<p>${tmpVar.proposalName}</p>
-								<p>
-									<a class="pull-right" href="/voteme/proposal?numberProposal=${tmpVar.proposalId}" role="button">Подробнее»</a> <em
-										class="pull-left">Количество голосов:
-										${fn:length(tmpVar.votes)} </em>
-								</p>
-							</div>
-						</div>
-						
-					</c:forEach>
- -->					
-					
+					</ul>	
  					<c:forEach items="${gpModel.proposalList}" var="tmpVar">
 						<div class="panel panel-default spacer">
 							<div class="panel-body">
@@ -154,9 +107,7 @@
 						</div>
 					
 					</c:forEach>
-					
-					
-					
+														
 				</div>
 				<!--/row-->
 				<!-- Pagination -->
@@ -175,7 +126,6 @@
 									${val}</a>
 							</li>
 						</c:forEach>
-		<!-- 			<li><a href="#">&raquo;</a></li> 	 -->
 					</ul>
 				</div>
 			</div>
@@ -266,10 +216,7 @@
 						<button type="submit" class="btn btn-default">Применить
 							фильтр</button>
 					</form>
-					
-				
-
-
+						
 				</div>
 				<!--/.well -->
 			</div>
@@ -282,22 +229,16 @@
 
 
 		<footer>
-			<p>© BArygaCompany 2014</p>
+			<p>© Sv-051Company 2014</p>
 		</footer>
 
 	</div>
 	<!--/.container-->
 
-
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	<script type="text/javascript" src="<c:url value="/resources/js/guestpage.js" />"></script>	
-
-
-
 </body>
 </html>
