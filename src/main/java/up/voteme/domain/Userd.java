@@ -18,18 +18,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Userd {
-	@Override
-	public String toString() {
-		return "Userd [userdId=" + userdId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", birthYear=" + birthYear
-				+ ", sex=" + sex + ", registrationDate=" + registrationDate
-				+ ", email=" + email + ", userLogin=" + userLogin
-				+ ", userPassword=" + userPassword + ", role=" + role.getRoleId()
-				+ ", userStatus=" + userStatus.getId() + ", country=" + country.getCountryId()
-				+ ", region=" + region.getRegionId() + ", city=" + city.getCityId() + ", district="
-				+ district.getDistrictId() + ", proposals=" + proposals.size() + ", commentd="
-				+ commentd.size() + ", votes=" + votes.size() + "]";
-	}
 	private long userdId;
 	private String firstName;
 	private String lastName;
@@ -200,4 +188,18 @@ public class Userd {
 		this.district = district;
 	}
 
+	@Override
+	public String toString() {
+		return "Userd [userdId=" + userdId + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", birthYear=" + birthYear
+				+ ", sex=" + sex + ", registrationDate=" + registrationDate
+				+ ", email=" + email + ", userLogin=" + userLogin
+				+ ", userPassword=" + userPassword + ", role=" + role.getRoleId()
+				+ ", userStatus=" + userStatus.getId() + ", country=" + country.getCountryId()
+				+ ", region=" + region.getRegionId() + ", city=" + city.getCityId() + ", district="
+				+ district.getDistrictId() + ", proposals=" + proposals.size() + ", commentd="
+				+ commentd.size() + ", votes=" + votes.size() + "]";
+	}
+	
+	
 }
