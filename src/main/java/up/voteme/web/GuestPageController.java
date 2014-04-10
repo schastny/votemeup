@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 
+
+
+
 import up.voteme.HomeController;
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
@@ -36,6 +42,7 @@ import up.voteme.domain.District;
 import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
 import up.voteme.domain.Region;
+import up.voteme.domain.Userd;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
@@ -52,7 +59,7 @@ import up.voteme.service.VoteService;
 
 
 @Controller
-@SessionAttributes("gpModel")
+@SessionAttributes({"gpModel","user"})
 @Scope("request")
 public class GuestPageController {
 
@@ -91,6 +98,18 @@ public class GuestPageController {
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
+		//login&pass in cookie data
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+		    Object principal = auth.getPrincipal();  
+		    if (principal instanceof Userd && (!model.containsAttribute("user"))) {
+		        Userd user = (Userd) principal;
+		        model.addAttribute("user", user);
+		        logger.info("cookie");
+		        gpModel.reset();
+		        return "guestpage";
+		    }
+		}
 		// request come without parameters
 		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
@@ -105,6 +124,7 @@ public class GuestPageController {
 			gpModel.clearFiltr();
 		}
 		gpModel.update();
+
 		return "guestpage";
 	}
 

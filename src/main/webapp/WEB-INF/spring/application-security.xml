@@ -14,10 +14,12 @@
 		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<form-login login-page="/signin"
 			authentication-failure-url="/signin-failure" default-target-url="/default" />
+		<remember-me key="myAppKey"/>
 	</http>
 
 	<authentication-manager>
 		<authentication-provider user-service-ref="customUserDetailsService">
+			 <password-encoder hash="sha"/> 
 		</authentication-provider>
 	</authentication-manager>
 	
