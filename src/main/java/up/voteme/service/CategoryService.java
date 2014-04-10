@@ -10,6 +10,5 @@ public interface CategoryService {
 
 	public abstract void delete(long id) ;
 
-	public abstract List<Category> getCategoryByProposal(long id);
 
 }

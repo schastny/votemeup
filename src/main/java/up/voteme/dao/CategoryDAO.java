@@ -16,6 +16,4 @@ public interface CategoryDAO {
 
 	public abstract long countAll();
 
-	public abstract List<Category> findCategoryByProposal(long id);
-
 }

@@ -10,10 +10,10 @@ import org.junit.runners.MethodSorters;
 
 import up.voteme.domain.Userd;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
+/*@FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class UserdDAOTest {
 
-	private	UserdDAO dao = new UserdDAO();
+	private	UserdDAO1 dao = new UserdDAO();
 
 	@Test
 	public void A_findAllTest() {
@@ -69,4 +69,4 @@ public class UserdDAOTest {
 		assertTrue ("Error in DB record delete ",beforList.size() == afterList.size()+1);
 	}
 
-}
+}*/

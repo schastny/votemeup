@@ -16,9 +16,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Autowired
     private CategoryDAO categoryDAO;
     
-    /* (non-Javadoc)
-	 * @see up.voteme.service.CategoryService#getAll()
-	 */
+
     @Override
     @Transactional
 	public List<Category> getAll() {
@@ -34,10 +32,4 @@ public class CategoryServiceImpl implements CategoryService{
         
     }
 
-	@Override
-	@Transactional
-	public List<Category> getCategoryByProposal(long id) {
-		return categoryDAO.findCategoryByProposal(id);
-	}
-    
 }

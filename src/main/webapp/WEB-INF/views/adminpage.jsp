@@ -12,6 +12,7 @@
 <p>Пользователь: ${user.firstName} ${user.lastName}</p>
 <p>Логин: ${user.userLogin}</p>
 <p>Роль: ${user.role.roleName}</p>
-<a href="<c:url value="/j_spring_security_logout"/>">Logout</a>
+<p><a href="<c:url value="/j_spring_security_logout"/>">Logout</a></p>
+<p><a href="<c:url value="/"/>">Назад</a></p>
 </body>
 </html>

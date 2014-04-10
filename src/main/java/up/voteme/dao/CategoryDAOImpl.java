@@ -60,15 +60,5 @@ public class CategoryDAOImpl implements CategoryDAO {
 	}
 
 
-	@Override
-	public List<Category> findCategoryByProposal(long id) {
-//		TypedQuery<Category> query =  em.createQuery("SELECT c FROM category c LEFT JOIN proposal_category ON category_category_id = c.category_id LEFT JOIN proposal ON proposal_id = proposal_proposal_id WHERE proposal_id="+id, Category.class);
-//		//SELECT e FROM Employee e JOIN e.projects p JOIN e.projects p2 WHERE p.name = :p1 AND p2.name = :p2
-//		List<Category> items = query.getResultList();
-//		for (Category item : items) {
-//			item.getProposals().size();
-//		}
-//		return items;
-		return null;
-	}
+
 }

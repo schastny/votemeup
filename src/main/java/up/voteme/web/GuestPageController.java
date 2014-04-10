@@ -52,7 +52,7 @@ import up.voteme.service.VoteService;
 
 
 @Controller
-@SessionAttributes({ "welcomeMes", "gpModel" })
+@SessionAttributes("gpModel")
 @Scope("request")
 public class GuestPageController {
 
@@ -91,15 +91,12 @@ public class GuestPageController {
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
-
-
 		// request come without parameters
 		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
 			logger.info("gpModel.reset()");
 			return "guestpage";
 		}
-		
 		gpModel.setSortBy(sortBy);
 		gpModel.setPageQuant(Integer.parseInt(pageQuant));
 		gpModel.setPageNum(Integer.parseInt(pageNum));
@@ -111,29 +108,7 @@ public class GuestPageController {
 		return "guestpage";
 	}
 
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute GuestLogin guest,
-			BindingResult result, Model model) {
-		logger.info("POST method");
-		if (result.hasErrors()) {
-			logger.info("Binding error");
-		}
-		String name = guest.getName();
-		String password = guest.getPassword();
-		logger.info("Name:" + name);
-		logger.info("Password:" + password);
 
-		if (!name.equals("user")) {
-			model.addAttribute("fNameMes", "неверное!");
-		} else if (!password.equals("user")) {
-			model.addAttribute("fPassMes", "неверный!");
-		} else
-			model.addAttribute("welcomeMes", "Welcome: user");
-
-		return "guestpage";
-	}
-	
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)
 	public String filtr(@ModelAttribute FiltrForm fForm,
 			BindingResult result, Model model) {
@@ -141,7 +116,6 @@ public class GuestPageController {
 		if (result.hasErrors()) {
 			logger.info("Binding error");
 		}
-
 		gpModel.setFiltrOn("true");
 		gpModel.setSortBy("noSort");
 		gpModel.setPageNum(1);
@@ -153,7 +127,6 @@ public class GuestPageController {
 		gpModel.setSelectedCityId(fForm.getCity());
 		gpModel.setSelectedDistrictId(fForm.getDistrict());
 		gpModel.update();
-
 		return "guestpage";
 	}
 	
