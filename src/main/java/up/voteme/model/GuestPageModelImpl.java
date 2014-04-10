@@ -78,6 +78,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	private int pagesTotal; // total pages.
 	private Date creationDate;
 	private String filtrOn;
+	private String loginMes;
 
 	
 	public GuestPageModelImpl(){
@@ -103,6 +104,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		// for database to retrieve RequestResult
 		configMap = new HashMap<>();
 		sortBy = "noSort";
+		loginMes = "";
 		pageNum = 1;
 		pageQuant = 5;
 		update();
@@ -137,10 +139,9 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		configMap.put("filterByDistrictId", String.valueOf(selectedDistrictId));
 		
 		RequestResult result = propServ.findByParams(configMap);
-
-		
-		int num = (int) result.count/pageQuant;
-		pagesTotal = (result.count % pageQuant != 0) ? (num + 1) : num;
+		propCount = result.count;
+		int num = (int) propCount/pageQuant;
+		pagesTotal = (propCount % pageQuant != 0) ? (num + 1) : num;
 		proposalList = result.list;
 		propCount = result.count;
 	}
@@ -699,6 +700,16 @@ public class GuestPageModelImpl implements GuestPageModel  {
 
 	public void setPagesTotal(int pagesTotal) {
 		this.pagesTotal = pagesTotal;
+	}
+
+
+	public String getLoginMes() {
+		return loginMes;
+	}
+
+
+	public void setLoginMes(String loginMes) {
+		this.loginMes = loginMes;
 	}
 
 

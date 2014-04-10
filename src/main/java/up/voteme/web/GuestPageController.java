@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +31,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 
 
+
+
+
 import up.voteme.HomeController;
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
@@ -36,6 +42,7 @@ import up.voteme.domain.District;
 import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
 import up.voteme.domain.Region;
+import up.voteme.domain.Userd;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
@@ -52,7 +59,7 @@ import up.voteme.service.VoteService;
 
 
 @Controller
-@SessionAttributes({ "welcomeMes", "gpModel" })
+@SessionAttributes({"gpModel","user"})
 @Scope("request")
 public class GuestPageController {
 
@@ -91,15 +98,24 @@ public class GuestPageController {
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
-
-
+		//login&pass in cookie data
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+		    Object principal = auth.getPrincipal();  
+		    if (principal instanceof Userd && (!model.containsAttribute("user"))) {
+		        Userd user = (Userd) principal;
+		        model.addAttribute("user", user);
+		        logger.info("cookie");
+		        gpModel.reset();
+		        return "guestpage";
+		    }
+		}
 		// request come without parameters
 		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
 			logger.info("gpModel.reset()");
 			return "guestpage";
 		}
-		
 		gpModel.setSortBy(sortBy);
 		gpModel.setPageQuant(Integer.parseInt(pageQuant));
 		gpModel.setPageNum(Integer.parseInt(pageNum));
@@ -108,32 +124,11 @@ public class GuestPageController {
 			gpModel.clearFiltr();
 		}
 		gpModel.update();
-		return "guestpage";
-	}
-
-	
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute GuestLogin guest,
-			BindingResult result, Model model) {
-		logger.info("POST method");
-		if (result.hasErrors()) {
-			logger.info("Binding error");
-		}
-		String name = guest.getName();
-		String password = guest.getPassword();
-		logger.info("Name:" + name);
-		logger.info("Password:" + password);
-
-		if (!name.equals("user")) {
-			model.addAttribute("fNameMes", "неверное!");
-		} else if (!password.equals("user")) {
-			model.addAttribute("fPassMes", "неверный!");
-		} else
-			model.addAttribute("welcomeMes", "Welcome: user");
 
 		return "guestpage";
 	}
-	
+
+
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)
 	public String filtr(@ModelAttribute FiltrForm fForm,
 			BindingResult result, Model model) {
@@ -141,7 +136,6 @@ public class GuestPageController {
 		if (result.hasErrors()) {
 			logger.info("Binding error");
 		}
-
 		gpModel.setFiltrOn("true");
 		gpModel.setSortBy("noSort");
 		gpModel.setPageNum(1);
@@ -153,7 +147,6 @@ public class GuestPageController {
 		gpModel.setSelectedCityId(fForm.getCity());
 		gpModel.setSelectedDistrictId(fForm.getDistrict());
 		gpModel.update();
-
 		return "guestpage";
 	}
 	
