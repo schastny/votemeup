@@ -29,8 +29,8 @@
 
 
 	<div class="container">
-	
-		<jsp:include page="header.jsp" /> 
+
+		<jsp:include page="header.jsp" />
 
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
@@ -85,27 +85,8 @@
 			</div>
 			<!--/span-->
 			<div class="col-sm-3" role="navigation">
-				<div class="well sidebar-nav">
-					<form role="form" method="POST" action="login">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Имя ${fNameMes}</label> <input
-								type="text" name="name" class="form-control"
-								id="exampleInputEmail1" placeholder="Введите имя">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">Пароль ${fPassMes}</label> <input
-								type="password" name="password" class="form-control"
-								id="exampleInputPassword1" placeholder="Пароль">
-						</div>
-						<div class="checkbox">
-							<label> <input type="checkbox"> Запомнить меня
-							</label>
-						</div>
-						<button type="submit" class="btn btn-default">Войти</button>
-						<a class="pull-right" href="#" role="button">Регистрация</a>
-					</form>
-				</div>
 
+				<jsp:include page="loginForm.jsp" />
 			</div>
 			<!--/span-->
 		</div>
