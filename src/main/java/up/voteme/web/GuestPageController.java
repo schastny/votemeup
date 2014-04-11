@@ -131,7 +131,7 @@ public class GuestPageController {
 //		} else
 //			model.addAttribute("welcomeMes", "Welcome: user");
 
-		return "admin/admin";
+		return "guestpage";
 	}
 	
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)

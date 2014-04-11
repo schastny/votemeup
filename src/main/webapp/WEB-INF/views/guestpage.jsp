@@ -203,7 +203,7 @@
 <!-- 						<a class="pull-right" href="#" role="button">Регистрация</a> -->
 <%-- 					</form> --%>
 
-					<!-- Путь к фильтру аутентификации -->
+					Путь к фильтру аутентификации
 					<spring:url var="authUrl" value="/static/j_spring_security_check" />
 					<form method="post" class="signin" action="${authUrl}">
 
