@@ -16,7 +16,9 @@
 		<form-login login-processing-url="/static/j_spring_security_check"
 					login-page="/questpage"
 					authentication-failure-url="/questpage?login_error=t"/>
-		<logout logout-url="/static/j_spring_security_logout"/>			
+		<logout logout-url="/static/j_spring_security_logout"/>		
+		<remember-me key="votemeKey"
+					 token-validity-seconds="2419200" />	
 	</http>
 	
 	
