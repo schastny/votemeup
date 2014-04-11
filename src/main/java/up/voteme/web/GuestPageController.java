@@ -119,10 +119,10 @@ public class GuestPageController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String addContact(@ModelAttribute Model model) {
 
-		session
-		System.out.println("user.getAuthorities():" + user.getAuthorities());
-		http://howtodoinjava.com/2013/04/16/custom-userdetailsservice-example-for-spring-3-security/
-			http://stackoverflow.com/questions/14268451/spring-security-userdetailsservice-implementation-login-fails	
+//		session
+//		System.out.println("user.getAuthorities():" + user.getAuthorities());
+//		http://howtodoinjava.com/2013/04/16/custom-userdetailsservice-example-for-spring-3-security/
+//			http://stackoverflow.com/questions/14268451/spring-security-userdetailsservice-implementation-login-fails	
 
 //		if (!name.equals("user")) {
 //			model.addAttribute("fNameMes", "неверное!");
