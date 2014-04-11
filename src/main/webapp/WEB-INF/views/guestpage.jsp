@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@ page session="true"%>
 
 
@@ -203,20 +203,33 @@
 <!-- 						<a class="pull-right" href="#" role="button">Регистрация</a> -->
 <%-- 					</form> --%>
 
-					<form role="form" method="POST" action="j_spring_security_check">
+					<!-- Путь к фильтру аутентификации -->
+					<spring:url var="authUrl" value="/static/j_spring_security_check" />
+					<form method="post" class="signin" action="${authUrl}">
+
 						<div class="form-group">
-							<label for="j_username">Имя ${j_username}</label> <input
-								type="text" name="j_username" class="form-control"
-								id="j_username" placeholder="Введите имя">
+							<label for="j_username">Имя:</label>
+							<input  id="j_username"
+									type="text"
+									name="j_username"
+									class="form-control"
+									placeholder="Введите имя"/>
 						</div>
 						<div class="form-group">
-							<label for="j_password">Пароль ${j_password}</label> <input
-								type="password" name="j_password" class="form-control"
-								id="j_password" placeholder="Пароль">
+							<label for="j_password">Пароль:</label>
+							<input id="j_password"
+								   type="password"
+								   name="j_password"
+								   class="form-control"
+								   placeholder="Пароль"/>
 						</div>
 						<div class="checkbox">
-							<label> <input type="checkbox"> Запомнить меня
-							</label>
+						
+							<input id="remember_me"
+							       name="_spring_security_remember_me" 
+							       type="checkbox"/> 
+							<label for="remember_me">Запомнить меня</label>
+							
 						</div>
 						<button type="submit" value="Login" class="btn btn-default">Войти</button>
 						<a class="pull-right" href="#" role="button">Регистрация</a>
