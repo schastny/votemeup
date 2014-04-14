@@ -81,10 +81,10 @@ public class GuestPageController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String homepage(@RequestParam(value="sortBy", required = false) String sortBy, 
-			@RequestParam(value="pageQuant", required = false) String pageQuant,
-				@RequestParam(value="pageNum", required = false) String pageNum,
-					@RequestParam(value="filtrOn", required = false) String filtrOn,
-					Model model) {
+			               @RequestParam(value="pageQuant", required = false) String pageQuant,
+				           @RequestParam(value="pageNum", required = false) String pageNum,
+					       @RequestParam(value="filtrOn", required = false) String filtrOn,
+					       Model model) {
 		
 		
 		logger.info("GET method /");
@@ -95,6 +95,7 @@ public class GuestPageController {
 			logger.info("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
+		
 
 
 		// request come without parameters
@@ -116,22 +117,15 @@ public class GuestPageController {
 	}
 
 	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String addContact(@ModelAttribute Model model) {
+	@RequestMapping(value = "/signin-failure", method = RequestMethod.GET)
+	public String signinFailure(Model model) {
 
-//		session
-//		System.out.println("user.getAuthorities():" + user.getAuthorities());
-//		http://howtodoinjava.com/2013/04/16/custom-userdetailsservice-example-for-spring-3-security/
-//			http://stackoverflow.com/questions/14268451/spring-security-userdetailsservice-implementation-login-fails	
+		System.out.println("signin-failure");
+		logger.info("login error - incorect data!");
 
-//		if (!name.equals("user")) {
-//			model.addAttribute("fNameMes", "неверное!");
-//		} else if (!password.equals("user")) {
-//			model.addAttribute("fPassMes", "неверный!");
-//		} else
-//			model.addAttribute("welcomeMes", "Welcome: user");
-
+		gpModel.setLoginMes("Неверный логин или пароль");
 		return "guestpage";
+			
 	}
 	
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)

@@ -11,9 +11,9 @@ public class SigninController {
 		return "signin";
 	}
 	
-	@RequestMapping(value = "/signin-failure", method = RequestMethod.GET)
-	public String signinFailure() {
-		return "signin_failure";
-	}
+//	@RequestMapping(value = "/signin-failure", method = RequestMethod.GET)
+//	public String signinFailure() {
+//		return "signin_failure";
+//	}
 	
 }

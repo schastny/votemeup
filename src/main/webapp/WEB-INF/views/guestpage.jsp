@@ -203,8 +203,8 @@
 <!-- 						<a class="pull-right" href="#" role="button">Регистрация</a> -->
 <%-- 					</form> --%>
 
-					Путь к фильтру аутентификации
-					<spring:url var="authUrl" value="/static/j_spring_security_check" />
+					<h4 class="text-danger text-center">${gpModel.loginMes}</h4>
+					<c:url var="authUrl" value="/static/j_spring_security_check" />
 					<form method="post" class="signin" action="${authUrl}">
 
 						<div class="form-group">

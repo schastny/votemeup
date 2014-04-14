@@ -146,6 +146,10 @@ public interface GuestPageModel {
 	public void update() ;
 	public void clearFiltr() ;
 	
+	public String getLoginMes() ;
+
+
+	public void setLoginMes(String loginMes) ;
 
 
 }

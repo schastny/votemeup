@@ -78,6 +78,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	private int pagesTotal; // total pages.
 	private Date creationDate;
 	private String filtrOn;
+	private String loginMes;
 
 	
 	public GuestPageModelImpl(){
@@ -698,6 +699,19 @@ public class GuestPageModelImpl implements GuestPageModel  {
 
 	public void setPagesTotal(int pagesTotal) {
 		this.pagesTotal = pagesTotal;
+	}
+
+
+	@Override
+	public String getLoginMes() {
+		return loginMes;
+	}
+
+
+	@Override
+	public void setLoginMes(String loginMes) {
+		this.loginMes = loginMes;
+		
 	}
 
 
