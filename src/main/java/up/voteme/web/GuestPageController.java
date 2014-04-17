@@ -249,8 +249,5 @@ public class GuestPageController {
 		model.addAttribute("welcomeMes", "Welcome: user");
 		return "help";
 	}	
-	
-	
 
-	
 }

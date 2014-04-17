@@ -172,7 +172,6 @@ p {
 
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
-	<!--  	<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>-->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script>

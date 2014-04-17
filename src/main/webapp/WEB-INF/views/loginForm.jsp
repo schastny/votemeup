@@ -31,7 +31,7 @@
 				</label>
 			</div>
 			<button type="submit" class="btn btn-default" value="Login">Войти</button>
-			<a class="pull-right" href="#" role="button">Регистрация</a>
+			<a class="pull-right" href="/voteme/registration" role="button">Регистрация</a>
 		</form>
 	</c:if>
 
