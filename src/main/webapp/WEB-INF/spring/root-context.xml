@@ -26,6 +26,7 @@
   	  <!-- Use @Component annotations for bean definitions -->
   <context:component-scan base-package="up.voteme"/>
   <mvc:resources mapping="/resources/**" location="/resources/" />
+  <mvc:resources mapping="/pages/**" location="/WEB-INF/pages/" />
   
  
 

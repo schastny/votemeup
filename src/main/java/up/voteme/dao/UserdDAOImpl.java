@@ -66,8 +66,8 @@ public class UserdDAOImpl implements UserdDAO {
 		List<Userd> results = query.getResultList();
 	    if (results.isEmpty()) return null;
 	    else if (results.size() == 1) return results.get(0);
-	    logger.info("NonUniqueResultException(Login must be UNIC)");
-	    throw new NonUniqueResultException("Login must be UNIC");
+	    logger.info("NonUniqueResultException(Login must be UNIQUE)");
+	    throw new NonUniqueResultException("Login must be UNIQUE");
 
 	}
 
