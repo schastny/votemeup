@@ -17,5 +17,7 @@ public interface UserdDAO {
 	public abstract List<Userd> findAll();
 
 	public abstract long countAll();
+	
+
 
 }

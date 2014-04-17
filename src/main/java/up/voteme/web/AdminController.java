@@ -24,7 +24,8 @@ public class AdminController {
 		logger.info("/admin/");
 		Userd user = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
-		return "adminpage";
+		//return "adminpage";
+		return "redirect:/pages/adminpage.html";
 	}
 	
 }
