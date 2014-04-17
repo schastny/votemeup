@@ -13,8 +13,7 @@ window.UserdCollection = Backbone.Collection.extend({
  
 // Views
 window.UserdListView = Backbone.View.extend({
- 
-    /*tagName:'ul',*/
+
 	template:_.template($('#user-table').html()),
  
     initialize:function () {
@@ -23,8 +22,9 @@ window.UserdListView = Backbone.View.extend({
     },
  
     render:function (eventName) {
+        $(this.el).html(this.template());
         _.each(this.model.models, function (userd) {
-            $(this.el).append(new UserdListItemView({model:userd}).render().el);
+             $('tbody').append(new UserdListItemView({model:userd}).render().el);
         }, this);
         return this;
     }
@@ -32,9 +32,7 @@ window.UserdListView = Backbone.View.extend({
 });
  
 window.UserdListItemView = Backbone.View.extend({
- 
-    tagName:"li",
- 
+	tagName : "tr",
     template:_.template($('#user-list-item').html()),
  
     render:function (eventName) {
@@ -46,14 +44,19 @@ window.UserdListItemView = Backbone.View.extend({
 });
  
 window.UserdView = Backbone.View.extend({
- 
-    template:_.template($('#user-details').html()),
- 
+    template:_.template($('#user-edit').html()),
     render:function (eventName) {
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
     }
- 
+});
+
+window.UserdDetailsView = Backbone.View.extend({
+    template:_.template($('#user-details').html()),
+    render:function (eventName) {
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+    }
 });
  
 // Router
@@ -61,7 +64,9 @@ var AppRouter = Backbone.Router.extend({
  
     routes:{
         "":"list",
-        "users/:id":"userDetails"
+        "users/:id":"userEdit",
+        "details/:id" : "userDetails",
+        "main":"main"
     },
  
     list:function () {
@@ -69,14 +74,31 @@ var AppRouter = Backbone.Router.extend({
         this.userdList = new UserdCollection();
         this.userdListView = new UserdListView({model:this.userdList});
         this.userdList.fetch();
-        $('#sidebar').html(this.userdListView.render().el);
+        $('#content').html(this.userdListView.render().el);
     },
  
-    userDetails:function (id) {
+    userEdit:function (id) {
+    	console.log("Backbone.Router->userEdit:...");
         this.userd = this.userdList.get(id);
         this.userdView = new UserdView({model:this.userd});
         $('#content').html(this.userdView.render().el);
+    },
+    
+    userDetails:function (id) {
+    	console.log("Backbone.Router->userDetails:...");
+        this.userd = this.userdList.get(id);
+        this.userdDetailsView = new UserdDetailsView({model:this.userd});
+        $('#content').html(this.userdDetailsView.render().el);
+    },
+    
+    main:function () {
+    	console.log("Backbone.Router->main:...");
+    	this.userdList.fetch();
+    	$('#content').html(this.userdListView.render().el);
     }
+    
+    
+    
 });
  
 var app = new AppRouter();

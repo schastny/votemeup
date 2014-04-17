@@ -24,31 +24,30 @@ public class UsersController {
     public @ResponseBody List<Userd> getUsersInJSON() {   
         List<Userd> users = userdService.findAll();
         for (Userd u: users){
-        	u.setCommentd(null);
-        	u.setCountry(null);
-        	u.setRegion(null);
-        	u.setCity(null);
-        	u.setDistrict(null);
-        	u.setProposals(null);
+    		u.setCommentd(null);
+        	u.getCountry().setRegions(null);
+        	u.getRegion().setCities(null);
+        	u.getCity().setDistricts(null);
+         	u.setProposals(null);
         	u.setVotes(null);
         	u.getRole().setUsers(null);
         }
         return users; 
     }
-	
+/*	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody Userd findById(@PathVariable Long id) {
 		Userd u = userdService.findById(id);
 		u.setCommentd(null);
-    	u.setCountry(null);
-    	u.setRegion(null);
-    	u.setCity(null);
+    	u.getCountry().setRegions(null);
+    	u.getRegion().setCities(null);
+    	u.getCity().setDistricts(null);
     	u.setDistrict(null);
     	u.setProposals(null);
     	u.setVotes(null);
     	u.getRole().setUsers(null);
 		return  u;
 	}
-
+*/
 
 }
