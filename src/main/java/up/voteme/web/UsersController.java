@@ -3,6 +3,7 @@ package up.voteme.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,21 @@ public class UsersController {
         	u.getRole().setUsers(null);
         }
         return users; 
+    }
+	
+	@RequestMapping(value = "/current", method = RequestMethod.GET)
+    public @ResponseBody Userd getCurrentAdmin() {   
+       Userd u = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    		u.setCommentd(null);
+        	u.getCountry().setRegions(null);
+        	u.setRegion(null);
+        	u.setCity(null);
+        	u.setDistrict(null);
+         	u.setProposals(null);
+        	u.setVotes(null);
+        	u.getRole().setUsers(null);
+
+        return u; 
     }
 /*	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)

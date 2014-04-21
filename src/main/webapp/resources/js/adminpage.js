@@ -10,6 +10,12 @@ window.UserdCollection = Backbone.Collection.extend({
     model:Userd,
     url:"../api/users"
 });
+
+window.Admin = Backbone.Model.extend({
+	url:"../api/users/current"
+});
+
+
  
 // Views
 window.UserdListView = Backbone.View.extend({
@@ -58,6 +64,21 @@ window.UserdDetailsView = Backbone.View.extend({
         return this;
     }
 });
+
+window.CurrentAdminView = Backbone.View.extend({
+	template:_.template($('#current-admin').html()),
+	initialize:function () {
+    	console.log("CurrentAdminView->initialize...");
+        this.model.bind("change", this.render, this);
+    },
+    
+    render:function (eventName) {
+    	console.log("CurrentAdminView->render:...");
+        $(this.el).html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
  
 // Router
 var AppRouter = Backbone.Router.extend({
@@ -68,6 +89,17 @@ var AppRouter = Backbone.Router.extend({
         "details/:id" : "userDetails",
         "main":"main"
     },
+    
+    initialize:function(){
+   	 this.admin = new Admin();
+    	this.currentAdminView = new CurrentAdminView({model:this.admin});
+    	this.admin.fetch({success: function(m, resp) { 
+    		console.log(resp);}, 
+        });
+        $('#content2').html(this.currentAdminView.el);
+   	
+   },
+
  
     list:function () {
     	console.log("Backbone.Router->list:...");

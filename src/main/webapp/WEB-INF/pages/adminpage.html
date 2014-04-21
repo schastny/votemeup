@@ -32,15 +32,22 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
- 	<div class="row-fluid">
+ 	<div class="row">
+		<div class="col-xs-9">
+			<div id="content"></div>
+			<hr>
+			<footer>
+				<p>© Sv-051Company 2014</p>
+			</footer>
+		</div>
+		<div class="col-xs-3">
+			<div class="well sidebar-nav">
+				<div id="content2"></div>
+			</div>
+		</div>
 		
-		<div id="content"></div>
-		<div id="content1"></div>
 
-		<hr>
-		<footer>
-			<p>© Sv-051Company 2014</p>
-		</footer>
+		
 	</div>
 	<!--/row-->
 </div>
@@ -54,6 +61,17 @@
 <script src="../resources/js/adminpage.js"></script>
 
 <!-- Templates -->
+
+
+<script type="text/template" id="current-admin">
+
+	Вы вошли как <%= userLogin %>
+	<a class="pull-right"
+			href="../j_spring_security_logout">Выход</a>
+
+</script>
+
+
 <script type="text/template" id="user-details">
 	<div class="panel panel-default">
 		<div class="panel-body">
@@ -150,9 +168,6 @@
 
 <script type="text/template" id="user-list-item">
 		<td><%= userdId %></td>
-		<td><%= firstName %></td>
-		<td><%= lastName %></td>
-		<td><%= birthYear %></td>
 		<td><%= userLogin %></td>
 		<td><%= email %></td>
 		<td><%= registrationDate %></td>
@@ -176,9 +191,6 @@
 		<thead>
 			<tr>
 				<th>ID</th>
-				<th>Имя</th>
-				<th>Фамилия</th>
-				<th>Год рождения</th>
 				<th>Логин</th>
 				<th>E-mail</th>
 				<th>Дата регистрации</th>
