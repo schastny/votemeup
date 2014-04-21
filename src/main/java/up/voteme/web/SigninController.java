@@ -55,6 +55,22 @@ public class SigninController {
 		return "guestpage";
 	}
 	
+	@RequestMapping(value = "/user/", method = RequestMethod.GET)
+	public String secure(Model model) {
+		logger.info("/user/");
+		Userd user = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user);
+		return "guestpage";
+	}
+	
+	@RequestMapping(value = "/admin/", method = RequestMethod.GET)
+	public String admin(Model model) {
+		logger.info("/admin/");
+		Userd user = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user);
+		//return "adminpage";
+		return "redirect:/pages/adminpage.html";
+	}
 	
 	
 }
