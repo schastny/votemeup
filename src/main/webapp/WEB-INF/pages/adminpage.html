@@ -55,6 +55,7 @@
 
 
 <script src="../resources/js/jquery-2.1.0.min.js"></script>
+<script src="../resources/js/jquery-dateFormat.js"></script>
 <script src="../resources/js/underscore-min.js"></script>
 <script src="../resources/js/bootstrap.min.js"></script>
 <script src="../resources/js/backbone-min.js"></script>
@@ -91,7 +92,7 @@
   		<div class="col-xs-4">
 			<div class="form-group">
     			<label for="userdId">ID</label>
-    			<input type="email" class="form-control" id="userdId" value="<%=userdId%>" disabled>
+    			<input type="text" name="id" class="form-control" id="userdId" value="<%=userdId%>" disabled>
   			</div>
 			<div class="form-group">
     			<label for="registrationDate">Дата регистрации</label>
@@ -170,7 +171,7 @@
 		<td><%= userdId %></td>
 		<td><%= userLogin %></td>
 		<td><%= email %></td>
-		<td><%= registrationDate %></td>
+		<td><%= $.format.date(registrationDate, "dd-MM-yyyy hh:mm") %></td>
 		<td><%= role.roleName %></td>
 		<td><%= userStatus.status %></td>
 		<td>
@@ -180,7 +181,7 @@
   				<a class="btn btn-xs btn-default" href="#users/<%= userdId %>">
   					<span class="glyphicon glyphicon-pencil"></span>
   				</a>
-  				<a class="btn btn-xs btn-default" href="">
+  				<a class="btn btn-xs btn-default" href="#remove/<%= userdId %>" >
   					<span class="glyphicon glyphicon-trash"></span>
   				</a>
 		</td>
@@ -193,7 +194,7 @@
 				<th>ID</th>
 				<th>Логин</th>
 				<th>E-mail</th>
-				<th>Дата регистрации</th>
+				<th>Дата регистр-и</th>
 				<th>Роль</th>
 				<th>Статус</th>
 				<th>Действия</th>

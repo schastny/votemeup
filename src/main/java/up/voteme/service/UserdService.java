@@ -11,5 +11,9 @@ public interface UserdService {
 	public abstract List<Userd> findAll();
 	
 	public abstract Userd findById(long id);
+	
+	public void delete(long id);
+	
+	public void store(Userd u);
 
 }

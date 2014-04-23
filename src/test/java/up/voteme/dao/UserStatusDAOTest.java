@@ -13,7 +13,7 @@ import up.voteme.domain.UserStatus;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class UserStatusDAOTest {
 
-	private	UserStatusDAO dao = new UserStatusDAO();
+	private	UserStatusDAO dao = new UserStatusDAOImpl();
 
 	@Test
 	public void A_findAllTest() {

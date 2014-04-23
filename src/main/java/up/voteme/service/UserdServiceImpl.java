@@ -25,4 +25,16 @@ public class UserdServiceImpl implements UserdService {
 	public Userd findById(long id) {
         return userdDAO.findById(id);
     }
+    
+    @Override
+	@Transactional
+	public void delete(long id) {
+        userdDAO.delete(id);
+    }
+    
+    @Override
+	@Transactional
+	public void store(Userd u) {
+        userdDAO.store(u);
+    }
 }

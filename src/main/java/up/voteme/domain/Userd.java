@@ -236,5 +236,19 @@ public class Userd implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Userd [userdId=" + userdId + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", birthYear=" + birthYear
+				+ ", sex=" + sex + ", registrationDate=" + registrationDate
+				+ ", email=" + email + ", userLogin=" + userLogin
+				+ ", userPassword=" + userPassword + ", role=" + role
+				+ ", userStatus=" + userStatus + ", country=" + country
+				+ ", region=" + region + ", city=" + city + ", district="
+				+ district + ", proposals=" + proposals + ", commentd="
+				+ commentd + ", votes=" + votes + "]";
+	}
+	
+	
 
 }
