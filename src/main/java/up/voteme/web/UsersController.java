@@ -2,11 +2,10 @@ package up.voteme.web;
 
 import java.util.List;
 
-import javax.ws.rs.PathParam;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import up.voteme.domain.Comment;
 import up.voteme.domain.UserStatus;
@@ -72,12 +72,20 @@ public class UsersController {
 	    @ResponseStatus(value = HttpStatus.NO_CONTENT)
 	    public void update(@PathVariable(value = "userId") long userId, @RequestBody User user)*/
 	
-	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	public @ResponseBody String update(@PathVariable String id, @RequestBody Userd user) {
+	 @RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = "application/json" ) 
+	 @ResponseStatus(HttpStatus.NO_CONTENT) 
+	public void update(@PathVariable Long id, @RequestBody Userd user) {
 		logger.info("UPDATE api/users/{id}="+id);
 		logger.info(user.toString());
 		//userdService.store(user);
-		return user.getUserLogin();
+		
+	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	@ResponseStatus(value = HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable Long id) {
+		logger.info("DELETE api/users/{id}="+id);
+		userdService.delete(id);
 	}
 
 

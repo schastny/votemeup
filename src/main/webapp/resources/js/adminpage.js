@@ -60,21 +60,46 @@ window.UserdListItemView = Backbone.View.extend({
  
 });
  
-window.UserdView = Backbone.View.extend({
+window.UserdEditView = Backbone.View.extend({
     template:_.template($('#user-edit').html()),
+    
+    events: {
+		"click .save": "saveUser",
+    },
+    
+    
     render:function (eventName) {
         $(this.el).html(this.template(this.model.toJSON()));
         return this;
-    }
+    },
+    
+	saveUser: function() {
+		console.log("UserdEditView->saveUser...");
+		console.log(this.model);
+		var uRole = this.model.get("role");
+		uRole.roleName = $('#role').val();
+		var uStatus = this.model.get("userStatus");
+		uStatus.status = $('#userStatus').val();
+		var uCountry = this.model.get("country");
+		uCountry.countryName = $('#country').val();
+		
+		this.model.set({
+			userLogin: $('#userLogin').val(),
+			email: $('#email').val(),
+			userPassword: $('#userPassword').val(),
+			firstName: $('#firstName').val(),
+			lastName: $('#lastName').val(),
+			birthYear: $('#birthYear').val(),
+			country: uCountry,
+			sex: $('#sex').val(),
+			role: uRole ,
+			userStatus: uStatus,
+		});
+		this.model.save();
+		return false;
+	}
 });
 
-window.UserdDetailsView = Backbone.View.extend({
-    template:_.template($('#user-details').html()),
-    render:function (eventName) {
-        $(this.el).html(this.template(this.model.toJSON()));
-        return this;
-    }
-});
 
 window.CurrentAdminView = Backbone.View.extend({
 	template:_.template($('#current-admin').html()),
@@ -97,8 +122,6 @@ var AppRouter = Backbone.Router.extend({
     routes:{
         "":"list",
         "users/:id":"userEdit",
-        "details/:id" : "userDetails",
-        "remove/:id" : "userRemove",
         "main":"main"
     },
     
@@ -125,35 +148,9 @@ var AppRouter = Backbone.Router.extend({
     userEdit:function (id) {
     	console.log("Backbone.Router->userEdit:...");
         this.userd = this.userdList.get(id);
-        this.userdView = new UserdView({model:this.userd});
-        $('#content').html(this.userdView.render().el);
+        this.userdEditView = new UserdEditView({model:this.userd});
+        $('#content').html(this.userdEditView.render().el);
     },
-    
-    userDetails:function (id) {
-    	console.log("Backbone.Router->userDetails:...");
-        this.userd = this.userdList.get(id);
-        this.userdDetailsView = new UserdDetailsView({model:this.userd});
-        $('#content').html(this.userdDetailsView.render().el);
-    },
-    
-    userRemove:function (id) {
-    	console.log("Backbone.Router->userRemove:...");
-    	this.userd = this.userdList.get(id);
-    	var userAttributes = this.userd.get("userStatus");
-    	userAttributes.status = "Запись удалена";
-    	this.userd.set({"userStatus": userAttributes});
-    	console.log("this.userd.isNew "+this.userd.isNew());
-    	console.log(this.userd);
-    	this.userd.save({
-			success: function(model,response) {
-				console.log("Backbone.Router->userRemove->success");
-			},
-	    	error: function(){
-	    		console.log("Backbone.Router->userRemove->error");
-	    	}
-    	});
-
-   },
     
     main:function () {
     	console.log("Backbone.Router->main:...");

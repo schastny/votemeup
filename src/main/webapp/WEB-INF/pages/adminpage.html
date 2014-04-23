@@ -95,13 +95,50 @@
     			<input type="text" name="id" class="form-control" id="userdId" value="<%=userdId%>" disabled>
   			</div>
 			<div class="form-group">
-    			<label for="registrationDate">Дата регистрации</label>
-    			<input type="text" class="form-control" id="registrationDate" id="registrationDate" 
-					value="<%=registrationDate%>" disabled >
-  			</div>
-			<div class="form-group">
     			<label for="userLogin">Имя пользователя</label>
     			<input type="text" class="form-control" id="userLogin" id="userLogin" value="<%=userLogin%>" >
+  			</div>
+			<div class="form-group">
+    			<label for="email">Email</label>
+    			<input type="text" class="form-control" id="email" id="email" value="<%=email%>" >
+  			</div>	
+			<div class="form-group">
+    			<label for="userPassword">SHA1 хэш пароля</label>
+    			<input type="text" class="form-control" id="userPassword" id="userPassword" value="<%=userPassword%>" >
+  			</div>	
+			
+  			
+			<a class="btn btn-primary" href="#main">Назад</a>
+			<button type="submit" class="save btn btn-success">Сохранить</button>
+			
+  		</div>
+  		<div class="col-xs-4">
+			<div class="form-group">
+    			<label for="registrationDate">Дата регистрации</label>
+    			<input type="text" class="form-control" id="registrationDate" id="registrationDate" 
+					value="<%=$.format.date(registrationDate, "dd-MM-yyyy hh:mm")%>" disabled >
+  			</div>
+    		<div class="form-group">
+    			<label for="firstName">Фамилия</label>
+    			<input type="text" class="form-control" id="firstName" value="<%=firstName%>" >
+  			</div>
+			<div class="form-group">
+    			<label for="lastName">Имя</label>
+    			<input type="text" class="form-control" id="lastName" id="lastName" value="<%=lastName%>" >
+  			</div>
+			<div class="form-group">
+    			<label for="birthYear">Год рождения</label>
+    			<input type="text" class="form-control" id="birthYear" id="birthYear" value="<%=birthYear%>" >
+  			</div>
+  		</div>
+		<div class="col-xs-4">
+			<div class="form-group">
+    			<label for="country">Страна</label>
+    			<input type="text" class="form-control" id="country" id="country" value="<%=country.countryName%>" >
+  			</div>
+			<div class="form-group">
+    			<label for="sex">Пол</label>
+    			<input type="text" class="form-control" id="sex" id="sex" value="<%=sex%>" >
   			</div>
 			<div class="form-group">
     			<label for="role">Роль</label>
@@ -110,51 +147,6 @@
 			<div class="form-group">
     			<label for="userStatus">Статус</label>
     			<input type="text" class="form-control" id="userStatus" id="userStatus" value="<%=userStatus.status%>" >
-  			</div>
-  			
-			<a class="btn btn-primary" href="#main">Назад</a>
-			<button type="submit" class="btn btn-success">Сохранить</button>
-			
-  		</div>
-  		<div class="col-xs-4">
-    		<div class="form-group">
-    			<label for="firstName">Имя</label>
-    			<input type="text" class="form-control" id="firstName" value="<%=firstName%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="lastName">Фамилия</label>
-    			<input type="text" class="form-control" id="lastName" id="lastName" value="<%=lastName%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="birthYear">Год рождения</label>
-    			<input type="text" class="form-control" id="birthYear" id="birthYear" value="<%=birthYear%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="sex">Пол</label>
-    			<input type="text" class="form-control" id="sex" id="sex" value="<%=sex%>" >
-  			</div>
-
-			<div class="form-group">
-    			<label for="email">Email</label>
-    			<input type="text" class="form-control" id="email" id="email" value="<%=email%>" >
-  			</div>	
-  		</div>
-		<div class="col-xs-4">
-			<div class="form-group">
-    			<label for="country">Страна</label>
-    			<input type="text" class="form-control" id="country" id="country" value="<%=country.countryName%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="region">Регион</label>
-    			<input type="text" class="form-control" id="region" id="region" value="<%=region.regionName%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="city">Город</label>
-    			<input type="text" class="form-control" id="city" id="city" value="<%=city.cityName%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="district">Район</label>
-    			<input type="text" class="form-control" id="district" id="district" value="<%=district.districtName%>" >
   			</div>
   		</div>
   	</div>
@@ -174,15 +166,9 @@
 		<td><%= $.format.date(registrationDate, "dd-MM-yyyy hh:mm") %></td>
 		<td><%= role.roleName %></td>
 		<td><%= userStatus.status %></td>
-		<td>
-				<a class="btn btn-xs btn-default" href="#details/<%= userdId %>">
-					<span class="glyphicon glyphicon-eye-open"></span>
-				</a>
-  				<a class="btn btn-xs btn-default" href="#users/<%= userdId %>">
-  					<span class="glyphicon glyphicon-pencil"></span>
-  				</a>
-  				<a class="btn btn-xs btn-default" href="#remove/<%= userdId %>" >
-  					<span class="glyphicon glyphicon-trash"></span>
+		<td >
+  				<a class="btn btn-xs btn-default center" href="#users/<%= userdId %>">
+  					<span class="glyphicon glyphicon-pencil"> Edit</span>
   				</a>
 		</td>
 </script>
