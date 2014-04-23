@@ -134,7 +134,7 @@
 		<div class="col-xs-4">
 			<div class="form-group">
     			<label for="country">Страна</label>
-    			<input type="text" class="form-control" id="country" id="country" value="<%=country.countryName%>" >
+    			<input type="text" class="form-control" id="country" id="country" value="<%=country%>" >
   			</div>
 			<div class="form-group">
     			<label for="sex">Пол</label>
@@ -142,11 +142,11 @@
   			</div>
 			<div class="form-group">
     			<label for="role">Роль</label>
-    			<input type="text" class="form-control" id="role" id="role" value="<%=role.roleName%>" >
+    			<input type="text" class="form-control" id="role" id="role" value="<%=role%>" >
   			</div>
 			<div class="form-group">
     			<label for="userStatus">Статус</label>
-    			<input type="text" class="form-control" id="userStatus" id="userStatus" value="<%=userStatus.status%>" >
+    			<input type="text" class="form-control" id="userStatus" id="userStatus" value="<%=userStatus%>" >
   			</div>
   		</div>
   	</div>
@@ -164,8 +164,8 @@
 		<td><%= userLogin %></td>
 		<td><%= email %></td>
 		<td><%= $.format.date(registrationDate, "dd-MM-yyyy hh:mm") %></td>
-		<td><%= role.roleName %></td>
-		<td><%= userStatus.status %></td>
+		<td><%= role %></td>
+		<td><%= userStatus %></td>
 		<td >
   				<a class="btn btn-xs btn-default center" href="#users/<%= userdId %>">
   					<span class="glyphicon glyphicon-pencil"> Edit</span>

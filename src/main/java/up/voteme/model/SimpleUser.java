@@ -2,6 +2,14 @@ package up.voteme.model;
 
 import java.util.Date;
 
+import up.voteme.domain.City;
+import up.voteme.domain.Country;
+import up.voteme.domain.District;
+import up.voteme.domain.Region;
+import up.voteme.domain.Role;
+import up.voteme.domain.UserStatus;
+import up.voteme.domain.Userd;
+
 
 public class SimpleUser {
 	private long userdId;
@@ -19,7 +27,18 @@ public class SimpleUser {
 	
 	
 	public SimpleUser (Userd user){
-		
+		this.userdId = user.getUserdId();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.birthYear = user.getBirthYear();
+		this.sex = user.getSex();
+		this.registrationDate = user.getRegistrationDate();
+		this.email = user.getEmail();
+		this.userLogin = user.getUserLogin();
+		this.userPassword = user.getPassword();
+		this.role = user.getRole().getRoleName();
+		this.userStatus = user.getUserStatus().getStatus();
+		this.country = user.getCountry().getCountryName();
 	}
 	
 	public long getUserdId() {
@@ -94,5 +113,18 @@ public class SimpleUser {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	@Override
+	public String toString() {
+		return "SimpleUser [userdId=" + userdId + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", birthYear=" + birthYear
+				+ ", sex=" + sex + ", registrationDate=" + registrationDate
+				+ ", email=" + email + ", userLogin=" + userLogin
+				+ ", userPassword=" + userPassword + ", role=" + role
+				+ ", userStatus=" + userStatus + ", country=" + country + "]";
+	}
+	
+	
+
 	
 }

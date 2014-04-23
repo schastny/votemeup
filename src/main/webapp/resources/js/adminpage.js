@@ -76,12 +76,6 @@ window.UserdEditView = Backbone.View.extend({
 	saveUser: function() {
 		console.log("UserdEditView->saveUser...");
 		console.log(this.model);
-		var uRole = this.model.get("role");
-		uRole.roleName = $('#role').val();
-		var uStatus = this.model.get("userStatus");
-		uStatus.status = $('#userStatus').val();
-		var uCountry = this.model.get("country");
-		uCountry.countryName = $('#country').val();
 		
 		this.model.set({
 			userLogin: $('#userLogin').val(),
@@ -90,10 +84,10 @@ window.UserdEditView = Backbone.View.extend({
 			firstName: $('#firstName').val(),
 			lastName: $('#lastName').val(),
 			birthYear: $('#birthYear').val(),
-			country: uCountry,
+			country: $('#country').val(),
 			sex: $('#sex').val(),
-			role: uRole ,
-			userStatus: uStatus,
+			role: $('#role').val(),
+			userStatus: $('#userStatus').val()
 		});
 		this.model.save();
 		return false;

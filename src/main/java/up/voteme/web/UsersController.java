@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import up.voteme.domain.Comment;
 import up.voteme.domain.UserStatus;
 import up.voteme.domain.Userd;
+import up.voteme.model.SimpleUser;
 import up.voteme.service.CommentService;
 import up.voteme.service.UserStatusService;
 import up.voteme.service.UserdService;
@@ -39,18 +41,9 @@ public class UsersController {
 	CommentService commentService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<Userd> getUsersInJSON() {   
-        List<Userd> users = userdService.findAll();
-        for (Userd u: users){
-    		u.setCommentd(null);
-        	u.getCountry().setRegions(null);
-        	u.getRegion().setCities(null);
-        	u.getCity().setDistricts(null);
-         	u.setProposals(null);
-        	u.setVotes(null);
-        	u.getRole().setUsers(null);
-        }
-        return users; 
+    public @ResponseBody List<SimpleUser> getUsersInJSON() {   
+        List<SimpleUser> sUsers = userdService.findAllSimple();
+        return sUsers; 
     }
 	
 	@RequestMapping(value = "/current", method = RequestMethod.GET)
@@ -68,15 +61,16 @@ public class UsersController {
         return u; 
     }
 	
-	 /*@RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-	    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-	    public void update(@PathVariable(value = "userId") long userId, @RequestBody User user)*/
+	 /*	    
+	    *, @RequestBody SimpleUser sUser
+	    *
+	    */
 	
-	 @RequestMapping(value = "{id}", method = RequestMethod.PUT, consumes = "application/json" ) 
+	 @RequestMapping(value = "{id}", method = RequestMethod.PUT) 
 	 @ResponseStatus(HttpStatus.NO_CONTENT) 
-	public void update(@PathVariable Long id, @RequestBody Userd user) {
+	 public void update(@PathVariable Long id, @RequestBody SimpleUser sUser) {
 		logger.info("UPDATE api/users/{id}="+id);
-		logger.info(user.toString());
+		//logger.info(sUser.toString());
 		//userdService.store(user);
 		
 	}

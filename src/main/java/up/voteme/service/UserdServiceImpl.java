@@ -1,12 +1,15 @@
 package up.voteme.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import up.voteme.dao.UserdDAO;
 import up.voteme.domain.Userd;
+import up.voteme.model.SimpleUser;
 
 @Service
 public class UserdServiceImpl implements UserdService {
@@ -37,4 +40,16 @@ public class UserdServiceImpl implements UserdService {
 	public void store(Userd u) {
         userdDAO.store(u);
     }
+
+	@Override
+	@Transactional
+	public List<SimpleUser> findAllSimple() {
+		// TODO Auto-generated method stub
+		List<Userd> uList= userdDAO.findAll();
+		List<SimpleUser> sList = new ArrayList<>();
+		for (Userd u : uList){
+			sList.add(new SimpleUser(u));
+		}
+		return sList;
+	}
 }
