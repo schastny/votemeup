@@ -4,7 +4,6 @@ $(function(){
 // Models
 window.Userd = Backbone.Model.extend({
 	 idAttribute: "userdId",
-		 
 });
  
 window.UserdCollection = Backbone.Collection.extend({
@@ -16,7 +15,14 @@ window.Admin = Backbone.Model.extend({
 	url:"../api/users/current"
 });
 
+window.Role = Backbone.Model.extend({
+	 idAttribute: "roleId",
+});
 
+window.RoleCollection = Backbone.Collection.extend({
+    model:Role,
+    url:"../api/roles"
+});
  
 // Views
 window.UserdListView = Backbone.View.extend({
@@ -26,7 +32,7 @@ window.UserdListView = Backbone.View.extend({
     initialize:function () {
     	console.log("UserdListView->initialize...");
         this.model.bind("reset", this.render, this);
-        this.model.bind("change", this.render, this);
+        this.model.bind("change", this.change, this);
         this.model.bind("destroy", this.render, this);
        
         
@@ -42,7 +48,12 @@ window.UserdListView = Backbone.View.extend({
         return this;
     },
     
-    
+    change: function(){
+    	console.log("UserdListView->change...");
+    	$('#content').html(this.el);
+    	this.render();
+   
+    }
     
 
  
@@ -75,7 +86,6 @@ window.UserdEditView = Backbone.View.extend({
     
 	saveUser: function() {
 		console.log("UserdEditView->saveUser...");
-		console.log(this.model);
 		
 		this.model.set({
 			userLogin: $('#userLogin').val(),
@@ -83,15 +93,29 @@ window.UserdEditView = Backbone.View.extend({
 			userPassword: $('#userPassword').val(),
 			firstName: $('#firstName').val(),
 			lastName: $('#lastName').val(),
-			birthYear: $('#birthYear').val(),
+			birthYear: parseInt($('#birthYear').val()),
 			country: $('#country').val(),
 			sex: $('#sex').val(),
-			role: $('#role').val(),
-			userStatus: $('#userStatus').val()
-		});
-		this.model.save();
+			role: $('#rol').val(),
+			userStatus: $('#userStatus').val(), 
+		},{ silent: true});
+		 
+		var changedAttr = this.model.changedAttributes();
+		if (changedAttr){
+			console.log(changedAttr);
+			this.model.save();
+			this.model.trigger("change");
+			app.navigate("main");
+		} else {
+			alert ("Данные пользователя не были изменены");
+		}
+			
+		
+	 	
 		return false;
-	}
+	},
+
+	
 });
 
 
@@ -115,17 +139,14 @@ var AppRouter = Backbone.Router.extend({
  
     routes:{
         "":"list",
+        "main":"main",
         "users/:id":"userEdit",
-        "main":"main"
     },
     
     initialize:function(){
    	 this.admin = new Admin();
     	this.currentAdminView = new CurrentAdminView({model:this.admin});
-    	this.admin.fetch({success: function(m, resp) { 
-    		//console.log(resp);
-    		},
-        });
+    	this.admin.fetch();
         $('#content2').html(this.currentAdminView.el);
    	
    },
@@ -133,10 +154,13 @@ var AppRouter = Backbone.Router.extend({
  
     list:function () {
     	console.log("Backbone.Router->list:...");
-        this.userdList = new UserdCollection();
-        this.userdListView = new UserdListView({model:this.userdList});
-        this.userdList.fetch();
-        $('#content').html(this.userdListView.render().el);
+    	if (!this.userdList){
+    		console.log("Backbone.Router->list:!this.userdList");
+	        this.userdList = new UserdCollection();
+	        this.userdList.fetch();
+    	}
+	    this.userdListView = new UserdListView({model:this.userdList});
+        $('#content').html(this.userdListView.el);
     },
  
     userEdit:function (id) {
@@ -146,12 +170,10 @@ var AppRouter = Backbone.Router.extend({
         $('#content').html(this.userdEditView.render().el);
     },
     
-    main:function () {
+    main: function(){
     	console.log("Backbone.Router->main:...");
-    	$('#content').html(this.userdListView.el);
-    },
-    
-      
+        $('#content').html(this.userdListView.el);
+    }
     
 });
 

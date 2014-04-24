@@ -1,6 +1,10 @@
 package up.voteme.model;
 
+import java.io.Serializable;
 import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import up.voteme.domain.City;
 import up.voteme.domain.Country;
@@ -9,9 +13,12 @@ import up.voteme.domain.Region;
 import up.voteme.domain.Role;
 import up.voteme.domain.UserStatus;
 import up.voteme.domain.Userd;
+import up.voteme.service.UserdService;
 
 
-public class SimpleUser {
+public class SimpleUser implements Serializable  {
+	
+	private static final long serialVersionUID = 1L;
 	private long userdId;
 	private String firstName;
 	private String lastName;
@@ -25,6 +32,7 @@ public class SimpleUser {
 	private String userStatus;
 	private String country;
 	
+	public SimpleUser(){}
 	
 	public SimpleUser (Userd user){
 		this.userdId = user.getUserdId();
@@ -35,10 +43,27 @@ public class SimpleUser {
 		this.registrationDate = user.getRegistrationDate();
 		this.email = user.getEmail();
 		this.userLogin = user.getUserLogin();
-		this.userPassword = user.getPassword();
+		this.userPassword = user.getUserPassword();
 		this.role = user.getRole().getRoleName();
 		this.userStatus = user.getUserStatus().getStatus();
 		this.country = user.getCountry().getCountryName();
+	}
+	
+	public Userd update(Userd user){
+		user.setUserdId(userdId);
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setBirthYear(birthYear);
+		user.setSex(sex);
+		user.setRegistrationDate(registrationDate);
+		user.setEmail(email);
+		user.setUserLogin(userLogin);
+		user.setUserPassword(userPassword);
+		user.getRole().setRoleName(role);
+		user.getUserStatus().setStatus(userStatus);
+		user.getCountry().setCountryName(country);
+		
+		return user;
 	}
 	
 	public long getUserdId() {

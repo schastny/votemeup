@@ -100,7 +100,7 @@
   			</div>
 			<div class="form-group">
     			<label for="email">Email</label>
-    			<input type="text" class="form-control" id="email" id="email" value="<%=email%>" >
+    			<input type="email" class="form-control" id="email" id="email" value="<%=email%>" >
   			</div>	
 			<div class="form-group">
     			<label for="userPassword">SHA1 хэш пароля</label>
@@ -108,8 +108,8 @@
   			</div>	
 			
   			
-			<a class="btn btn-primary" href="#main">Назад</a>
-			<button type="submit" class="save btn btn-success">Сохранить</button>
+			<a class="btn btn-primary back " href="#main">Назад</a>
+			<a class="save btn btn-success" >Сохранить</a>
 			
   		</div>
   		<div class="col-xs-4">
@@ -128,7 +128,7 @@
   			</div>
 			<div class="form-group">
     			<label for="birthYear">Год рождения</label>
-    			<input type="text" class="form-control" id="birthYear" id="birthYear" value="<%=birthYear%>" >
+    			<input type="number" class="form-control" id="birthYear" id="birthYear" value="<%=birthYear%>" >
   			</div>
   		</div>
 		<div class="col-xs-4">
@@ -140,9 +140,12 @@
     			<label for="sex">Пол</label>
     			<input type="text" class="form-control" id="sex" id="sex" value="<%=sex%>" >
   			</div>
-			<div class="form-group">
-    			<label for="role">Роль</label>
-    			<input type="text" class="form-control" id="role" id="role" value="<%=role%>" >
+			<div id="role" class="form-group">
+				<label for="rol">Роль</label>
+				<select class="form-control"  id="rol">
+					<option value="<%=role%>"> <%=role%></option>
+					<option value="rrrr">rrrr</option>
+				</select>
   			</div>
 			<div class="form-group">
     			<label for="userStatus">Статус</label>

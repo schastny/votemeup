@@ -62,16 +62,15 @@ public class UsersController {
     }
 	
 	 /*	    
-	    *, @RequestBody SimpleUser sUser
-	    *
-	    */
+	 */
 	
-	 @RequestMapping(value = "{id}", method = RequestMethod.PUT) 
+	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT) 
 	 @ResponseStatus(HttpStatus.NO_CONTENT) 
-	 public void update(@PathVariable Long id, @RequestBody SimpleUser sUser) {
+	 public void update(@PathVariable Long id, @RequestBody final SimpleUser sUser) {
 		logger.info("UPDATE api/users/{id}="+id);
-		//logger.info(sUser.toString());
-		//userdService.store(user);
+		logger.info(sUser.toString());
+		Userd u = userdService.findById(sUser.getUserdId());
+		userdService.store(sUser.update(u));
 		
 	}
 	
