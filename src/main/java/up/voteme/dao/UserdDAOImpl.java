@@ -52,8 +52,9 @@ public class UserdDAOImpl implements UserdDAO {
 	 */
 	@Override
 	public Userd findById(long UserdId) {
-		 return em.find(Userd.class, UserdId);
-		
+		Userd item = em.find(Userd.class, UserdId);
+		item.getCommentd().size();
+		return item;
 	}
 	
 	/* (non-Javadoc)
@@ -77,7 +78,7 @@ public class UserdDAOImpl implements UserdDAO {
 	@Override
 	public List<Userd> findAll() {
 		TypedQuery<Userd> query = em.createQuery(
-		"SELECT c FROM Userd c", Userd.class);
+		"SELECT u FROM Userd u ORDER BY  u.userStatus.status, u.registrationDate DESC", Userd.class);
 		List<Userd> items = query.getResultList();
 		for (Userd item : items) {
 			//item.getProposals().size();

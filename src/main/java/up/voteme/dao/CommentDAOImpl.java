@@ -31,7 +31,8 @@ public class CommentDAOImpl implements CommentDAO {
 
 	@Override
 	public Comment findById(long commentId) {         // find record
-		return eMgr.find(Comment.class, commentId);
+		Comment item = eMgr.find(Comment.class, commentId);
+		return item;
 	}
 
 	@Override
