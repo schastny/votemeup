@@ -61,9 +61,7 @@ public class UsersController {
         return u; 
     }
 	
-	 /*	    
-	 */
-	
+
 	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT) 
 	 @ResponseStatus(HttpStatus.NO_CONTENT) 
 	 public void update(@PathVariable Long id, @RequestBody final SimpleUser sUser) {

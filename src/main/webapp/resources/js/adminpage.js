@@ -34,12 +34,8 @@ window.UserdListView = Backbone.View.extend({
         this.model.bind("reset", this.render, this);
         this.model.bind("change", this.change, this);
         this.model.bind("destroy", this.render, this);
-       
-        
-    },
-    
- 
-    render:function (eventName) {
+   },
+   render:function (eventName) {
     	console.log("UserdListView->render...");
         $(this.el).html(this.template());
         _.each(this.model.models, function (userd) {
@@ -47,16 +43,12 @@ window.UserdListView = Backbone.View.extend({
         }, this);
         return this;
     },
-    
     change: function(){
     	console.log("UserdListView->change...");
     	$('#content').html(this.el);
-    	this.render();
-   
+    	//this.render();
+    	this.model.fetch();
     }
-    
-
- 
 });
  
 window.UserdListItemView = Backbone.View.extend({
@@ -70,6 +62,17 @@ window.UserdListItemView = Backbone.View.extend({
     }
  
 });
+
+
+window.RoleListItemView = Backbone.View.extend({
+    template:_.template($('#role-item').html()),
+    render:function (eventName) {
+    	console.log("RoleListItemView->render...");
+        $(this.el).html(this.template(this.model2.toJSON()));
+        return this;
+    }
+ });
+
  
 window.UserdEditView = Backbone.View.extend({
     template:_.template($('#user-edit').html()),
@@ -78,9 +81,11 @@ window.UserdEditView = Backbone.View.extend({
 		"click .save": "saveUser",
     },
     
-    
     render:function (eventName) {
         $(this.el).html(this.template(this.model.toJSON()));
+         _.each(this.model2.models, function (role) {
+            $('#rol').append(new RoleListItemView({model2:role}).render().el);
+       }, this);
         return this;
     },
     
@@ -166,8 +171,13 @@ var AppRouter = Backbone.Router.extend({
     userEdit:function (id) {
     	console.log("Backbone.Router->userEdit:...");
         this.userd = this.userdList.get(id);
-        this.userdEditView = new UserdEditView({model:this.userd});
+        this.roleList = new RoleCollection();
+        this.userdList.fetch();
+        this.userdEditView = new UserdEditView({model:this.userd,model2:this.roleList});
         $('#content').html(this.userdEditView.render().el);
+        
+        
+        
     },
     
     main: function(){
