@@ -29,10 +29,14 @@ public class DocumentDAOTest2 {
 	@Transactional
 	public void A_findAllTest() {
 		System.out.println("Starting test FIND ALL....");
+		Document item = new Document();
+	    item.setDocId(0);
+		item.setDocName("cool document2222");
+		item.setDocUrl("http:/google.com/img.png");
+		item.setProposal(daoDocument.findById(1L).getProposal());	
+		daoDocument.store(item);
 		List<Document> listItem = daoDocument.findAll();
-		for (int i = 0; i < listItem.size(); i++) {
-			System.out.println("Item :" + listItem.get(i));
-		}
+	
 		assertFalse("The table is empty!", listItem.size() == 0);
 		// assertTrue("The table is empty!", listItem.size() == 0);
 		System.out.println("Finish test FIND ALL....");

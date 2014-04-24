@@ -15,8 +15,8 @@ $(document).ready(function() {
 		                    },
 	                    stringLength: {
                             min: 2,
-                            max: 60,
-                            message:  'Это поле должно иметь длину от 2 до 60 символов и не содержать специальные символы или цифры!'   
+                            max: 50,
+                            message:  'Это поле должно иметь длину от 2 до 50 символов и не содержать специальные символы или цифры!'   
                         },
                         regexp: {
 	                       regexp: /^([A-Za-zА-Яа-я]+[ -]*)+$/,
@@ -33,8 +33,8 @@ $(document).ready(function() {
 	                    },
 	                    stringLength: {
                             min: 2,
-                            max: 60,  
-                            message:   'Это поле должно иметь длину от 2 до 60 символов и не содержать специальные символы или цифры!' ,
+                            max: 50,  
+                            message:   'Это поле должно иметь длину от 2 до 50 символов и не содержать специальные символы или цифры!' ,
                        },
                        regexp: {
 	                       regexp: /^([A-Za-zА-Яа-я]+[ -]*)+$/,  
@@ -72,8 +72,8 @@ $(document).ready(function() {
 	                     },
 	                     stringLength: {
 	                            min: 5,
-	                            max: 60,  
-	                            message: 'Это поле должно иметь длину от 5 до 60 символов !',
+	                            max: 20,  
+	                            message: 'Это поле должно иметь длину от 5 до 20 символов !',
 	                       },
 	                       regexp: {
 		                       regexp:  /^([\w]+[\._-]*)+$/,  
@@ -117,7 +117,7 @@ $(document).ready(function() {
 	                       regexp: /^[\w\d-_\.]+$/,  
 	                       message:'Это поле  содержать только символы латинского алфавита, цифры, символы "-" "_" "." !'
 	                  },
-	                    
+	                  	                    
 	            	}
 	            	
 	            },
@@ -148,52 +148,15 @@ $(document).ready(function() {
 	    
 
 	    // Validate the form manually
-	  //  $('#validateBtn').click(function() {
-	      //  $('#contact-form').bootstrapValidator('validate');
-   // });
+	 //   $('#validateBtn').click(function() {
+	       // $('#contact-form').bootstrapValidator('validate');
+	    	//  $("#lastname").
+    //});
 
 	    $('#resetBtn').click(function() {
 	        $('#contact-form').data('bootstrapValidator').resetForm(true);
 	    });
 	});
-
-
-//$(document).ready(function () {
-//    
-//    $('#datepicker').datepicker({
-//        format: "dd/mm/yyyy", 
-//    });  
-    
-//    $('#datepicker').validate({ 
-//        errorPlacement: $.datepicker.errorPlacement, 
-//        rules: { 
-//            validDefaultDatepicker: { 
-//                required: true, 
-//                dpDate: true 
-//            }, 
-//            validBeforeDatepicker: { 
-//                dpCompareDate: ['before', '#validAfterDatepicker'] 
-//            }, 
-//            validAfterDatepicker: { 
-//                dpCompareDate: {after: '#validBeforeDatepicker'} 
-//            }, 
-//            validTodayDatepicker: { 
-//                dpCompareDate: 'ne today' 
-//            }, 
-//            validSpecificDatepicker: { 
-//                dpCompareDate: 'notBefore 01/01/2012' 
-//            } 
-//        }, 
-//        messages: { 
-//            validFormatDatepicker: 'Please enter a valid date (yyyy-mm-dd)', 
-//            validRangeDatepicker: 'Please enter a valid date range', 
-//            validMultiDatepicker: 'Please enter at most three valid dates', 
-//            validAfterDatepicker: 'Please enter a date after the previous value' 
-//        }});
-//    
-    
-
-//});
 
 
 

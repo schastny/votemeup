@@ -11,6 +11,7 @@
 <head>
 <title>Регистрация</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 <!-- Bootstrap -->
 
 
@@ -82,7 +83,7 @@
 				<h3>Регистрация нового пользователя:</h3>
 				<br />
 				<form role="form" id="contact-form" class="form-horizontal"
-					method="POST" action="save">
+					method="POST" action="save" >
 
 					<div class="form-group">
 						<label for="lastname" class="col-md-3">Имя :</label>
