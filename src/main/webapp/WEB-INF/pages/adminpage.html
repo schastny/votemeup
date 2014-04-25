@@ -62,16 +62,53 @@
 <script src="../resources/js/adminpage.js"></script>
 
 <!-- Templates -->
-<script type="text/template" id="role-item">
-	<option value="<%=role%>"> <%=role%></option>
+<script type="text/template" id="country-select">
+	<label for="country-selector">Страна</label>
+   	<select class="form-control" id="country-selector">
+        <% countries.each(function(country) { %>
+            <option value="<%= country.get('countryName')%>" 
+				<%= country.get('countryName')==isSelected ? 'selected' : '' %> >
+				<%= country.get('countryName') %></option>
+        <% }); %>
+    </select>
+</script>
+
+<script type="text/template" id="sex-select">
+	<label for="sex-selector">Пол</label>
+   	<select class="form-control" id="sex-selector">
+            <option value="муж"<%= 'муж'==isSelected ? 'selected' : '' %> >
+				муж</option>
+			<option value="жен"<%= 'жен'==isSelected ? 'selected' : '' %> >
+				жен</option>
+    </select>
+</script>
+
+<script type="text/template" id="role-select">
+	<label for="role-selector">Роль</label>
+   	<select class="form-control" id="role-selector">
+        <% roles.each(function(role) { %>
+            <option value="<%= role.get('roleName')%>" 
+				<%= role.get('roleName')==isSelected ?  'selected' : '' %> >
+				<%= role.get('roleName') %></option>
+        <% }); %>
+    </select>
+</script>
+
+<script type="text/template" id="userStatus-select">
+	<label for="userStatus-selector">Статус</label>
+   	<select class="form-control" id="userStatus-selector">
+        <% userStatuses.each(function(userStatus) { %>
+            <option value="<%= userStatus.get('status')%>" 
+				<%= userStatus.get('status')==isSelected ?  'selected' : '' %> >
+				<%= userStatus.get('status') %></option>
+        <% }); %>
+    </select>
 </script>
 
 <script type="text/template" id="current-admin">
-
 	Вы вошли как <%= userLogin %>
 	<a class="pull-right"
 			href="../j_spring_security_logout">Выход</a>
-
 </script>
 
 
@@ -86,7 +123,6 @@
 
 
 <script type="text/template" id="user-edit">
-
 <div class="panel panel-default">
 <div class="panel-body">
 <form role="form" >
@@ -108,11 +144,8 @@
     			<label for="userPassword">SHA1 хэш пароля</label>
     			<input type="text" class="form-control" id="userPassword" id="userPassword" value="<%=userPassword%>" >
   			</div>	
-			
-  			
 			<a class="btn btn-primary back " href="#main">Назад</a>
 			<a class="save btn btn-success" >Сохранить</a>
-			
   		</div>
   		<div class="col-xs-4">
 			<div class="form-group">
@@ -134,34 +167,15 @@
   			</div>
   		</div>
 		<div class="col-xs-4">
-			<div class="form-group">
-    			<label for="country">Страна</label>
-    			<input type="text" class="form-control" id="country" id="country" value="<%=country%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="sex">Пол</label>
-    			<input type="text" class="form-control" id="sex" id="sex" value="<%=sex%>" >
-  			</div>
-			<div id="role" class="form-group">
-				<label for="rol">Роль</label>
-				<select class="form-control"  id="rol">
-					<option value="<%=role%>"> <%=role%></option>
-					<option value="rrrr">rrrr</option>
-				</select>
-  			</div>
-			<div class="form-group">
-    			<label for="userStatus">Статус</label>
-    			<input type="text" class="form-control" id="userStatus" id="userStatus" value="<%=userStatus%>" >
-  			</div>
+			<div id="country-container" class="form-group">	</div>
+			<div id="sex-container" class="form-group"> 	</div>
+			<div id="role-container" class="form-group">	</div>
+			<div id="userStatus-container" class="form-group">		</div>
   		</div>
   	</div>
 </form>
 </div>
 </div>
-
-
-
-
 </script>
 
 <script type="text/template" id="user-list-item">
@@ -193,7 +207,6 @@
 		</thead>
 		<tbody>
 		</tbody>
-		
 	</table>
 </script>
 

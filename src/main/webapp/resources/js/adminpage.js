@@ -5,7 +5,6 @@ $(function(){
 window.Userd = Backbone.Model.extend({
 	 idAttribute: "userdId",
 });
- 
 window.UserdCollection = Backbone.Collection.extend({
     model:Userd,
     url:"../api/users"
@@ -15,14 +14,31 @@ window.Admin = Backbone.Model.extend({
 	url:"../api/users/current"
 });
 
+window.Country = Backbone.Model.extend({
+	 idAttribute: "countryId",
+});
+window.CountryCollection = Backbone.Collection.extend({
+   model:Country,
+   url:"../api/countries"
+});
+
 window.Role = Backbone.Model.extend({
 	 idAttribute: "roleId",
 });
-
 window.RoleCollection = Backbone.Collection.extend({
     model:Role,
     url:"../api/roles"
 });
+
+window.UserStatus = Backbone.Model.extend({
+	 idAttribute: "id",
+});
+window.UserStatusCollection = Backbone.Collection.extend({
+   model:UserStatus,
+   url:"../api/userStatuses"
+});
+
+
  
 // Views
 window.UserdListView = Backbone.View.extend({
@@ -46,8 +62,8 @@ window.UserdListView = Backbone.View.extend({
     change: function(){
     	console.log("UserdListView->change...");
     	$('#content').html(this.el);
-    	//this.render();
-    	this.model.fetch();
+    	this.render();
+    	//this.model.fetch();
     }
 });
  
@@ -63,29 +79,50 @@ window.UserdListItemView = Backbone.View.extend({
  
 });
 
-
-window.RoleListItemView = Backbone.View.extend({
-    template:_.template($('#role-item').html()),
-    render:function (eventName) {
-    	console.log("RoleListItemView->render...");
-        $(this.el).html(this.template(this.model2.toJSON()));
-        return this;
-    }
- });
-
- 
 window.UserdEditView = Backbone.View.extend({
     template:_.template($('#user-edit').html()),
     
+    initialize:function () {
+    	console.log("UserdEditView->initialize...");
+        this.options.model2.bind("reset", this.render, this);
+        this.options.model3.bind("reset", this.render, this);
+        this.options.model4.bind("reset", this.render, this);
+    },
+    
     events: {
 		"click .save": "saveUser",
+
     },
     
     render:function (eventName) {
+    	console.log("UserdEditView->render...");
         $(this.el).html(this.template(this.model.toJSON()));
-         _.each(this.model2.models, function (role) {
-            $('#rol').append(new RoleListItemView({model2:role}).render().el);
-       }, this);
+        
+        //render selectboxes.
+        var countrySelect = _.template($("#country-select").html(), {
+            countries: this.options.model2,
+            isSelected: this.model.get("country"),
+        });
+        $('#country-container').html(countrySelect);
+               
+        var sexSelect = _.template($("#sex-select").html(), {
+            isSelected: this.model.get("sex"),
+        });
+        $('#sex-container').html(sexSelect);
+        
+        var roleSelect = _.template($("#role-select").html(), {
+            roles: this.options.model3,
+            isSelected: this.model.get("role"),
+        });
+        $('#role-container').html(roleSelect);
+        
+        var userStatusSelect = _.template($("#userStatus-select").html(), {
+        	userStatuses: this.options.model4,
+            isSelected: this.model.get("status"),
+        });
+        $('#userStatus-container').html(userStatusSelect);
+        
+       
         return this;
     },
     
@@ -99,18 +136,26 @@ window.UserdEditView = Backbone.View.extend({
 			firstName: $('#firstName').val(),
 			lastName: $('#lastName').val(),
 			birthYear: parseInt($('#birthYear').val()),
-			country: $('#country').val(),
-			sex: $('#sex').val(),
-			role: $('#rol').val(),
-			userStatus: $('#userStatus').val(), 
-		},{ silent: true});
+			country: $('#country-selector').val(),
+			sex: $('#sex-selector').val(),
+			role: $('#role-selector').val(),
+			userStatus: $('#userStatus-selector').val(), 
+		},{silent: true});
 		 
 		var changedAttr = this.model.changedAttributes();
 		if (changedAttr){
+			console.log("Changed attributes: ");
 			console.log(changedAttr);
-			this.model.save();
-			this.model.trigger("change");
-			app.navigate("main");
+			this.model.save(null,{
+				success:function(model, response){
+					console.log("model saved succeesfully");
+					model.trigger("change");
+					app.navigate("main");
+				},
+				error: function(model, response){
+					alert("Ошибка сохранения данных на сервере");
+				},
+			});
 		} else {
 			alert ("Данные пользователя не были изменены");
 		}
@@ -170,13 +215,16 @@ var AppRouter = Backbone.Router.extend({
  
     userEdit:function (id) {
     	console.log("Backbone.Router->userEdit:...");
-        this.userd = this.userdList.get(id);
+        this.countryList = new CountryCollection();
         this.roleList = new RoleCollection();
-        this.userdList.fetch();
-        this.userdEditView = new UserdEditView({model:this.userd,model2:this.roleList});
-        $('#content').html(this.userdEditView.render().el);
-        
-        
+        this.userStatusList = new UserStatusCollection();
+        this.countryList.fetch();
+        this.roleList.fetch();
+        this.userStatusList.fetch();
+        this.userd = this.userdList.get(id);
+        this.userdEditView = new UserdEditView({model:this.userd, model2:this.countryList,
+        	model3:this.roleList, model4:this.userStatusList});
+        $('#content').html(this.userdEditView.el);
         
     },
     

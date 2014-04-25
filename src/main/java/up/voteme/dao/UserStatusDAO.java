@@ -15,5 +15,7 @@ public interface UserStatusDAO {
 	public abstract List<UserStatus> findAll();
 
 	public abstract long countAll();
+	
+	public UserStatus findByName (String name);
 
 }

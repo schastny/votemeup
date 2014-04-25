@@ -10,22 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import up.voteme.domain.Country;
 import up.voteme.domain.Role;
+import up.voteme.service.CountryService;
 import up.voteme.service.RoleService;
 
-
 @Controller
-@RequestMapping("/api/roles")
-public class RoleController {
-
+@RequestMapping("/api/countries")
+public class CountryController {
+	
 	private static final Logger logger = LoggerFactory
-			.getLogger(RoleController.class);
+			.getLogger(CountryController.class);
 	@Autowired
-	RoleService roleService;
+	CountryService countryService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<Role> getRolesInJSON() {   
-        List<Role> roles = roleService.findAll();
-        return roles; 
+    public @ResponseBody List<Country> getCountriesInJSON() {   
+        List<Country> countries = countryService.findAll();
+        return countries; 
     }
+
 }

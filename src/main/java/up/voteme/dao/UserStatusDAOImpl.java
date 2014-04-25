@@ -3,6 +3,7 @@ package up.voteme.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import up.voteme.domain.Role;
 import up.voteme.domain.UserStatus;
 
 
@@ -77,6 +79,16 @@ public class UserStatusDAOImpl implements UserStatusDAO {
 		Query query = em.createQuery("select count(*) from UserStatus");
 		long result = (long) query.getSingleResult();
 		return result;
+	}
+	
+	public UserStatus findByName (String name){
+		TypedQuery<UserStatus> query = em.createQuery("SELECT r FROM UserStatus r WHERE r.status = :name", UserStatus.class);
+		query.setParameter("name", name);
+		List<UserStatus> results = query.getResultList();
+	    if (results.isEmpty()) return null;
+	    else if (results.size() == 1) return results.get(0);
+	    //logger.info("NonUniqueResultException(Login must be UNIQUE)");
+	    throw new NonUniqueResultException("Login must be UNIQUE");
 	}
 
 

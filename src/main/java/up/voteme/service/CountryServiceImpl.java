@@ -19,14 +19,12 @@ private CountryDAO countryDAO;
 	@Override
 	public void store(Country country) {
 		countryDAO.store(country);
-
 	}
 
 	@Transactional
 	@Override
 	public void delete(Long id) {
 		countryDAO.delete(id);
-
 	}
 
 	@Transactional
@@ -37,8 +35,12 @@ private CountryDAO countryDAO;
 
 	@Transactional
 	@Override
-	public List<Country> findAll() {		
-		return  countryDAO.findAll();
+	public List<Country> findAll() {
+		List<Country> country = countryDAO.findAll();
+		for (Country c : country){
+			c.setRegions(null);
+		}
+		return  country;
 	}
 
 	@Override

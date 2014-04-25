@@ -18,5 +18,7 @@ public interface UserdService {
 	public void delete(long id);
 	
 	public void store(Userd u);
+	
+	public void updateUserdAndStore (SimpleUser sUser);
 
 }

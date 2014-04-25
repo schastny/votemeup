@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -42,6 +43,7 @@ public class UsersController {
 	
 	@RequestMapping(method = RequestMethod.GET)
     public @ResponseBody List<SimpleUser> getUsersInJSON() {   
+		logger.info("GET api/users");
         List<SimpleUser> sUsers = userdService.findAllSimple();
         return sUsers; 
     }
@@ -63,12 +65,22 @@ public class UsersController {
 	
 
 	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT) 
-	 @ResponseStatus(HttpStatus.NO_CONTENT) 
-	 public void update(@PathVariable Long id, @RequestBody final SimpleUser sUser) {
+
+	 public @ResponseBody ResponseEntity<String>  update(@PathVariable Long id, @RequestBody final SimpleUser sUser) {
 		logger.info("UPDATE api/users/{id}="+id);
 		logger.info(sUser.toString());
-		Userd u = userdService.findById(sUser.getUserdId());
-		userdService.store(sUser.update(u));
+		if (!sUser.validate()) {
+			logger.info("data validation failed");
+			return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE );
+		}
+		try{
+			userdService.updateUserdAndStore(sUser);
+			logger.info("Database updated");
+			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+		} catch (Exception e){
+			logger.info(e.toString());
+			return new  ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE );
+		}
 		
 	}
 	
