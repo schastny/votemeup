@@ -48,7 +48,7 @@ window.UserdListView = Backbone.View.extend({
     initialize:function () {
     	console.log("UserdListView->initialize...");
         this.model.bind("reset", this.render, this);
-        this.model.bind("change", this.change, this);
+        this.model.bind("change", this.render, this);
         this.model.bind("destroy", this.render, this);
    },
    render:function (eventName) {
@@ -59,12 +59,7 @@ window.UserdListView = Backbone.View.extend({
         }, this);
         return this;
     },
-    change: function(){
-    	console.log("UserdListView->change...");
-    	$('#content').html(this.el);
-    	this.render();
-    	//this.model.fetch();
-    }
+
 });
  
 window.UserdListItemView = Backbone.View.extend({
@@ -91,7 +86,7 @@ window.UserdEditView = Backbone.View.extend({
     
     events: {
 		"click .save": "saveUser",
-
+		"click .back": "back",
     },
     
     render:function (eventName) {
@@ -128,7 +123,7 @@ window.UserdEditView = Backbone.View.extend({
     
 	saveUser: function() {
 		console.log("UserdEditView->saveUser...");
-		
+
 		this.model.set({
 			userLogin: $('#userLogin').val(),
 			email: $('#email').val(),
@@ -140,8 +135,10 @@ window.UserdEditView = Backbone.View.extend({
 			sex: $('#sex-selector').val(),
 			role: $('#role-selector').val(),
 			userStatus: $('#userStatus-selector').val(), 
-		},{silent: true});
-		 
+		},{silent:true});
+		
+		
+		
 		var changedAttr = this.model.changedAttributes();
 		if (changedAttr){
 			console.log("Changed attributes: ");
@@ -149,8 +146,7 @@ window.UserdEditView = Backbone.View.extend({
 			this.model.save(null,{
 				success:function(model, response){
 					console.log("model saved succeesfully");
-					model.trigger("change");
-					app.navigate("main");
+					window.history.back();
 				},
 				error: function(model, response){
 					alert("Ошибка сохранения данных на сервере");
@@ -159,13 +155,15 @@ window.UserdEditView = Backbone.View.extend({
 		} else {
 			alert ("Данные пользователя не были изменены");
 		}
-			
-		
 	 	
 		return false;
 	},
 
-	
+	back: function(){
+		console.log("back to main");
+		window.history.back();
+	},
+		
 });
 
 
@@ -200,39 +198,62 @@ var AppRouter = Backbone.Router.extend({
         $('#content2').html(this.currentAdminView.el);
    	
    },
-
+   
+   /*
+   this.wineList = new WineCollection();
+   var self = this;
+   this.wineList.fetch({
+       success:function () {
+           self.wineListView = new WineListView({model:self.wineList});
+           $('#sidebar').html(self.wineListView.render().el);
+           if (self.requestedId) self.wineDetails(self.requestedId);
+       }
+   });
+*/
  
     list:function () {
     	console.log("Backbone.Router->list:...");
     	if (!this.userdList){
     		console.log("Backbone.Router->list:!this.userdList");
 	        this.userdList = new UserdCollection();
-	        this.userdList.fetch();
+	        
     	}
-	    this.userdListView = new UserdListView({model:this.userdList});
+        this.userdList.fetch();
+    	if (!this.userdListView){
+    		console.log("Backbone.Router->list:!this.userdListView");
+    		this.userdListView = new UserdListView({model:this.userdList});
+    	}
         $('#content').html(this.userdListView.el);
     },
  
     userEdit:function (id) {
     	console.log("Backbone.Router->userEdit:...");
-        this.countryList = new CountryCollection();
+		this.countryList = new CountryCollection();
         this.roleList = new RoleCollection();
         this.userStatusList = new UserStatusCollection();
         this.countryList.fetch();
         this.roleList.fetch();
         this.userStatusList.fetch();
+
         this.userd = this.userdList.get(id);
         this.userdEditView = new UserdEditView({model:this.userd, model2:this.countryList,
-        	model3:this.roleList, model4:this.userStatusList});
+            model3:this.roleList, model4:this.userStatusList});
+        
+        
         $('#content').html(this.userdEditView.el);
         
     },
-    
+    /*
     main: function(){
     	console.log("Backbone.Router->main:...");
+    	if (!this.userdList){
+    		console.log("Backbone.Router->list:!this.userdList");
+	        this.userdList = new UserdCollection();
+    	}
+    	this.userdList.fetch();
         $('#content').html(this.userdListView.el);
     }
-    
+    */
 });
 
 
