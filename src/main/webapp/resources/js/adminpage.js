@@ -146,7 +146,8 @@ window.UserdEditView = Backbone.View.extend({
 			this.model.save(null,{
 				success:function(model, response){
 					console.log("model saved succeesfully");
-					window.history.back();
+					//app.requestedId = null;
+					//app.navigate("", {trigger: true, replace: true});
 				},
 				error: function(model, response){
 					alert("Ошибка сохранения данных на сервере");
@@ -161,7 +162,8 @@ window.UserdEditView = Backbone.View.extend({
 
 	back: function(){
 		console.log("back to main");
-		window.history.back();
+		//app.requestedId = null;
+		//app.navigate("", {trigger: true, replace: true});
 	},
 		
 });
@@ -199,48 +201,47 @@ var AppRouter = Backbone.Router.extend({
    	
    },
    
-   /*
-   this.wineList = new WineCollection();
-   var self = this;
-   this.wineList.fetch({
-       success:function () {
-           self.wineListView = new WineListView({model:self.wineList});
-           $('#sidebar').html(self.wineListView.render().el);
-           if (self.requestedId) self.wineDetails(self.requestedId);
-       }
-   });
-*/
+
  
     list:function () {
-    	console.log("Backbone.Router->list:...");
+    	console.log("Backbone.Router->list, requestedId="+this.requestedId);
     	if (!this.userdList){
     		console.log("Backbone.Router->list:!this.userdList");
 	        this.userdList = new UserdCollection();
-	        
     	}
-        this.userdList.fetch();
+    	var self = this;
+        this.userdList.fetch({
+        	success:function(){
+        		if (self.requestedId)self.userEdit(self.requestedId);
+        	}
+        });
     	if (!this.userdListView){
     		console.log("Backbone.Router->list:!this.userdListView");
     		this.userdListView = new UserdListView({model:this.userdList});
     	}
         $('#content').html(this.userdListView.el);
+        
     },
  
     userEdit:function (id) {
-    	console.log("Backbone.Router->userEdit:...");
-		this.countryList = new CountryCollection();
-        this.roleList = new RoleCollection();
-        this.userStatusList = new UserStatusCollection();
-        this.countryList.fetch();
-        this.roleList.fetch();
-        this.userStatusList.fetch();
-
-        this.userd = this.userdList.get(id);
-        this.userdEditView = new UserdEditView({model:this.userd, model2:this.countryList,
-            model3:this.roleList, model4:this.userStatusList});
+    	console.log("Backbone.Router->userEdit, id="+id);
+    	if (this.userdList){
+			this.countryList = new CountryCollection();
+	        this.roleList = new RoleCollection();
+	        this.userStatusList = new UserStatusCollection();
+	        this.countryList.fetch();
+	        this.roleList.fetch();
+	        this.userStatusList.fetch();
+	        this.userd = this.userdList.get(id);
+	        this.userdEditView = new UserdEditView({model:this.userd, model2:this.countryList,
+	            model3:this.roleList, model4:this.userStatusList});
+	        $('#content').html(this.userdEditView.el);
+    	} else{
+    		 this.requestedId = id;
+             this.list();
+    	}
         
         
-        $('#content').html(this.userdEditView.el);
         
     },
     /*
