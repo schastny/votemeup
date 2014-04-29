@@ -1,5 +1,6 @@
 package up.voteme.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import up.voteme.domain.Comment;
 import up.voteme.domain.UserStatus;
 import up.voteme.domain.Userd;
+import up.voteme.model.PaginatedUser;
 import up.voteme.model.SimpleUser;
 import up.voteme.service.CommentService;
 import up.voteme.service.UserStatusService;
@@ -41,11 +43,19 @@ public class UsersController {
 	@Autowired
 	CommentService commentService;
 	
-	@RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<SimpleUser> getUsersInJSON() {   
-		logger.info("GET api/users");
+	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody PaginatedUser getUsersInJSON(@RequestParam("page") int pageNumber, @RequestParam("per_page") int perPage) {   
+		logger.info("GET api/users, pageNumber:" + pageNumber + "  resultsPerPage:" + perPage);
         List<SimpleUser> sUsers = userdService.findAllSimple();
-        return sUsers; 
+        List<SimpleUser> result = new ArrayList<>();
+        int upperLimit = pageNumber*perPage > sUsers.size() ? sUsers.size():pageNumber*perPage;
+        for (int i = (pageNumber-1)*perPage; i < upperLimit; i++){
+        	result.add(sUsers.get(i));
+        }
+        PaginatedUser u = new PaginatedUser();
+        u.setUsers(result);
+        u.setTotalRecords(sUsers.size());
+        return u; 
     }
 	
 	@RequestMapping(value = "/current", method = RequestMethod.GET)

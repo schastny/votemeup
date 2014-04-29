@@ -34,7 +34,10 @@
 	</nav>
  	<div class="row">
 		<div class="col-xs-9">
-			<div id="content"></div>
+			<div id="content"> 
+      		</div>
+	        <div id="pagination">
+	        </div>
 			<hr>
 			<footer>
 				<p>© Sv-051Company 2014</p>
@@ -45,23 +48,52 @@
 				<div id="content2"></div>
 			</div>
 		</div>
-		
-
-		
 	</div>
 	<!--/row-->
 </div>
 <!--/.container-->
 
 
-<script src="../resources/js/jquery-2.1.0.min.js"></script>
-<script src="../resources/js/jquery-dateFormat.js"></script>
-<script src="../resources/js/underscore-min.js"></script>
-<script src="../resources/js/bootstrap.min.js"></script>
-<script src="../resources/js/backbone-min.js"></script>
-<script src="../resources/js/adminpage.js"></script>
+
+
 
 <!-- Templates -->
+
+
+<script type="text/html" id="tmpServerPagination">
+      <div class="breadcrumb">
+       <% if (currentPage > firstPage) { %>
+            <a href="#" class="serverprevious">Previous</a>
+          <% }else{ %>
+            <span>Previous</span>
+         <% }%>
+
+	<span class="divider">/</span>
+
+          <span class="cell">
+          <% for(p=1;p<=totalPages;p++){
+          %>
+            <% if (currentPage == p) { %>
+              <span class="page selected"><%= p %></span>
+            <% } else { %>
+              <a href="#" class="page"><%= p %></a>
+            <% } %>
+          <%
+          }%>
+
+          <span class="divider">/</span>
+
+          <% if (currentPage < totalPages) { %>
+            <a href="#" class="servernext">Next</a>
+          <% }else{ %>
+			<span>Next</span>
+		  <% }%>
+   
+
+        </div>
+</script>
+
+
 <script type="text/template" id="country-select">
 	<label for="country-selector">Страна</label>
    	<select class="form-control" id="country-selector">
@@ -209,7 +241,40 @@
 		</tbody>
 	</table>
 </script>
+<!-- 
+<script src="../resources/lib/jquery-2.1.0.min.js"></script>
+<script src="../resources/lib/jquery-dateFormat.js"></script>
+<script src="../resources/lib/underscore-min.js"></script>
+<script src="../resources/lib/bootstrap.min.js"></script>
+<script src="../resources/lib/backbone-min.js"></script>
+ -->
 
+ <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="../resources/lib/jquery-dateFormat.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+
+ 
+
+<script src="../resources/js/adminpage.js"></script>
+
+<script src="../resources/lib/backbone.paginator.js"></script>
+
+<script src="../resources/js/models/Admin.js"></script>
+<script src="../resources/js/models/Country.js"></script>
+<script src="../resources/js/models/Role.js"></script>
+<script src="../resources/js/models/Userd.js"></script>
+<script src="../resources/js/models/UserStatus.js"></script>
+<script src="../resources/js/collections/CountryCollection.js"></script>
+<script src="../resources/js/collections/PaginatedCollection.js"></script>
+<script src="../resources/js/collections/RoleCollection.js"></script>
+<script src="../resources/js/collections/UserStatusCollection.js"></script>
+<script src="../resources/js/views/CurrentAdminView.js"></script>
+<script src="../resources/js/views/PaginationView.js"></script>
+<script src="../resources/js/views/UserdListItemView.js"></script>
+<script src="../resources/js/views/UserdListView.js"></script>
+<script src="../resources/js/views/UserEditView.js"></script>
 
 
 
