@@ -38,6 +38,7 @@
       		</div>
 	        <div id="pagination">
 	        </div>
+	        
 			<hr>
 			<footer>
 				<p>© Sv-051Company 2014</p>
@@ -61,36 +62,32 @@
 
 
 <script type="text/html" id="tmpServerPagination">
-      <div class="breadcrumb">
-       <% if (currentPage > firstPage) { %>
-            <a href="#" class="serverprevious">Previous</a>
-          <% }else{ %>
-            <span>Previous</span>
-         <% }%>
 
-	<span class="divider">/</span>
-
-          <span class="cell">
-          <% for(p=1;p<=totalPages;p++){
-          %>
-            <% if (currentPage == p) { %>
-              <span class="page selected"><%= p %></span>
-            <% } else { %>
-              <a href="#" class="page"><%= p %></a>
-            <% } %>
-          <%
-          }%>
-
-          <span class="divider">/</span>
-
-          <% if (currentPage < totalPages) { %>
-            <a href="#" class="servernext">Next</a>
-          <% }else{ %>
-			<span>Next</span>
-		  <% }%>
-   
-
-        </div>
+			<ul class="pagination ">
+				<li>
+					<% if (currentPage > firstPage) { %>
+            			<a href="#" class="serverprevious">&laquo;</a>
+         			 <% }else{ %>
+            			<span>&laquo;</span>
+         			<% }%>
+				</li>
+				
+				<% for(p=1;p<=totalPages;p++){%>
+		            <% if (currentPage == p) { %>
+		              <li class="active"><a href="#"><%= p %></a></li>
+		            <% } else { %>
+		              <li> <a href="#" class="page"><%= p %></a></li>
+		            <% } %>
+		        <%}%>
+				
+				<li>
+			          <% if (currentPage < totalPages) { %>
+			            <a href="#" class="servernext">&raquo;</a>
+			          <% }else{ %>
+						<span>&raquo;</span>
+					  <% }%>
+			    </li>
+			</ul>
 </script>
 
 

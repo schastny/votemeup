@@ -146,15 +146,16 @@
 				<!--/row-->
 				<!-- Pagination -->
 				<div>
-					<ul class="pagination ">
-						<!-- 			<li><a href="#">&laquo;</a></li>	 -->
-
-						<c:if test="${gpModel.pagesTotal == 0}">
+					<c:if test="${gpModel.pagesTotal == 0}">
 							<p>Данных соответствующих данному фильтру нет в базе данных.
 								Измените условия фильтра...
 							<p>
-						</c:if>
+					</c:if>
+				
+					<ul class="pagination ">
+						<!-- 			<li><a href="#">&laquo;</a></li>	 -->
 
+						
 
 						<c:forEach begin="1" end="${gpModel.pagesTotal}" var="val">
 							<li ${gpModel.pageNum == val ? 'class="active"' : ''}><a
