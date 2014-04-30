@@ -143,7 +143,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		int num = (int) propCount/pageQuant;
 		pagesTotal = (propCount % pageQuant != 0) ? (num + 1) : num;
 		proposalList = result.list;
-		propCount = result.count;
+		propCount = propServ.countAll();
 	}
 	
 	

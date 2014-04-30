@@ -183,15 +183,16 @@
 				<!--/row-->
 				<!-- Pagination -->
 				<div>
-					<ul class="pagination ">
-						<!-- 			<li><a href="#">&laquo;</a></li>	 -->
-
-						<c:if test="${gpModel.pagesTotal == 0}">
+					<c:if test="${gpModel.pagesTotal == 0}">
 							<p>Данных соответствующих данному фильтру нет в базе данных.
 								Измените условия фильтра...
 							<p>
-						</c:if>
+					</c:if>
+				
+					<ul class="pagination ">
+						<!-- 			<li><a href="#">&laquo;</a></li>	 -->
 
+						
 
 						<c:forEach begin="1" end="${gpModel.pagesTotal}" var="val">
 							<li ${gpModel.pageNum == val ? 'class="active"' : ''}><a
@@ -296,8 +297,8 @@
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<script src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
-	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/resources/js/lib/jquery-2.1.0.min.js" />"></script>
+	<script src="<c:url value="/resources/js/lib/bootstrap.min.js" />"></script>
 	<script type="text/javascript"
 		src="<c:url value="/resources/js/guestpage.js" />"></script>
 </body>

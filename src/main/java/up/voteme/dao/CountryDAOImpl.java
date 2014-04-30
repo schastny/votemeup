@@ -3,12 +3,14 @@ package up.voteme.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
+import up.voteme.domain.Country;
 import up.voteme.domain.Country;
 
 @Component
@@ -58,5 +60,14 @@ System.out.println("country = "+con);
 		Query query = eMgr.createQuery("SELECT COUNT(*) FROM Country");
 		long result = (long) query.getSingleResult();
 		return result;
+	}
+	
+	public Country findByName (String name){
+		TypedQuery<Country> query = eMgr.createQuery("SELECT r FROM Country r WHERE r.countryName = :name", Country.class);
+		query.setParameter("name", name);
+		List<Country> results = query.getResultList();
+	    if (results.isEmpty()) return null;
+	    else if (results.size() == 1) return results.get(0);
+	    throw new NonUniqueResultException("Country must be UNIQUE");
 	}
 }

@@ -34,7 +34,11 @@
 	</nav>
  	<div class="row">
 		<div class="col-xs-9">
-			<div id="content"></div>
+			<div id="content"> 
+      		</div>
+	        <div id="pagination">
+	        </div>
+	        
 			<hr>
 			<footer>
 				<p>© Sv-051Company 2014</p>
@@ -45,33 +49,95 @@
 				<div id="content2"></div>
 			</div>
 		</div>
-		
-
-		
 	</div>
 	<!--/row-->
 </div>
 <!--/.container-->
 
 
-<script src="../resources/js/jquery-2.1.0.min.js"></script>
-<script src="../resources/js/jquery-dateFormat.js"></script>
-<script src="../resources/js/underscore-min.js"></script>
-<script src="../resources/js/bootstrap.min.js"></script>
-<script src="../resources/js/backbone-min.js"></script>
-<script src="../resources/js/adminpage.js"></script>
+
+
 
 <!-- Templates -->
-<script type="text/template" id="role-item">
-	<option value="<%=role%>"> <%=role%></option>
+
+
+<script type="text/html" id="tmpServerPagination">
+
+			<ul class="pagination ">
+				<li>
+					<% if (currentPage > firstPage) { %>
+            			<a href="#" class="serverprevious">&laquo;</a>
+         			 <% }else{ %>
+            			<span>&laquo;</span>
+         			<% }%>
+				</li>
+				
+				<% for(p=1;p<=totalPages;p++){%>
+		            <% if (currentPage == p) { %>
+		              <li class="active"><a href="#"><%= p %></a></li>
+		            <% } else { %>
+		              <li> <a href="#" class="page"><%= p %></a></li>
+		            <% } %>
+		        <%}%>
+				
+				<li>
+			          <% if (currentPage < totalPages) { %>
+			            <a href="#" class="servernext">&raquo;</a>
+			          <% }else{ %>
+						<span>&raquo;</span>
+					  <% }%>
+			    </li>
+			</ul>
+</script>
+
+
+<script type="text/template" id="country-select">
+	<label for="country-selector">Страна</label>
+   	<select class="form-control" id="country-selector">
+        <% countries.each(function(country) { %>
+            <option value="<%= country.get('countryName')%>" 
+				<%= country.get('countryName')==isSelected ? 'selected' : '' %> >
+				<%= country.get('countryName') %></option>
+        <% }); %>
+    </select>
+</script>
+
+<script type="text/template" id="sex-select">
+	<label for="sex-selector">Пол</label>
+   	<select class="form-control" id="sex-selector">
+            <option value="муж"<%= 'муж'==isSelected ? 'selected' : '' %> >
+				муж</option>
+			<option value="жен"<%= 'жен'==isSelected ? 'selected' : '' %> >
+				жен</option>
+    </select>
+</script>
+
+<script type="text/template" id="role-select">
+	<label for="role-selector">Роль</label>
+   	<select class="form-control" id="role-selector">
+        <% roles.each(function(role) { %>
+            <option value="<%= role.get('roleName')%>" 
+				<%= role.get('roleName')==isSelected ?  'selected' : '' %> >
+				<%= role.get('roleName') %></option>
+        <% }); %>
+    </select>
+</script>
+
+<script type="text/template" id="userStatus-select">
+	<label for="userStatus-selector">Статус</label>
+   	<select class="form-control" id="userStatus-selector">
+        <% userStatuses.each(function(userStatus) { %>
+            <option value="<%= userStatus.get('status')%>" 
+				<%= userStatus.get('status')==isSelected ?  'selected' : '' %> >
+				<%= userStatus.get('status') %></option>
+        <% }); %>
+    </select>
 </script>
 
 <script type="text/template" id="current-admin">
-
 	Вы вошли как <%= userLogin %>
 	<a class="pull-right"
 			href="../j_spring_security_logout">Выход</a>
-
 </script>
 
 
@@ -86,7 +152,6 @@
 
 
 <script type="text/template" id="user-edit">
-
 <div class="panel panel-default">
 <div class="panel-body">
 <form role="form" >
@@ -108,11 +173,8 @@
     			<label for="userPassword">SHA1 хэш пароля</label>
     			<input type="text" class="form-control" id="userPassword" id="userPassword" value="<%=userPassword%>" >
   			</div>	
-			
-  			
-			<a class="btn btn-primary back " href="#main">Назад</a>
+			<a class="back btn btn-primary" >Назад</a>
 			<a class="save btn btn-success" >Сохранить</a>
-			
   		</div>
   		<div class="col-xs-4">
 			<div class="form-group">
@@ -134,34 +196,15 @@
   			</div>
   		</div>
 		<div class="col-xs-4">
-			<div class="form-group">
-    			<label for="country">Страна</label>
-    			<input type="text" class="form-control" id="country" id="country" value="<%=country%>" >
-  			</div>
-			<div class="form-group">
-    			<label for="sex">Пол</label>
-    			<input type="text" class="form-control" id="sex" id="sex" value="<%=sex%>" >
-  			</div>
-			<div id="role" class="form-group">
-				<label for="rol">Роль</label>
-				<select class="form-control"  id="rol">
-					<option value="<%=role%>"> <%=role%></option>
-					<option value="rrrr">rrrr</option>
-				</select>
-  			</div>
-			<div class="form-group">
-    			<label for="userStatus">Статус</label>
-    			<input type="text" class="form-control" id="userStatus" id="userStatus" value="<%=userStatus%>" >
-  			</div>
+			<div id="country-container" class="form-group">	</div>
+			<div id="sex-container" class="form-group"> 	</div>
+			<div id="role-container" class="form-group">	</div>
+			<div id="userStatus-container" class="form-group">		</div>
   		</div>
   	</div>
 </form>
 </div>
 </div>
-
-
-
-
 </script>
 
 <script type="text/template" id="user-list-item">
@@ -193,10 +236,36 @@
 		</thead>
 		<tbody>
 		</tbody>
-		
 	</table>
 </script>
 
+
+ <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="../resources/js/lib/jquery-dateFormat.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+
+ 
+
+<script src="../resources/js/adminpage.js"></script>
+
+<script src="../resources/js/lib/backbone.paginator.js"></script>
+
+<script src="../resources/js/models/Admin.js"></script>
+<script src="../resources/js/models/Country.js"></script>
+<script src="../resources/js/models/Role.js"></script>
+<script src="../resources/js/models/Userd.js"></script>
+<script src="../resources/js/models/UserStatus.js"></script>
+<script src="../resources/js/collections/CountryCollection.js"></script>
+<script src="../resources/js/collections/PaginatedCollection.js"></script>
+<script src="../resources/js/collections/RoleCollection.js"></script>
+<script src="../resources/js/collections/UserStatusCollection.js"></script>
+<script src="../resources/js/views/CurrentAdminView.js"></script>
+<script src="../resources/js/views/PaginationView.js"></script>
+<script src="../resources/js/views/UserdListItemView.js"></script>
+<script src="../resources/js/views/UserdListView.js"></script>
+<script src="../resources/js/views/UserEditView.js"></script>
 
 
 

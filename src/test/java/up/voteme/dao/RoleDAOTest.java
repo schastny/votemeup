@@ -13,7 +13,7 @@ import up.voteme.domain.Role;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING) //set junit  to 4.11
 public class RoleDAOTest {
 
-	private	RoleDAO dao = new RoleDAO();
+	private	RoleDAO dao = new RoleDAOImpl();
 
 	@Test
 	public void A_findAllTest() {

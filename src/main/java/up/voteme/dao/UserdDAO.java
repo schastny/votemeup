@@ -17,6 +17,8 @@ public interface UserdDAO {
 	public abstract List<Userd> findAll();
 
 	public abstract long countAll();
+
+	public abstract Userd findByEmail(String email);
 	
 
 

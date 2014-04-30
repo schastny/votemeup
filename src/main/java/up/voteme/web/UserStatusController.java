@@ -9,23 +9,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import up.voteme.domain.Role;
-import up.voteme.service.RoleService;
-
+import up.voteme.domain.UserStatus;
+import up.voteme.service.UserStatusService;
 
 @Controller
-@RequestMapping("/api/roles")
-public class RoleController {
-
+@RequestMapping("/api/userStatuses")
+public class UserStatusController {
+	
 	private static final Logger logger = LoggerFactory
-			.getLogger(RoleController.class);
+			.getLogger(UserStatusController.class);
+	
 	@Autowired
-	RoleService roleService;
+	UserStatusService userStatusService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-    public @ResponseBody List<Role> getRolesInJSON() {   
-        List<Role> roles = roleService.findAll();
-        return roles; 
+    public @ResponseBody List<UserStatus> getUserStatusesInJSON() {   
+        List<UserStatus> statuses = userStatusService.findAll();
+        return statuses; 
     }
+
 }
