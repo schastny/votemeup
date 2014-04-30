@@ -16,6 +16,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import up.voteme.domain.Country;
@@ -80,7 +82,7 @@ public class RegistrationController {
 		newUser.setLastName(regForm.getLastName());
 		newUser.setBirthYear(regForm.getBirthdate());
 		newUser.setSex(regForm.getGender());
-		newUser.setEmail(regForm.getEmail());
+		newUser.setEmail(regForm.getUserEmail());
 		newUser.setUserLogin(regForm.getUserLogin());
 
 		String securePassword = getShaPassword(regForm.getPassword());
@@ -99,9 +101,44 @@ public class RegistrationController {
 		 * logger.info("----------"+ regForm.getCountry());
 		 */
 
-		return "registration";
+		return "successRegistration";
+		//return "redirect:/pages/registr.html";
 	}
 
+	@RequestMapping(value = "/checkLogin", method = RequestMethod.POST)
+	public @ResponseBody String checkUser(@RequestParam("userLogin") String userLogin, Model model) {
+		logger.info(userLogin);
+		if(userDao.findByLogin(userLogin)!= null){
+			logger.info("fail");
+			return "fail";
+		}
+		else {
+			logger.info("ok");
+			return "ok";
+		}
+	}
+	
+	@RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
+	public @ResponseBody String checkEmail(@RequestParam("userEmail") String userEmail, Model model) {
+		logger.info(userEmail);
+		if(userDao.findByEmail(userEmail)!= null){
+			logger.info("fail");
+			return "fail";
+		}
+		else {
+			logger.info("ok");
+			return "ok";
+		}
+	}
+	
+//	@RequestMapping(value = "/successregistr")
+//	public String helpPage(Model model){
+//		model.addAttribute("welcomeMes", "user");
+//		return "successRegistration";
+//	}	
+	
+	
+	
 	//Хеширование пароля(SHA-1)
 	private static String getShaPassword(String passwordToHash) {
 		try {
@@ -119,4 +156,5 @@ public class RegistrationController {
 		return passwordToHash;
 	}
 
+	
 }

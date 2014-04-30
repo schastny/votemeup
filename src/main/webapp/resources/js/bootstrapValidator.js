@@ -42,7 +42,7 @@
         elementClass: 'bootstrap-validator-form',
 
         // Default invalid message
-        message: 'This value is not valid',
+      //  message: 'This value is not valid',
 
         // Shows ok/error/loading icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).

@@ -25,6 +25,10 @@
 .spacer {
 	margin-bottom: 5px;
 }
+
+#loginError,#emailError {
+	font-size: 12px;
+}
 </style>
 
 <script type="text/javascript"
@@ -83,7 +87,7 @@
 				<h3>Регистрация нового пользователя:</h3>
 				<br />
 				<form role="form" id="contact-form" class="form-horizontal"
-					method="POST" action="save" >
+					method="POST" action="save">
 
 					<div class="form-group">
 						<label for="lastname" class="col-md-3">Имя :</label>
@@ -119,9 +123,9 @@
 						<label for="gender" class="col-md-3"> Укажите свой пол : </label>
 						<div class="col-md-8">
 							<label class="radio"> <input type="radio" name="gender"
-								id="gender" value="male"> Мужской
+								id="gender" value="муж"> Мужской
 							</label> <label class="radio"> <input type="radio" name="gender"
-								id="gender" value="female"> Женский
+								id="gender" value="жен"> Женский
 							</label>
 						</div>
 					</div>
@@ -142,18 +146,35 @@
 					</div>
 					<!--  	<br /> <br /> -->
 					<div class="form-group">
-						<label for="userlogin" class="col-md-3">Логин :</label>
+						<div class="col-md-3">
+							<label for="userlogin">Логин :</label>
+						</div>
 						<div class="col-md-8">
+
 							<input type="text" class="form-control" id="userLogin"
-								name="userLogin" placeholder="Введите  логин...">
+								name="userLogin" placeholder="Введите  логин..." /> 
+								<span id="span" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+							<div>
+								<p id="loginError" class="help-block"></p>
+							</div>
+
 						</div>
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
 						<label for="email" class="col-md-3">Е-mail :</label>
 						<div class="col-md-8">
-							<input type="email" class="form-control" id="email" name="email"
+							<input type="text" class="form-control" id="userEmail" name="userEmail"
 								placeholder="Введите  e-mail адрес...">
+								   <span id="span2" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! insert model item-->
+
+							<div>
+								<p id="emailError" class="help-block"></p>
+							</div>
+
+
 						</div>
 					</div>
 					<!--  	<br /> <br />-->

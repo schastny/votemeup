@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Userd;
-import up.voteme.service.ProposalServiceImpl;
+
 
 
 @Component
@@ -71,6 +71,22 @@ public class UserdDAOImpl implements UserdDAO {
 
 	}
 
+	
+	@Override
+	public Userd findByEmail (String email){
+		TypedQuery<Userd> query = em.createQuery("SELECT u FROM Userd u WHERE u.email = :name",Userd.class);
+		query.setParameter("name", email);
+		List<Userd> results = query.getResultList();
+	    if (results.isEmpty()) return null;
+	    else if (results.size() == 1) return results.get(0);
+	    logger.info("NonUniqueResultException(Email must be UNIQUE)");
+	    throw new NonUniqueResultException("Email must be UNIQUE");
+
+	}
+	
+	
+	
+	
 	/* (non-Javadoc)
 	 * @see up.voteme.dao.UserdDAO#findAll()
 	 */
@@ -78,10 +94,7 @@ public class UserdDAOImpl implements UserdDAO {
 	public List<Userd> findAll() {
 		TypedQuery<Userd> query = em.createQuery(
 		"SELECT c FROM Userd c", Userd.class);
-		List<Userd> items = query.getResultList();
-		for (Userd item : items) {
-			//item.getProposals().size();
-		}
+		List<Userd> items = query.getResultList();		
 		return items;
 	}
 	

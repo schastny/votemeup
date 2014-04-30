@@ -26,6 +26,19 @@ public class UserdServiceImpl implements UserdService {
 	public Userd findById(long id) {
 		return userdDAO.findById(id);
 	}
+	
+	@Override
+	@Transactional
+	public Userd findByLogin(String login){
+		return userdDAO.findByLogin(login);
+	}
+	
+	@Override
+	@Transactional
+	public Userd findByEmail(String email){
+		return userdDAO.findByEmail(email);
+	}
+	
 
 	@Transactional
 	@Override

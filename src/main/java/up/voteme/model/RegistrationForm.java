@@ -7,10 +7,9 @@ public class RegistrationForm {
 	private String gender;
 	private int country;
 	private String userLogin;
-	private String email;
+	private String userEmail;
 	private String password;
 	private String confirmPassword;
-	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -47,11 +46,11 @@ public class RegistrationForm {
 	public void setUserLogin(String userLogin) {
 		this.userLogin = userLogin;
 	}
-	public String getEmail() {
-		return email;
+	public String getUserEmail() {
+		return userEmail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
 	}
 	public String getPassword() {
 		return password;
@@ -64,6 +63,8 @@ public class RegistrationForm {
 	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
-	}	
+	}
+	
+	
 	
 }
