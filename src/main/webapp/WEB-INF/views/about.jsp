@@ -49,6 +49,9 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="/voteme/">Главная</a></li>
+						<c:if test="${user.role.roleName == 'ROLE_ADMIN'}">
+							<li><a href="/voteme/admin/">Пользователи</a></li>
+						</c:if>
 						<li class="active"><a href="/voteme/about">О проекте</a></li>
 						<li><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>

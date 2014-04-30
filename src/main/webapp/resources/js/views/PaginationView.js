@@ -4,7 +4,7 @@ window.PaginatedView = Backbone.View.extend({
       'click a.servernext': 'nextResultPage',
       'click a.serverprevious': 'previousResultPage',
       'click a.page': 'gotoPage',
-       'click a.serverpage': 'gotoPage',
+    //  'click a.serverpage': 'gotoPage',
   
 
     },
@@ -23,6 +23,7 @@ window.PaginatedView = Backbone.View.extend({
     },
 
     render: function () {
+    	console.log("paginatedView->render");
       var html = this.template(this.collection.info());
       this.$el.html(html);
     },
@@ -45,11 +46,6 @@ window.PaginatedView = Backbone.View.extend({
       var page = $(e.target).text();
       this.collection.goTo(page);
     },
-    
-    backToPage: function (page) {
-        console.log("backToPage:"+page);
-        this.collection.goTo(page);
-      },
-
+ 
   });
 

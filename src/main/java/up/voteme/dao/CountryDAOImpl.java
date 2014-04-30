@@ -68,7 +68,6 @@ System.out.println("country = "+con);
 		List<Country> results = query.getResultList();
 	    if (results.isEmpty()) return null;
 	    else if (results.size() == 1) return results.get(0);
-	    //logger.info("NonUniqueResultException(Login must be UNIQUE)");
-	    throw new NonUniqueResultException("Login must be UNIQUE");
+	    throw new NonUniqueResultException("Country must be UNIQUE");
 	}
 }

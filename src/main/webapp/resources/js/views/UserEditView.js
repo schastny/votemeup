@@ -4,8 +4,7 @@ window.UserdEditView = Backbone.View.extend({
     template:_.template($('#user-edit').html()),
     
     initialize:function () {
-    	console.log("UserdEditView->initialize...");
-    	console.log(this.model);
+    	console.log("UserdEditView->initialize");
         this.options.model2.bind("reset", this.render, this);
         this.options.model3.bind("reset", this.render, this);
         this.options.model4.bind("reset", this.render, this);
@@ -73,8 +72,6 @@ window.UserdEditView = Backbone.View.extend({
 			this.model.save(null,{
 				success:function(model, response){
 					console.log("model saved succeesfully");
-					//app.requestedId = null;
-					//app.navigate("", {trigger: true, replace: true});
 					window.history.back();
 				},
 				error: function(model, response){
@@ -90,8 +87,6 @@ window.UserdEditView = Backbone.View.extend({
 
 	back: function(){
 		console.log("back to main");
-		//app.requestedId = null;
-		//app.navigate("", {trigger: true, replace: true});
 		window.history.back();
 	},
 		

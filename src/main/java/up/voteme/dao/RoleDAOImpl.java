@@ -82,8 +82,7 @@ public class RoleDAOImpl implements RoleDAO {
 		List<Role> results = query.getResultList();
 	    if (results.isEmpty()) return null;
 	    else if (results.size() == 1) return results.get(0);
-	    //logger.info("NonUniqueResultException(Login must be UNIQUE)");
-	    throw new NonUniqueResultException("Login must be UNIQUE");
+	    throw new NonUniqueResultException("ROLE must be UNIQUE");
 	}
 	
 }

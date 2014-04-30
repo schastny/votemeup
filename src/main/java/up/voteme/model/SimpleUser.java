@@ -52,37 +52,6 @@ public class SimpleUser implements Serializable  {
 		this.country = user.getCountry().getCountryName();
 	}
 	
-	public boolean validate(){
-		
-		boolean isValid = false;
-		if (firstName.length() >= 2 && firstName.length() <= 50) isValid = true;
-		else return false;
-		
-		if (lastName.length() >= 2 && lastName.length()<=50) isValid = true;
-		else return false;
-		
-		if (email.length() >= 2 && email.length()<=255) isValid = true;
-		else return false;
-		
-		if (userLogin.length() >= 2 && userLogin.length()<=20) isValid = true;
-		else return false;
-		
-		if (userPassword.length() == 40) isValid = true;
-		else return false;
-		
-		Calendar cal = Calendar.getInstance();
-	    cal.setTime(new Date()); // your date
-	    int curYear = cal.get(Calendar.YEAR);
-	    int age = curYear - birthYear;
-	    if (age >= 14 && age <= 120 ) isValid = true;
-	    else return false;
-		
-	    if (sex.equals("муж")||sex.equals("жен")) isValid = true;
-	    else return false;
-	    
-
-		return isValid;
-	}
 	
 	public long getUserdId() {
 		return userdId;

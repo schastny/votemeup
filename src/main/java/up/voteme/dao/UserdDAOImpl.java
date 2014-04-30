@@ -69,8 +69,19 @@ public class UserdDAOImpl implements UserdDAO {
 	    else if (results.size() == 1) return results.get(0);
 	    logger.info("NonUniqueResultException(Login must be UNIQUE)");
 	    throw new NonUniqueResultException("Login must be UNIQUE");
-
 	}
+	
+	@Override
+	public Userd findByEmail (String email){
+		TypedQuery<Userd> query = em.createQuery("SELECT u FROM Userd u WHERE u.email = :str",Userd.class);
+		query.setParameter("str", email);
+		List<Userd> results = query.getResultList();
+	    if (results.isEmpty()) return null;
+	    else if (results.size() == 1) return results.get(0);
+	    logger.info("NonUniqueResultException(Email must be UNIQUE)");
+	    throw new NonUniqueResultException("Email must be UNIQUE");
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see up.voteme.dao.UserdDAO#findAll()

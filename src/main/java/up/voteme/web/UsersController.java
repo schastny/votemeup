@@ -1,7 +1,5 @@
 package up.voteme.web;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,18 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import up.voteme.domain.Comment;
-import up.voteme.domain.UserStatus;
 import up.voteme.domain.Userd;
 import up.voteme.model.PaginatedUser;
 import up.voteme.model.SimpleUser;
@@ -44,18 +38,22 @@ public class UsersController {
 	CommentService commentService;
 	
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public @ResponseBody PaginatedUser getUsersInJSON(@RequestParam("page") int pageNumber, @RequestParam("per_page") int perPage) {   
-		logger.info("GET api/users, pageNumber:" + pageNumber + "  resultsPerPage:" + perPage);
-        List<SimpleUser> sUsers = userdService.findAllSimple();
-        List<SimpleUser> result = new ArrayList<>();
-        int upperLimit = pageNumber*perPage > sUsers.size() ? sUsers.size():pageNumber*perPage;
-        for (int i = (pageNumber-1)*perPage; i < upperLimit; i++){
-        	result.add(sUsers.get(i));
-        }
-        PaginatedUser u = new PaginatedUser();
-        u.setUsers(result);
-        u.setTotalRecords(sUsers.size());
-        return u; 
+    public @ResponseBody ResponseEntity<PaginatedUser> getUsersInJSON(@RequestParam("page") int pageNumber, @RequestParam("per_page") int perPage) {   
+		logger.info("GET api/users, pageNumber:" + pageNumber + "  perPage:" + perPage);
+		long items = userdService.countAll();
+		if (pageNumber * perPage < 1){
+			if (((pageNumber-1) * perPage + 1) > items){
+				return new ResponseEntity<PaginatedUser>(HttpStatus.BAD_REQUEST);
+			};
+		}
+		try{
+			PaginatedUser pUser = userdService.findPaginated(pageNumber, perPage);
+			return new ResponseEntity<PaginatedUser>(pUser, HttpStatus.OK);
+		} catch (Exception e){
+			logger.info("Exception catched: " +e.toString());
+			return new  ResponseEntity<PaginatedUser>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
     }
 	
 	@RequestMapping(value = "/current", method = RequestMethod.GET)
@@ -79,26 +77,19 @@ public class UsersController {
 	 public @ResponseBody ResponseEntity<String>  update(@PathVariable Long id, @RequestBody final SimpleUser sUser) {
 		logger.info("UPDATE api/users/{id}="+id);
 		logger.info(sUser.toString());
-		if (!sUser.validate()) {
-			logger.info("data validation failed");
-			return new ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE );
+		if (!userdService.validate(sUser)) {
+			logger.info("Data validation failed");
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST );
 		}
 		try{
 			userdService.updateUserdAndStore(sUser);
 			logger.info("Database updated");
 			return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 		} catch (Exception e){
-			logger.info(e.toString());
-			return new  ResponseEntity<String>(HttpStatus.NOT_ACCEPTABLE );
+			logger.info("Exception catched: " +e.toString());
+			return new  ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-	}
-	
-	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long id) {
-		logger.info("DELETE api/users/{id}="+id);
-		userdService.delete(id);
 	}
 
 

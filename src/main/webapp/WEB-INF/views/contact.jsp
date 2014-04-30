@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="true"%>
 
@@ -49,6 +49,9 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="/voteme/">Главная</a></li>
+						<c:if test="${user.role.roleName == 'ROLE_ADMIN'}">
+							<li><a href="/voteme/admin/">Пользователи</a></li>
+						</c:if>
 						<li><a href="/voteme/about">О проекте</a></li>
 						<li class="active"><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>

@@ -5,13 +5,12 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import up.voteme.domain.Userd;
+import up.voteme.model.PaginatedUser;
 import up.voteme.model.SimpleUser;
 
 public interface UserdService {
 
 	public abstract List<Userd> findAll();
-	
-	public abstract List<SimpleUser> findAllSimple();
 	
 	public abstract Userd findById(long id);
 	
@@ -20,5 +19,11 @@ public interface UserdService {
 	public void store(Userd u);
 	
 	public void updateUserdAndStore (SimpleUser sUser);
+
+	boolean validate(SimpleUser sUser);
+
+	public PaginatedUser findPaginated(int pageNumber, int perPage);
+
+	public long countAll();
 
 }
