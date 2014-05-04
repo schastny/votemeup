@@ -90,23 +90,39 @@
 					method="POST" action="save">
 
 					<div class="form-group">
-						<label for="lastname" class="col-md-3">Имя :</label>
+						<div class="col-md-3">
+							<label for="lastname">Имя :</label>
+						</div>
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="lastname"
 								name="lastName" placeholder="Введите  имя...">
 						</div>
+
+						<div>
+							<p></p>
+						</div>
+
 					</div>
 
 					<div class="form-group">
-						<label for="firstname" class="col-md-3">Фамилия :</label>
+						<div class="col-md-3">
+							<label for="firstname">Фамилия :</label>
+						</div>
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="firstName"
 								name="firstName" placeholder="Введите  фамилию...">
 						</div>
+
+						<div>
+							<p></p>
+						</div>
+
 					</div>
 					<!--  <br /> <br />-->
 					<div class="form-group">
-						<label for="birth" class="col-md-3"> Год рождения : </label>
+						<div class="col-md-3">
+							<label for="birth"> Год рождения : </label>
+						</div>
 						<div class="col-md-8">
 							<!--  <div class="form-control">-->
 							<select name="birthdate" id="birthdate" class="form-control">
@@ -117,10 +133,15 @@
 
 							</select>
 						</div>
+						<div>
+							<p></p>
+						</div>
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
-						<label for="gender" class="col-md-3"> Укажите свой пол : </label>
+						<div class="col-md-3">
+							<label for="gender"> Укажите свой пол : </label>
+						</div>
 						<div class="col-md-8">
 							<label class="radio"> <input type="radio" name="gender"
 								id="gender" value="муж"> Мужской
@@ -128,14 +149,20 @@
 								id="gender" value="жен"> Женский
 							</label>
 						</div>
+
+						<div>
+							<p></p>
+						</div>
+
 					</div>
 					<!--  	<br /> <br /> -->
 					<div class="form-group">
-						<label for="country" class="col-md-3"> Страна : </label>
+						<div class="col-md-3">
+							<label for="country"> Страна : </label>
+						</div>
 						<div class="col-md-8">
 							<select name="country" id="country" class="form-control">
 								<option value="">--Выберите страну--</option>
-								<!--   <option>----</option> -->
 								<c:forEach items="${gpModel.countryList}" var="item">
 									<option value="${item.countryId}"
 										${item.countryId == regModel.selectedCountryId ? 'selected="selected"' : ''}>${item.countryName}</option>
@@ -143,6 +170,11 @@
 
 							</select>
 						</div>
+
+						<div>
+							<p></p>
+						</div>
+
 					</div>
 					<!--  	<br /> <br /> -->
 					<div class="form-group">
@@ -152,8 +184,9 @@
 						<div class="col-md-8">
 
 							<input type="text" class="form-control" id="userLogin"
-								name="userLogin" placeholder="Введите  логин..." /> 
-								<span id="span" class="glyphicon glyphicon-remove form-control-feedback"></span>
+								name="userLogin" placeholder="Введите  логин..." />
+							<!--  <span id="span" class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+							<span id="span"></span>
 							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 							<div>
 								<p id="loginError" class="help-block"></p>
@@ -163,11 +196,14 @@
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
-						<label for="email" class="col-md-3">Е-mail :</label>
+						<div class="col-md-3">
+							<label for="email">Е-mail :</label>
+						</div>
 						<div class="col-md-8">
-							<input type="text" class="form-control" id="userEmail" name="userEmail"
-								placeholder="Введите  e-mail адрес...">
-								   <span id="span2" class="glyphicon glyphicon-remove form-control-feedback"></span>
+							<input type="text" class="form-control" id="userEmail"
+								name="userEmail" placeholder="Введите  e-mail адрес...">
+							<!-- <span id="span2" class="glyphicon glyphicon-remove form-control-feedback"></span>-->
+							<span id="span2"></span>
 							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! insert model item-->
 
 							<div>
@@ -179,7 +215,9 @@
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
-						<label for="password" class="col-md-3">Пароль :</label>
+						<div class="col-md-3">
+							<label for="password">Пароль :</label>
+						</div>
 						<div class="col-md-8">
 							<input type="password" class="form-control" id="password"
 								name="password" name="password" placeholder="Введите  пароль...">
@@ -187,8 +225,9 @@
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
-						<label for="confirmPassword" class="col-md-3">Подтвердите
-							пароль :</label>
+						<div class="col-md-3">
+							<label for="confirmPassword">Подтвердите пароль :</label>
+						</div>
 						<div class="col-md-8">
 							<input type="password" class="form-control" id="confirmPassword"
 								name="confirmPassword" placeholder="Подтвердите пароль...">

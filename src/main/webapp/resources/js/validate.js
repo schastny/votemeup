@@ -100,10 +100,10 @@ $(document).ready(function() {
 	    
 	    $("#userLogin").change(function() {
 	    	$("#userLogin").focusin(function(){
+	    		$("#span").hide();
 	    		$("#loginError").text("");
 	    	});
-	    	
-	    	
+	    		    
 	    	var usLogin = $("#userLogin").val();
 	    	var pattern =  /^((\w)+[\._-]*(\w)+)+$/;
 	    		     	
@@ -144,7 +144,11 @@ $(document).ready(function() {
 	    });
 	    
 	    $("#userEmail").change(function() {
-	    	//$("#span2").hide();
+	    	$("#userEmail").focusin(function(){
+	    		$("#span").hide();
+	    		$("#emailError").text("");
+	    	});
+	    	
 	    	var usEmail = $("#userEmail").val();
 	    	var pattern =  /^\w+([\.\-_]*\w+)*@\w+([\.-]?\w+)*(\.\w{2,10})+$/;
 	    	
@@ -217,8 +221,10 @@ $(document).ready(function() {
 	    });
 	    
 	    $("#validateBtn").click(function() {
+	    	
 	    	var usLogin = $("#userLogin").val();
 	      	var usEmail = $("#userEmail").val();
+	      	
 	    	if(usLogin.length == 0){
 	    		loginError();
 	    		$("#loginError").text("");
@@ -227,6 +233,8 @@ $(document).ready(function() {
 	    	}
 	    	if(usEmail.length == 0){
 	    		emailError();
+	    		$("#emailError").text("");
+	    		$("#emailError").text("Это поле обязательно для заполнения и не может быть пустым!");
 	    	}
 	    	
 	    });
