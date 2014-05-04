@@ -8,6 +8,7 @@ window.UserdEditView = Backbone.View.extend({
         this.options.model2.bind("reset", this.render, this);
         this.options.model3.bind("reset", this.render, this);
         this.options.model4.bind("reset", this.render, this);
+        this.model.bind("error", this.validError, this);
     },
     
     events: {
@@ -15,8 +16,19 @@ window.UserdEditView = Backbone.View.extend({
 		"click .back": "back",
     },
     
+    validError: function(obj ,error){
+    	console.log("UserdEditView->error");
+    	console.log(error);
+  		 _.each(error, function (err) {
+  			if (err.message)
+  			$('#errors').append("<p><span class='glyphicon glyphicon-remove'></span>"+err.message+"</p>");
+   		 }, this);
+
+
+    },
+    
     render:function (eventName) {
-    	console.log("UserdEditView->render...");
+    	console.log("UserdEditView->render");
         $(this.el).html(this.template(this.model.toJSON()));
         
         //render selectboxes.
@@ -50,6 +62,7 @@ window.UserdEditView = Backbone.View.extend({
 	saveUser: function() {
 		console.log("UserdEditView->saveUser...");
 
+	
 		this.model.set({
 			userLogin: $('#userLogin').val(),
 			email: $('#email').val(),
@@ -63,6 +76,9 @@ window.UserdEditView = Backbone.View.extend({
 			userStatus: $('#userStatus-selector').val(), 
 		},{silent:true});
 		
+		var valid = this.model.isValid();
+		console.log(valid);
+		if (!valid) return false;
 		
 		
 		var changedAttr = this.model.changedAttributes();
@@ -74,12 +90,12 @@ window.UserdEditView = Backbone.View.extend({
 					console.log("model saved succeesfully");
 					window.history.back();
 				},
-				error: function(model, response){
-					alert("Ошибка сохранения данных на сервере");
-				},
+				error: function(){
+					$('#errors').append("<p><span class='glyphicon glyphicon-remove'></span>  Ошибка сохранения данных на сервере</p>");
+				}
 			});
 		} else {
-			alert ("Данные пользователя не были изменены");
+			$('#errors').append("<p><span class='glyphicon glyphicon-remove'></span>  Данные пользователя не были изменены</p>");
 		}
 	 	
 		return false;
@@ -87,6 +103,7 @@ window.UserdEditView = Backbone.View.extend({
 
 	back: function(){
 		console.log("back to main");
+		$('#errors').html("");
 		window.history.back();
 	},
 		
