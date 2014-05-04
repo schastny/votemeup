@@ -29,16 +29,21 @@
 #loginError,#emailError {
 	font-size: 12px;
 }
+
+.help-block {
+	font-size: 12px;
+	color: red;
+}
 </style>
 
 <script type="text/javascript"
-	src="<c:url value="/resources/js/jquery-2.1.0.min.js" />"></script>
+	src="<c:url value="/resources/js/lib/jquery-2.1.0.min.js" />"></script>
 
 <script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
+	src="<c:url value="/resources/js/lib/bootstrap.min.js" />"></script>
 
 <script type="text/javascript"
-	src="<c:url value="/resources/js/bootstrapValidator.js" />"></script>
+	src="<c:url value="/resources/js/lib/bootstrapValidator.js" />"></script>
 </head>
 <body>
 
@@ -96,12 +101,10 @@
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="lastname"
 								name="lastName" placeholder="Введите  имя...">
+							<div>
+								<p class="help-block">${lastNameError}</p>
+							</div>
 						</div>
-
-						<div>
-							<p></p>
-						</div>
-
 					</div>
 
 					<div class="form-group">
@@ -111,12 +114,11 @@
 						<div class="col-md-8">
 							<input type="text" class="form-control" id="firstName"
 								name="firstName" placeholder="Введите  фамилию...">
-						</div>
+							<div>
+								<p class="help-block">${firstNameError}</p>
+							</div>
 
-						<div>
-							<p></p>
 						</div>
-
 					</div>
 					<!--  <br /> <br />-->
 					<div class="form-group">
@@ -132,10 +134,11 @@
 								</c:forEach>
 
 							</select>
+							<div>
+								<p class="help-block">${birthdateError}</p>
+							</div>
 						</div>
-						<div>
-							<p></p>
-						</div>
+
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
@@ -148,10 +151,9 @@
 							</label> <label class="radio"> <input type="radio" name="gender"
 								id="gender" value="жен"> Женский
 							</label>
-						</div>
-
-						<div>
-							<p></p>
+							<div>
+								<p class="help-block">${genderError}</p>
+							</div>
 						</div>
 
 					</div>
@@ -169,11 +171,12 @@
 								</c:forEach>
 
 							</select>
+							<div>
+								<p class="help-block">${countryError}</p>
+							</div>
 						</div>
 
-						<div>
-							<p></p>
-						</div>
+
 
 					</div>
 					<!--  	<br /> <br /> -->
@@ -189,7 +192,7 @@
 							<span id="span"></span>
 							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 							<div>
-								<p id="loginError" class="help-block"></p>
+								<p id="loginError" class="help-block">${loginError}</p>
 							</div>
 
 						</div>
@@ -207,7 +210,7 @@
 							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! insert model item-->
 
 							<div>
-								<p id="emailError" class="help-block"></p>
+								<p id="emailError" class="help-block">${emailError}</p>
 							</div>
 
 
@@ -221,7 +224,13 @@
 						<div class="col-md-8">
 							<input type="password" class="form-control" id="password"
 								name="password" name="password" placeholder="Введите  пароль...">
+							<div>
+								<p class="help-block">${passwordError}</p>
+							</div>
 						</div>
+
+
+
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
@@ -231,6 +240,9 @@
 						<div class="col-md-8">
 							<input type="password" class="form-control" id="confirmPassword"
 								name="confirmPassword" placeholder="Подтвердите пароль...">
+							<div>
+								<p class="help-block">${confirmPasswordError}</p>
+							</div>
 						</div>
 					</div>
 
