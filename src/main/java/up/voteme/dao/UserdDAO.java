@@ -13,15 +13,13 @@ public interface UserdDAO {
 	public abstract Userd findById(long UserdId);
 
 	public abstract Userd findByLogin(String login);
-	
-	public abstract Userd findByEmail(String email); 
 
 	public abstract List<Userd> findAll();
 
 	public abstract long countAll();
 
 	public abstract Userd findByEmail(String email);
-	
+
 
 
 }
