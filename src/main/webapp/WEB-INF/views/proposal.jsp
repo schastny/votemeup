@@ -170,14 +170,14 @@
 						</div>
 						</form>
 					</c:when>
-
+					
 					<c:otherwise>
 						<div class="alert bg-danger">
 							Для голосования вы должны быть <a href="/voteme/">авторизованы</a>
 						</div>
 					</c:otherwise>
 				</c:choose>
-
+				
 				<!-- Голосование ends here-->
 
 				<!-- Page comment -->
@@ -202,7 +202,7 @@
     						<textarea class="form-control" rows="3" style="resize:none"	
     							name="commentText" placeholder="Ваш комментарий..."></textarea>
 							<br>
-
+					
 							<input type="hidden" name="propID" value="${proposalMore.proposalId}">
 							</input>
     				
@@ -265,7 +265,7 @@
 
 				<div>
 					<br>
-
+					
 
 					<p>Для рассмотрения варианта решения на
 						${proposalMore.proposalLevel.level} уровне осталось

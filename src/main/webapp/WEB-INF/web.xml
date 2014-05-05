@@ -16,7 +16,7 @@
 			/WEB-INF/spring/root-context.xml
 			/WEB-INF/spring/application-security.xml
 		</param-value>
-
+		
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -61,7 +61,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	<!-- Filter for Russian symbols  -->	
-
+	
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
