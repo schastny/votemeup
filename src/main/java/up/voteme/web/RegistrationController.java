@@ -240,7 +240,6 @@ public class RegistrationController {
 		} else {
 
 			return "registration";
-			// return formPage(model);
 		}
 
 	}
@@ -308,7 +307,6 @@ public class RegistrationController {
 		confirmPasswordError = "";
 	}
 
-	// Хеширование пароля(SHA-1)
 	private static String getShaPassword(String passwordToHash) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("SHA-1");

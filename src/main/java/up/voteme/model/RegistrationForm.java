@@ -1,7 +1,7 @@
 package up.voteme.model;
 
 public class RegistrationForm {
-	private String firstName;//Фамилия
+	private String firstName;
 	private String lastName;
 	private int birthdate;
 	private String gender;
@@ -10,6 +10,7 @@ public class RegistrationForm {
 	private String userEmail;
 	private String password;
 	private String confirmPassword;
+	
 	public String getFirstName() {
 		return firstName;
 	}

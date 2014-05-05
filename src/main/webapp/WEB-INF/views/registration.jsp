@@ -93,7 +93,6 @@
 				<br />
 				<form role="form" id="contact-form" class="form-horizontal"
 					method="POST" action="save">
-
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="lastname">Имя :</label>
@@ -106,7 +105,6 @@
 							</div>
 						</div>
 					</div>
-
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="firstname">Фамилия :</label>
@@ -117,10 +115,8 @@
 							<div>
 								<p class="help-block">${firstNameError}</p>
 							</div>
-
 						</div>
 					</div>
-					<!--  <br /> <br />-->
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="birth"> Год рождения : </label>
@@ -132,7 +128,6 @@
 								<c:forEach items="${yearList}" var="item">
 									<option value="${item}">${item}</option>
 								</c:forEach>
-
 							</select>
 							<div>
 								<p class="help-block">${birthdateError}</p>
@@ -140,7 +135,6 @@
 						</div>
 
 					</div>
-					<!--  	<br /> <br />-->
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="gender"> Укажите свой пол : </label>
@@ -157,7 +151,7 @@
 						</div>
 
 					</div>
-					<!--  	<br /> <br /> -->
+
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="country"> Страна : </label>
@@ -169,15 +163,11 @@
 									<option value="${item.countryId}"
 										${item.countryId == regModel.selectedCountryId ? 'selected="selected"' : ''}>${item.countryName}</option>
 								</c:forEach>
-
 							</select>
 							<div>
 								<p class="help-block">${countryError}</p>
 							</div>
 						</div>
-
-
-
 					</div>
 					<!--  	<br /> <br /> -->
 					<div class="form-group">
@@ -187,17 +177,14 @@
 						<div class="col-md-8">
 
 							<input type="text" class="form-control" id="userLogin"
-								name="userLogin" placeholder="Введите  логин..." />
-							<!--  <span id="span" class="glyphicon glyphicon-remove form-control-feedback"></span>-->
-							<span id="span"></span>
-							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+								name="userLogin" placeholder="Введите  логин..." /> <span
+								id="span"></span>
 							<div>
 								<p id="loginError" class="help-block">${loginError}</p>
 							</div>
 
 						</div>
 					</div>
-					<!--  	<br /> <br />-->
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="email">Е-mail :</label>
@@ -207,16 +194,11 @@
 								name="userEmail" placeholder="Введите  e-mail адрес...">
 							<!-- <span id="span2" class="glyphicon glyphicon-remove form-control-feedback"></span>-->
 							<span id="span2"></span>
-							<!-- ----!!!!!!!!!!!!!!!!!!!!!!!!!!! insert model item-->
-
 							<div>
 								<p id="emailError" class="help-block">${emailError}</p>
 							</div>
-
-
 						</div>
 					</div>
-					<!--  	<br /> <br />-->
 					<div class="form-group">
 						<div class="col-md-3">
 							<label for="password">Пароль :</label>
@@ -228,9 +210,6 @@
 								<p class="help-block">${passwordError}</p>
 							</div>
 						</div>
-
-
-
 					</div>
 					<!--  	<br /> <br />-->
 					<div class="form-group">
@@ -245,9 +224,7 @@
 							</div>
 						</div>
 					</div>
-
 					<br /> <br />
-
 					<div class="row">
 						<div class="col-md-10">
 							<button type="submit" class="btn btn-default" id="validateBtn">Зарегистрироваться</button>
@@ -276,6 +253,5 @@
 	<!--/.container-->
 	<script type="text/javascript"
 		src="<c:url value="/resources/js/validate.js" />"></script>
-
 </body>
 </html>

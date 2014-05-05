@@ -33,11 +33,6 @@ public class DocumentDAOImpl implements IDocumentDAO {
 		TypedQuery<Document> query = manager.createQuery(
 				"SELECT d FROM Document d", Document.class);
 		List<Document> docs = query.getResultList();
-//		for (Document doc : docs) {
-//			
-//			System.out.println(doc);
-//		}
-
 		return docs;
 	}
 

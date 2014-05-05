@@ -29,6 +29,7 @@ public class DocumentDAOTest2 {
 	@Transactional
 	public void A_findAllTest() {
 		System.out.println("Starting test FIND ALL....");
+		List<Document> listItem2 = daoDocument.findAll();
 		Document item = new Document();
 	    item.setDocId(0);
 		item.setDocName("cool document2222");
@@ -36,20 +37,20 @@ public class DocumentDAOTest2 {
 		item.setProposal(daoDocument.findById(1L).getProposal());	
 		daoDocument.store(item);
 		List<Document> listItem = daoDocument.findAll();
-	
+		System.out.println("Befor size = "+listItem2.size()+", after size = "+listItem.size());
 		assertFalse("The table is empty!", listItem.size() == 0);
 		// assertTrue("The table is empty!", listItem.size() == 0);
-		System.out.println("Finish test FIND ALL....");
+		System.out.println("Finish test FIND ALL....\n");
 	}
 
 	@Test
 	@Transactional
 	public void B_findByIdTest() {
-		System.out.println("Find first record in table....");
+		System.out.println("Find last record in table....");
 		long id = daoDocument.findAll().size();
 		Document item = daoDocument.findById(id);
-		System.out.println("First item = " + id + " item disctict:"+ item.getDocName());
-		System.out.println("Finish test FIND BY ID....");
+		System.out.println("Last item = " + id + " item disctict:"+ item.getDocName());
+		System.out.println("Finish test FIND BY ID....\n");
 
 	}
 	
@@ -69,7 +70,7 @@ public class DocumentDAOTest2 {
 		List<Document> afterList = daoDocument.findAll();
 		long listSizeAfter = afterList.size();
 		System.out.println("New item stored with id="+id);
-		System.out.println("Finish STORE test....");
+		System.out.println("Finish STORE test....\n");
 		assertTrue ("Error  writing! ",listSizeBefore == listSizeAfter-1);
 	}
 
@@ -83,7 +84,7 @@ public class DocumentDAOTest2 {
 		List<Document> afterList = daoDocument.findAll();
 		System.out.println("Item id="+id+" was deleted");
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		System.out.println("Finish DELETE test....");
+		System.out.println("Finish DELETE test....\n");
 		assertTrue ("Error deleting ",beforList.size() == afterList.size()+1);
 	
 	}
