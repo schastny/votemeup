@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 
+
 import up.voteme.HomeController;
 import up.voteme.domain.Category;
 import up.voteme.domain.City;
@@ -231,18 +232,36 @@ public class GuestPageController {
 	public @ResponseBody
 	String addComment(@RequestParam(value = "commentText") String commentTextString,
 			@RequestParam(value = "propID", required = false) Long commentProposalId,
-			@RequestParam(value = "userID", required = false) Long commentUserId) {
-		Comment newComment = new Comment();
-		Date commentDate = new Date();
+			//@RequestParam(value = "userID", required = false) Long commentUserId
+			Model model
+			) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			System.out.println("#################################################");	///!!!
+
+ 		    Object principal = auth.getPrincipal();  
+		    if (principal instanceof Userd ) {
+		    	Userd commuser = (Userd) principal;
+		        // System.out.println(commuser);	///!!!
+		        System.out.println(commentTextString + " | " + commentProposalId + " | " + commuser.getUserLogin());
+	
+				Comment newComment = new Comment();
+		        Date commentDate = new Date();
+		        //newComment.setProposal(commentServ.findById(1L).getProposal());	// !!!!
+		        newComment.setProposal(propServ.getById(commentProposalId));	// !!!!
+		        //newComment.setUserd(commentServ.findById(1L).getUserd());		// !!!!
+		        newComment.setUserd(commuser);
+		        newComment.setCommentDate(commentDate);
+		        newComment.setCommentText(commentTextString);
 		
-		newComment.setProposal(commentServ.findById(1L).getProposal());	// !!!!
-		newComment.setUserd(commentServ.findById(1L).getUserd());		// !!!!
-		newComment.setCommentDate(commentDate);
-		newComment.setCommentText(commentTextString);
-		
-		commentServ.store(newComment);
-		return "";
+		        commentServ.store(newComment);
+		     }
 		}
+	//return "redirect:?numberProposal=" + commentProposalId;
+	return "redirect:/pages/adminpage.html";
+	
+	}
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////	
 	@RequestMapping(value = "/vote*", method = RequestMethod.POST)

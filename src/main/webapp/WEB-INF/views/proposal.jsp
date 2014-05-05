@@ -202,6 +202,10 @@
     						<textarea class="form-control" rows="3" style="resize:none"	
     							name="commentText" placeholder="Ваш комментарий..."></textarea>
 							<br>
+					
+							<input type="hidden" name="propID" value="${proposalMore.proposalId}">
+							</input>
+    				
     						<button type="submit" class="btn pull-right"> Отправить
     						</button>
     				</fieldset>
