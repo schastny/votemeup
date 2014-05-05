@@ -16,4 +16,6 @@ public interface CountryDAO {
 
 	public abstract long countAll();
 
+	public Country findByName (String name);
+
 }
