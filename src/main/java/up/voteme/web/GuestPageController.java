@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-
-
-
-
-
-
-
-
-
 
 
 import up.voteme.HomeController;
@@ -43,6 +36,7 @@ import up.voteme.domain.Document;
 import up.voteme.domain.Proposal;
 import up.voteme.domain.Region;
 import up.voteme.domain.Userd;
+import up.voteme.domain.Vote;
 import up.voteme.model.FiltrForm;
 import up.voteme.model.GuestLogin;
 import up.voteme.model.GuestPageModel;
@@ -228,11 +222,47 @@ public class GuestPageController {
 		model.addAttribute("categoryProposal", proposalMore.getCategories());
 		model.addAttribute("countCat", proposalMore.getCategories().size());
 		
-		
-		
 		return "proposal";
 	}
 
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+	@RequestMapping(value = "/addcomment", method = RequestMethod.POST)
+	public @ResponseBody
+	String addComment(@RequestParam(value = "commentText") String commentTextString,
+			@RequestParam(value = "propID", required = false) Long commentProposalId,
+			@RequestParam(value = "userID", required = false) Long commentUserId) {
+		Comment newComment = new Comment();
+		Date commentDate = new Date();
+		
+		newComment.setProposal(commentServ.findById(1L).getProposal());	// !!!!
+		newComment.setUserd(commentServ.findById(1L).getUserd());		// !!!!
+		newComment.setCommentDate(commentDate);
+		newComment.setCommentText(commentTextString);
+		
+		commentServ.store(newComment);
+		return "";
+		}
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////	
+	@RequestMapping(value = "/vote*", method = RequestMethod.POST)
+	public @ResponseBody
+	String addVote(@RequestParam(value = "vote*") String voteValue,
+			@RequestParam(value = "propID", required = false) Long voteProposalId,
+			@RequestParam(value = "userID", required = false) Long voteUserId) {
+		Vote newVote = new Vote();
+		Date voteDate = new Date();
+		
+		newVote.setProposal(voteServ.getById(1L).getProposal());	// !!!!
+		newVote.setUserd(voteServ.getById(1L).getUserd());		// !!!!
+		newVote.setVoteDate(voteDate);
+		if (voteValue == "voteNo"){ newVote.setVote(false); } else { newVote.setVote(true); }
+		
+		voteServ.store(newVote);
+		return "";
+		}
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////	
 	
 	@RequestMapping(value = "/about")
 	public String aboutPage(Model model){

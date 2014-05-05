@@ -34,3 +34,7 @@
 .proposal_text{
 	text-align:justify;
 }
+
+.btn-vote {
+	width: 120px;
+}
