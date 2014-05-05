@@ -17,18 +17,12 @@ public class DistrictDAOTest {
 
 	@Test
 	public void A_findAllTest() {
-		final int SHOW_ITEMS = 5;
 		System.out.println("Find all items....");
+		District dist = new District();
+		dist.setDistrictId(1L);
+		dist.setDistrictName("Sevastopolskiy");
+		dao.store(dist);
 		List<District> list = dao.findAll();
-		for (int i = 0; i< list.size(); i++){
-			System.out.println(list.get(i));
-			// comment if block to show all items
-			if ((i == SHOW_ITEMS-1)&(list.size()>SHOW_ITEMS)) {
-				System.out.println("etc......");
-				System.out.println("total "+list.size()+" items");
-				break;
-			}
-		}
 		assertTrue ("No records in table",list.size()>1);
 	}
 

@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import up.voteme.domain.City;
 import up.voteme.domain.District;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -29,14 +30,20 @@ public class DistrictDAOTest2 {
 	@Test
 	@Transactional
 	public void A_findAllTest() {
+		List<District> listBefore = daoDistrict.findAll();
 		System.out.println("Starting test FIND ALL....");
-		List<District> listItem = daoDistrict.findAll();
-		for (int i = 0; i < listItem.size(); i++) {
-			System.out.println("Item: " + listItem.get(i));
-		}
-		assertFalse("The table is empty!", listItem.size() == 0);
+		District dist = new District();
+		City city = new City();
+		city.setCityId(1);
+		dist.setDistrictId(1L);
+		dist.setDistrictName("Sevastopolskiy");
+		dist.setCity(city);
+	    daoDistrict.store(dist);		
+		List<District> listAfter = daoDistrict.findAll();
+		System.out.println("Befor size = "+listBefore.size()+", after size = "+listAfter.size());
+		assertFalse("The table is empty!", listAfter.size() == 0);
 		// assertTrue("The table is empty!", listItem.size() == 0);
-		System.out.println("Finish test FIND ALL....");
+		System.out.println("Finish test FIND ALL....\n");
 	}
 
 	@Test
@@ -48,7 +55,7 @@ public class DistrictDAOTest2 {
 		District item = daoDistrict.findById(id);
 		System.out.println("First item = " + id + " item disctict:"
 				+ item.getDistrictName());
-		System.out.println("Finish test FIND BY ID....");
+		System.out.println("Finish test FIND BY ID....\n");
 
 	}
 	
@@ -66,7 +73,7 @@ public class DistrictDAOTest2 {
 		List<District> afterList = daoDistrict.findAll();
 		long listSizeAfter = afterList.size();
 		System.out.println("New item stored with id="+id);
-		System.out.println("Finish STORE test....");
+		System.out.println("Finish STORE test....\n");
 		assertTrue ("Error  writing! ",listSizeBefore == listSizeAfter-1);
 	}
 
@@ -80,7 +87,7 @@ public class DistrictDAOTest2 {
 		List<District> afterList = daoDistrict.findAll();
 		System.out.println("Item id="+id+" was deleted");
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
-		System.out.println("Finish DELETE test....");
+		System.out.println("Finish DELETE test....\n");
 		assertFalse ("Error deleting ",beforList.size() == afterList.size());
 	
 	}

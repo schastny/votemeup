@@ -18,4 +18,6 @@ public interface CountryDAO {
 	
 	public Country findByName (String name);
 
+	public Country findByName (String name);
+
 }

@@ -32,7 +32,7 @@ public class UserStatusDAOTest {
 		assertTrue ("No records in table",list.size()>1);
 	}
 
-	
+
 	@Test
 	public void B_storeTest(){
 		System.out.println("Store new item....");
@@ -41,14 +41,14 @@ public class UserStatusDAOTest {
 		UserStatus item = dao.findById(1L);
 		item.setId(0);
 		item.setStatus("OHOHOHOHOHO");
-		
+
 		long id =  dao.store(item);
 		List<UserStatus> afterList = dao.findAll();
 		System.out.println("New item stored with id="+id);
 		System.out.println("Befor size = "+beforList.size()+", after size = "+afterList.size());
 		assertTrue ("Error in DB record store ",beforList.size() == afterList.size()-1);
 	}
-	
+
 	@Test
 	public void C_findByIdTest() {
 		System.out.println("Find last record (assume ID = num of rec)....");
@@ -56,7 +56,7 @@ public class UserStatusDAOTest {
 		UserStatus item = dao.findById(id);
 		System.out.println("Item id="+id+" was found, getClass="+item.getClass());
 	}
-	
+
 	@Test
 	public void D_deleteTest() {
 		System.out.println("Delete last record(assume ID = num of rec)....");

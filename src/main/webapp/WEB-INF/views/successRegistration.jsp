@@ -1,7 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="true"%>
 
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Контакты</title>
+<title>Регистрация</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Bootstrap -->
 <link type="text/css" rel="stylesheet"
@@ -23,10 +23,6 @@
 
 </head>
 <body>
-
-
-
-
 
 	<div class="container">
 
@@ -49,11 +45,8 @@
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="/voteme/">Главная</a></li>
-						<c:if test="${user.role.roleName == 'ROLE_ADMIN'}">
-							<li><a href="/voteme/admin/">Пользователи</a></li>
-						</c:if>
 						<li><a href="/voteme/about">О проекте</a></li>
-						<li class="active"><a href="/voteme/contact">Контакты</a></li>
+						<li><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>
 					</ul>
 					<form class="navbar-form navbar-right" role="search">
@@ -74,21 +67,15 @@
 			<div class="col-sm-9">
 				<div class="row">
 
+					<h3>
+						<p>Поздравляем!Вы успешно прошли регистрацию.</p>
+						<p>Используйте свой логин и пароль для входа в систему.</p>
+					</h3>
 
-					<p>
-						<b>Контактная информация:</b>
-					</p>
-					<p>
-						г.Севастополь <br> 99011, ул. Большая Морская,<br> Тел:
-						+380 (777) 937-929,<br> Факс: +380 (777) 973-292,<br>
-						email: devcentr@gmail.com.
-					</p>
-					<p>Будем рады вам помочь. Спасибо что посетили наш сайт.</p>
 				</div>
 			</div>
 			<!--/span-->
 			<div class="col-sm-3" role="navigation">
-
 				<jsp:include page="loginForm.jsp" />
 			</div>
 			<!--/span-->
