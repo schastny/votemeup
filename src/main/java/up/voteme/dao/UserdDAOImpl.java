@@ -52,8 +52,9 @@ public class UserdDAOImpl implements UserdDAO {
 	 */
 	@Override
 	public Userd findById(long UserdId) {
-		 return em.find(Userd.class, UserdId);
-		
+		Userd item = em.find(Userd.class, UserdId);
+		item.getCommentd().size();
+		return item;
 	}
 	
 	/* (non-Javadoc)
@@ -68,14 +69,12 @@ public class UserdDAOImpl implements UserdDAO {
 	    else if (results.size() == 1) return results.get(0);
 	    logger.info("NonUniqueResultException(Login must be UNIQUE)");
 	    throw new NonUniqueResultException("Login must be UNIQUE");
-
 	}
 
-	
 	@Override
 	public Userd findByEmail (String email){
-		TypedQuery<Userd> query = em.createQuery("SELECT u FROM Userd u WHERE u.email = :name",Userd.class);
-		query.setParameter("name", email);
+		TypedQuery<Userd> query = em.createQuery("SELECT u FROM Userd u WHERE u.email = :str",Userd.class);
+		query.setParameter("str", email);
 		List<Userd> results = query.getResultList();
 	    if (results.isEmpty()) return null;
 	    else if (results.size() == 1) return results.get(0);
@@ -84,17 +83,17 @@ public class UserdDAOImpl implements UserdDAO {
 
 	}
 	
-	
-	
-	
 	/* (non-Javadoc)
 	 * @see up.voteme.dao.UserdDAO#findAll()
 	 */
 	@Override
 	public List<Userd> findAll() {
 		TypedQuery<Userd> query = em.createQuery(
-		"SELECT c FROM Userd c", Userd.class);
-		List<Userd> items = query.getResultList();		
+		"SELECT u FROM Userd u ORDER BY  u.registrationDate DESC", Userd.class);
+		List<Userd> items = query.getResultList();
+		for (Userd item : items) {
+			//item.getProposals().size();
+		}
 		return items;
 	}
 	

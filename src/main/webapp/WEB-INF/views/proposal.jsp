@@ -26,7 +26,6 @@
 </head>
 <body>
 
-
 	<div class="container">
 
 		<jsp:include page="header.jsp" />
@@ -147,14 +146,73 @@
 
 					<div class="proposal_text">${proposalMore.proposalResult}</div>
 
+				<br>
 				</div>
-				<!-- 				Page comment -->
 
-				<div>
-					<c:if test="${sizeComment > 0}">
-						<div class="alert bg-info">
-							<h4>Комментарии:</h4>
+				<!-- Голосование starts here-->
+				<c:choose>
+					<c:when test="${user.role.roleName == 'ROLE_USER'}">
+						<form id="voteForm" method="POST">
+						<div class="span" style="text-align:right">
+						<p>
+						  <h3>Проголосовать:&nbsp;
+							<button id="voteYesBtn" class="btn btn-vote btn-success btn-lg" 
+									type="submit" name="voteNo" action="voteYes">
+								<i class="glyphicon glyphicon-thumbs-up"></i>&nbsp; За 
+							</button>
+							&nbsp;
+							<button id="voteNoBtn" class="btn btn-vote btn-danger btn-lg" 
+									type="submit" name="voteNo" action="voteNo">
+								<i class="glyphicon glyphicon-thumbs-down"></i>&nbsp; Против 
+							</button>
+					  	  </h3>
+						</p>
 						</div>
+						</form>
+					</c:when>
+
+					<c:otherwise>
+						<div class="alert bg-danger">
+							Для голосования вы должны быть <a href="/voteme/">авторизованы</a>
+						</div>
+					</c:otherwise>
+				</c:choose>
+
+				<!-- Голосование ends here-->
+
+				<!-- Page comment -->
+				<div>
+					<div class="alert bg-info">
+						<h4>Комментарии:
+						<!-- Появление кнопки "AddComment" -->
+							<c:if test="${user.role.roleName == 'ROLE_USER'}">
+								<button id="addCommentBtn" class="btn btn-primary pull-right" 
+								   onclick="document.getElementById('commentForm').style.display = 'block'">
+									Добавить комментарий &nbsp;
+									<i class="glyphicon  glyphicon-comment"></i>
+								</button>	
+    						</c:if>
+						</h4>
+						<!-- Появилась кнопка "AddComment" -->
+					</div>
+
+					<form id="commentForm" style="display:none" method="POST" action="addcomment">
+					<fieldset>
+    						<legend>Добавление комментария:</legend>
+    						<textarea class="form-control" rows="3" style="resize:none"	
+    							name="commentText" placeholder="Ваш комментарий..."></textarea>
+							<br>
+
+							<input type="hidden" name="propID" value="${proposalMore.proposalId}">
+							</input>
+    				
+    						<button type="submit" class="btn pull-right"> Отправить
+    						</button>
+    				</fieldset>
+    				</form>
+
+					<br>
+					<c:if test="${sizeComment > 0}">
 						<c:forEach items="${commentProposal}" var="tmpVar">
 
 							<div class="panel panel-default spacer">
@@ -207,9 +265,7 @@
 
 				<div>
 					<br>
-					<div class="alert bg-danger">
-						Для голосования вы должны быть <a href="/voteme/">авторизованы</a>
-					</div>
+
 
 					<p>Для рассмотрения варианта решения на
 						${proposalMore.proposalLevel.level} уровне осталось
@@ -246,14 +302,11 @@
 	<!--/.container-->
 
 
-
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="<c:url value="/resources/js/lib/jquery-2.1.0.min.js" />"></script>
 	<script src="<c:url value="/resources/js/lib/bootstrap.min.js" />"></script>
-
-
 
 </body>
 </html>

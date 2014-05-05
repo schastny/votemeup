@@ -53,6 +53,10 @@ p {
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li><a href="/voteme/">Главная</a></li>
+						<c:if test="${user.role.roleName == 'ROLE_ADMIN'}">
+							<li><a href="/voteme/admin/">
+									Пользователи</a></li>	
+						</c:if>
 						<li><a href="/voteme/about">О проекте</a></li>
 						<li><a href="/voteme/contact">Контакты</a></li>
 						<li class="active"><a href="/voteme/help">Помощь</a></li>
@@ -172,6 +176,7 @@ p {
 
 	<script src="<c:url value="/resources/js/lib/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/js/lib/jquery-2.1.0.min.js" />"></script>
+	<!--  	<script src="<c:url value="/resources/js/jquery-ui.min.js" />"></script>-->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 	<script>
