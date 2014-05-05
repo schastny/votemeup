@@ -69,6 +69,17 @@ public class UserdServiceImpl implements UserdService {
         return userdDAO.countAll();
     }
     
+    @Override
+	@Transactional
+	public Userd findByLogin(String login){
+		return userdDAO.findByLogin(login);
+	}
+	
+	@Override
+	@Transactional
+	public Userd findByEmail(String email){
+		return userdDAO.findByEmail(email);
+	}
     
 
 	@Override
