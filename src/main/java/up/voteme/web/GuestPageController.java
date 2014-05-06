@@ -147,7 +147,7 @@ public class GuestPageController {
 	
 	
 	
-	@RequestMapping(value = "/api/regions", method = RequestMethod.GET)
+	@RequestMapping(value = "/filtr/api/regions", method = RequestMethod.GET)
 	public @ResponseBody
 	List<Region> regionsForCountry(
 			@RequestParam(value = "countryId", required = true) String countryId) {
@@ -165,7 +165,7 @@ public class GuestPageController {
 	}
 	
 	
-	@RequestMapping(value = "/api/cities", method = RequestMethod.GET)
+	@RequestMapping(value = "/filtr/api/cities", method = RequestMethod.GET)
 	public @ResponseBody
 	List<City> citiesForRegion(
 			@RequestParam(value = "regionId", required = true) String regionId) {
@@ -182,7 +182,7 @@ public class GuestPageController {
 	}
 	
 	
-	@RequestMapping(value = "/api/districts", method = RequestMethod.GET)
+	@RequestMapping(value = "/filtr/api/districts", method = RequestMethod.GET)
 	public @ResponseBody
 	List<District> districtsForCity(
 			@RequestParam(value = "cityId", required = true) String cityId) {

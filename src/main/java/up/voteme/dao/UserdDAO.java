@@ -3,6 +3,7 @@ package up.voteme.dao;
 import java.util.List;
 
 import up.voteme.domain.Userd;
+import up.voteme.model.PaginatedUser;
 
 public interface UserdDAO {
 
@@ -19,6 +20,8 @@ public interface UserdDAO {
 	public abstract long countAll();
 
 	public abstract Userd findByEmail(String email);
+
+	public abstract List<Userd> findPaginatedUserd(int pageNumber, int perPage);
 
 
 

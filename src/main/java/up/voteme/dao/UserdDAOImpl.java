@@ -1,5 +1,6 @@
 package up.voteme.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,6 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import up.voteme.domain.Userd;
+import up.voteme.model.PaginatedUser;
+import up.voteme.model.SimpleUser;
 import up.voteme.service.ProposalServiceImpl;
 
 
@@ -107,6 +110,21 @@ public class UserdDAOImpl implements UserdDAO {
 		Query query = em.createQuery("select count(*) from Userd");
 		long result = (long) query.getSingleResult();
 		return result;
+	}
+	
+	@Override
+	public List<Userd>  findPaginatedUserd(int pageNumber, int perPage){
+
+		TypedQuery<Userd> query = em.createQuery("SELECT u FROM Userd u ORDER BY  "
+				+ "u.registrationDate DESC", Userd.class);
+		int first = (pageNumber-1)*perPage;
+		query.setFirstResult(first);
+		query.setMaxResults(perPage);
+		List<Userd> list = query.getResultList();
+		
+		
+        
+		return list;
 	}
 
 

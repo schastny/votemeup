@@ -1,6 +1,6 @@
 $(document).ready(function(){ 
 	$( "select[name='country']" ).change(function() {
-		$.getJSON('api/regions', {
+		$.getJSON('filtr/api/regions', {
 			countryId : $(this).val(),
 			ajax : 'true'
 		}, function(data) {
@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){ 
 	$( "select[name='region']" ).change(function() {
-		$.getJSON('api/cities', {
+		$.getJSON('filtr/api/cities', {
 			regionId : $(this).val(),
 			ajax : 'true'
 		}, function(data) {
@@ -41,7 +41,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){ 
 	$( "select[name='city']" ).change(function() {
-		$.getJSON('api/districts', {
+		$.getJSON('filtr/api/districts', {
 			cityId : $(this).val(),
 			ajax : 'true'
 		}, function(data) {

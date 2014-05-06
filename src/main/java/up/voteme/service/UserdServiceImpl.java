@@ -85,23 +85,19 @@ public class UserdServiceImpl implements UserdService {
 	@Override
 	@Transactional
 	public PaginatedUser findPaginated(int pageNumber, int perPage) {
-		// TODO 
-		//List<SimpleUser> uList= userdDAO.findPaginatedSimpleUser(int pageNumber, int perPage);
+
+		List<Userd> userdList= userdDAO.findPaginatedUserd(pageNumber, perPage);
+		List<SimpleUser> suList = new ArrayList<>();
+		for (Userd u : userdList){
+			suList.add(new SimpleUser(u));
+		}
+		Long totalRecords = userdDAO.countAll();
+		PaginatedUser user = new PaginatedUser();
+        user.setUsers(suList);
+        user.setTotalRecords(totalRecords);
 		
-		List<Userd> userds = userdDAO.findAll();
-        List<SimpleUser> sUsers = new ArrayList<>();
-        for (Userd u :userds){
-        	sUsers.add(new SimpleUser(u));
-        }
-        List<SimpleUser> result = new ArrayList<>();
-        int upperLimit = pageNumber*perPage > sUsers.size() ? sUsers.size():pageNumber*perPage;
-        for (int i = (pageNumber-1)*perPage; i < upperLimit; i++){
-        	result.add(sUsers.get(i));
-        }
-        PaginatedUser u = new PaginatedUser();
-        u.setUsers(result);
-        u.setTotalRecords(sUsers.size());
-        return u;
+		
+		return user;
 	}
 	
 	

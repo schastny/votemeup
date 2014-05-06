@@ -11,8 +11,8 @@
 	<http auto-config="true">
 		<intercept-url pattern="/user/**" access="ROLE_USER" />
 		<intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-		<intercept-url pattern="/api/users/**" access="ROLE_ADMIN" />
-		<intercept-url pattern="/login" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<intercept-url pattern="/pages/**" access="ROLE_ADMIN" />
+		<intercept-url pattern="/api**" access="ROLE_ADMIN" />
 		<form-login login-page="/signin"
 			authentication-failure-url="/signin-failure" default-target-url="/default" />
 		<remember-me key="myAppKey"/>

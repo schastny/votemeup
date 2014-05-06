@@ -6,7 +6,7 @@ import java.util.List;
 public class PaginatedUser {
 	
 	private List<SimpleUser> users;
-	private int totalRecords;
+	private long totalRecords;
 	
 	public List<SimpleUser> getUsers() {
 		return users;
@@ -14,10 +14,10 @@ public class PaginatedUser {
 	public void setUsers(List<SimpleUser> users) {
 		this.users = users;
 	}
-	public int getTotalRecords() {
+	public long getTotalRecords() {
 		return totalRecords;
 	}
-	public void setTotalRecords(int totalRecords) {
+	public void setTotalRecords(long totalRecords) {
 		this.totalRecords = totalRecords;
 	}
 
