@@ -31,6 +31,13 @@ public class VoteServiceImpl implements VoteService {
 
 	@Override
 	@Transactional
+	public List<Vote> findUserVotesForProp(long userId, long propId) {
+		return voteDAO.findUserVotesForProp(userId, propId);
+	}
+
+	
+	@Override
+	@Transactional
 	public List<Vote> getAllVote() {
 		return voteDAO.findAll();
 	}

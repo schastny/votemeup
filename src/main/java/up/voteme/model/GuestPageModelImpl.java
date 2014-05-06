@@ -79,7 +79,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	private Date creationDate;
 	private String filtrOn;
 	private String loginMes;
-
+	private String proposalActionMes;
 	
 	public GuestPageModelImpl(){
 		logger.debug("GuestPageModel constructor");
@@ -105,6 +105,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 		configMap = new HashMap<>();
 		sortBy = "noSort";
 		loginMes = "";
+		proposalActionMes = "";
 		pageNum = 1;
 		pageQuant = 5;
 		update();
@@ -713,10 +714,14 @@ public class GuestPageModelImpl implements GuestPageModel  {
 	}
 
 
-	
-	
-	
+	public String getProposalActionMes() {
+		return proposalActionMes;
+	}
 
+
+	public void setProposalActionMes(String proposalActionMes) {
+		this.proposalActionMes = proposalActionMes;
+	}
 
 
 }

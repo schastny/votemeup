@@ -196,7 +196,7 @@ public class GuestPageController {
 		return list;
 	}
 	
-	
+
 	
 	
 	
@@ -228,58 +228,69 @@ public class GuestPageController {
 
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/addcomment", method = RequestMethod.POST)
+								///!!!!!!!!!
+	@RequestMapping(value = "&addComment", method = RequestMethod.POST)
 	public @ResponseBody
-	String addComment(@RequestParam(value = "commentText") String commentTextString,
-			@RequestParam(value = "propID", required = false) Long commentProposalId,
-			//@RequestParam(value = "userID", required = false) Long commentUserId
-			Model model
-			) {
+	String addComment(@RequestParam(value = "commentText") String commentText,
+						@RequestParam(value = "propID") Long commentPropId) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
-			System.out.println("#################################################");	///!!!
-
- 		    Object principal = auth.getPrincipal();  
+		    Object principal = auth.getPrincipal();  
 		    if (principal instanceof Userd ) {
-		    	Userd commuser = (Userd) principal;
-		        // System.out.println(commuser);	///!!!
-		        System.out.println(commentTextString + " | " + commentProposalId + " | " + commuser.getUserLogin());
-	
+		    	Userd commentUser = (Userd) principal;
+		        
 				Comment newComment = new Comment();
 		        Date commentDate = new Date();
-		        //newComment.setProposal(commentServ.findById(1L).getProposal());	// !!!!
-		        newComment.setProposal(propServ.getById(commentProposalId));	// !!!!
-		        //newComment.setUserd(commentServ.findById(1L).getUserd());		// !!!!
-		        newComment.setUserd(commuser);
+
+		        newComment.setProposal(propServ.getById(commentPropId));
+		        newComment.setUserd(commentUser);
 		        newComment.setCommentDate(commentDate);
-		        newComment.setCommentText(commentTextString);
+		        newComment.setCommentText(commentText);
 		
 		        commentServ.store(newComment);
 		     }
 		}
-	//return "redirect:?numberProposal=" + commentProposalId;
-	return "redirect:/pages/adminpage.html";
-	
+	//return "proposal?numberProposal=" + commentPropId;		///!!!!!!!!!
+	return "redirect:proposal";		///!!!!!!!!!
 	}
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////	
-	@RequestMapping(value = "/vote*", method = RequestMethod.POST)
+	@RequestMapping(value = "/vote", method = RequestMethod.POST)
 	public @ResponseBody
-	String addVote(@RequestParam(value = "vote*") String voteValue,
-			@RequestParam(value = "propID", required = false) Long voteProposalId,
-			@RequestParam(value = "userID", required = false) Long voteUserId) {
-		Vote newVote = new Vote();
-		Date voteDate = new Date();
+	String addVote(@RequestParam(value = "vote") boolean voteValue,
+					@RequestParam(value = "propID") Long votePropId) {
 		
-		newVote.setProposal(voteServ.getById(1L).getProposal());	// !!!!
-		newVote.setUserd(voteServ.getById(1L).getUserd());		// !!!!
-		newVote.setVoteDate(voteDate);
-		if (voteValue == "voteNo"){ newVote.setVote(false); } else { newVote.setVote(true); }
-		
-		voteServ.store(newVote);
-		return "";
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			Object principal = auth.getPrincipal();  
+			if (principal instanceof Userd ) {
+				Userd voteUser = (Userd) principal;
+				
+				List<Vote> previousVoting = null;
+				previousVoting = voteServ.findUserVotesForProp(voteUser.getUserdId(), votePropId);
+
+				if (previousVoting == null)
+		    	{
+		    		Vote newVote = new Vote();
+		    		Date voteDate = new Date();
+		    		
+		    		newVote.setProposal(propServ.getById(votePropId));
+		    		newVote.setUserd(voteUser);
+		    		newVote.setVoteDate(voteDate);
+		    		newVote.setVote(voteValue);
+		    			
+		    		voteServ.store(newVote);
+		    		gpModel.setProposalActionMes("Спасибо. Ваш голос учтён.");
+		    	} else { 
+		    		gpModel.setProposalActionMes("Вы уже голосовали за пропозицию № " +
+		    				votePropId + "  (" + previousVoting.get(0).getVoteDate() + " )"); 
+		    		   };	
+			}
 		}
+		return "/proposal";
+		}
+			
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////	
 	
@@ -298,5 +309,5 @@ public class GuestPageController {
 		model.addAttribute("welcomeMes", "Welcome: user");
 		return "help";
 	}	
-
+	
 }

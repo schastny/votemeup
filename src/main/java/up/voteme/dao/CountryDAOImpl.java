@@ -33,12 +33,12 @@ public class CountryDAOImpl implements CountryDAO {
 
 	@Override
 	public Country findById(long countryId) {         // find record
-System.out.println("countryID !!! = "+countryId);
+	//System.out.println("countryID !!! = "+countryId);
 		Country con = new Country();
 		
 		con = eMgr.find(Country.class, countryId);
 
-System.out.println("country = "+con);		
+	//System.out.println("country = "+con);		
 		
 		return con;
 		//return eMgr.find(Country.class, countryId);

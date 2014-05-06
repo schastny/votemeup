@@ -9,13 +9,14 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
+import up.voteme.domain.Userd;
 import up.voteme.domain.Vote;
 
 @Component
 public class VoteDAOImpl implements VoteDAO {
 
 	@PersistenceContext
-    private EntityManager em;
+	private EntityManager em;
 	
 	@Override
 	public long store(Vote vote) {
@@ -36,6 +37,19 @@ public class VoteDAOImpl implements VoteDAO {
 	}
 
 	@Override
+	public List<Vote> findUserVotesForProp(long userId, long propId) {
+		TypedQuery<Vote> query = em.createQuery(
+		"SELECT v FROM Vote v WHERE (v.userd.id = " + userId + " ) AND ( v.proposal.id = " + propId + " )", Vote.class);
+
+		List<Vote> results = query.getResultList();
+		if (results.isEmpty()) {
+			return null; 
+			} else {
+			return results;
+			}
+	}	
+		
+	@Override
 	public List<Vote> findAll() {
 		TypedQuery<Vote> query = em.createQuery(
 		"SELECT c FROM Vote c", Vote.class);
@@ -55,7 +69,7 @@ public class VoteDAOImpl implements VoteDAO {
 		
 		  Query query = em.createQuery("SELECT COUNT(*) FROM Vote AS v WHERE v.proposal.id="+id+" AND v.vote = 1");
 		  long count = (long) query.getSingleResult();
-		  System.out.println("count YES = "+count);
+		  //System.out.println("count YES = "+count);
 		  return count;
 	}
 
@@ -63,7 +77,7 @@ public class VoteDAOImpl implements VoteDAO {
 	public long countVoteByProposalNo(long id) {
 		  Query query = em.createQuery("SELECT COUNT(*) FROM Vote AS v WHERE v.proposal.id="+id+" AND v.vote = 0");
 		  long count = (long) query.getSingleResult();
-		  System.out.println("count NO = "+count);
+		  //System.out.println("count NO = "+count);
 		  return count;
 	}
 

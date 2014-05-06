@@ -233,14 +233,14 @@ public class ProposalDAOImpl implements ProposalDAO {
 		}
 
 		String queryTextCount = "SELECT COUNT(p) FROM Proposal AS p";
-		System.out.println("**    1  **   " + queryTextCount+queryText); // debugging
+		//System.out.println("**    1  **   " + queryTextCount+queryText); // debugging
 		Query queryCount = em.createQuery(queryTextCount+queryText);
 		long size =(long) queryCount.getSingleResult();
 		List<Proposal> resultList = new ArrayList<Proposal>();
 
 		if (queryVote.isEmpty()) {
 			String queryTextProposal = "SELECT p FROM Proposal AS p";
-			System.out.println("**    2  **   " + queryTextProposal+queryText + sortString); // debugging
+			//System.out.println("**    2  **   " + queryTextProposal+queryText + sortString); // debugging
 			TypedQuery<Proposal> queryProposal = em.createQuery(queryTextProposal+queryText+sortString, Proposal.class);
 			int pageNum = Integer.parseInt(map.get("pageNum"));
 			int pageQuant = Integer.parseInt(map.get("pageQuant"));

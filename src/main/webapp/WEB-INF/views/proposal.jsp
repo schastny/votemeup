@@ -152,20 +152,24 @@
 				<!-- Голосование starts here-->
 				<c:choose>
 					<c:when test="${user.role.roleName == 'ROLE_USER'}">
-						<form id="voteForm" method="POST">
+						<form id="voteForm" method="POST" action="vote">
+
+						<input type="hidden" name="propID" value="${proposalMore.proposalId}"></input>
+						
 						<div class="span" style="text-align:right">
 						<p>
 						  <h3>Проголосовать:&nbsp;
 							<button id="voteYesBtn" class="btn btn-vote btn-success btn-lg" 
-									type="submit" name="voteNo" action="voteYes">
+									type="submit" name="vote" value="1">
 								<i class="glyphicon glyphicon-thumbs-up"></i>&nbsp; За 
 							</button>
 							&nbsp;
 							<button id="voteNoBtn" class="btn btn-vote btn-danger btn-lg" 
-									type="submit" name="voteNo" action="voteNo">
+									type="submit" name="vote" value="0">
 								<i class="glyphicon glyphicon-thumbs-down"></i>&nbsp; Против 
 							</button>
 					  	  </h3>
+					  	  <h4 class="text-danger text-center">${gpModel.proposalActionMes} </h4>
 						</p>
 						</div>
 						</form>
@@ -196,15 +200,14 @@
 						<!-- Появилась кнопка "AddComment" -->
 					</div>
 
-					<form id="commentForm" style="display:none" method="POST" action="addcomment">
+					<form id="commentForm" style="display:none" method="POST" action="&addComment">
 					<fieldset>
     						<legend>Добавление комментария:</legend>
     						<textarea class="form-control" rows="3" style="resize:none"	
     							name="commentText" placeholder="Ваш комментарий..."></textarea>
 							<br>
 					
-							<input type="hidden" name="propID" value="${proposalMore.proposalId}">
-							</input>
+							<input type="hidden" name="propID" value="${proposalMore.proposalId}"></input>
     				
     						<button type="submit" class="btn pull-right"> Отправить
     						</button>

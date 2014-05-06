@@ -8,7 +8,8 @@ public interface VoteService {
 	public abstract long store(Vote vote);
 	public abstract void delete(long id) ;
 
-	
+	public abstract List<Vote> findUserVotesForProp(long userId, long propId);
+
 	public abstract List<Vote> getAllVote();
 	public abstract Vote getById(long id);
 	public abstract long getCount();

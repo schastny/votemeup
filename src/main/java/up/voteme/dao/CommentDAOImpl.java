@@ -40,7 +40,7 @@ public class CommentDAOImpl implements CommentDAO {
 		TypedQuery<Comment> query = eMgr.createQuery("SELECT com FROM Comment com", Comment.class);
 		List<Comment> items = query.getResultList();
 		for (Comment item : items) {
-			System.out.println(item);
+			//System.out.println(item);
 		}
 		return items;
 	}
@@ -57,7 +57,7 @@ public class CommentDAOImpl implements CommentDAO {
 		  TypedQuery<Comment> query =  eMgr.createQuery("SELECT com FROM Comment com WHERE proposal_id = " + id + " ORDER BY comment_date DESC", Comment.class);
 			  List<Comment> items = query.getResultList();
 			  for (Comment item : items) {
-			   System.out.println(item);
+			   //System.out.println(item);
 			  }
 			  return items;
 	
@@ -68,7 +68,7 @@ public class CommentDAOImpl implements CommentDAO {
 
 		Query query = eMgr.createQuery("SELECT COUNT(*) FROM Comment AS c WHERE c.proposal.id like "+id);
 		long count = (long) query.getSingleResult();
-		System.out.println("count comment for proposal("+id+") = " + count);
+		//System.out.println("count comment for proposal("+id+") = " + count);
 		return count;
 	}
 }
