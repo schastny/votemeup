@@ -1,5 +1,7 @@
 package up.voteme.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+
 
 
 
@@ -228,14 +232,17 @@ public class GuestPageController {
 
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////
-								///!!!!!!!!!
-	@RequestMapping(value = "&addComment", method = RequestMethod.POST)
-	public @ResponseBody
+	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
+	//public @ResponseBody
 	String addComment(@RequestParam(value = "commentText") String commentText,
 						@RequestParam(value = "propID") Long commentPropId) {
+		
+		gpModel.setProposalActionMes("");
+		String fwdAfterComment = "forward:/proposal?numberProposal=" + commentPropId;
+		
 		if (commentText.length() < 3)	{
-			gpModel.setProposalActionMes("Слишком короткий комментарий.");
-			return "";
+			gpModel.setProposalActionMes("Слишком короткий комментарий");
+			return fwdAfterComment;
 			}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -244,25 +251,25 @@ public class GuestPageController {
 		    	Userd commentUser = (Userd) principal;
 		        
 				Comment newComment = new Comment();
-		        Date commentDate = new Date();
-
+		        
 		        newComment.setProposal(propServ.getById(commentPropId));
 		        newComment.setUserd(commentUser);
-		        newComment.setCommentDate(commentDate);
 		        newComment.setCommentText(commentText);
 		
 		        commentServ.store(newComment);
 		     }
 		}
-	//return "proposal?numberProposal=" + commentPropId;		///!!!!!!!!!
-	return "redirect:proposal";		///!!!!!!!!!
+		gpModel.setProposalActionMes("Комментарий успешно добавлен.");
+		return fwdAfterComment;
 	}
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////	
 	@RequestMapping(value = "/vote", method = RequestMethod.POST)
-	public @ResponseBody
 	String addVote(@RequestParam(value = "vote") boolean voteValue,
 					@RequestParam(value = "propID") Long votePropId) {
+		
+		gpModel.setProposalActionMes("");
+		String fwdAfterVote = "forward:/proposal?numberProposal=" +	votePropId;
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -270,8 +277,6 @@ public class GuestPageController {
 			if (principal instanceof Userd ) {
 				Userd voteUser = (Userd) principal;
 				
-				Date voteDate = new Date();
-
 				List<Vote> previousVoting = null;
 				previousVoting = voteServ.findUserVotesForProp(voteUser.getUserdId(), votePropId);
 
@@ -279,28 +284,28 @@ public class GuestPageController {
 		    	{
 		    		Vote newVote = new Vote();
 		    		
-		    		
 		    		newVote.setProposal(propServ.getById(votePropId));
 		    		newVote.setUserd(voteUser);
-		    		newVote.setVoteDate(voteDate);
 		    		newVote.setVote(voteValue);
 		    			
 		    		voteServ.store(newVote);
-		    		gpModel.setProposalActionMes("Спасибо. Ваш голос учтён.");
+		    		gpModel.setProposalActionMes("Спасибо. Ваш голос очень важен для нас.");
 		    	} else {
 		    		
-		    		voteDate = previousVoting.get(0).getVoteDate();
-		    		gpModel.setProposalActionMes("Вы уже голосовали за пропозицию № " +
-		    				votePropId + "  (" + voteDate + " )"); 
-		    		   };	
+		    		Date voteDate = previousVoting.get(0).getVoteDate();
+		    		DateFormat f = new SimpleDateFormat("dd.MM.yyyy");
+		    		String voteDateFormatted = f.format(voteDate);
+		    		
+		    	    gpModel.setProposalActionMes("Вы уже голосовали " + 
+		    	    		voteDateFormatted + " по этой пропозиции"); 
+		    		   }
 			}
 		}
-		return "redirect:guestpage";
-		}
+		return fwdAfterVote;
+	}
 			
 /////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////	
-	
 	@RequestMapping(value = "/about")
 	public String aboutPage(Model model){
 		model.addAttribute("welcomeMes", "Welcome: user");

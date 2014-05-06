@@ -146,10 +146,11 @@
 
 				<br>
 				</div>
-
+				
 				<!-- Голосование starts here-->
 				<c:choose>
 					<c:when test="${user.role.roleName == 'ROLE_USER'}">
+
 						<form id="voteForm" method="POST" action="vote">
 
 						<input type="hidden" name="propID" value="${proposalMore.proposalId}"></input>
@@ -198,7 +199,7 @@
 						<!-- Появилась кнопка "AddComment" -->
 					</div>
 
-					<form id="commentForm" style="display:none" method="POST" action="&addComment">
+					<form id="commentForm" style="display:none" method="POST" action="addComment">
 					<fieldset>
     						<legend>Добавление комментария:</legend>
     						<textarea class="form-control" rows="3" style="resize:none"	
