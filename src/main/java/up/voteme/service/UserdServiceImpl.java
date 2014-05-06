@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,37 +110,49 @@ public class UserdServiceImpl implements UserdService {
 	@Transactional
 	public boolean validate (SimpleUser sUser) {
 		
-		int length = sUser.getFirstName().length();
-		if ( length < 2 || length > 50) {
+		Pattern pattern = Pattern.compile("^([A-Za-zА-Яа-я]+[ -]*){2,50}$");
+		Matcher matcher = pattern.matcher(sUser.getFirstName());
+		if (!matcher.matches()){
+			logger.debug("sUser.getFirstName() uncorrect" );
 			return false;
 		}
 		
-		length = sUser.getLastName().length();
-		if (length < 2 || length > 50){
+		matcher = pattern.matcher(sUser.getLastName());
+		if (!matcher.matches()){
+			logger.debug("sUser.getLastName() uncorrect" );
 			return false;
-			
 		}
 		
-		length = sUser.getEmail().length();
-		if (length < 2 || length > 255){
+		int length = sUser.getEmail().length();
+		if (length > 255){
+			logger.debug("getEmail().length() > 255" );
 			return false;
-			
 		}
 		
-		length = sUser.getUserLogin().length();
-		if (length < 2 || length > 255){
+		pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+		matcher = pattern.matcher(sUser.getEmail());
+		if (!matcher.matches()){
+			logger.debug("sUser.getEmail() uncorrect" );
 			return false;
-			
+		}
+
+		pattern = Pattern.compile("^[0-9A-Za-z\\._-]{3,20}");
+		matcher = pattern.matcher(sUser.getUserLogin());
+		if (!matcher.matches()){
+			logger.debug("sUser.getUserLogin() uncorrect" );
+			return false;
 		}
 		
-		length = sUser.getUserPassword().length();
-		if (length != 40){
+		pattern = Pattern.compile("^[0-9a-fA-F]{40}$");
+		matcher = pattern.matcher(sUser.getUserPassword());
+		if (!matcher.matches()){
+			logger.debug("sUser.getUserPassword() uncorrect" );
 			return false;
-			
 		}
+		
 		
 		Calendar cal = Calendar.getInstance();
-	    cal.setTime(new Date()); // your date
+	    cal.setTime(new Date()); 
 	    int curYear = cal.get(Calendar.YEAR);
 	    int age = curYear - sUser.getBirthYear();
 	    if (age < 14 || age > 120 ){
@@ -195,21 +209,21 @@ public class UserdServiceImpl implements UserdService {
 	@Transactional
 	public void updateUserdAndStore (SimpleUser sUser) {
 
-			Userd user = userdDAO.findById(sUser.getUserdId());
-			user.setFirstName(sUser.getFirstName());
-			user.setLastName(sUser.getLastName());
-			user.setBirthYear(sUser.getBirthYear());
-			user.setSex(sUser.getSex());
-			user.setEmail(sUser.getEmail());
-			user.setUserLogin(sUser.getUserLogin());
-			user.setUserPassword(sUser.getUserPassword());
-			Role role = roleDAO.findByName(sUser.getRole());
-			user.setRole(role);
-			UserStatus  status = userStatusDAO.findByName(sUser.getUserStatus());
-			user.setUserStatus(status);
-			Country country = countryDAO.findByName(sUser.getCountry());
-			user.setCountry(country);
-			userdDAO.store(user);
+		Userd user = userdDAO.findById(sUser.getUserdId());
+		user.setFirstName(sUser.getFirstName());
+		user.setLastName(sUser.getLastName());
+		user.setBirthYear(sUser.getBirthYear());
+		user.setSex(sUser.getSex());
+		user.setEmail(sUser.getEmail());
+		user.setUserLogin(sUser.getUserLogin());
+		user.setUserPassword(sUser.getUserPassword());
+		Role role = roleDAO.findByName(sUser.getRole());
+		user.setRole(role);
+		UserStatus  status = userStatusDAO.findByName(sUser.getUserStatus());
+		user.setUserStatus(status);
+		Country country = countryDAO.findByName(sUser.getCountry());
+		user.setCountry(country);
+		userdDAO.store(user);
 
 	}
 }

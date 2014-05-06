@@ -4,14 +4,14 @@ $(document).ready(function(){
 			countryId : $(this).val(),
 			ajax : 'true'
 		}, function(data) {
-			var html = '<option value="0">---Регион---</option>';
+			var htmlStr = '<option value="0">---Регион---</option>';
 			var len = data.length;
 			for ( var i = 0; i < len; i++) {
-				html += '<option value="' + data[i].regionId + '">'
+				htmlStr += '<option value="' + data[i].regionId + '">'
 						+ data[i].regionName + '</option>';
 			}
-			html += '</option>';
-			$("select[name='region']").html(html);
+			htmlStr += '</option>';
+			$("select[name='region']").html(htmlStr);
 			$("select[name='city']").html('<option value="0">---Город---</option>');
 			$("select[name='district']").html('<option value="0">---Район---</option>');
 		});
@@ -25,14 +25,14 @@ $(document).ready(function(){
 			regionId : $(this).val(),
 			ajax : 'true'
 		}, function(data) {
-			var html = '<option value="0">---Город---</option>';
+			var htmlStr = '<option value="0">---Город---</option>';
 			var len = data.length;
 			for ( var i = 0; i < len; i++) {
-				html += '<option value="' + data[i].cityId + '">'
+				htmlStr += '<option value="' + data[i].cityId + '">'
 						+ data[i].cityName + '</option>';
 			}
-			html += '</option>';
-			$("select[name='city']").html(html);
+			htmlStr += '</option>';
+			$("select[name='city']").html(htmlStr);
 			$("select[name='district']").html('<option value="0">---Район---</option>');
 		});
 	});
@@ -45,14 +45,14 @@ $(document).ready(function(){
 			cityId : $(this).val(),
 			ajax : 'true'
 		}, function(data) {
-			var html = '<option value="0">---Район---</option>';
+			var htmlStr = '<option value="0">---Район---</option>';
 			var len = data.length;
 			for ( var i = 0; i < len; i++) {
-				html += '<option value="' + data[i].districtId + '">'
+				htmlStr += '<option value="' + data[i].districtId + '">'
 						+ data[i].districtName + '</option>';
 			}
-			html += '</option>';
-			$("select[name='district']").html(html);
+			htmlStr += '</option>';
+			$("select[name='district']").html(htmlStr);
 		});
 	});
 });

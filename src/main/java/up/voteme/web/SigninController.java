@@ -28,21 +28,21 @@ public class SigninController {
 	
 	@RequestMapping(value = "/signin", method = RequestMethod.GET)
 	public String signin() {
-		logger.info("/signin");
+		logger.debug("/signin");
 		gpModel.setLoginMes("Вход не выполнен");
 		return "guestpage";
 	}
 	
 	@RequestMapping(value = "/signin-failure", method = RequestMethod.GET)
 	public String signinFailure() {
-		logger.info("/signin-failure");
+		logger.debug("/signin-failure");
 		gpModel.setLoginMes("Неверные данные");
 		return "guestpage";
 	}
 	
 	@RequestMapping(value = "/default", method = RequestMethod.GET)
 	public String defaultAfterLogin(HttpServletRequest request, Model model) {
-		logger.info("/default");
+		logger.debug("/default");
 		Userd user = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
 		if (request.isUserInRole("ROLE_ADMIN")) {
@@ -57,7 +57,7 @@ public class SigninController {
 	
 	@RequestMapping(value = "/user/", method = RequestMethod.GET)
 	public String secure(Model model) {
-		logger.info("/user/");
+		logger.debug("/user/");
 		Userd user = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
 		return "guestpage";
@@ -65,7 +65,7 @@ public class SigninController {
 	
 	@RequestMapping(value = "/admin/", method = RequestMethod.GET)
 	public String admin(Model model) {
-		logger.info("/admin/");
+		logger.debug("/admin/");
 		Userd user = (Userd)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user);
 		//return "adminpage";

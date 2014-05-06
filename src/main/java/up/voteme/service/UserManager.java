@@ -25,10 +25,10 @@ public class UserManager {
 	
 	public Userd getUser(String userLogin) throws UsernameNotFoundException{
 
-		logger.info("userLogin: "+userLogin);
+		logger.debug("userLogin: "+userLogin);
 		Userd user = userdDao.findByLogin(userLogin);
 		if (user==null) {
-			logger.info("UsernameNotFoundException: "+userLogin + " not found");
+			logger.warn("UsernameNotFoundException: "+userLogin + " not found");
 			throw new UsernameNotFoundException(userLogin + " not found" );
 		}
 		return user;

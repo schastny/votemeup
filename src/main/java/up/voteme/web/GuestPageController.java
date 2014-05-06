@@ -85,12 +85,12 @@ public class GuestPageController {
 				@RequestParam(value="pageNum", required = false) String pageNum,
 					@RequestParam(value="filtrOn", required = false) String filtrOn,
 						Model model) {
-		logger.info("GET method /");
+		logger.debug("GET method /");
 		//mark new session to track
 		if (!model.containsAttribute("gpModel")){
 			Date date = new Date();
 			gpModel.setCreationDate(date); 
-			logger.info("GuestPageModel() creation date "+ date);
+			logger.debug("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
 		//login&pass in cookie data
@@ -100,7 +100,7 @@ public class GuestPageController {
 		    if (principal instanceof Userd && (!model.containsAttribute("user"))) {
 		        Userd user = (Userd) principal;
 		        model.addAttribute("user", user);
-		        logger.info("cookie");
+		        logger.debug("cookie");
 		        gpModel.reset();
 		        return "guestpage";
 		    }
@@ -108,7 +108,7 @@ public class GuestPageController {
 		// request come without parameters
 		if ((sortBy == null)||(pageQuant == null)||(pageNum == null)||(filtrOn == null)){
 			gpModel.reset();
-			logger.info("gpModel.reset()");
+			logger.debug("gpModel.reset()");
 			return "guestpage";
 		}
 		gpModel.setSortBy(sortBy);
@@ -127,9 +127,9 @@ public class GuestPageController {
 	@RequestMapping(value = "/filtr", method = RequestMethod.GET)
 	public String filtr(@ModelAttribute FiltrForm fForm,
 			BindingResult result, Model model) {
-		logger.info("GET method /filtr");
+		logger.debug("GET method /filtr");
 		if (result.hasErrors()) {
-			logger.info("Binding error");
+			logger.debug("Binding error");
 		}
 		gpModel.setFiltrOn("true");
 		gpModel.setSortBy("noSort");

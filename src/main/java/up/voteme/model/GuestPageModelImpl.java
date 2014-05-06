@@ -82,7 +82,7 @@ public class GuestPageModelImpl implements GuestPageModel  {
 
 	
 	public GuestPageModelImpl(){
-		logger.info("GuestPageModel constructor");
+		logger.debug("GuestPageModel constructor");
 	}
 
 
