@@ -56,12 +56,10 @@
 						<li class="active"><a href="/voteme/contact">Контакты</a></li>
 						<li><a href="/voteme/help">Помощь</a></li>
 					</ul>
-					<form class="navbar-form navbar-right" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control"
-								placeholder="Поиск инициатив...">
-						</div>
-						<button type="submit" class="btn btn-default">Поиск</button>
+					<form class="navbar-form navbar-right" method=GET action="http://www.google.com/search">
+							<input type="text" class="form-control" name="q" placeholder="Поиск инициатив...">
+							<input type="hidden" name="sitesearch" value="www.roi.ru">						
+						<button type="submit" class="btn btn-default">Поиск</button>											  
 					</form>
 
 				</div>
