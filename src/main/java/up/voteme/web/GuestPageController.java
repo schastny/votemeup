@@ -233,7 +233,10 @@ public class GuestPageController {
 	public @ResponseBody
 	String addComment(@RequestParam(value = "commentText") String commentText,
 						@RequestParam(value = "propID") Long commentPropId) {
-
+		if (commentText.length() < 3)	{
+			gpModel.setProposalActionMes("Слишком короткий комментарий.");
+			return "";
+			}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
 		    Object principal = auth.getPrincipal();  
@@ -267,13 +270,15 @@ public class GuestPageController {
 			if (principal instanceof Userd ) {
 				Userd voteUser = (Userd) principal;
 				
+				Date voteDate = new Date();
+
 				List<Vote> previousVoting = null;
 				previousVoting = voteServ.findUserVotesForProp(voteUser.getUserdId(), votePropId);
 
 				if (previousVoting == null)
 		    	{
 		    		Vote newVote = new Vote();
-		    		Date voteDate = new Date();
+		    		
 		    		
 		    		newVote.setProposal(propServ.getById(votePropId));
 		    		newVote.setUserd(voteUser);
@@ -282,13 +287,15 @@ public class GuestPageController {
 		    			
 		    		voteServ.store(newVote);
 		    		gpModel.setProposalActionMes("Спасибо. Ваш голос учтён.");
-		    	} else { 
+		    	} else {
+		    		
+		    		voteDate = previousVoting.get(0).getVoteDate();
 		    		gpModel.setProposalActionMes("Вы уже голосовали за пропозицию № " +
-		    				votePropId + "  (" + previousVoting.get(0).getVoteDate() + " )"); 
+		    				votePropId + "  (" + voteDate + " )"); 
 		    		   };	
 			}
 		}
-		return "/proposal";
+		return "redirect:guestpage";
 		}
 			
 /////////////////////////////////////////////////////////////////////////////
