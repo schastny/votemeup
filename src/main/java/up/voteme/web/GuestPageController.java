@@ -97,6 +97,7 @@ public class GuestPageController {
 			logger.debug("GuestPageModel() creation date "+ date);
 			model.addAttribute("gpModel",gpModel);
 		}
+		gpModel.setProposalActionMes("");
 		//login&pass in cookie data
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth != null) {
@@ -297,7 +298,7 @@ public class GuestPageController {
 		    		String voteDateFormatted = f.format(voteDate);
 		    		
 		    	    gpModel.setProposalActionMes("Вы уже голосовали " + 
-		    	    		voteDateFormatted + " по этой пропозиции"); 
+		    	    		voteDateFormatted + " по этой инициативе"); 
 		    		   }
 			}
 		}
