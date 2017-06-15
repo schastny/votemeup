@@ -6,7 +6,7 @@
  
   <persistence-unit name="org.hibernate" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
-<class>up.voteme.domain.Category</class>
+         <class>up.voteme.domain.Category</class>
          <class>up.voteme.domain.Userd</class>
          <class>up.voteme.domain.Vote</class>
          <class>up.voteme.domain.Role</class>
